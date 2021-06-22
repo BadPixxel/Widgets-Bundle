@@ -13,3 +13,4 @@
 /reboot.sh
 /docs/yarn.lock
 /.idea/
+/app/config/parameters.yml

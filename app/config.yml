@@ -1,5 +1,5 @@
 imports:
-    - { resource: parameters.yml }
+    - { resource: config/parameters.yml }
     - { resource: config/framework.yml }
     - { resource: config/doctrine.yml }
     - { resource: config/twig.yml }
