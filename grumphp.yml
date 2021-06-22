@@ -26,3 +26,9 @@ parameters:
 # Import Generic + Splash Console Configs
 imports:
     - { resource: "./vendor/badpixxel/php-sdk/grumphp/generic.yml" }
+
+
+grumphp:
+    tasks:
+        phpcpd:
+            triggered_by: []
