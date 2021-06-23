@@ -39,7 +39,7 @@
         "doctrine/doctrine-cache-bundle":               "^1.2",
         
         "knplabs/knp-time-bundle":                      "~1.6",
-        "knplabs/knp-menu-bundle":                      "~2.0",
+        "knplabs/knp-menu-bundle":                      "~2.0|~3.0",
         
         "sonata-project/block-bundle":                  "~3.0",
         
