@@ -13,9 +13,11 @@
 
 namespace Splash\Widgets\Tests\Controller;
 
+use Exception;
 use Splash\Widgets\Entity\WidgetCache;
 use Splash\Widgets\Services\ManagerService;
 use Splash\Widgets\Tests\Services\SamplesFactoryService as SamplesFactory;
+use Splash\Widgets\Tests\Traits\ContainerAwareTrait;
 use Splash\Widgets\Tests\Traits\UrlCheckerTrait;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
@@ -25,7 +27,7 @@ use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 class B001ViewControllerTest extends WebTestCase
 {
     use UrlCheckerTrait;
-    use \Splash\Widgets\Tests\Traits\ContainerAwareTrait;
+    use ContainerAwareTrait;
 
     /**
      * {@inheritDoc}
@@ -141,7 +143,7 @@ class B001ViewControllerTest extends WebTestCase
         // Render Forced
         $crawler = $this->assertRouteWorks("splash_widgets_render_widget", $params);
         //====================================================================//
-        // Verify No Enevloppe
+        // Verify No Envelope
         $xPath = '//*[@data-id="'.$type.'"]';
         $this->assertEquals(0, $crawler->filterXpath($xPath)->count());
     }
@@ -176,6 +178,8 @@ class B001ViewControllerTest extends WebTestCase
 
     /**
      * Demo Widgets Names & Parameters Data Provider
+     *
+     * @throws Exception
      *
      * @return array
      */
