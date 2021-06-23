@@ -14,6 +14,7 @@
 namespace Splash\Widgets\Models\Demo\Blocks;
 
 use Splash\Widgets\Entity\Widget;
+use Splash\Widgets\Models\Blocks\MorrisAreaBlock;
 use Splash\Widgets\Services\FactoryService;
 use Symfony\Component\Form\FormBuilderInterface;
 
@@ -50,10 +51,11 @@ class MorrisArea
             $next2 += rand(-50, 50);
         }
 
-        $factory
-            //==============================================================================
-            // Create Morris Line Chart Block
-            ->addBlock("MorrisAreaBlock", self::blockOptions())
+        //==============================================================================
+        // Create Morris Line Chart Block
+        /** @var MorrisAreaBlock $widget */
+        $widget = $factory->addBlock("MorrisAreaBlock", self::blockOptions());
+        $widget
             ->setTitle("Morris Area Chart")
             ->setDataSet($values)
             ->setYKeys(array("value", "value2"))

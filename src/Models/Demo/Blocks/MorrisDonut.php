@@ -14,6 +14,7 @@
 namespace Splash\Widgets\Models\Demo\Blocks;
 
 use Splash\Widgets\Entity\Widget;
+use Splash\Widgets\Models\Blocks\MorrisDonutBlock;
 use Splash\Widgets\Services\FactoryService;
 use Symfony\Component\Form\FormBuilderInterface;
 
@@ -45,16 +46,15 @@ class MorrisDonut
             );
         }
 
-        $factory
-
         //==============================================================================
-        // Create Morris Line Chart Block
-            ->addBlock("MorrisDonutBlock", self::blockOptions())
+        // Create Morris Donut Chart Block
+        /** @var MorrisDonutBlock $widget */
+        $widget = $factory->addBlock("MorrisDonutBlock", self::blockOptions());
+        $widget
             ->setTitle("Morris Donut Chart")
             ->setDataSet($values)
             ->end()
-
-            ;
+        ;
     }
 
     /**

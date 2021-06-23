@@ -14,6 +14,7 @@
 namespace Splash\Widgets\Models\Demo\Blocks;
 
 use Splash\Widgets\Entity\Widget;
+use Splash\Widgets\Models\Blocks\SparkInfoBlock;
 use Splash\Widgets\Services\FactoryService;
 use Symfony\Component\Form\FormBuilderInterface;
 
@@ -37,43 +38,48 @@ class SparkInfos
      */
     public static function build(FactoryService $factory, array $parameters) : void
     {
-        $factory
-
-            //==============================================================================
-            // Create SparkInfo Block
-            ->addBlock("SparkInfoBlock", self::blockOptions())
+        //==============================================================================
+        // Create SparkInfo Block
+        /** @var SparkInfoBlock $widget */
+        $widget = $factory->addBlock("SparkInfoBlock", self::blockOptions());
+        $widget
             ->setTitle("Fontawesome Icon")
             ->setFaIcon("magic")
-            ->setValue("100%")
+            ->setValue(rand(20, 80)."%")
             ->setSeparator(true)
             ->end()
-
-            //==============================================================================
-            // Create SparkInfo Block
-            ->addBlock("SparkInfoBlock", self::blockOptions())
+        ;
+        //==============================================================================
+        // Create SparkInfo Block
+        /** @var SparkInfoBlock $widget */
+        $widget = $factory->addBlock("SparkInfoBlock", self::blockOptions());
+        $widget
             ->setTitle("Glyph Icon")
             ->setGlyphIcon("asterisk")
-            ->setValue("100%")
+            ->setValue(rand(20, 80)."%")
             ->setSeparator(true)
             ->end()
-
-            //==============================================================================
-            // Create SparkInfo Block
-            ->addBlock("SparkInfoBlock", self::blockOptions())
+        ;
+        //==============================================================================
+        // Create SparkInfo Block
+        /** @var SparkInfoBlock $widget */
+        $widget = $factory->addBlock("SparkInfoBlock", self::blockOptions());
+        $widget
             ->setTitle("Sparkline Chart")
             ->setChart(array("0:30", "10:20", "20:20", "30:20", "-10:10", "15:25", "30:40", "80:90", 90, 100, 90, 80))
             ->setSeparator(true)
             ->end()
-
-            //==============================================================================
-            // Create SparkInfo Block
-            ->addBlock("SparkInfoBlock", self::blockOptions())
+        ;
+        //==============================================================================
+        // Create SparkInfo Block
+        /** @var SparkInfoBlock $widget */
+        $widget = $factory->addBlock("SparkInfoBlock", self::blockOptions());
+        $widget
             ->setTitle("Sparkline Pie")
             ->setPie(array("10", "20", "30"))
             ->setSeparator(true)
             ->end()
-
-            ;
+        ;
     }
 
     /**

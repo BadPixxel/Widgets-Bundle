@@ -31,22 +31,8 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
  * @method self setWarning(string $warning)
  * @method self setInfo(string $info)
  * @method self setSuccess(string $message)
- *
- * Table Blocks
- * @method self addRow(array $columns)
  * @method self setValue(string $value)
  * @method self setValues(array $values)
- *
- * SparkInfos
- * @method self setSeparator(bool $hasSeparator)
- * @method self setChart(array $values)
- * @method self setPie(array $values)
- *
- * Morris Charts
- * @method self setDataSet(array $dataSet)
- * @method self setLabels(array $data)
- * @method self setYKeys(array $data)
- * @method self setChartOptions(array $data)
  */
 class BaseBlock
 {

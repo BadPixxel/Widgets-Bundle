@@ -77,6 +77,7 @@ class SamplesFactoryService implements WidgetProviderInterface
         $event["MorrisDonut"] = $this->buildWidgetDefinition("MorrisDonut")->getWidget();
         $event["MorrisArea"] = $this->buildWidgetDefinition("MorrisArea")->getWidget();
         $event["MorrisBar"] = $this->buildWidgetDefinition("MorrisBar")->getWidget();
+        $event["ProgressBar"] = $this->buildWidgetDefinition("ProgressBar")->getWidget();
     }
 
     /**
@@ -110,7 +111,7 @@ class SamplesFactoryService implements WidgetProviderInterface
                 ->setDescription($blockClass::DESCRIPTION)
                 ->setOrigin(static::ORIGIN)
                 ->setOptions($this->getWidgetOptions($type))
-                ;
+            ;
         }
 
         return $this->factory;

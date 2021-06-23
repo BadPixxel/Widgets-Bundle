@@ -231,7 +231,7 @@ class SparkInfoBlock extends BaseBlock
     /**
      * Get Chart
      *
-     * @return Array
+     * @return array
      */
     public function getChart() : array
     {

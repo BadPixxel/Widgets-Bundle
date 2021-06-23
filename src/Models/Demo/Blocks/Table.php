@@ -14,6 +14,8 @@
 namespace Splash\Widgets\Models\Demo\Blocks;
 
 use Splash\Widgets\Entity\Widget;
+use Splash\Widgets\Models\Blocks\TableBlock;
+use Splash\Widgets\Models\Blocks\TextBlock;
 use Splash\Widgets\Services\FactoryService;
 use Symfony\Component\Form\FormBuilderInterface;
 
@@ -39,24 +41,25 @@ class Table
      */
     public static function build(FactoryService $factory, array $parameters) : void
     {
-        $factory
-
-            //==============================================================================
-            // Create Text Block
-            ->addBlock("TextBlock", self::blockOptions())
+        //==============================================================================
+        // Create Text Block
+        /** @var TextBlock $textBlock */
+        $textBlock = $factory->addBlock("TextBlock", self::blockOptions());
+        $textBlock
             ->setText("<p>This is demo Table Block. You can use it to render... <b>data tables</b>.</p>")
             ->end()
-
-            //==============================================================================
-            // Create Table Block
-            ->addBlock("TableBlock", self::blockOptions())
-            ->addRow(array("One", "Two", "Treeee!"))
-            ->addRow(array("One", "<b>Two</b>", "Treeee!"))
-            ->addRow(array("One", "Two", "Treeee!"))
-            ->addRow(array("One", "Two", "Treeee!"))
+        ;
+        //==============================================================================
+        // Create Table Block
+        /** @var TableBlock $tableBlock */
+        $tableBlock = $factory->addBlock("TableBlock", self::blockOptions());
+        $tableBlock
+            ->addRow(array("One", "Two", "Tree!"))
+            ->addRow(array("One", "<b>Two</b>", "Tree!"))
+            ->addRow(array("One", "Two", "Tree!"))
+            ->addRow(array("One", "Two", "Tree!"))
             ->end()
-
-            ;
+        ;
     }
 
     /**

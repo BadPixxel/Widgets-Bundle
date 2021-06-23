@@ -14,19 +14,19 @@
 namespace Splash\Widgets\Models\Demo\Blocks;
 
 use Splash\Widgets\Entity\Widget;
-use Splash\Widgets\Models\Blocks\SparkBarChartBlock;
+use Splash\Widgets\Models\Blocks\ProgressBarChartBlock;
 use Splash\Widgets\Services\FactoryService;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**
- * Demo SparkLine Bar Chart Block definition
+ * Demo Progress Bar Chart Block definition
  */
-class SparkBar
+class ProgressBar
 {
-    const TYPE = "SparkBar";
+    const TYPE = "ProgressBar";
     const ICON = "fa fa-bar-chart fas fa-chart-bar";
-    const TITLE = "Sparkline Bar Chart Block";
-    const DESCRIPTION = "Demonstration Sparkline Bar Chart";
+    const TITLE = "Progress Bar Chart Block";
+    const DESCRIPTION = "Progress Sparkline Bar Chart";
 
     /**
      * Build Block
@@ -39,18 +39,36 @@ class SparkBar
     public static function build(FactoryService $factory, array $parameters) : void
     {
         $values = array();
-        for ($i = 0; $i < 24; $i++) {
-            $values[] = rand(0, 100);
+        $legend = array();
+        for ($i = 0; $i < 5; $i++) {
+            $rand = rand(1, 15);
+            $values["V".$i] = $rand;
+            $legend[] = "V".$i." (".$rand.")";
         }
 
         //==============================================================================
         // Create Sparkline Line Chart Block
-        $barGraph = $factory->addBlock("SparkBarChartBlock", self::blockOptions());
+        /** @var ProgressBarChartBlock $barGraph */
+        $barGraph = $factory->addBlock("ProgressBarChartBlock");
 
         $barGraph
-            ->setTitle("Sparkline Bar Chart")
+            ->setTitle("Progress Bar with Classes")
             ->setValues($values)
+            ->setLegend($legend)
             ->setParameters($parameters)
+            ->setBarHeight(20)
+        ;
+
+        /** @var ProgressBarChartBlock $barGraph */
+        $barGraph = $factory->addBlock("ProgressBarChartBlock");
+
+        $barGraph
+            ->setTitle("Progress Bar with Colors")
+            ->setValues($values)
+//            ->setLegend($legend)
+            ->setParameters($parameters)
+            ->setBarHeight(20)
+            ->setBarColors(array("Navy", "Green", "Yellow", "Red"))
         ;
     }
 
@@ -63,27 +81,5 @@ class SparkBar
      */
     public static function populateWidgetForm(FormBuilderInterface $builder) : void
     {
-        SparkBarChartBlock::addHeightFormRow($builder);
-        SparkBarChartBlock::addBarWidthFormRow($builder);
-        SparkBarChartBlock::addBarColorFormRow($builder);
-    }
-
-    /**
-     * Get Block Options
-     *
-     * @return array
-     */
-    public static function blockOptions() : array
-    {
-        //==============================================================================
-        // Create Block Options
-        return array(
-            "Width" => Widget::$widthXl,
-            "AllowHtml" => false,
-            "ChartOptions" => array(
-                "bar-color" => "DeepSkyBlue",
-                "barwidth" => "10",
-            ),
-        );
     }
 }

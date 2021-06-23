@@ -14,6 +14,7 @@
 namespace Splash\Widgets\Models\Demo\Blocks;
 
 use Splash\Widgets\Entity\Widget;
+use Splash\Widgets\Models\Blocks\MorrisLineBlock;
 use Splash\Widgets\Services\FactoryService;
 use Symfony\Component\Form\FormBuilderInterface;
 
@@ -50,11 +51,11 @@ class MorrisLine
             $next2 += rand(-50, 50);
         }
 
-        $factory
-
         //==============================================================================
         // Create Morris Line Chart Block
-            ->addBlock("MorrisLineBlock", self::blockOptions())
+        /** @var MorrisLineBlock $widget */
+        $widget = $factory->addBlock("MorrisLineBlock", self::blockOptions());
+        $widget
             ->setTitle("Morris Line Chart")
             ->setDataSet($values)
             ->setYKeys(array("value", "value2"))
@@ -63,8 +64,7 @@ class MorrisLine
                 "lineColors" => array("BlueViolet", "blue", "green"),
             ))
             ->end()
-
-            ;
+        ;
     }
 
     /**

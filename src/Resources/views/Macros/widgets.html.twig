@@ -28,6 +28,35 @@
     
 {% endmacro %}
 
+{% macro Progress( Options, Values ) %}
+    {% spaceless %}
+    <div class="progress" style="height: {{Options.barHeight|default("20")}}px;">
+        {% for Name, Value in Values %}
+            <div class="progress-bar {{ Options.class|default("") }} {% if Options.classes|length|default(0) %}{{ Options.classes[loop.index0 % (Options.classes|length)] }}{% endif %}"
+                 role="progressbar" aria-valuenow="{{Value}}" aria-valuemin="0" aria-valuemax="100"
+                 style="width: {{Value}}%;{% if Options.colors|length|default(0) %}background-color: {{ Options.colors[loop.index0 % (Options.colors|length)] }};{% endif %}"
+            >
+                {{Name}}
+            </div>
+        {% endfor %}
+    </div>
+
+    {% if Options.legend|default({})|length %}
+        <ul class="p-2">
+            {% for Value in Options.legend|default({}) %}
+                <li class="" style="display:inline;">
+                    <span
+                        class="badge badge-pill {% if Options.classes|length|default(0) %}{{ Options.classes[loop.index0 % (Options.classes|length)] }}{% endif %}"
+                        style="{% if Options.colors|length|default(0) %}background-color: {{ Options.colors[loop.index0 % (Options.colors|length)] }};{% endif %}"
+                    >&nbsp;</span>
+                    {{Value}}
+                </li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+    {% endspaceless %}
+{% endmacro %}
+
 {% macro MorrisChart( Type, DataSet, Xkey, Ykeys, Labels, Options ) %}
     {% if DataSet is not empty %}                
         <div 
