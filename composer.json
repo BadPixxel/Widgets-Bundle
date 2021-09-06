@@ -3,7 +3,7 @@
     "description":      "Easy Widgets & Information boxes for Symfony Applications",
     "type":             "symfony-bundle",
     "keywords":         ["Symfony", "Bundle", "Widget", "PHP", "Simple", "Bootstrap"],
-    "homepage":         "http://www.badpixxel.com",
+    "homepage":         "https://www.badpixxel.com",
     "license":          "MIT",
     "prefer-stable":    true,
     "minimum-stability": "dev",
@@ -29,14 +29,13 @@
     },
     
     "require": {
-        "php":                                          "~7.2",
+        "php":                                          "^7.2|^8.0",
         "ext-json":                                     "*",
 
         "symfony/monolog-bundle":                       "^2.0|^3.0",
         
         "doctrine/orm":                                 "^2.5",
-        "doctrine/doctrine-bundle":                     "^1.6",
-        "doctrine/doctrine-cache-bundle":               "^1.2",
+        "doctrine/doctrine-bundle":                     "^1.6|^2.0",
         
         "knplabs/knp-time-bundle":                      "~1.6",
         "knplabs/knp-menu-bundle":                      "~2.0|~3.0",

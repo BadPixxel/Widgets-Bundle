@@ -121,7 +121,7 @@ class WidgetBlock extends AbstractAdminBlockService
 
         //==============================================================================
         // Render Response
-        return $this->renderResponse($blockContext->getTemplate(), array(
+        return $this->renderResponse((string) $blockContext->getTemplate(), array(
             "Service" => $settings["service"],
             "Type" => $settings["type"],
             "Options" => $options,

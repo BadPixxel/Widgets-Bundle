@@ -14,7 +14,7 @@
 namespace Splash\Widgets\Tests\Traits;
 
 use Doctrine\Bundle\DoctrineBundle\Registry;
-use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\Persistence\ObjectManager;
 use Exception;
 use Splash\Widgets\Services\FactoryService;
 use Splash\Widgets\Services\ManagerService;

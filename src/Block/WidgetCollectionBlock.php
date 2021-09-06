@@ -156,7 +156,7 @@ class WidgetCollectionBlock extends AbstractAdminBlockService
 
         //==============================================================================
         // Render Response
-        return $this->renderResponse($blockContext->getTemplate(), array(
+        return $this->renderResponse((string) $blockContext->getTemplate(), array(
             "Collection" => $collection,
             "Title" => $settings["title"],
             "Channel" => $settings["channel"],

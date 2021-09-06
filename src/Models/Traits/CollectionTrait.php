@@ -36,7 +36,7 @@ trait CollectionTrait
     /**
      * @var Collection
      *
-     * @ORM\OneToMany(targetEntity="Splash\Widgets\Entity\Widget", mappedBy="parent", cascade="all" )
+     * @ORM\OneToMany(targetEntity="Splash\Widgets\Entity\Widget", mappedBy="parent", cascade={"all"} )
      * @ORM\OrderBy({"position" = "ASC"})
      */
     protected $widgets;
