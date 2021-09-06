@@ -14,22 +14,19 @@
 namespace Splash\Widgets\Block;
 
 use Exception;
-use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\BlockBundle\Block\BlockContextInterface;
-use Sonata\BlockBundle\Block\Service\AbstractAdminBlockService;
-use Sonata\BlockBundle\Meta\Metadata;
-use Sonata\BlockBundle\Model\BlockInterface;
+use Sonata\BlockBundle\Block\Service\AbstractBlockService;
 use Splash\Widgets\Models\Traits\ParametersTrait;
 use Splash\Widgets\Services\FactoryService;
 use Splash\Widgets\Services\ManagerService;
-use Symfony\Bundle\FrameworkBundle\Templating\EngineInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Twig\Environment;
 
 /**
  * Sonata Block to render just a Widget
  */
-class WidgetBlock extends AbstractAdminBlockService
+class WidgetBlock extends AbstractBlockService
 {
     use ParametersTrait;
 
@@ -50,18 +47,16 @@ class WidgetBlock extends AbstractAdminBlockService
     /**
      * Class Constructor
      *
-     * @param string          $name
-     * @param EngineInterface $templating
-     * @param ManagerService  $widgetsManager
-     * @param FactoryService  $widgetFactory
+     * @param Environment    $twig
+     * @param ManagerService $widgetsManager
+     * @param FactoryService $widgetFactory
      */
     public function __construct(
-        string $name,
-        EngineInterface $templating,
+        Environment $twig,
         ManagerService $widgetsManager,
         FactoryService $widgetFactory
     ) {
-        parent::__construct($name, $templating);
+        parent::__construct($twig);
 
         $this->manager = $widgetsManager;
         $this->factory = $widgetFactory;
@@ -83,23 +78,10 @@ class WidgetBlock extends AbstractAdminBlockService
 
     /**
      * {@inheritdoc}
-     */
-    public function buildEditForm(FormMapper $formMapper, BlockInterface $block): void
-    {
-        $formMapper->add('settings', 'sonata_type_immutable_array', array(
-            'keys' => array(
-                array('service',    'text', array('required' => true)),
-                array('type',       'text', array('required' => true)),
-            ),
-        ));
-    }
-
-    /**
-     * {@inheritdoc}
      *
      * @throws Exception
      */
-    public function execute(BlockContextInterface $blockContext, Response $response = null): ?Response
+    public function execute(BlockContextInterface $blockContext, Response $response = null): Response
     {
         //==============================================================================
         // Get Block Settings
@@ -127,21 +109,5 @@ class WidgetBlock extends AbstractAdminBlockService
             "Options" => $options,
             "Parameters" => $parameters,
         ));
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getBlockMetadata($code = null): Metadata
-    {
-        return new Metadata(
-            $this->getName(),
-            (!is_null($code) ? $code : $this->getName()),
-            null,
-            'SplashWidgetsBundle',
-            array(
-                'class' => 'fa fa-television',
-            )
-        );
     }
 }

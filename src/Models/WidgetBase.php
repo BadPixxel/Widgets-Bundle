@@ -82,13 +82,11 @@ class WidgetBase
      * @param string $key
      * @param mixed  $value
      *
-     * @return $this
+     * @return void
      */
-    public function __set(string $key, $value) : self
+    public function __set(string $key, $value) : void
     {
         $this->parameters[$key] = $value;
-
-        return $this;
     }
 
     //====================================================================//

@@ -6,16 +6,13 @@ sonata_block:
             contexts:   [admin]
 
 services:
+    _defaults:
+        autowire: true
 
     #################################################################################
     # Widgets Collection Sonata Block Service
     splash.widgets.blocks.collection:
         class: Splash\Widgets\Block\WidgetCollectionBlock
-        arguments:
-            - "splash.widgets.blocks.collection"
-            - "@templating"
-            - "@doctrine.orm.entity_manager"
-            - "@request_stack"
         tags:
             - { name: sonata.block }
 
@@ -23,10 +20,5 @@ services:
     # Single Widget Sonata Block Service
     splash.widgets.blocks.simple:
         class: Splash\Widgets\Block\WidgetBlock
-        arguments:
-            - "splash.widgets.blocks.simple"
-            - "@templating"
-            - "@splash.widgets.manager"
-            - "@splash.widgets.factory"
         tags:
             - { name: sonata.block }

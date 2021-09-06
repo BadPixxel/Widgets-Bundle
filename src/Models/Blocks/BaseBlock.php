@@ -107,6 +107,8 @@ class BaseBlock
      *
      * @param string $name Function Name
      * @param array  $args Function Arguments
+     *
+     * @return void
      */
     public function __set($name, $args): void
     {

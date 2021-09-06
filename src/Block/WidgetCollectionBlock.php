@@ -13,28 +13,25 @@
 
 namespace Splash\Widgets\Block;
 
-use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface as EntityManager;
 use Doctrine\ORM\ORMException;
 use Doctrine\Persistence\ObjectRepository;
 use Exception;
-use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\BlockBundle\Block\BlockContextInterface;
-use Sonata\BlockBundle\Block\Service\AbstractAdminBlockService;
-use Sonata\BlockBundle\Meta\Metadata;
-use Sonata\BlockBundle\Model\BlockInterface;
+use Sonata\BlockBundle\Block\Service\AbstractBlockService;
 use Splash\Widgets\Entity\WidgetCollection;
-use Symfony\Bundle\FrameworkBundle\Templating\EngineInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Twig\Environment;
 
 /**
  * Sonata Block to render a Widget Collection
  *
  * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
  */
-class WidgetCollectionBlock extends AbstractAdminBlockService
+class WidgetCollectionBlock extends AbstractBlockService
 {
     /**
      * @var EntityManager
@@ -56,20 +53,18 @@ class WidgetCollectionBlock extends AbstractAdminBlockService
     private $request;
 
     /**
-     * @param string          $name
-     * @param EngineInterface $templating
-     * @param EntityManager   $manager
-     * @param RequestStack    $requestStack
+     * @param Environment   $twig
+     * @param EntityManager $manager
+     * @param RequestStack  $requestStack
      *
      * @throws Exception
      */
     public function __construct(
-        string $name,
-        EngineInterface $templating,
+        Environment   $twig,
         EntityManager $manager,
-        RequestStack $requestStack
+        RequestStack  $requestStack
     ) {
-        parent::__construct($name, $templating);
+        parent::__construct($twig);
 
         $this->manager = $manager;
         $this->repository = $manager->getRepository(WidgetCollection::class);
@@ -98,30 +93,11 @@ class WidgetCollectionBlock extends AbstractAdminBlockService
     }
 
     /**
-     * @param FormMapper     $formMapper
-     * @param BlockInterface $block
-     *
-     * @SuppressWarnings(PHPMD.UnusedFormalParameter)
-     */
-    public function buildEditForm(FormMapper $formMapper, BlockInterface $block): void
-    {
-        $formMapper->add('settings', 'sonata_type_immutable_array', array(
-            'keys' => array(
-                array('title',      'text', array('required' => false)),
-                array('collection', 'text', array('required' => true)),
-                array('channel',    'text', array('required' => true)),
-                array('editable',   'bool', array('required' => false)),
-                array('menu',       'bool', array('required' => false)),
-            ),
-        ));
-    }
-
-    /**
      * {@inheritdoc}
      *
      * @throws ORMException
      */
-    public function execute(BlockContextInterface $blockContext, Response $response = null): ?Response
+    public function execute(BlockContextInterface $blockContext, Response $response = null): Response
     {
         //==============================================================================
         // Get Block Settings
@@ -164,21 +140,5 @@ class WidgetCollectionBlock extends AbstractAdminBlockService
             "Edit" => $edit,
             "Editable" => $settings["editable"],
         ), $response);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getBlockMetadata($code = null): Metadata
-    {
-        return new Metadata(
-            $this->getName(),
-            (!is_null($code) ? $code : $this->getName()),
-            null,
-            'SplashWidgetsBundle',
-            array(
-                'class' => 'fa fa-television',
-            )
-        );
     }
 }
