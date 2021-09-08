@@ -40,14 +40,15 @@
         "knplabs/knp-time-bundle":                      "~1.6",
         "knplabs/knp-menu-bundle":                      "~2.0|~3.0",
         
-        "sonata-project/block-bundle":                  "~4.0",
-        
-        "symfony/webpack-encore-bundle":                "^1.7"
+        "sonata-project/block-bundle":                  "~3.0|~4.0"
     },
     
     "require-dev": {
+        "badpixxel/php-sdk":                            "dev-main",
+
         "symfony/symfony":                              "~3.4|~4.4",
         "symfony/phpunit-bridge":                       "^3.0",
+        "symfony/webpack-encore-bundle":                "^1.7",
         "twig/twig":                                    "~2.6",
 
         "sonata-project/admin-bundle":                  ">=3.0",
@@ -55,9 +56,7 @@
         "phpunit/phpunit":                              "~7.0|~8.0",
         
         "splash/php-bundle":                            "dev-master",
-        "splash/console":                               "dev-master",
-
-        "badpixxel/php-sdk":                            "dev-main"
+        "splash/console":                               "dev-master"
     },
     
     "scripts": {
