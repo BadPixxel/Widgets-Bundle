@@ -53,8 +53,6 @@
 
         "sonata-project/admin-bundle":                  ">=3.0",
         
-        "phpunit/phpunit":                              "~7.0|~8.0",
-        
         "splash/php-bundle":                            "dev-master",
         "splash/console":                               "dev-master"
     },
