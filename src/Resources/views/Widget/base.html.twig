@@ -15,7 +15,7 @@
     {% set Parameters = Widget.Parameters | json_encode %}  
 {% endif %}
 
-<div    class="{{ Options.Class|default("splash-widget mb-3") {{ Width }} " id="{{ WidgetType ~ "-" ~ WidgetId }}" 
+<div    class="{{ Options.Class|default("splash-widget mb-3")}} {{ Width }} " id="{{ WidgetType ~ "-" ~ WidgetId }}"
         data-id="{{ WidgetType }}"
     >
     
