@@ -270,6 +270,7 @@ trait OptionsTrait
     public static function getDefaultOptions() : array
     {
         return array(
+            'Class' => "splash-widget mb-3",
             'Width' => static::$widthDefault,
             'Color' => static::$colorDefault,
             'Mode' => static::$modeDefault,
