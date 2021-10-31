@@ -15,7 +15,7 @@
     {% set Parameters = Widget.Parameters | json_encode %}  
 {% endif %}
 
-<div    class="splash-widget mb-3 {{ Width }} " id="{{ WidgetType ~ "-" ~ WidgetId }}" 
+<div    class="{{ Options.Class|default("splash-widget mb-3") {{ Width }} " id="{{ WidgetType ~ "-" ~ WidgetId }}" 
         data-id="{{ WidgetType }}"
     >
     
@@ -23,7 +23,4 @@
     {% block widget_box %}
         {% include '@SplashWidgets/Widget/contents.'~Mode~'.twig' %}  
     {% endblock %}                 
-</div> 
-        
-
- 
+</div>
