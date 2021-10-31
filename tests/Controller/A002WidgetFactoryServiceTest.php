@@ -143,6 +143,7 @@ class A002WidgetFactoryServiceTest extends KernelTestCase
         // Check Widget
         $this->assertInstanceOf(Widget::class, $this->getFactory()->getWidget());
         $this->assertEquals(array(
+            'Class' => 'splash-widget mb-3',
             'Width' => "col-test-12",
             'Color' => "#666666",
             'Header' => false,
