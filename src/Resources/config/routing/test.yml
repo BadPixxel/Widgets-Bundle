@@ -4,7 +4,7 @@
 splash_widgets_test_view_forced:
     path:     /forced/{service}/{type}/{options}/{parameters}
     defaults: 
-        _controller:    SplashWidgetsBundle:View:forced
+        _controller:    Splash\Widgets\Controller\ViewController::forcedAction
         options:        null
         parameters:     null      
         
@@ -13,7 +13,7 @@ splash_widgets_test_view_forced:
 splash_widgets_test_view_delayed:
     path:     /delayed/{service}/{type}/{options}/{parameters}
     defaults: 
-        _controller:    SplashWidgetsBundle:View:forced
+        _controller:    Splash\Widgets\Controller\ViewController::forcedAction
         options:        null
         parameters:     null      
         

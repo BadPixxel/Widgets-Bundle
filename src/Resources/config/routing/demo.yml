@@ -3,37 +3,37 @@
 ## COLLECTIONS : DISPLAY OF COLLECTIONS By CONTROLLER 
 splash_widgets_demo_home:
     path:     /
-    defaults: { _controller: SplashWidgetsBundle:Demo:collection } 
+    defaults: { _controller: Splash\Widgets\Controller\DemoController::collectionAction }
 
 splash_widgets_demo_collection:
     path:     /collection
-    defaults: { _controller: SplashWidgetsBundle:Demo:collection }  
+    defaults: { _controller: Splash\Widgets\Controller\DemoController::collectionAction }
     
 splash_widgets_demo_collection_edit:
     path:     /collection/edit
-    defaults: { _controller: SplashWidgetsBundle:Demo:collectionEdit } 
+    defaults: { _controller: Splash\Widgets\Controller\DemoController::collectionEditAction }
 
 
 #################################################################################
 ## LIST : DISPLAY LIST OF AVAILABLE WIDGETS
 splash_widgets_demo_list:
     path:     /list
-    defaults: { _controller: SplashWidgetsBundle:Demo:list }
+    defaults: { _controller: Splash\Widgets\Controller\DemoController::listAction }
 
 #################################################################################
 ## WIDGETS : DISPLAY OF WIDGETS By CONTROLLER
 splash_widgets_demo_single_forced:
     path:     /forced
-    defaults: { _controller: SplashWidgetsBundle:Demo:forced }    
+    defaults: { _controller: Splash\Widgets\Controller\DemoController::forcedAction }
 
 splash_widgets_demo_single_delayed:
     path:     /delayed
-    defaults: { _controller: SplashWidgetsBundle:Demo:delayed }  
+    defaults: { _controller: Splash\Widgets\Controller\DemoController::delayedAction }
 
 splash_widgets_demo_single_edit:
     path:     /edit/{widgetType}
     defaults:
-        _controller: SplashWidgetsBundle:Demo:edit
+        _controller: Splash\Widgets\Controller\DemoController::editAction
         widgetType: Text
 
 #################################################################################

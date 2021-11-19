@@ -4,7 +4,7 @@
 splash_widgets_render_widget:
     path:     /view/{service}/{type}/{options}/{parameters}
     defaults: 
-        _controller:    SplashWidgetsBundle:View:ajax
+        _controller:    Splash\Widgets\Controller\ViewController::ajaxAction
         options:        null
         parameters:     null      
     options:
@@ -15,7 +15,7 @@ splash_widgets_render_widget:
 splash_widgets_edit_widget:
     path:     /edit/{service}/{type}
     defaults: 
-        _controller: SplashWidgetsBundle:Edit:modal
+        _controller: Splash\Widgets\Controller\EditController::modalAction
     options:
         expose: true
         

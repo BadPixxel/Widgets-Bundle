@@ -2,29 +2,29 @@
 ## COLLECTIONS : AJAX ORDERING UPDATE
 splash_widgets_collections_reorder:
     path:     /reorder/{collectionId}
-    defaults: { _controller: SplashWidgetsBundle:Collection:reorder }
+    defaults: { _controller: Splash\Widgets\Controller\CollectionController::reorderAction }
         
 #################################################################################
 ## COLLECTIONS : AJAX DATE PRESET UPDATE
 splash_widgets_collections_preset:
     path:     /preset/{collectionId}/{preset}
-    defaults: { _controller: SplashWidgetsBundle:Collection:preset }
+    defaults: { _controller: Splash\Widgets\Controller\CollectionController::presetAction }
         
 #################################################################################
 ## COLLECTIONS : AJAX ADD WIDGET
 splash_widgets_collections_add_widget:
     path:     /add/{collectionId}/{service}/{type}
-    defaults: { _controller: SplashWidgetsBundle:Collection:add }
+    defaults: { _controller: Splash\Widgets\Controller\CollectionController::addAction }
         
 #################################################################################
 ## COLLECTIONS : AJAX REMOVE WIDGET
 splash_widgets_collections_remove_widget:
     path:     /remove/{service}/{type}
-    defaults: { _controller: SplashWidgetsBundle:Collection:remove }
+    defaults: { _controller: Splash\Widgets\Controller\CollectionController::removeAction }
         
 #################################################################################
 ## COLLECTIONS : AJAX WIDGETS LIST MODAL
 splash_widgets_collections_list_widget:
     path:     /list/{collectionId}/{channel}
-    defaults: { _controller: SplashWidgetsBundle:List:modal }
+    defaults: { _controller: Splash\Widgets\Controller\CollectionController::modalAction }
           
