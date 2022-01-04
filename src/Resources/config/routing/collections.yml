@@ -26,5 +26,5 @@ splash_widgets_collections_remove_widget:
 ## COLLECTIONS : AJAX WIDGETS LIST MODAL
 splash_widgets_collections_list_widget:
     path:     /list/{collectionId}/{channel}
-    defaults: { _controller: Splash\Widgets\Controller\CollectionController::modalAction }
+    defaults: { _controller: Splash\Widgets\Controller\ListController::modalAction }
           
