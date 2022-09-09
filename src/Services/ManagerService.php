@@ -497,6 +497,7 @@ class ManagerService
             return null;
         }
 
+        /** @phpstan-ignore-next-line  */
         return $reflection->invokeArgs($this->dispatcher, $args);
     }
 }

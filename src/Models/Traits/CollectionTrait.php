@@ -34,7 +34,7 @@ trait CollectionTrait
     //==============================================================================
 
     /**
-     * @var Collection
+     * @var Collection<Widget>
      *
      * @ORM\OneToMany(targetEntity="Splash\Widgets\Entity\Widget", mappedBy="parent", cascade={"all"} )
      * @ORM\OrderBy({"position" = "ASC"})
@@ -81,7 +81,7 @@ trait CollectionTrait
     /**
      * Get All Widgets
      *
-     * @return Collection
+     * @return Collection<Widget>
      */
     public function getWidgets() : Collection
     {

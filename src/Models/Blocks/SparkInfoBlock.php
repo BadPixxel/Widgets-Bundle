@@ -18,6 +18,8 @@ use ArrayObject;
 /**
  * Widget SparkInfo Block
  * Render a Simple Spark Info (i.e. Ico + Number) Block
+ *
+ * @SuppressWarnings(PHPMD.CamelCasePropertyName)
  */
 class SparkInfoBlock extends BaseBlock
 {
@@ -32,7 +34,7 @@ class SparkInfoBlock extends BaseBlock
      *
      * @var array
      */
-    public static $DATA = array(
+    public static array $DATA = array(
         "color" => "defaut",
         "title" => "Title",
         "fa_icon" => null,
@@ -48,7 +50,7 @@ class SparkInfoBlock extends BaseBlock
      *
      * @var array
      */
-    public static $OPTIONS = array(
+    public static array $OPTIONS = array(
         'Width' => "col-sm-12 col-md-12 col-lg-12",
         "AllowHtml" => false,
         "ChartOptions" => array(

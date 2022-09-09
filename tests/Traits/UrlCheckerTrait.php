@@ -15,6 +15,7 @@ namespace Splash\Widgets\Tests\Traits;
 
 use Symfony\Bundle\FrameworkBundle\Client;
 use Symfony\Component\DomCrawler\Crawler;
+use Symfony\Component\DomCrawler\Form;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\RouterInterface;
@@ -25,14 +26,14 @@ use Symfony\Component\Routing\RouterInterface;
 trait UrlCheckerTrait
 {
     /**
-     * @var RouterInterface
+     * @var null|RouterInterface
      */
-    private $router;
+    private ?RouterInterface $router;
 
     /**
      * @var Client
      */
-    private $client;
+    private Client $client;
 
     /**
      * Generate Relative Url
@@ -165,9 +166,9 @@ trait UrlCheckerTrait
     /**
      * Verify if an Submit of a Form Works
      *
-     * @param mixed $form
+     * @param Form $form
      */
-    public function assertSubmitWorks($form) : void
+    public function assertSubmitWorks(Form $form) : void
     {
         $this->ensureClientIsLoaded();
 

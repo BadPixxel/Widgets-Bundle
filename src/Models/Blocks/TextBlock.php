@@ -18,6 +18,8 @@ use ArrayObject;
 /**
  * Widget Simple Text Block
  * Render text as Escaped or Raw Html
+ *
+ * @SuppressWarnings(PHPMD.CamelCasePropertyName)
  */
 class TextBlock extends BaseBlock
 {
@@ -32,7 +34,7 @@ class TextBlock extends BaseBlock
      *
      * @var array
      */
-    public static $DATA = array(
+    public static array $DATA = array(
         "text" => null,
     );
 
@@ -42,7 +44,7 @@ class TextBlock extends BaseBlock
      *
      * @var array
      */
-    public static $OPTIONS = array(
+    public static array $OPTIONS = array(
         'Width' => "col-xs-12 col-sm-12 col-md-12 col-lg-12",
         "AllowHtml" => false,
     );

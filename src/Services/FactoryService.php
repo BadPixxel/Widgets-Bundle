@@ -202,7 +202,7 @@ class FactoryService
         $blockClassName = '\Splash\Widgets\Models\Blocks\\'.$type;
         //====================================================================//
         // Check if Requested Block Type Exists
-        $this->block = class_exists($blockClassName)
+        $this->block = (class_exists($blockClassName) && is_subclass_of($blockClassName, BaseBlock::class))
                 ? new $blockClassName()
                 : new BaseBlock();
         //====================================================================//

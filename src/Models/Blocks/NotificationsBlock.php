@@ -18,6 +18,8 @@ use ArrayObject;
 /**
  * Widget Notification Block
  * Render Notifs & Messages as Bootstrap Alerts
+ *
+ * @SuppressWarnings(PHPMD.CamelCasePropertyName)
  */
 class NotificationsBlock extends BaseBlock
 {
@@ -32,7 +34,7 @@ class NotificationsBlock extends BaseBlock
      *
      * @var array
      */
-    public static $DATA = array(
+    public static array $DATA = array(
         'error' => null,
         'warning' => null,
         'info' => null,

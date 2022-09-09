@@ -24,7 +24,7 @@ class D001DemoControllerTest extends WebTestCase
     use UrlCheckerTrait;
 
     /**
-     * @var array
+     * @var string[]
      */
     const DEMO_ROUTES = array(
         "splash_widgets_demo_home",
@@ -51,9 +51,9 @@ class D001DemoControllerTest extends WebTestCase
      *
      * @dataProvider demoRoutesProvider
      *
-     * @param mixed $route
+     * @param string $route
      */
-    public function testDemoPages($route) : void
+    public function testDemoPages(string $route) : void
     {
         $this->assertRouteWorks($route);
     }

@@ -21,6 +21,8 @@ use Symfony\Component\Form\FormBuilderInterface;
 /**
  * Widget Spark Bar Chart Block
  * Simple Bar Chart
+ *
+ * @SuppressWarnings(PHPMD.CamelCasePropertyName)
  */
 class SparkBarChartBlock extends BaseBlock
 {
@@ -35,7 +37,7 @@ class SparkBarChartBlock extends BaseBlock
      *
      * @var array
      */
-    public static $DATA = array(
+    public static array $DATA = array(
         "title" => "Title",
         "values" => array(),
     );
@@ -46,7 +48,7 @@ class SparkBarChartBlock extends BaseBlock
      *
      * @var array
      */
-    public static $OPTIONS = array(
+    public static array $OPTIONS = array(
         'Width' => "col-sm-12 col-md-12 col-lg-12",
         "AllowHtml" => false,
         "ChartOptions" => array(

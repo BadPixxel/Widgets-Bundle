@@ -36,7 +36,7 @@ class WidgetCollectionBlock extends AbstractBlockService
     /**
      * @var EntityManager
      */
-    private $manager;
+    private EntityManager $manager;
 
     /**
      * Widget Collections Repository
@@ -50,7 +50,7 @@ class WidgetCollectionBlock extends AbstractBlockService
      *
      * @var Request
      */
-    private $request;
+    private Request $request;
 
     /**
      * @param Environment   $twig
@@ -101,6 +101,14 @@ class WidgetCollectionBlock extends AbstractBlockService
     {
         //==============================================================================
         // Get Block Settings
+        /** @var array{
+         *     collection:string,
+         *     options:array,
+         *     editable:bool,
+         *     title:string,
+         *     channel:string,
+         *     menu:string,
+         *     } $settings */
         $settings = $blockContext->getSettings();
         //==============================================================================
         // Load Collection from DataBase

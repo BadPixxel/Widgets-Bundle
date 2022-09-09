@@ -17,7 +17,6 @@ use Exception;
 use Sonata\BlockBundle\Block\BlockContextInterface;
 use Sonata\BlockBundle\Block\Service\AbstractBlockService;
 use Splash\Widgets\Models\Traits\ParametersTrait;
-use Splash\Widgets\Services\FactoryService;
 use Splash\Widgets\Services\ManagerService;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -35,31 +34,21 @@ class WidgetBlock extends AbstractBlockService
      *
      * @var ManagerService
      */
-    private $manager;
-
-    /**
-     * Splash Widgets Factory
-     *
-     * @var FactoryService
-     */
-    private $factory;
+    private ManagerService $manager;
 
     /**
      * Class Constructor
      *
      * @param Environment    $twig
      * @param ManagerService $widgetsManager
-     * @param FactoryService $widgetFactory
      */
     public function __construct(
         Environment $twig,
-        ManagerService $widgetsManager,
-        FactoryService $widgetFactory
+        ManagerService $widgetsManager
     ) {
         parent::__construct($twig);
 
         $this->manager = $widgetsManager;
-        $this->factory = $widgetFactory;
     }
 
     /**
@@ -85,6 +74,7 @@ class WidgetBlock extends AbstractBlockService
     {
         //==============================================================================
         // Get Block Settings
+        /** @var array{service:string, type:string, options:array, parameters:array} $settings */
         $settings = $blockContext->getSettings();
 
         //==============================================================================

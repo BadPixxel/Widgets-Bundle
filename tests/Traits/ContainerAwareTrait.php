@@ -28,21 +28,21 @@ trait ContainerAwareTrait
     /**
      * Splash Widgets Manager
      *
-     * @var ManagerService
+     * @var null|ManagerService
      */
-    private $manager;
+    private ?ManagerService $manager;
 
     /**
-     * @var FactoryService
+     * @var null|FactoryService
      */
-    private $factory;
+    private ?FactoryService $factory;
 
     /**
      * Doctrine Entity Manager
      *
-     * @var ObjectManager
+     * @var null|ObjectManager
      */
-    private $entityManager;
+    private ?ObjectManager $entityManager;
 
     /**
      * Safe Load Symfony Service Container

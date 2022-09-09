@@ -33,6 +33,9 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
  * @method self setSuccess(string $message)
  * @method self setValue(string $value)
  * @method self setValues(array $values)
+ * @method self setContents(array $contents)
+ *
+ * @SuppressWarnings(PHPMD.CamelCasePropertyName)
  */
 class BaseBlock
 {
@@ -54,7 +57,7 @@ class BaseBlock
      *
      * @var array
      */
-    public static $DATA = array(
+    public static array $DATA = array(
     );
 
     /**
@@ -63,7 +66,7 @@ class BaseBlock
      *
      * @var array
      */
-    public static $OPTIONS = array(
+    public static array $OPTIONS = array(
         'Width' => self::SIZE_DEFAULT,
     );
 

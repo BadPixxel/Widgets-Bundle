@@ -52,6 +52,7 @@ services:
         image: 'node:8-slim'
         user: 'node'
         container_name: widgets-nodeJs
+        tty:                true
         volumes:
             - './:/app'
             - ~/.cache/yarn:/home/node/.yarn-cache

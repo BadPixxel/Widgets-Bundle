@@ -18,6 +18,8 @@ use ArrayObject;
 /**
  * Widget Progress Bar Chart Block
  * Progress Bar Chart
+ *
+ * @SuppressWarnings(PHPMD.CamelCasePropertyName)
  */
 class ProgressBarChartBlock extends BaseBlock
 {
@@ -32,7 +34,7 @@ class ProgressBarChartBlock extends BaseBlock
      *
      * @var array
      */
-    public static $DATA = array(
+    public static array $DATA = array(
         "title" => "Title",
         "values" => array(),
     );
@@ -43,7 +45,7 @@ class ProgressBarChartBlock extends BaseBlock
      *
      * @var array
      */
-    public static $OPTIONS = array(
+    public static array $OPTIONS = array(
         'Width' => "col-sm-12 col-md-12 col-lg-12",
         "AllowHtml" => false,
         "ChartOptions" => array(

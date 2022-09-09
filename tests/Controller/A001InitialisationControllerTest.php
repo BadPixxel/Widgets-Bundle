@@ -57,13 +57,8 @@ class A001InitialisationControllerTest extends KernelTestCase
         // Create Command
         $command = "php bin/console cache:clear --no-debug --env=".$environement;
         //====================================================================//
-        // Execute Test (SF 3&4 Versions)
-        try {
-            $process = Process::fromShellCommandline($command);
-        } catch (\Error $exception) {
-            $process = new Process($command);
-        }
-
+        // Execute Test
+        $process = Process::fromShellCommandline($command);
         //====================================================================//
         // Clean Working Dir
         $workingDirectory = (string) $process->getWorkingDirectory();
@@ -99,12 +94,7 @@ class A001InitialisationControllerTest extends KernelTestCase
         $command = "php bin/console debug:router --no-debug --env=".$environement;
         //====================================================================//
         // Execute Test (SF 3&4 Versions)
-        try {
-            $process = Process::fromShellCommandline($command);
-        } catch (\Error $exception) {
-            $process = new Process($command);
-        }
-
+        $process = Process::fromShellCommandline($command);
         //====================================================================//
         // Clean Working Dir
         $workingDirectory = (string) $process->getWorkingDirectory();

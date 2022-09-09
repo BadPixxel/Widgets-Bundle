@@ -136,6 +136,7 @@ class CollectionController extends AbstractController
         }
         //==============================================================================
         // Retrieve New Order from Post
+        /** @var array $orderArray */
         $orderArray = $request->request->get("ordering");
         //==============================================================================
         // Apply
@@ -250,7 +251,7 @@ class CollectionController extends AbstractController
         //==============================================================================
         // Init & Safety Check
         $manager = $this->has($service) ? $this->get($service) : $manager;
-        if (empty($manager) || !method_exists($manager, "getDefinition")) {
+        if (!method_exists($manager, "getDefinition")) {
             return new Response("Splash Widgets : Init Failed", 500);
         }
         //==============================================================================

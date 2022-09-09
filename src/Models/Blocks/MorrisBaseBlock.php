@@ -17,6 +17,8 @@ use ArrayObject;
 
 /**
  * Morris Js Chart Base Block Model
+ *
+ * @SuppressWarnings(PHPMD.CamelCasePropertyName)
  */
 class MorrisBaseBlock extends BaseBlock
 {
@@ -31,7 +33,7 @@ class MorrisBaseBlock extends BaseBlock
      *
      * @var array
      */
-    public static $DATA = array(
+    public static array $DATA = array(
         "title" => "",
         "dataset" => array(),
         "xkey" => "label",
@@ -45,7 +47,7 @@ class MorrisBaseBlock extends BaseBlock
      *
      * @var array
      */
-    public static $OPTIONS = array(
+    public static array $OPTIONS = array(
         'Width' => "col-sm-12 col-md-12 col-lg-12",
         "AllowHtml" => false,
         "ChartOptions" => array(

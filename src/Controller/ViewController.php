@@ -61,8 +61,9 @@ class ViewController extends AbstractController
         }
         //==============================================================================
         // Setup Widget Options
-        if (!is_null($options) && !empty(json_decode($options, true))) {
-            $widget->mergeOptions(json_decode($options, true));
+        $decodedOptions = json_decode((string) $options, true);
+        if (is_array($decodedOptions) && !empty($decodedOptions)) {
+            $widget->mergeOptions($decodedOptions);
         }
         //==============================================================================
         // Render Response
@@ -108,6 +109,7 @@ class ViewController extends AbstractController
         //==============================================================================
         // Decode Widget Parameters
         $widgetParameters = is_null($parameters)  ? array() : json_decode($parameters, true);
+        $widgetParameters = is_array($widgetParameters)  ? $widgetParameters : array();
 
         //==============================================================================
         // Load From cache if Available
@@ -161,6 +163,7 @@ class ViewController extends AbstractController
         //==============================================================================
         // Decode Widget Parameters
         $widgetParameters = is_null($parameters)  ? array() : json_decode($parameters, true);
+        $widgetParameters = is_array($widgetParameters)  ? $widgetParameters : array();
 
         //==============================================================================
         // Read Widget Contents
@@ -186,8 +189,9 @@ class ViewController extends AbstractController
 
         //==============================================================================
         // Setup Widget Options
-        if (!is_null($options) && !empty(json_decode($options, true))) {
-            $widget->mergeOptions(json_decode($options, true));
+        $decodedOptions = json_decode((string) $options, true);
+        if (is_array($decodedOptions) && !empty($decodedOptions)) {
+            $widget->mergeOptions($decodedOptions);
         }
 
         //==============================================================================

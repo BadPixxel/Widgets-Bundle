@@ -36,6 +36,7 @@ class WidgetCacheRepository extends EntityRepository
      */
     public function findCached(string $service, string $type, string $discriminator) : ?WidgetCache
     {
+        /** @phpstan-ignore-next-line  */
         return $this->createQueryBuilder("WC")
             ->where("WC.service = :service")
             ->andwhere("WC.type = :type")

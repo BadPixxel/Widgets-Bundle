@@ -18,6 +18,8 @@ use ArrayObject;
 /**
  * Widget Table Block
  * Render an Html Table wit Escaped or Raw Html Cells
+ *
+ * @SuppressWarnings(PHPMD.CamelCasePropertyName)
  */
 class TableBlock extends BaseBlock
 {
@@ -32,7 +34,7 @@ class TableBlock extends BaseBlock
      *
      * @var array
      */
-    public static $DATA = array(
+    public static array $DATA = array(
         "rows" => null,
     );
 
@@ -42,7 +44,7 @@ class TableBlock extends BaseBlock
      *
      * @var array
      */
-    public static $OPTIONS = array(
+    public static array $OPTIONS = array(
         'Width' => "col-xs-12 col-sm-12 col-md-12 col-lg-12",
         "Layout" => "table-bordered table-hover no-margin my-0",
         "HeadingRows" => 1,

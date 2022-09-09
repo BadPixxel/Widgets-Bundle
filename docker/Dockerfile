@@ -15,16 +15,15 @@
 #
 ################################################################################
 
-#FROM php:8.0-alpine
-FROM php:7.4-alpine
+FROM php:8.0-alpine
 EXPOSE 80
 WORKDIR /project
 
 ################################################################################
 # Install Required Libs
 RUN apk add nano git 
-#RUN apk add libzip-dev zlib1g-dev
-RUN apk add libzip-dev php7-zip
+RUN apk add libzip-dev
+#RUN #apk add libzip-dev php7-zip
 ################################################################################
 # Install Required PHP Extensions
 RUN docker-php-ext-install zip

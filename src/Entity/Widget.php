@@ -43,4 +43,14 @@ class Widget extends WidgetBase
     {
         return $this->id;
     }
+
+    /**
+     * @param int $id
+     *
+     * @return void
+     */
+    protected function setId(int $id)
+    {
+        $this->id = $id;
+    }
 }
