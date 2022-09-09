@@ -29,7 +29,7 @@
     },
     
     "require": {
-        "php":                                          "^7.2|^8.0",
+        "php":                                          "^7.4|^8.0",
         "ext-json":                                     "*",
 
         "symfony/monolog-bundle":                       "^2.0|^3.0",
@@ -80,6 +80,10 @@
         "symfony-bin-dir":                          "bin",
         "symfony-var-dir":                          "var",
         "symfony-web-dir":                          "web"
+    },
+    "config": {
+        "allow-plugins": {
+            "phpro/grumphp": true
+        }
     }
-    
 }

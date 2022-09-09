@@ -21,11 +21,20 @@ parameters:
     mode:           "badpixxel"
     # Php Stan
     stan_config:    "./tests/grumphp/phpstan.neon"
+    # For Building Splash Documentation
+    doc-enable:         false
+    doc-contents:       ["php-composer", "php-docker"]
+    # For Building Splash Module
+    mod-enable:         false
+    # For Building Splash Manifest
+    yml-enable:         false
+
 
 #############################################
 # Import Generic + Splash Console Configs
 imports:
     - { resource: "./vendor/badpixxel/php-sdk/grumphp/generic.yml" }
+    - { resource: "./vendor/badpixxel/php-sdk/grumphp/extras.yml" }
 
 
 grumphp:
