@@ -83,7 +83,7 @@
     },
     "config": {
         "platform": {
-            "php": "8.0.0"
+            "php": "7.4.0"
         },
         "allow-plugins": {
             "phpro/grumphp": true
