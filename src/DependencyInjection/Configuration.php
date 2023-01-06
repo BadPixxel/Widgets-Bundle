@@ -26,11 +26,10 @@ class Configuration implements ConfigurationInterface
      */
     public function getConfigTreeBuilder()
     {
-        $treeBuilder = new TreeBuilder();
-        $rootNode = $treeBuilder->root('splash_widgets');
+        $treeBuilder = new TreeBuilder('splash_widgets');
 
         // @phpstan-ignore-next-line
-        $rootNode
+        $treeBuilder->getRootNode()
             ->children()
             ->arrayNode('cache')
             ->children()
