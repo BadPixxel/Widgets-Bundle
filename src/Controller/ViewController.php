@@ -196,7 +196,7 @@ class ViewController extends AbstractController
 
         //==============================================================================
         // Update Cache
-        if (!$widgetOptions["EditMode"]) {
+        if (empty($widgetOptions["EditMode"])) {
             //==============================================================================
             // Generate Widget Raw Contents
             $contents = $this->renderView('SplashWidgetsBundle:Widget/Blocks:row.html.twig', array(
