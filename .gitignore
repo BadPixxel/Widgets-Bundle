@@ -5,13 +5,15 @@
 /vendor/
 /var/
 /app/bootstrap.php.cache
-/web/bundles/
 /node_modules/
 /.gh-pages/
-/web/build/
 /yarn.lock
 /reboot.sh
 /docs/yarn.lock
 /.idea/
 /app/config/parameters.yml
 /.php-cs-fixer.cache
+/.env
+
+/public/bundles/
+/public/build/

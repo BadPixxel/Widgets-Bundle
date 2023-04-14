@@ -12,7 +12,8 @@
     convertWarningsToExceptions     = "true"
     processIsolation                = "false"
     stopOnFailure                   = "true"
-    bootstrap                       = "app/autoload.php"
+    cacheResult                     = "false"
+    bootstrap                       = "vendor/autoload.php"
 >
 
     <testsuites>
@@ -34,9 +35,10 @@
     </logging> 
 
     <php>
-        <server name="KERNEL_CLASS"                 value="AppKernel" />
+        <server name="KERNEL_CLASS"                 value="Splash\Widgets\Tests\Kernel" />
         <server name="KERNEL_DIR"                   value="app/" />
         <env    name="SYMFONY_DEPRECATIONS_HELPER"  value="disabled" />
+        <env    name="DATABASE_URL"                 value="sqlite:////var/www/html//var/data.db" />
     </php>
 
 </phpunit>
