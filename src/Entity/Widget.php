@@ -20,7 +20,9 @@ use Splash\Widgets\Models\WidgetBase;
  * Splash Widget Entity
  *
  * @ORM\Entity()
+ *
  * @ORM\Table(name="widgets__widget")
+ *
  * @ORM\HasLifecycleCallbacks
  */
 class Widget extends WidgetBase
@@ -29,7 +31,9 @@ class Widget extends WidgetBase
      * @var int
      *
      * @ORM\Id
+     *
      * @ORM\Column(type="integer")
+     *
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;

@@ -20,7 +20,9 @@ use Splash\Widgets\Models\WidgetCacheBase;
  * Splash Widget Cache Entity
  *
  * @ORM\Entity(repositoryClass="Splash\Widgets\Repository\WidgetCacheRepository")
+ *
  * @ORM\Table(name="widgets__cache")
+ *
  * @ORM\HasLifecycleCallbacks
  */
 class WidgetCache extends WidgetCacheBase
@@ -29,7 +31,9 @@ class WidgetCache extends WidgetCacheBase
      * @var int
      *
      * @ORM\Id
+     *
      * @ORM\Column(type="integer")
+     *
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;

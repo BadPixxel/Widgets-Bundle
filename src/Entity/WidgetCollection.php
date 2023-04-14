@@ -23,7 +23,9 @@ use Splash\Widgets\Models\WidgetCollectionBase;
  * Widgets Collection Object
  *
  * @ORM\Entity()
+ *
  * @ORM\Table(name="widgets__collection")
+ *
  * @ORM\HasLifecycleCallbacks
  */
 class WidgetCollection extends WidgetCollectionBase
@@ -35,7 +37,9 @@ class WidgetCollection extends WidgetCollectionBase
      * @var int
      *
      * @ORM\Id
+     *
      * @ORM\Column(type="integer")
+     *
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     protected $id;
