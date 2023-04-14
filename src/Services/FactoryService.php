@@ -139,9 +139,9 @@ class FactoryService
     {
         //==============================================================================
         //  If no Id Defined, Generate Unique Widget Id
-//        if ( empty( $this->widget->getId() ) ) {
-//            $this->widget->setIdentifier( md5( json_encode($this->widget) ) );
-//        }
+        //        if ( empty( $this->widget->getId() ) ) {
+        //            $this->widget->setIdentifier( md5( json_encode($this->widget) ) );
+        //        }
         //==============================================================================
         //  Return Current Widget Data
         return $this->widget;
