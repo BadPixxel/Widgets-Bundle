@@ -1,0 +1,10 @@
+# Framework Configuration
+framework:
+    esi:                { enabled: true }
+    translator:         { fallbacks: ["%locale%"] }
+    default_locale:     "%locale%"
+    form:               true
+    csrf_protection:    true
+    session:            ~
+    assets:
+        base_path:      '/'

@@ -1,0 +1,6 @@
+
+################################################################################
+# SPLASH Widget Bundle Test Routes
+splash_widgets_bundle_test:
+    resource: "@SplashWidgetsBundle/Resources/config/routing/test.yml"
+    prefix:   /test/        
