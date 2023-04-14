@@ -39,22 +39,22 @@ splash_widgets_demo_single_edit:
 #################################################################################
 ## WIDGETS : DISPLAY OF WIDGETS By SONATA BLOCKS 
 splash_widgets_demo_blocks:
-    path:     /blocks
+    path:           /blocks
+    controller:     Symfony\Bundle\FrameworkBundle\Controller\TemplateController
     defaults:
-        _controller: FrameworkBundle:Template:template
-        template:    "@SplashWidgets/Demo/Blocks/index.html.twig"    
+        template:   "@SplashWidgets/Demo/Blocks/index.html.twig"
         
 splash_widgets_demo_single_blocks:
-    path:     /single/blocks
+    path:           /single/blocks
+    controller:     Symfony\Bundle\FrameworkBundle\Controller\TemplateController
     defaults:
-        _controller: FrameworkBundle:Template:template
-        template:    "@SplashWidgets/Demo/Blocks/single.html.twig"
+        template:   "@SplashWidgets/Demo/Blocks/single.html.twig"
 
 #################################################################################
 ## DEBUG
 splash_widgets_demo_debug:
-    path:     /debug/{Service}/{Type}
+    path:           /debug/{Service}/{Type}
+    controller:     Symfony\Bundle\FrameworkBundle\Controller\TemplateController
     defaults:
-        _controller: FrameworkBundle:Template:template
-        template:    "@SplashWidgets/Demo/Debug/index.html.twig"
+        template:   "@SplashWidgets/Demo/Debug/index.html.twig"
                 
