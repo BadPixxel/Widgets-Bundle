@@ -1,0 +1,6 @@
+
+################################################################################
+# SPLASH Widget Bundle Demo Routes
+splash_widgets_bundle_demo:
+    resource: "@SplashWidgetsBundle/Resources/config/routing/demo.yml"
+    prefix:   /  
