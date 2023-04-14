@@ -67,6 +67,7 @@
         ],
         "post-install-cmd": [
             "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters",
+            "php bin/console doctrine:database:create",
             "@auto-scripts"
         ],
         "post-update-cmd": [
