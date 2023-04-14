@@ -18,8 +18,17 @@
 ################################################################
 # Set any variables we need
 variables:
-  COMPOSER_MEMORY_LIMIT:  -1
+  MYSQL_DATABASE:               symfony
+  MYSQL_ROOT_PASSWORD:          Widgets-Bundle
+  COMPOSER_MEMORY_LIMIT:        -1
   SYMFONY_DEPRECATIONS_HELPER:  disabled
+
+################################################################
+# Configure Services
+services:
+  - name: mariadb
+    # To Disable ONLY_FULL_GROUP_BY option on SQL Server
+    command: [ '--sql_mode=NO_ENGINE_SUBSTITUTION' ]
 
 ################################################################
 # Defined Pipeline Stages
