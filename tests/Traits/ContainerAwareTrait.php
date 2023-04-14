@@ -45,23 +45,6 @@ trait ContainerAwareTrait
     private ?ObjectManager $entityManager;
 
     /**
-     * Safe Load Symfony Service Container
-     *
-     * @throws Exception
-     *
-     * @return ContainerInterface
-     */
-    protected function getContainer() : ContainerInterface
-    {
-        $container = static::$kernel->getContainer();
-        if (!($container instanceof ContainerInterface)) {
-            throw new Exception("Unable to Load Service Container");
-        }
-
-        return $container;
-    }
-
-    /**
      * Safe Load Doctrine Entity Manager
      *
      * @throws Exception

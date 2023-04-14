@@ -13,7 +13,7 @@
 
 namespace Splash\Widgets\Tests\Traits;
 
-use Symfony\Bundle\FrameworkBundle\Client;
+use Symfony\Bundle\FrameworkBundle\KernelBrowser as Client;
 use Symfony\Component\DomCrawler\Crawler;
 use Symfony\Component\DomCrawler\Form;
 use Symfony\Component\HttpFoundation\RedirectResponse;

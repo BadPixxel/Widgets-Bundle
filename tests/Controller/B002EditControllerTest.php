@@ -98,8 +98,6 @@ class B002EditControllerTest extends WebTestCase
      */
     public function widgetDemoNamesProvider()
     {
-        $this->client = self::createClient();
-
         //====================================================================//
         // Get Demo List
         $widgetsList = array();

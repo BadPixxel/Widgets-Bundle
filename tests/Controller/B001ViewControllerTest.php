@@ -185,8 +185,6 @@ class B001ViewControllerTest extends WebTestCase
      */
     public function widgetDemoNamesProvider() : array
     {
-        $this->client = self::createClient();
-
         //====================================================================//
         // Get Demo List
         $widgetsList = array();
