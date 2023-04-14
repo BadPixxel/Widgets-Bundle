@@ -18,7 +18,6 @@ use Doctrine\Persistence\ObjectManager;
 use Exception;
 use Splash\Widgets\Services\FactoryService;
 use Splash\Widgets\Services\ManagerService;
-use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * Safe Load Symfony Service Container

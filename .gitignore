@@ -17,3 +17,4 @@
 
 /public/bundles/
 /public/build/
+/.phpunit.result.cache
