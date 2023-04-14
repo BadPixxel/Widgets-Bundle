@@ -54,7 +54,7 @@ class Notifications
             ->setSuccess("My Widget Success")
             ->end()
 
-            ;
+        ;
     }
 
     /**

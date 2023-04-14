@@ -49,7 +49,7 @@ class SparkLine
         $barGraph
             ->setTitle("Sparkline Line Chart")
             ->setValues($values)
-            ;
+        ;
     }
 
     /**
