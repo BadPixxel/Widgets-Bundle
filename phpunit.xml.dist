@@ -38,7 +38,7 @@
         <server name="KERNEL_CLASS"                 value="Splash\Widgets\Tests\Kernel" />
         <server name="KERNEL_DIR"                   value="app/" />
         <env    name="SYMFONY_DEPRECATIONS_HELPER"  value="disabled" />
-        <env    name="DATABASE_URL"                 value="sqlite:////var/www/html//var/data.db" />
+        <env    name="DATABASE_URL"                 value="mysql://root:Widgets-Bundle@mariadb:3306/symfony" />
     </php>
 
 </phpunit>
