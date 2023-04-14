@@ -3,7 +3,7 @@
 {% for Block in Widget.blocks %}
     
     <div class="{{ Block.Options.Width }}">
-        {% include 'SplashWidgetsBundle:Widget/Blocks:' ~ Block.type ~'.html.twig'%}  
+        {% include '@SplashWidgets/Widget/Blocks/' ~ Block.type ~'.html.twig'%}
     </div>   
         
 {% endfor %}  

@@ -17,7 +17,7 @@
     
         {#  Widget Header #}
         {% block widget_Header %}
-            {% include 'SplashWidgetsBundle:Widget/Core:header.bs3.twig'%}  
+            {% include '@SplashWidgets/Widget/Core/header.bs3.twig'%}
         {% endblock %}  
 
 
@@ -27,7 +27,7 @@
                 {# Widget Block Row #}
                 {% block widget_row %}
                     {% if Widget.Blocks is defined %}
-                        {% include 'SplashWidgetsBundle:Widget/Blocks:row.html.twig'%}  
+                        {% include '@SplashWidgets/Widget/Blocks/row.html.twig'%}
                     {% endif %}
                     {% if Widget.Contents is defined %}
                         {{ Widget.Contents | raw }}  
@@ -40,7 +40,7 @@
 
         {# Widget Footer #}
         {% block widget_footer %}
-            {% include 'SplashWidgetsBundle:Widget/Core:footer.bs3.twig'%}  
+            {% include '@SplashWidgets/Widget/Core/footer.bs3.twig'%}
         {% endblock %}  
 
     {% endblock %} 
@@ -54,8 +54,8 @@
 {#    <div class="col-xs-12 pull-right text-right text-primary" style="margin-bottom: 10px;">    #}
     <div class="pull-right hidden-xs hidden-sm" style="margin-bottom: 20px; padding-bottom: 10px; padding-right: 15px;">    
         {% block widget_buttons %}
-            {% include 'SplashWidgetsBundle:Widget/Buttons:edit.html.twig'%}
-            {% include 'SplashWidgetsBundle:Widget/Buttons:remove.html.twig'%}
+            {% include '@SplashWidgets/Widget/Buttons/edit.html.twig'%}
+            {% include '@SplashWidgets/Widget/Buttons/remove.html.twig'%}
         {% endblock %}  
     </div> 
 {% endif %}

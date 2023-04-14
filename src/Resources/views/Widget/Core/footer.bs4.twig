@@ -18,11 +18,11 @@
             {% if Widget.Origin is not empty %}|&nbsp;{{ Widget.Origin | raw }}{% endif %}
             
             &nbsp;
-            {% include 'SplashWidgetsBundle:Widget/Buttons:reload.bs4.twig'  %} 
+            {% include '@SplashWidgets/Widget/Buttons/reload.bs4.twig'  %}
 
             {% if Widget.Options.Editable | default(false) %}
                 &nbsp;
-                {% include 'SplashWidgetsBundle:Widget/Buttons:editable.html.twig'  %} 
+                {% include '@SplashWidgets/Widget/Buttons/editable.html.twig'  %}
             {% endif %}
             
         </small>
