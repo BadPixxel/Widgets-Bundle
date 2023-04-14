@@ -33,7 +33,7 @@
                 </thead>
                 <tbody>
                     {% for Index in Tab.widgets %}
-                        {% include 'SplashWidgetsBundle:List:item.html.twig' with {'Widget': Widgets[Index] } %} 
+                        {% include '@SplashWidgets/List/item.html.twig' with {'Widget': Widgets[Index] } %}
                     {% endfor %}
                 </tbody>
             </table>

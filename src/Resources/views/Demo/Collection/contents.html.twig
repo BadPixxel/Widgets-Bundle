@@ -8,8 +8,8 @@
         
 <div class="col-6 p-3 text-center">
     <div class="btn-group">
-        {% include 'SplashWidgetsBundle:Edit:dates_selector.html.twig' with {"Collection" : Collection } %} 
-        {% include 'SplashWidgetsBundle:Widget/Buttons:add.html.twig' with {"CollectionId" : Collection.id , "Channel" : "demo" } %} 
+        {% include '@SplashWidgets/Edit/dates_selector.html.twig' with {"Collection" : Collection } %}
+        {% include '@SplashWidgets/Widget/Buttons/add.html.twig' with {"CollectionId" : Collection.id , "Channel" : "demo" } %}
 
         {% if Edit %}
             <a href="{{ path("splash_widgets_demo_collection") }}" class="btn btn-labeled btn-success pull-right"> 
@@ -26,10 +26,10 @@
 </div>
     
 {% if Edit %}
-    {{ render(controller('SplashWidgetsBundle:Collection:edit', { 'request' : app.request, 'collectionId' : Collection.id })) }}
-    {{ render(controller('SplashWidgetsBundle:List:panel', { 'collectionId' : Collection.id, 'channel' : 'demo' })) }}
+    {{ render(controller('\\Splash\\Widgets\\Controller\\CollectionController::editAction', { 'request' : app.request, 'collectionId' : Collection.id })) }}
+    {{ render(controller('\\Splash\\Widgets\\Controller\\ListController::panelAction', { 'collectionId' : Collection.id, 'channel' : 'demo' })) }}
 {% else %}
-    {{ render(controller('SplashWidgetsBundle:Collection:view', { 'collectionId' : Collection.id })) }}
+    {{ render(controller('\\Splash\\Widgets\\Controller\\CollectionController::viewAction', { 'collectionId' : Collection.id })) }}
 {% endif %}
     
 

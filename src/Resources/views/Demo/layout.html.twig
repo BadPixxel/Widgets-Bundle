@@ -7,17 +7,17 @@
 
 {% block head_style %}
     {{ parent() }}
-    {% include 'SplashWidgetsBundle:Layout:stylesheets.html.twig' %}  
+    {% include '@SplashWidgets/Layout/stylesheets.html.twig' %}
 {% endblock head_style %}
 
 {% block head_script %}
     {{ parent() }}
-{#    {% include 'SplashWidgetsBundle:Layout:javascripts_top.html.twig' %}  #}
+{#    {% include '@SplashWidgets/Layout/javascripts_top.html.twig' %}  #}
 {% endblock head_script %}
 
 {% block foot_script %}
     {{ parent() }}
-    {% include 'SplashWidgetsBundle:Layout:javascripts_bottom.html.twig' %}          
+    {% include '@SplashWidgets/Layout/javascripts_bottom.html.twig' %}
 {% endblock foot_script %}
 
 

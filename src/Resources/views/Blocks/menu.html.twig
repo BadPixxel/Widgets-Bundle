@@ -12,11 +12,11 @@
     <div class="col-12 col-md-6 pull-right text-right">
         <div class="btn-group">
         
-            {% include 'SplashWidgetsBundle:Edit:dates_selector.html.twig' %} 
+            {% include '@SplashWidgets/Edit/dates_selector.html.twig' %}
 
             {% if Editable %}
 
-                {% include 'SplashWidgetsBundle:Widget/Buttons:add.html.twig' %} 
+                {% include '@SplashWidgets/Widget/Buttons/add.html.twig' %}
 
                 {% if Edit %}
                     {% set ViewUrl = path(app.request.attributes.get('_route'), app.request.attributes.get('_route_params') | merge({"widget-edit" : "no"})) %}

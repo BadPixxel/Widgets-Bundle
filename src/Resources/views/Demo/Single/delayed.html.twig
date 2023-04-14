@@ -20,14 +20,14 @@
         </p>
         <code>
             Example
-            <PRE>render(controller('SplashWidgetsBundle:View:delayed', { 'service' : "splash.widgets.demo.factory",  'type' : "Text" }))</PRE>
+            <PRE>render(controller('\\Splash\\\Widgets\\Controller\\ViewController::delayedAction', { 'service' : "splash.widgets.demo.factory",  'type' : "Text" }))</PRE>
         </code>
         
     </div>
     
 
     {% for Widget in Widgets %}
-        {{ render(controller('SplashWidgetsBundle:View:delayed', { 'service' : Widget.service,  'type' : Widget.type })) }}
+        {{ render(controller('\\Splash\\\Widgets\\Controller\\ViewController::delayedAction', { 'service' : Widget.service,  'type' : Widget.type })) }}
     {% endfor %} 
     
 {% endblock %}

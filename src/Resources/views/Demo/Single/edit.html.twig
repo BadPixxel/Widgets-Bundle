@@ -19,19 +19,19 @@
         </p>
         <code>
             Example
-            <PRE>render(controller('SplashWidgetsBundle:Edit:panel', { 'service' : "{{ Widget.service }}",  'type' : "{{ Widget.type }}", "request" : app.request }))</PRE>
+            <PRE>render(controller('\\Splash\\\Widgets\\Controller\\EditController::panelAction', { 'service' : "{{ Widget.service }}",  'type' : "{{ Widget.type }}", "request" : app.request }))</PRE>
         </code>
         
     </div>
      
     <div class="col-12 col-xs-12 col-md-4 col-lg-3">
-        {% include 'SplashWidgetsBundle:Edit:panel.html.twig' %}
+        {% include '@SplashWidgets/Edit/panel.html.twig' %}
     </div>
         
     <div class="col-12 col-xs-12 col-md-8 col-lg-7">
 
         <div class="row justify-content-center border border-primary bg-gray-200 border-primary py-3">
-            {{ render(controller('SplashWidgetsBundle:View:forced', { 
+            {{ render(controller('\\Splash\\\Widgets\\Controller\\ViewController::forcedAction', {
                     'service' :     Widget.service,  
                     'type' :        Widget.type,
                     'options':      Widget.options | json_encode,
