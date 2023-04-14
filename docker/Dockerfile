@@ -15,22 +15,28 @@
 #
 ################################################################################
 
-FROM php:8.0-alpine
-EXPOSE 80
-WORKDIR /project
+FROM registry.gitlab.com/badpixxel-projects/php-sdk:php-8.1
 
-################################################################################
-# Install Required Libs
-RUN apk add nano git 
-RUN apk add libzip-dev
-#RUN #apk add libzip-dev php7-zip
-################################################################################
-# Install Required PHP Extensions
-RUN docker-php-ext-install zip
-################################################################################
-# Install Composer
-ENV COMPOSER_MEMORY_LIMIT: -1
-ENV COMPOSER_HOME: '/home/docker/.composer'
-RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/bin --filename=composer 
+COPY ./000-default.conf /etc/apache2/sites-available/000-default.conf
 
-CMD ["php", "/project/bin/console", "server:run", "80"]
+RUN a2enmod rewrite
+
+
+#FROM php:8.0-alpine
+#EXPOSE 80
+#WORKDIR /project
+#
+#################################################################################
+## Install Required Libs
+#RUN apk add nano git
+#RUN apk add libzip-dev
+#################################################################################
+## Install Required PHP Extensions
+#RUN docker-php-ext-install zip
+#################################################################################
+## Install Composer
+#ENV COMPOSER_MEMORY_LIMIT: -1
+#ENV COMPOSER_HOME: '/home/docker/.composer'
+#RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/bin --filename=composer
+#
+#CMD ["php", "/project/bin/console", "server:run", "80"]
