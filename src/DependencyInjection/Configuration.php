@@ -38,7 +38,7 @@ class Configuration implements ConfigurationInterface
             ->end()
             ->arrayNode('templates')
             ->children()
-            ->scalarNode('TextBlock')->defaultValue("SplashWidgetsBundle:Blocks:TextBlock.html.twig")->end()
+            ->scalarNode('TextBlock')->defaultValue("@SplashWidgets/Blocks/TextBlock.html.twig")->end()
             ->end()
             ->end()
             ->end()

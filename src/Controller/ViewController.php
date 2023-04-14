@@ -67,7 +67,7 @@ class ViewController extends AbstractController
         }
         //==============================================================================
         // Render Response
-        return $this->render('SplashWidgetsBundle:Widget:base.html.twig', array(
+        return $this->render('@SplashWidgets/Widget/base.html.twig', array(
             "Widget" => $widget,
             "WidgetId" => WidgetCache::buildDiscriminator($widget->getOptions(), $widget->getParameters()),
         ));
@@ -120,7 +120,7 @@ class ViewController extends AbstractController
             $cache->mergeOptions($widgetOptions);
             //==============================================================================
             // Render Cached Widget
-            return $this->render('SplashWidgetsBundle:Widget:base.html.twig', array(
+            return $this->render('@SplashWidgets/Widget/base.html.twig', array(
                 "Widget" => $cache,
                 "WidgetId" => WidgetCache::buildDiscriminator($widgetOptions, $widgetParameters),
                 "Options" => $widgetOptions,
@@ -129,7 +129,7 @@ class ViewController extends AbstractController
 
         //==============================================================================
         // Render Loading Widget Box
-        return $this->render('SplashWidgetsBundle:View:delayed.html.twig', array(
+        return $this->render('@SplashWidgets/View/delayed.html.twig', array(
             "Service" => $service,
             "WidgetType" => $type,
             "WidgetId" => WidgetCache::buildDiscriminator($widgetOptions, $widgetParameters),
@@ -180,7 +180,7 @@ class ViewController extends AbstractController
         if (!($widget instanceof Widget)) {
             $widget = $factory->buildErrorWidget($service, $type, "An Error Occurred During Widget Loading");
 
-            return $this->render('SplashWidgetsBundle:Widget:contents.html.twig', array(
+            return $this->render('@SplashWidgets/Widget/contents.html.twig', array(
                 "WidgetId" => WidgetCache::buildDiscriminator($widgetOptions, $widgetParameters),
                 "Widget" => $widget,
                 "Options" => $widgetOptions,
@@ -199,7 +199,7 @@ class ViewController extends AbstractController
         if (empty($widgetOptions["EditMode"])) {
             //==============================================================================
             // Generate Widget Raw Contents
-            $contents = $this->renderView('SplashWidgetsBundle:Widget/Blocks:row.html.twig', array(
+            $contents = $this->renderView('@SplashWidgets/Widget/Blocks/row.html.twig', array(
                 "Widget" => $widget,
                 "Options" => $widgetOptions,
             ));
@@ -208,7 +208,7 @@ class ViewController extends AbstractController
 
         //==============================================================================
         // Render Widget Contents
-        return $this->render('SplashWidgetsBundle:Widget:contents.html.twig', array(
+        return $this->render('@SplashWidgets/Widget/contents.html.twig', array(
             "WidgetId" => WidgetCache::buildDiscriminator($widgetOptions, $widgetParameters),
             "Widget" => $widget,
             "Options" => $widgetOptions,

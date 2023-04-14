@@ -83,7 +83,7 @@ class CollectionController extends AbstractController
         }
         //==============================================================================
         // Render Response
-        return $this->render('SplashWidgetsBundle:View:collection.html.twig', array(
+        return $this->render('@SplashWidgets/View/collection.html.twig', array(
             "Collection" => $this->collection,
             "Edit" => false,
         ));
@@ -113,7 +113,7 @@ class CollectionController extends AbstractController
 
         //==============================================================================
         // Render Response
-        return $this->render('SplashWidgetsBundle:View:collection.html.twig', array(
+        return $this->render('@SplashWidgets/View/collection.html.twig', array(
             "Collection" => $this->collection,
             "Edit" => true,
         ));

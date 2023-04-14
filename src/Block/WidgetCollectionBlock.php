@@ -85,7 +85,7 @@ class WidgetCollectionBlock extends AbstractBlockService
             'title' => 'Splash Widget Collection Block',
             'collection' => 'demo-block',
             'channel' => 'demo',
-            'template' => 'SplashWidgetsBundle:Blocks:Collection.html.twig',
+            'template' => '@SplashWidgets/Blocks/Collection.html.twig',
             'options' => array(),
             'editable' => true,
             'menu' => true,

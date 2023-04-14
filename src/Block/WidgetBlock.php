@@ -59,7 +59,7 @@ class WidgetBlock extends AbstractBlockService
         $resolver->setDefaults(array(
             'service' => null,
             'type' => null,
-            'template' => 'SplashWidgetsBundle:Blocks:Widget.html.twig',
+            'template' => '@SplashWidgets/Blocks/Widget.html.twig',
             'parameters' => array(),
             'options' => array(),
         ));

@@ -61,7 +61,7 @@ class ListController extends AbstractController
         $params = $this->prepare($manager, $collectionId, $channel);
         //==============================================================================
         // Render Panel List
-        return $this->render('SplashWidgetsBundle:List:panel.html.twig', $params);
+        return $this->render('@SplashWidgets/List/panel.html.twig', $params);
     }
 
     //==============================================================================
@@ -91,7 +91,7 @@ class ListController extends AbstractController
         $params = $this->prepare($manager, $collectionId, $channel);
         //==============================================================================
         //Render Modal List
-        return $this->render('SplashWidgetsBundle:List:modal.html.twig', $params);
+        return $this->render('@SplashWidgets/List/modal.html.twig', $params);
     }
 
     /**
