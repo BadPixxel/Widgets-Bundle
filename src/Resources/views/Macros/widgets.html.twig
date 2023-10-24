@@ -29,7 +29,7 @@
 {% endmacro %}
 
 {% macro Progress( Options, Values ) %}
-    {% spaceless %}
+    {% apply spaceless %}
     <div class="progress" style="height: {{Options.barHeight|default("20")}}px;">
         {% for Name, Value in Values %}
             <div class="progress-bar {{ Options.class|default("") }} {% if Options.classes|length|default(0) %}{{ Options.classes[loop.index0 % (Options.classes|length)] }}{% endif %}"
@@ -54,7 +54,7 @@
             {% endfor %}
         </ul>
     {% endif %}
-    {% endspaceless %}
+    {% endapply %}
 {% endmacro %}
 
 {% macro MorrisChart( Type, DataSet, Xkey, Ykeys, Labels, Options ) %}
