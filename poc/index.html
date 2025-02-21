@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>POC D3.js - Cheminement</title>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+        }
+
+        svg {
+            border: 1px solid #ccc;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        text {
+            font-size: 12px;
+            font-weight: bold;
+            text-anchor: middle;
+            dominant-baseline: middle;
+        }
+
+        .node circle {
+            fill: #f5c6a5; /* Couleur orange blanchâtre grisâtre */
+            stroke: #333;
+            stroke-width: 2;
+        }
+
+        .node image {
+            pointer-events: none;
+        }
+
+        .link {
+            stroke: #aaa;
+            stroke-width: 2;
+        }
+
+        .arrow {
+            fill: red;
+        }
+    </style>
+</head>
+<body>
+    <svg width="800" height="600">
+        <defs>
+            <marker id="arrow" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                <path d="M 0 0 L 10 5 L 0 10 z" />
+            </marker>
+            <clipPath id="circle-clip">
+                <circle cx="0" cy="0" r="20"></circle> <!-- Rayon réduit à 20 -->
+            </clipPath>
+        </defs>
+    </svg>
+    <script>
+        const data = {
+            nodes: [
+                { id: "Server 1", label: "Main Server", logo: "https://upload.wikimedia.org/wikipedia/commons/4/4a/Logo_2013_Google.png" },
+                { id: "Server 2", label: "Satellite", logo: "https://upload.wikimedia.org/wikipedia/commons/a/a9/Amazon_logo.svg" },
+                { id: "Server 3", label: "Storage", logo: "https://upload.wikimedia.org/wikipedia/commons/5/51/IBM_logo.svg" },
+                { id: "Server 4", label: "Web Server", logo: "https://upload.wikimedia.org/wikipedia/commons/f/fa/Apple_logo_black.svg" },
+                { id: "Server 5", label: "Database", logo: "https://upload.wikimedia.org/wikipedia/commons/4/44/Microsoft_logo.svg" },
+                { id: "Server 6", label: "Backup", logo: "https://upload.wikimedia.org/wikipedia/commons/4/44/Meta_Platforms_Inc._logo.svg" },
+                { id: "Server 7", label: "Proxy", logo: "https://upload.wikimedia.org/wikipedia/commons/6/6a/JavaScript-logo.png" },
+                { id: "Server 8", label: "Cache", logo: "https://upload.wikimedia.org/wikipedia/commons/4/4f/Twitter-logo.svg" },
+                { id: "Server 9", label: "Load Balancer", logo: "https://upload.wikimedia.org/wikipedia/commons/5/51/IBM_logo.svg" },
+                { id: "Server 10", label: "Firewall", logo: "https://upload.wikimedia.org/wikipedia/commons/f/fa/Apple_logo_black.svg" },
+            ],
+            links: [
+                { source: "Server 1", target: "Server 3", value: 5, type: "test", direction: "forward", bidirectional: true },
+                { source: "Server 1", target: "Server 4", value: 3, direction: "forward", bidirectional: false },
+                { source: "Server 2", target: "Server 5", value: 4, direction: "forward", bidirectional: true },
+                { source: "Server 2", target: "Server 6", value: 2, direction: "forward", bidirectional: false },
+                { source: "Server 3", target: "Server 7", value: 6, direction: "forward", bidirectional: true },
+                { source: "Server 4", target: "Server 8", value: 8, direction: "forward", bidirectional: false },
+                { source: "Server 5", target: "Server 9", value: 1, direction: "forward", bidirectional: true },
+                { source: "Server 6", target: "Server 10", value: 7, direction: "forward", bidirectional: false },
+                { source: "Server 7", target: "Server 1", value: 9, direction: "forward", bidirectional: true },
+                { source: "Server 8", target: "Server 2", value: 5, direction: "forward", bidirectional: false },
+                { source: "Server 9", target: "Server 3", value: 3, direction: "forward", bidirectional: true },
+                { source: "Server 10", target: "Server 4", value: 4, direction: "forward", bidirectional: false },
+            ]
+        };
+
+        const width = 800;
+        const height = 600;
+        const radius = 25; // Rayon des cercles réduit à 20
+
+        const svg = d3.select("svg");
+
+        function createSimulation(nodes, links) {
+            const linkForce = d3.forceLink(links)
+                .id(d => d.id)
+                .distance(150);
+
+            return d3.forceSimulation(nodes)
+                .force("link", linkForce)
+                .force("charge", d3.forceManyBody().strength(-300)) // Adjusted for better performance
+                .force("center", d3.forceCenter(width / 2, height / 2))
+                .force("y", d3.forceY(height / 2).strength(0.05)) // Ajoute une contrainte verticale
+                .on("tick", () => {
+                    links.forEach(link => {
+                        link.source = nodes.find(node => node.id === link.source.id);
+                        link.target = nodes.find(node => node.id === link.target.id);
+                    });
+                });
+        }
+
+        function createLinks(svg, links) {
+            return svg.append("g")
+                .selectAll("line")
+                .data(links)
+                .join("line")
+                .attr("class", "link");
+        }
+
+        function createNodes(svg, nodes, simulation) {
+            const node = svg.append("g")
+                .selectAll("g")
+                .data(nodes)
+                .join("g")
+                .attr("class", "node")
+                .call(drag(simulation));
+
+            node.append("circle")
+                .attr("r", radius);
+
+            node.append("image")
+                .attr("xlink:href", d => d.logo)
+                .attr("x", -radius)
+                .attr("y", -radius)
+                .attr("width", radius * 2)
+                .attr("height", radius * 2)
+                .attr("clip-path", "url(#circle-clip)");
+
+            return node;
+        }
+
+        function createArrows(svg, links) {
+            return svg.append("g")
+                .selectAll("path")
+                .data(links)
+                .join("path")
+                .attr("class", "arrow")
+                .attr("marker-end", "url(#arrow)");
+        }
+
+        function animateArrow(arrow, d) {
+            const source = d.direction === "forward" ? d.source : d.target;
+            const target = d.direction === "forward" ? d.target : d.source;
+
+            const angle = Math.atan2(target.y - source.y, target.x - source.x);
+            const sourceX = source.x + radius * Math.cos(angle);
+            const sourceY = source.y + radius * Math.sin(angle);
+            const targetX = target.x - radius * Math.cos(angle);
+            const targetY = target.y - radius * Math.sin(angle);
+
+            arrow
+                .attr("d", `M${sourceX},${sourceY} L${sourceX},${sourceY}`)
+                .transition()
+                .duration(5000 / d.value) // Ajustez la durée pour ralentir l'animation
+                .ease(d3.easeLinear)
+                .attrTween("d", function() {
+                    return function(t) {
+                        const x = sourceX + (targetX - sourceX) * t;
+                        const y = sourceY + (targetY - sourceY) * t;
+                        return `M${sourceX},${sourceY} L${x},${y}`;
+                    };
+                })
+                .on("end", function() {
+                    if (d.bidirectional) {
+                        d.direction = d.direction === "forward" ? "backward" : "forward";
+                    }
+                    animateArrow(d3.select(this), d);
+                });
+        }
+
+        function updatePositions(link, node, movingArrows) {
+            link
+                .attr("x1", d => d.source.x)
+                .attr("y1", d => d.source.y)
+                .attr("x2", d => d.target.x)
+                .attr("y2", d => d.target.y);
+
+            node
+                .attr("transform", d => `translate(${d.x},${d.y})`);
+
+            movingArrows
+                .attr("d", d => {
+                    const angle = Math.atan2(d.target.y - d.source.y, d.target.x - d.source.x);
+                    const sourceX = d.source.x + radius * Math.cos(angle);
+                    const sourceY = d.source.y + radius * Math.sin(angle);
+                    const targetX = d.target.x - radius * Math.cos(angle);
+                    const targetY = d.target.y - radius * Math.sin(angle);
+                    return `M${sourceX},${sourceY} L${targetX},${targetY}`;
+                });
+        }
+
+        function drag(simulation) {
+            return d3.drag()
+                .on("start", (event, d) => {
+                    if (!event.active) simulation.alphaTarget(0.3).restart();
+                    d.fx = d.x;
+                    d.fy = d.y;
+                })
+                .on("drag", (event, d) => {
+                    d.fx = event.x;
+                    d.fy = event.y;
+                })
+                .on("end", (event, d) => {
+                    if (!event.active) simulation.alphaTarget(0);
+                    d.fx = null;
+                    d.fy = null;
+                });
+        }
+
+        const simulation = createSimulation(data.nodes, data.links);
+        const link = createLinks(svg, data.links);
+        const node = createNodes(svg, data.nodes, simulation);
+        const movingArrows = createArrows(svg, data.links);
+
+        movingArrows.each(function(d) {
+            animateArrow(d3.select(this), d);
+        });
+
+        simulation.on("tick", () => {
+            updatePositions(link, node, movingArrows);
+        });
+    </script>
+</body>
+</html>
