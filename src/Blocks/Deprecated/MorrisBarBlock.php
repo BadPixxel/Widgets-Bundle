@@ -11,15 +11,27 @@
  *  file that was distributed with this source code.
  */
 
-namespace Splash\Widgets\Models\Blocks;
+namespace BadPixxel\Widgets\Blocks\Deprecated;
+
+use BadPixxel\Widgets\Blocks\ChartJs\BarChartBlock;
 
 /**
- * Morris Js Bar Chart Block Model
+ * DEPRECATED - Morris Js Bar Chart Block
+ *
+ * @deprecated
  */
-class MorrisBarBlock extends MorrisBaseBlock
+class MorrisBarBlock extends BarChartBlock
 {
     /**
      * @var string
      */
-    protected $type = "MorrisBarBlock";
+    const TYPE = "MorrisBarBlock";
+
+    /**
+     * @inheritDoc
+     */
+    public function getDescription(): string
+    {
+        return "[DEPRECATED] Render a Bar Chart";
+    }
 }

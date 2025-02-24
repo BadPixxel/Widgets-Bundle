@@ -11,15 +11,24 @@
  *  file that was distributed with this source code.
  */
 
-namespace Splash\Widgets\Models\Blocks;
+namespace BadPixxel\Widgets\Blocks\Deprecated;
+
+use BadPixxel\Widgets\Blocks\ChartJs\DonutChartBlock;
 
 /**
- * Morris Js Chart Base Block Model
+ * DEPRECATED -  Morris Js Donut Chart Block
+ *
+ * @deprecated
  */
-class MorrisAreaBlock extends MorrisBaseBlock
+class MorrisDonutBlock extends DonutChartBlock
 {
+    const TYPE = "MorrisDonutBlock";
+
     /**
-     * @var string
+     * @inheritDoc
      */
-    protected $type = "MorrisAreaBlock";
+    public function getDescription(): string
+    {
+        return "[DEPRECATED] Render a Donut Chart";
+    }
 }
