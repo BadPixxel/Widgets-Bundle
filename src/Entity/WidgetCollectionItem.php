@@ -14,6 +14,7 @@
 namespace BadPixxel\Widgets\Entity;
 
 
+use BadPixxel\Widgets\Models\AbstractWidgetCollection;
 use BadPixxel\Widgets\Models\Widgets\OptionsAwareTrait;
 use BadPixxel\Widgets\Models\Widgets\ParametersAwareTrait;
 use BadPixxel\Widgets\Models\WidgetCollectionItems\ConfiguratorTrait;
@@ -44,7 +45,7 @@ class WidgetCollectionItem
     ]
     private ?int $id = null;
 
-    public function __construct(WidgetCollection $collection)
+    public function __construct(AbstractWidgetCollection $collection)
     {
         $this->setCollection($collection);
         $this->initPosition();

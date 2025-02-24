@@ -7,6 +7,7 @@ use BadPixxel\Widgets\Helpers\TagsEncoder;
 use BadPixxel\Widgets\Interfaces\WidgetInterface;
 use BadPixxel\Widgets\Services\Widgets\Loaders\StaticWidgetsLoader;
 use BadPixxel\Widgets\Services\Widgets\WidgetsResolver;
+use JsonException;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Webmozart\Assert\Assert;
@@ -25,6 +26,7 @@ class StaticWidgetsCompiler implements CompilerPassInterface
         //==============================================================================
         // Build List of Widgets Services
         foreach ($container->findTaggedServiceIds(AsStaticWidget::TAG) as $id => $tags) {
+            /** @var array $tag */
             foreach ($tags as $tag) {
                 Assert::classExists($class = (string) $container->getDefinition($id)->getClass());
                 $this->register($id, $tag, $class);
@@ -40,6 +42,8 @@ class StaticWidgetsCompiler implements CompilerPassInterface
 
     /**
      * Register a Widget tagged Service
+     *
+     * @throws JsonException
      */
     public function register(string $id, array $tag, string $serviceClass): void
     {
@@ -52,16 +56,19 @@ class StaticWidgetsCompiler implements CompilerPassInterface
         );
         //==============================================================================
         // Verify Tag Configuration
+        Assert::string($channels = $tag["channels"]);
         Assert::allStringNotEmpty(
-            $tag["channels"] = TagsEncoder::decode($tag["channels"]),
+            $tag["channels"] = TagsEncoder::decode($channels),
             sprintf("%s : Widget Channel must be a non empty string", $id)
         );
+        Assert::string($roles = $tag["roles"]);
         Assert::allStringNotEmpty(
-            $tag["roles"] = TagsEncoder::decode($tag["roles"]),
+            $tag["roles"] = TagsEncoder::decode($roles),
             sprintf("%s : Widget Role must be a non empty string", $id)
         );
+        Assert::string($options = $tag["options"]);
         Assert::isArray(
-            $tag["options"] = TagsEncoder::decode($tag["options"]),
+            $tag["options"] = TagsEncoder::decode($options),
             sprintf("%s : Widget Options must be an array", $id)
         );
         Assert::integer($tag["priority"], sprintf("%s : Widget Priority must be an integer", $id));

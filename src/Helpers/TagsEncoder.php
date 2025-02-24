@@ -2,6 +2,7 @@
 
 namespace BadPixxel\Widgets\Helpers;
 
+use JsonException;
 use Webmozart\Assert\Assert;
 
 /**
@@ -19,6 +20,8 @@ class TagsEncoder
 
     /**
      * Decode Tag Parameter as Array
+     *
+     * @throws JsonException
      */
     public static function decode(string $value): array
     {

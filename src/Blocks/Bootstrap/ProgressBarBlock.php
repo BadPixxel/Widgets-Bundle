@@ -104,6 +104,8 @@ class ProgressBarBlock extends AbstractBlock implements BlockWithDemoInterface
 
     /**
      * Set Chart Datasets
+     *
+     * @param array<float|int|array> $data
      */
     public function setDataSet(array $data) : static
     {

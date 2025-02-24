@@ -11,9 +11,9 @@
  *  file that was distributed with this source code.
  */
 
-namespace Splash\Widgets\Models\Interfaces;
+namespace BadPixxel\Widgets\Models\Interfaces;
 
-use Splash\Widgets\Entity\Widget;
+use BadPixxel\Widgets\Entity\WidgetCollectionItem;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**
@@ -27,9 +27,9 @@ interface WidgetProviderInterface
      * @param string $type       Widgets Type Identifier
      * @param array  $parameters Widget Parameters
      *
-     * @return null|Widget
+     * @return null|WidgetCollectionItem
      */
-    public function getWidget(string $type, array $parameters = null): ?Widget;
+    public function getWidget(string $type, array $parameters = null): ?WidgetCollectionItem;
 
     /**
      * Return Widget Options Array

@@ -48,9 +48,9 @@ interface BlockInterface extends BlockWidthAwareInterface
     /**
      * Set Widget Block Options
      *
-     * @param null|array<string, mixed> $options User Defined Options
+     * @param array<string, mixed> $options User Defined Options
      */
-    public function setOptions(array $options = null): static;
+    public function setOptions(array $options = array()): static;
 
     /**
      * Marge an Array of Options with Current Widget Block Options
