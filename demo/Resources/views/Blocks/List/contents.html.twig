@@ -1,0 +1,45 @@
+{% trans_default_domain "SplashWidgetsBundle" %}   
+
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">
+            Available Widgets Blocks
+        </h6>
+    </div>
+    <div class="card-body">
+
+        <table class="table table-bordered">
+
+            <thead>
+                <td>Type</td>
+                <td>Description</td>
+                <td>Try it!!</td>
+            </thead>
+
+            {% for Block in Blocks %}
+
+            <tr>
+                <td>
+                    {{ Block.type }}
+                </td>
+                <td>
+                    {{ Block.description }}
+                </td>
+                <td class="text-center">
+                    {% if Block.hasDemo() %}
+                    <a
+                            href="{{ path(constant('BadPixxel\\Widgets\\Demo\\Dictionary\\WidgetsDemoRoutes::BLOCKS_PREVIEW'), {"type": Block.type}) }}"
+                            class="btn btn-labeled btn-primary"
+                    >
+                        <i class="far fa-smile-wink"></i>
+                        Test me!
+                    </a>
+                    {% endif %}
+                </td>
+            <tr>
+
+            {% endfor %}
+        </table>
+
+    </div>
+</div>

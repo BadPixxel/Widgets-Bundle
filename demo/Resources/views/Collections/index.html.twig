@@ -1,0 +1,46 @@
+
+{% extends "base.html.twig" %}
+
+{% block headline %}
+    Widgets Collection as Twig Component
+{% endblock %}
+
+{% block content_row %}
+
+    <div class="col-xs-12 col-md-6 p-3">
+        <h3>
+            <i class="fa fa-fw fa-info-circle"></i>
+            Render Widget Collections with Twig Live Components
+        </h3>
+
+        <p>
+            Just pass a title, a channel code and your collection code, that's all...
+            <br />
+            If collection code is new, it will be create & persisted to database. So you can create new widget collections on the demand.
+            <br />
+            In addition, you can pass few option to hide the menu, disable édition.
+        </p>
+
+    </div>
+
+    <div class="col-xs-12 col-md-6 p-3">
+
+        <h3>
+            <i class="fa fa-fw fa-code"></i>
+            Example
+        </h3>
+
+<pre><code class="language-twig">{% verbatim %}
+{{ component("WidgetsCollection"), {
+    type:   "my-custom-type",
+} }}
+{% endverbatim %}</code></pre>
+
+    </div>
+
+    <div class="col-12 p-3">
+        <twig:WidgetsCollection :type="Type" />
+        <twig:Widget:Selector:Card :type="Type" />
+    </div>
+
+{% endblock %}

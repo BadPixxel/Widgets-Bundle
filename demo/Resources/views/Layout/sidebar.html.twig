@@ -1,0 +1,63 @@
+{%  import _self as Macros %}
+
+<!-- Sidebar -->
+<ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+
+    <!-- Sidebar - Brand -->
+    <a class="sidebar-brand d-flex align-items-center justify-content-center"
+       href="{{ path(widgetsDemoRoutes.HOME) }}">
+        <div class="sidebar-brand-icon rotate-n-15">
+            <i class="fas fa-laugh-wink"></i>
+        </div>
+        <div class="sidebar-brand-text mx-3">Widgets Demo</div>
+    </a>
+
+    {{ Macros.navDivider() }}
+    {{ Macros.navHeading("Widgets & Blocks") }}
+    {{ Macros.navItem(widgetsDemoRoutes.BLOCKS_LIST, "Blocks List", "fa-list-alt" ) }}
+    {{ Macros.navItem(widgetsDemoRoutes.WIDGETS_LIST, "Widgets List", "fa-cube" ) }}
+
+    {{ Macros.navDivider() }}
+    {{ Macros.navHeading("Live Components") }}
+    {{ Macros.navItem(widgetsDemoRoutes.COLLECTION_COMPONENT, "Collection", "fa-play-circle" ) }}
+
+    {{ Macros.navDivider() }}
+    {{ Macros.navHeading("Sonata Blocks") }}
+    {{ Macros.navItem(widgetsDemoRoutes.SONATA_WIDGET_LIST, "Widget as Block", "fa-cube" ) }}
+    {{ Macros.navItem(widgetsDemoRoutes.SONATA_COLLECTION, "Collection as Block", "fa-th-large" ) }}
+
+    {{ Macros.navDivider() }}
+    {{ Macros.navHeading("Sonata Admin") }}
+    {{ Macros.navItem("sonata_admin_dashboard", "Admin Dashboard", "fa-cogs" ) }}
+
+    <!-- Divider -->
+    <hr class="sidebar-divider d-none d-md-block">
+
+    <!-- Sidebar Toggler (Sidebar) -->
+    <div class="text-center d-none d-md-inline">
+        <button class="rounded-circle border-0" id="sidebarToggle"></button>
+    </div>
+
+</ul>
+<!-- End of Sidebar -->
+
+{% macro navHeading(title) %}
+    <!-- Nav Heading -->
+    <div class="sidebar-heading">{{ title }} </div>
+{% endmacro %}
+
+{% macro navItem(route, title, icon) %}
+    <!-- Nav Item - {{ title }} -->
+    <li class="nav-item">
+        <a class="nav-link py-2" href="{{ path(route) }}">
+            <i class="fas fa-fw {{ icon }}"></i>
+            <span>{{ title }}</span>
+        </a>
+    </li>
+    <!-- END Nav Item - {{ title }} -->
+{% endmacro %}
+
+{% macro navDivider() %}
+    <!-- Divider -->
+    <hr class="sidebar-divider">
+{% endmacro %}

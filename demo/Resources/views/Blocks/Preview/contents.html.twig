@@ -1,0 +1,12 @@
+{% trans_default_domain "SplashWidgetsBundle" %}   
+
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">
+            Preview of Widgets Blocks {{ Block.type }}
+        </h6>
+    </div>
+    <div class="card-body">
+        <twig:Widgets:Block :type="Type" :data="Data" :options="Options" />
+    </div>
+</div>

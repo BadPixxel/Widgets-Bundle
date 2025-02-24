@@ -1,0 +1,16 @@
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">
+            Blocks {{ Block.type }} Inputs
+        </h6>
+    </div>
+    <div class="card-body">
+
+        <h4>Block Input Data</h4>
+        <pre><code class="language-jsonp">{{ Data|json_encode(constant('JSON_PRETTY_PRINT')) }}</code></pre>
+
+        <h4>Block Options</h4>
+        <pre><code class="language-jsonp">{{ Options|json_encode(constant('JSON_PRETTY_PRINT')) }}</code></pre>
+
+    </div>
+</div>

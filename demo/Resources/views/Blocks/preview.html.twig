@@ -1,0 +1,28 @@
+{% trans_default_domain "SplashWidgetsBundle" %}   
+{% extends "base.html.twig" %}
+
+{% block headline %}
+    Widgets Blocks Preview
+{% endblock %}    
+
+{% block body %}
+    <p>
+        Let's see what block <code>{{ Block.type }}</code> looks like!
+    </p>
+
+    <hr>
+{% endblock %}    
+        
+    
+{% block content_row %}
+    <div class='col-12 col-md-6'>
+        {% include '@WidgetsDemo/Blocks/Preview/inputs.html.twig' %}
+    </div>
+    <div class='col-12 col-md-6'>
+        {% include '@WidgetsDemo/Blocks/Preview/contents.html.twig' %}
+    </div>
+    <div class='col-12 col-md-10'>
+        {% include '@WidgetsDemo/Blocks/List/contents.html.twig' %}
+    </div>
+{% endblock %}
+

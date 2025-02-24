@@ -1,0 +1,54 @@
+
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">
+            How to Register a Widget Block
+        </h6>
+    </div>
+    <div class="card-body">
+        
+        <p>
+            To register a widget block, you need to create & register a service extending <code>BlockInterface</code>.
+        </p>
+        <p>
+            Then, use <code>#[AsWidgetBlock]</code> attribute to register this service as a Widget Block.
+        </p>
+
+<pre><code class="language-php">
+use BadPixxel\Widgets\Attribute\AsWidgetBlock;
+use BadPixxel\Widgets\Models\AbstractBlock;
+
+#[AsWidgetBlock]
+class MyAwesomeBlock extends AbstractBlock
+{
+    const TYPE = "MyAwesomeBlock";
+
+    public function __construct(array $data = array(), array $options = array())
+    {
+        parent::__construct(self::TYPE, $data, $options);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getDescription(): string
+    {
+        return "Render an awesome widget block!";
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getDataResolver() : ?OptionsResolver
+    {
+        $resolver = new OptionsResolver();
+
+        // Configure resolver for block inputs data
+
+        return $resolver;
+    }
+}
+</code></pre>
+
+    </div>
+</div>

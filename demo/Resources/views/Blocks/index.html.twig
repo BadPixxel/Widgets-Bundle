@@ -1,0 +1,28 @@
+{% trans_default_domain "SplashWidgetsBundle" %}   
+{% extends "base.html.twig" %}
+
+{% block headline %}
+    List of Available Widgets Blocks
+{% endblock %}    
+
+{% block body %}
+    <p>
+        Blocks are Symfony Services, Implementing <code>BlockInterface</code>, and tagged using <code>#[AsWidgetBlock]</code> attribute.
+    </p>
+
+    <hr>
+{% endblock %}    
+        
+    
+{% block content_row %}
+    <div class='col-12 col-md-10'>
+        {% include '@WidgetsDemo/Blocks/List/contents.html.twig' %}
+    </div>
+    <div class='col-12 col-md-6'>
+        {% include '@WidgetsDemo/Blocks/List/definition.html.twig' %}
+    </div>
+    <div class='col-12 col-md-6'>
+{#        {% include '@WidgetsDemo/List/definition.html.twig' %}#}
+    </div>
+{% endblock %}
+
