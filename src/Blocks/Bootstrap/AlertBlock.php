@@ -41,6 +41,11 @@ class AlertBlock extends AbstractBlock implements BlockWithDemoInterface
     const SUCCESS = "success";
 
     /**
+     * Default Alert Message
+     */
+    const DEFAULT = "default";
+
+    /**
      * Info Alert Message
      */
     const INFO = "info";
@@ -63,6 +68,7 @@ class AlertBlock extends AbstractBlock implements BlockWithDemoInterface
         self::WARNING,
         self::SUCCESS,
         self::INFO,
+        self::DEFAULT,
     );
 
     public function __construct(array $data = array(), array $options = array())
