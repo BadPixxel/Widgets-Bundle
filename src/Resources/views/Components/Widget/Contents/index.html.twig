@@ -1,0 +1,48 @@
+
+{% if widget.options.Border %}
+<div
+        class="{{ this.boxClass }}"
+        style="{{ this.boxStyle }}"
+>
+    {% endif %}
+
+    {# Widget Contents #}
+    {% block widget_container %}
+
+        {#  Widget Header #}
+        {% block widget_header %}
+            <twig:Widget:Header :widget="widget" :configuration="configuration" />
+        {% endblock %}
+
+
+        {# Widget Contents #}
+        {% block widget_contents %}
+            <div data-loading="show">
+                <twig:Widgets:Loading />
+            </div>
+
+            <div data-loading="hide">
+                <div class="row no-padding">
+                    {# Widget Block Row #}
+                    {% block widget_row %}
+
+                        {% if widget.Blocks is defined %}
+                            <twig:Widget:Blocks :widget="widget" :configuration="configuration" />
+                        {% endif %}
+
+                    {% endblock %}
+                </div>
+            </div>
+        {% endblock %}
+
+
+        {# Widget Footer #}
+        {% block widget_footer %}
+            <twig:Widget:Footer :widget="widget" :configuration="configuration" />
+        {% endblock %}
+
+    {% endblock %}
+
+    {% if widget.options.Border %}
+</div>
+{% endif %}

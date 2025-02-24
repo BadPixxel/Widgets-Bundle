@@ -1,0 +1,15 @@
+
+{#
+    RENDER A UNIQUE BLOCK
+#}
+<div class="{{ block.options.Width }}">
+
+    {% if renderer is not empty %}
+        {{ component(renderer, { "block": block }) }}
+    {% else %}
+        <p class="text-danger">
+            Unable to identify Widget Block renderer !
+        </p>
+    {% endif %}
+
+</div>

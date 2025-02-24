@@ -1,0 +1,12 @@
+
+{% if widget.options.Header %}
+    <div
+        class="{{ this.divClass }} {{ this.headerTextClass }}"
+    >
+        <twig:Widgets:Widget:Icon :widget="widget" />
+        <twig:Widgets:Widget:Title :widget="widget" />
+        <small>
+            <twig:Widgets:Widget:Subtitle :widget="widget" />
+        </small>
+    </div>
+{% endif %}

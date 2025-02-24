@@ -1,0 +1,4 @@
+
+{% for block in widget.Blocks %}
+    <twig:Widgets:Block :type="block.type" :data="block.data" :options="block.options" />
+{% endfor %}
