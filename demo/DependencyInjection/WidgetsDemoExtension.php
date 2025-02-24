@@ -37,7 +37,7 @@ class WidgetsDemoExtension extends Extension implements PrependExtensionInterfac
     /**
      * @inheritDoc
      */
-    public function prepend(ContainerBuilder $container)
+    public function prepend(ContainerBuilder $container): void
     {
         $container->prependExtensionConfig("twig", array(
             "globals" => array(
