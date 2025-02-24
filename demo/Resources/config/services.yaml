@@ -1,0 +1,27 @@
+services:
+
+    _defaults:
+        autowire: true
+        autoconfigure: true
+
+    ################################################################################
+    # AutoWire for Routes
+    BadPixxel\Widgets\Demo\Dictionary\:
+        resource: '../../Dictionary'
+
+    ################################################################################
+    # AutoWire for Actions
+    BadPixxel\Widgets\Demo\Actions\:
+        resource: '../../Actions'
+        tags: ['controller.service_arguments']
+
+    ################################################################################
+    # AutoWire for Services
+    BadPixxel\Widgets\Demo\Services\:
+        resource: '../../Services'
+
+    ################################################################################
+    # AutoWire for Demo Widgets
+    BadPixxel\Widgets\Demo\Widgets\:
+        resource: '../../Widgets'
+
