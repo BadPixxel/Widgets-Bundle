@@ -1,6 +1,0 @@
-
-################################################################################
-# SPLASH Widget Bundle Core Routes
-splash_widgets_bundle_core:
-    resource: "@SplashWidgetsBundle/Resources/config/routing.yml"
-    prefix:   /

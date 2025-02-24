@@ -1,6 +1,0 @@
-
-# Framework Configuration
-framework:
-    test: ~
-    session:
-        storage_id: session.storage.filesystem

@@ -1,2 +1,0 @@
-imports:
-    - { resource: "@SplashWidgetsBundle/Resources/config/test.yml" }
