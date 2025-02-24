@@ -2,16 +2,18 @@
 
 namespace BadPixxel\Widgets\Interfaces;
 
-use BadPixxel\Widgets\Interfaces\Widgets\BlocksAwareWidgetInterface;
-use BadPixxel\Widgets\Interfaces\Widgets\OptionsAwareWidgetInterface;
+use BadPixxel\Widgets\Interfaces\Widgets as Interfaces;
 use BadPixxel\Widgets\Widgets\Descriptor\SimpleDescriptor;
 
 /**
  * Minimal Interfaces for a Widget
  */
 interface WidgetInterface extends
-    OptionsAwareWidgetInterface,
-    BlocksAwareWidgetInterface
+    Interfaces\OptionsAwareWidgetInterface,
+    Interfaces\ParametersAwareWidgetInterface,
+    Interfaces\BlocksAwareWidgetInterface,
+    Interfaces\LifecycleAwareInterface,
+    Interfaces\CacheableInterface
 {
     /**
      * Symfony Service Tag for Widgets Blocks

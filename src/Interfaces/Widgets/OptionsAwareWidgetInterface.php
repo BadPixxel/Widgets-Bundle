@@ -2,9 +2,6 @@
 
 namespace BadPixxel\Widgets\Interfaces\Widgets;
 
-use BadPixxel\Widgets\OptionResolver\WidgetOptionsResolver;
-use Symfony\Component\OptionsResolver\Exception\InvalidArgumentException;
-
 interface OptionsAwareWidgetInterface
 {
     //==============================================================================
