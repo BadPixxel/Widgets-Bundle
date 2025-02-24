@@ -96,12 +96,14 @@ class WidgetsCollection extends AbstractCollectionAwareComponent
         $title = $data['title'] ?? null;
         if ($title && is_string($title)) {
             $collection->setName($title);
+            $this->manager->update($collection);
         }
         //==============================================================================
         // Setup Collection Icon
         $icon = $data['icon'] ?? null;
         if ($icon && is_string($icon)) {
             $collection->setIcon($icon);
+            $this->manager->update($collection);
         }
 
         return $data;
