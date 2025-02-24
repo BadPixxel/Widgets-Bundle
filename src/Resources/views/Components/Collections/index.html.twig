@@ -1,0 +1,27 @@
+
+<div    id="{{ type }}"
+        class="{% if editMode|default(false) %}splash-widget-sortable-collection{% endif %}"
+        {{ attributes.defaults(stimulus_controller('BadPixxelWidgetsSortableController', {
+            sortable: this.configuration.sortable
+        })) }}
+>
+
+    {% if toolbar|default(false) %}
+        <twig:Widgets:Collection:Toolbar
+                :collection="this.collection"
+                :editMode="this.configuration.edited"
+                :configuration="this.configuration"
+        />
+    {% endif %}
+
+    <div id="{{ type }}-widgets" class="row padding-10 collection-widgets">
+        {% for widget in this.widgets %}
+            {{ component("Widget", widget) }}
+        {% endfor %}
+    </div>
+
+    {% if this.empty and this.configuration.editable %}
+        <twig:Widget:Selector:Card :collection="this.collection" :channel="channel" />
+    {% endif %}
+
+</div>

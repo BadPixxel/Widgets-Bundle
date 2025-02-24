@@ -1,0 +1,57 @@
+{% trans_default_domain "BadPixxelWidgets" %}
+
+<div class="row mb-4" {{ attributes }}>
+    
+    <div class="col-12 col-md-6">
+        <div class="h3">
+            <twig:Widgets:Collection:Icon :collection="collection" />
+            <twig:Widgets:Collection:Title :collection="collection" />
+        </div>
+    </div>
+    
+    <div class="col-12 col-md-6 pull-right text-right">
+
+        <div class="btn-toolbar pull-right justify-content-end" role="toolbar">
+
+            <twig:Widgets:Collection:PresetSelector :collection="collection" />
+
+            <div class="btn-group">
+
+                {% if configuration.editable %}
+
+                    <twig:Widgets:Stimulus:Button
+                            class="btn-info"
+                            icon="fa fa-fw fa-plus-circle"
+                            text="widget.add"
+                            translationDomain="BadPixxelWidgets"
+                            action="openAddModal"
+                    />
+
+                    {% if configuration.edited %}
+                        <twig:Widgets:Stimulus:Button
+                                class="btn-success"
+                                icon="fa fa-fw fa-eye"
+                                text="widget.view"
+                                translationDomain="BadPixxelWidgets"
+                                action="closeEditor"
+                        />
+                    {% else %}
+                        <twig:Widgets:Stimulus:Button
+                                class="btn-primary"
+                                icon="fa fa-fw fa-cogs"
+                                text="widget.edit"
+                                translationDomain="BadPixxelWidgets"
+                                action="startEditor"
+                        />
+                    {% endif %}
+                {% endif %}
+
+            </div>
+        </div>
+    </div>
+
+    {% if addMode|default(false) %}
+        <twig:Widget:Selector:Modal :collection="collection" />
+    {% endif %}
+</div>
+        
