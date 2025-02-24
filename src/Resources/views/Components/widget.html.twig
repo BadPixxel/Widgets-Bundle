@@ -1,0 +1,25 @@
+<div
+        {{ attributes }}
+        class="{{ widget.options.Class|default("splash-widget mb-3")}} {{ widget.options.Width }} "
+        data-id="{{ key }}"
+>
+
+    <twig:Widget:Contents :widget="widget" :configuration="configuration" />
+
+    {% if editMode|default(false) %}
+        <twig:Widget:Configurator:Modal
+                :key="key"
+                :configuratorHash="configuratorHash"
+                :options="widget.options"
+                :parameters="widget.parameters"
+        />
+    {% endif %}
+
+</div>
+
+{% macro placeholder(props) %}
+    <twig:Widgets:Loading />
+{% endmacro %}
+
+
+

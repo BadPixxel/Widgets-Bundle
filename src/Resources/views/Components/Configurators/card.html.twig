@@ -1,0 +1,39 @@
+
+{% trans_default_domain "BadPixxelWidgetsBundle" %}
+{% form_theme form 'bootstrap_4_layout.html.twig' %}
+
+<div  class="card" {{ attributes }} >
+
+    {{ form_start(form, {
+        attr: {
+            'class': 'mb-0 px-0',
+            'data-action': 'live#action:prevent',
+            'data-live-action-param': 'save'
+        }
+    }) }}
+
+    <div class="card-header">
+        <twig:Widgets:Widget:Icon :widget="this.widget" />
+        <twig:Widgets:Widget:Title :widget="this.widget" />
+    </div>
+
+
+    <div class="card-body">
+        {{ form_widget(form, { 'show_legend': false }) }}
+    </div>
+
+    <div class="card-footer text-muted text-right">
+        <twig:Widgets:Stimulus:Button
+                class="btn-primary"
+                icon="fa fa-fw fa-save"
+                text="widget.save"
+                translationDomain="BadPixxelWidgets"
+                action="save"
+        />
+    </div>
+
+    {{ form_end(form) }}
+
+</div>
+
+
