@@ -11,15 +11,15 @@
  *  file that was distributed with this source code.
  */
 
-namespace BadPixxel\Widgets\Tests\Controller;
+namespace BadPixxel\Widgets\Phpunit\Tests\A;
 
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Component\Process\Process;
 
 /**
- * Test Sequence Initiatlisation
+ * Test Sequence Initialization
  */
-class A001InitialisationControllerTest extends KernelTestCase
+class A001SymfonyInitTest extends KernelTestCase
 {
     /**
      * {@inheritDoc}
@@ -30,32 +30,17 @@ class A001InitialisationControllerTest extends KernelTestCase
     }
 
     /**
-     * Show Splash Logo
-     */
-    public function testDisplayLogo() : void
-    {
-        echo PHP_EOL;
-        echo " ______     ______   __         ______     ______     __  __    ".PHP_EOL;
-        echo "/\\  ___\\   /\\  == \\ /\\ \\       /\\  __ \\   /\\  ___\\   /\\ \\_\\ \\   ".PHP_EOL;
-        echo "\\ \\___  \\  \\ \\  _-/ \\ \\ \\____  \\ \\  __ \\  \\ \\___  \\  \\ \\  __ \\  ".PHP_EOL;
-        echo " \\/\\_____\\  \\ \\_\\    \\ \\_____\\  \\ \\_\\ \\_\\  \\/\\_____\\  \\ \\_\\ \\_\\ ".PHP_EOL;
-        echo "  \\/_____/   \\/_/     \\/_____/   \\/_/\\/_/   \\/_____/   \\/_/\\/_/ ".PHP_EOL;
-        echo "                                                                ".PHP_EOL;
-        $this->assertTrue(true);
-    }
-
-    /**
-     * Clear Cache for All Environements
+     * Clear Cache for All Environments
      *
      * @dataProvider envTestNamesProvider
      *
-     * @param string $environement
+     * @param string $environment
      */
-    public function testCacheClear(string $environement) : void
+    public function testCacheClear(string $environment) : void
     {
         //====================================================================//
         // Create Command
-        $command = "php bin/console cache:clear --no-debug --env=".$environement;
+        $command = "php bin/console cache:clear --no-debug --env=".$environment;
         //====================================================================//
         // Execute Test
         $process = Process::fromShellCommandline($command);
@@ -81,17 +66,17 @@ class A001InitialisationControllerTest extends KernelTestCase
     }
 
     /**
-     * Test All Environement Are Loadable
+     * Test All Environment Are Loadable
      *
      * @dataProvider envTestNamesProvider
      *
-     * @param string $environement
+     * @param string $environment
      */
-    public function testEnvironements(string $environement) : void
+    public function testEnvironments(string $environment) : void
     {
         //====================================================================//
         // Create Command
-        $command = "php bin/console debug:router --no-debug --env=".$environement;
+        $command = "php bin/console debug:router --no-debug --env=".$environment;
         //====================================================================//
         // Execute Test (SF 3&4 Versions)
         $process = Process::fromShellCommandline($command);
@@ -119,9 +104,9 @@ class A001InitialisationControllerTest extends KernelTestCase
     /**
      * Tested Environments Codes Provider
      *
-     * @return array
+     * @return array[]
      */
-    public function envTestNamesProvider() : array
+    public static function envTestNamesProvider() : array
     {
         return array(
             array("dev"),

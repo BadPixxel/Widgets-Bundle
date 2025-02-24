@@ -29,6 +29,7 @@ use Symfony\Contracts\Translation\TranslatorInterface;
  */
 #[AsStaticWidget(
     channels: array(Channels::SYSTEM),
+    roles: array("ROLE_ADMIN"),
     options: array(
         Options::WIDTH => WidgetWidth::XL
     )

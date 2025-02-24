@@ -53,13 +53,10 @@ Encore
     // ENTRY CONFIG
     //------------------------------------------------------------------------------
     .addEntry('demo', './demo/Resources/assets/all.js')
-    
+
     //------------------------------------------------------------------------------
     // DEV => Enable SourceMap
     .enableSourceMaps(!Encore.isProduction())
-    //------------------------------------------------------------------------------
-    // PROD => enables hashed filenames (e.g. app.abc123.css)
-    .enableVersioning(Encore.isProduction())
 
 ;
 module.exports = Encore.getWebpackConfig();

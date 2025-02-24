@@ -9,6 +9,7 @@ use BadPixxel\Widgets\Services\Widgets\Technical\NotFoundWidget;
 use BadPixxel\Widgets\Widgets\WidgetConfigurator;
 use Symfony\Component\DependencyInjection\Attribute\TaggedIterator;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
+use Symfony\Component\Security\Core\Exception\AuthenticationCredentialsNotFoundException;
 use Webmozart\Assert\Assert;
 
 /**
@@ -205,8 +206,14 @@ class WidgetsResolver
         foreach ($configurator->getRoles() as $role) {
             //==============================================================================
             // Current User has this Role
-            if ($this->authorizationChecker->isGranted($role)) {
-                return true;
+            try {
+                if ($this->authorizationChecker->isGranted($role)) {
+                    return true;
+                }
+            } catch (AuthenticationCredentialsNotFoundException) {
+                //==============================================================================
+                // No Authentication Token Found
+                continue;
             }
         }
 

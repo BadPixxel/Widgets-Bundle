@@ -61,7 +61,7 @@ class TextBlock extends AbstractBlock implements BlockWithDemoInterface
     public function getDataResolver() : ?OptionsResolver
     {
         $resolver = new OptionsResolver();
-        $resolver->setDefault("text", null);
+        $resolver->setDefault("text", "");
         $resolver->addAllowedTypes("text", "string");
 
         return $resolver;

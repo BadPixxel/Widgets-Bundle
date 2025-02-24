@@ -88,7 +88,6 @@ abstract class AbstractBlock implements BlockInterface
         $resolver = $this->getDataResolver();
         //==============================================================================
         //  Update Options Array using OptionResolver
-        /** @phpstan-ignore-next-line */
         return $resolver
             ? $resolver->resolve($this->data)
             : $this->data
@@ -100,7 +99,6 @@ abstract class AbstractBlock implements BlockInterface
      */
     final public function set(string $key, mixed $value) : static
     {
-        /** @phpstan-ignore-next-line */
         $this->setData(array_replace_recursive(
             $this->data,
             array($key => $value)
@@ -161,7 +159,6 @@ abstract class AbstractBlock implements BlockInterface
      */
     final public function mergeOptions(array $options) : static
     {
-        /** @phpstan-ignore-next-line */
         $this->setOptions(array_replace_recursive(
             $this->options,
             $options

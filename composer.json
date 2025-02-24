@@ -66,6 +66,7 @@
         "symfony/web-profiler-bundle":                  "^5.4|^6.4|^7.0",
         "symfony/webpack-encore-bundle":                "^2.0",
         "symfony/debug-bundle":                         "^5.4|^6.4|^7.0",
+        "symfony/css-selector":                         "^5.4|^6.4|^7.0",
 
         "symfony/monolog-bundle":                       "^2.0|^3.0",
         "symfony/flex":                                 "^1.0"

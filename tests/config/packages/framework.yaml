@@ -12,5 +12,3 @@ framework:
 when@test:
     framework:
         test: ~
-        session:
-            storage_id: session.storage.filesystem
