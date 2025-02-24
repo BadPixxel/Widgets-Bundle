@@ -17,6 +17,11 @@ class CollectionManager
 
     /**
      * Get Widget Collection from Database or Create
+     * 
+     * @param string $type The type of the widget collection
+     * @param bool $selfCreate If true, creates the collection if it doesn't exist
+     *
+     * @phpstan-return ($selfCreate is true ? WidgetCollection : WidgetCollection|null)
      */
     public function getCollection(string $type, bool $selfCreate = true): ?WidgetCollection
     {

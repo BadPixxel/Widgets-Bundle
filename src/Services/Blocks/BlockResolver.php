@@ -12,7 +12,7 @@ use Symfony\Component\DependencyInjection\Attribute\TaggedIterator;
 class BlockResolver
 {
     /**
-     * @param iterable<BlockInterface> $blocks
+     * @param iterable<string, BlockInterface> $blocks
      */
     public function __construct(
         #[TaggedIterator(tag: BlockInterface::TAG, indexAttribute: "id")]
@@ -22,6 +22,8 @@ class BlockResolver
 
     /**
      * Get All Available Blocks
+     *
+     * @return iterable<string, BlockInterface>
      */
     public function all() : iterable
     {

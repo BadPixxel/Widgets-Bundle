@@ -93,6 +93,9 @@ class Widget extends AbstractConfiguratorAwareComponent
         );
     }
 
+    /**
+     * @param array<string, scalar|null> $parameters
+     */
     #[LiveListener(WidgetEvents::UPDATED)]
     public function updated(
         #[LiveArg] string $key,
@@ -107,7 +110,9 @@ class Widget extends AbstractConfiguratorAwareComponent
         //==============================================================================
         // Update Widget Configuration
         $this->options = array_replace_recursive($this->options, $options);
-        $this->parameters = array_replace_recursive($this->parameters, $parameters);
+        /** @var array<string, bool|float|int|string|null> $parameters */
+        $parameters = array_replace_recursive($this->parameters, $parameters);
+        $this->parameters = $parameters;
         //==============================================================================
         // Compile Widget
         $this->compile();
