@@ -11,62 +11,47 @@
  *  file that was distributed with this source code.
  */
 
-namespace Splash\Widgets\Entity;
+namespace BadPixxel\Widgets\Entity;
 
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\ORM\Mapping                        as ORM;
-use Splash\Widgets\Models\Traits\CollectionTrait;
-use Splash\Widgets\Models\Traits\LifecycleTrait;
-use Splash\Widgets\Models\WidgetCollectionBase;
+use BadPixxel\Widgets\Models\AbstractWidgetCollection;
+use Doctrine\ORM\Mapping as ORM;
 
 /**
  * Widgets Collection Object
- *
- * @ORM\Entity()
- *
- * @ORM\Table(name="widgets__collection")
- *
- * @ORM\HasLifecycleCallbacks
  */
-class WidgetCollection extends WidgetCollectionBase
+#[
+    ORM\Entity(),
+    ORM\Table("widgets__collection"),
+    ORM\HasLifecycleCallbacks,
+]
+class WidgetCollection extends AbstractWidgetCollection
 {
-    use CollectionTrait;
-    use LifecycleTrait;
-
-    /**
-     * @var int
-     *
-     * @ORM\Id
-     *
-     * @ORM\Column(type="integer")
-     *
-     * @ORM\GeneratedValue(strategy="AUTO")
-     */
-    protected $id;
-
-    //==============================================================================
-    //      CONSTRUCTOR
-    //==============================================================================
-
-    /**
-     * Class Cosntructor
-     */
-    public function __construct()
-    {
-        $this->widgets = new ArrayCollection();
-    }
+    #[
+        ORM\Id,
+        ORM\Column,
+        ORM\GeneratedValue,
+    ]
+    private ?int $id = null;
 
     //==============================================================================
     //      GETTERS & SETTERS
     //==============================================================================
 
     /**
-     * Get Entity Id
-     *
-     * @return int
+     * Get Entity ID
      */
-    public function getId()
+    public function getId(): ?int
     {
         return $this->id;
+    }
+
+    /**
+     * Set Entity ID
+     */
+    protected function setId(int $id): static
+    {
+        $this->id = $id;
+
+        return $this;
     }
 }

@@ -11,16 +11,18 @@
  *  file that was distributed with this source code.
  */
 
-namespace Splash\Widgets\Form;
+namespace BadPixxel\Widgets\Form;
 
+use BadPixxel\Widgets\Models\AbstractWidgetCollection;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
- * Widget Dates Range Selector Form Type
+ * Widget Collection Dates Range Selector Form Type
  */
-class WidgetDatesType extends AbstractType
+class CollectionDatesPresetType extends AbstractType
 {
     /**
      * Build Form Widget
@@ -28,7 +30,7 @@ class WidgetDatesType extends AbstractType
      * @param FormBuilderInterface $builder
      * @param array                $options
      *
-     * @SuppressWarnings(PHPMD.UnusedFormalParameter)
+     * @SuppressWarnings(UnusedFormalParameter)
      */
     public function buildForm(FormBuilderInterface $builder, array $options) : void
     {
@@ -38,8 +40,7 @@ class WidgetDatesType extends AbstractType
 
         $builder->add("DatePreset", ChoiceType::class, array(
             'required' => true,
-            'property_path' => '[DatePreset]',
-            'label' => "dates.tooltip",
+            'label' => false,
             'choices' => array(
                 "dates.D" => "D",
                 "dates.W" => "W",
@@ -55,19 +56,26 @@ class WidgetDatesType extends AbstractType
                 "dates.PY" => "PY",
             ),
             'empty_data' => "options.dates.M",
-            'translation_domain' => "SplashWidgetsBundle",
-            'choice_translation_domain' => "SplashWidgetsBundle",
+            'translation_domain' => "BadPixxelWidgets",
+            'choice_translation_domain' => "BadPixxelWidgets",
             'placeholder' => false,
             'expanded' => false,
-            //                'choices_as_values'         => True,
+            'row_attr' => array(
+                'class' => 'mb-0',
+            ),
         ));
     }
 
     /**
-     * @return string
+     * @return void
      */
-    public function getName() : string
+    public function configureOptions(OptionsResolver $resolver)
     {
-        return 'splash_widgets_render_widgeting_forms';
+        $resolver->setDefaults(array(
+            'data_class' => AbstractWidgetCollection::class,
+            'attr' => array(
+                'class' => 'my-0 py-auto',
+            ),
+        ));
     }
 }
