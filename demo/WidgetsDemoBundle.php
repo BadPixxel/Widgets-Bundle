@@ -11,13 +11,13 @@
  *  file that was distributed with this source code.
  */
 
-namespace Splash\Widgets;
+namespace BadPixxel\Widgets\Demo;
 
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 /**
- * SPLASH WIDGET BUNDLE
+ * BADPIXXEL WIDGETS DEMO BUNDLE
  */
-class SplashWidgetsBundle extends Bundle
+class WidgetsDemoBundle extends Bundle
 {
 }
