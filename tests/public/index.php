@@ -11,14 +11,14 @@
  *  file that was distributed with this source code.
  */
 
-use Splash\Widgets\Tests\Kernel;
+use BadPixxel\Widgets\Tests\Kernel;
 
 //==============================================================================
 // This will let the permissions be 0775
 umask(0002);
 //==============================================================================
 // AUTOLOAD
-require_once dirname(__DIR__).'/vendor/autoload_runtime.php';
+require_once dirname(__DIR__,2).'/vendor/autoload_runtime.php';
 //==============================================================================
 // BOOT SYMFONY
 //==============================================================================
