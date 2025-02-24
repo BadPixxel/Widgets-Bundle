@@ -1,0 +1,20 @@
+services:
+
+    _defaults:
+        autowire:       true
+        autoconfigure:  true
+
+    ################################################################################
+    # AutoWire for Widgets Blocks
+    BadPixxel\Widgets\Blocks\:
+        resource: '../../Blocks'
+
+    ################################################################################
+    # AutoWire for Symfony Commands
+    BadPixxel\Widgets\Command\:
+        resource: '../../Command'
+
+    ################################################################################
+    # AutoWire for Services
+    BadPixxel\Widgets\Services\:
+        resource: '../../Services'

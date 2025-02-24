@@ -1,0 +1,10 @@
+services:
+
+    _defaults:
+        autowire: true
+        autoconfigure: true
+
+    ################################################################################
+    # AutoWire for Twig Components
+    BadPixxel\Widgets\TwigComponent\:
+        resource: '../../TwigComponent'

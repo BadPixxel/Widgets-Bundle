@@ -1,0 +1,28 @@
+
+################################################################################
+# Configurations for Sonata Blocks Bundle
+################################################################################
+services:
+
+    _defaults:
+        autowire:       true
+        autoconfigure:  true
+
+    ################################################################################
+    # AutoWire for Sonata Block Services
+    BadPixxel\Widgets\Sonata\Block\:
+        resource: '../../Sonata/Block'
+
+    #################################################################################
+    # Widgets Collection Sonata Block Service
+    badpixxel.widgets.collection:
+        class: BadPixxel\Widgets\Sonata\Block\WidgetCollectionBlock
+        tags:
+            - { name: sonata.block }
+
+    #################################################################################
+    # Single Widget Sonata Block Service
+    badpixxel.widget.simple:
+        class: BadPixxel\Widgets\Sonata\Block\WidgetBlock
+        tags:
+            - { name: sonata.block }
