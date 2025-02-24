@@ -69,7 +69,7 @@ class BadpixxelWidgetsExtension extends Extension implements PrependExtensionInt
             $container->prependExtensionConfig('sonata_admin', array(
                 'assets' => array(
                     'extra_javascripts' => array(
-                        'bundles/badpixxelwidgets/assets/widgets.js'
+                        'bundles/badpixxelwidgets/widgets.js'
                     )
                 ),
             ));
