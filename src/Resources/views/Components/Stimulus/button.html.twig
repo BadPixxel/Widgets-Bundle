@@ -1,0 +1,14 @@
+<button class="btn btn-xs px-1 small {{ class }}"
+        data-action="live#action"
+        data-live-action-param="{{ action }}"
+        {% block content %}{% endblock %}
+>
+    <i class="{{ icon }}"></i>
+    {% if translationDomain is not empty %}
+        {{ text|trans(translationOptions, translationDomain) }}
+    {% else %}
+        {{ text }}
+    {% endif %}
+</button>
+
+    

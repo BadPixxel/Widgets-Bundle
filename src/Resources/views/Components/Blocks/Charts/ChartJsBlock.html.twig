@@ -1,0 +1,8 @@
+
+{% if data.title is not empty %}
+    <h5>
+        <twig:Widgets:Block:Text :text="data.title" :options="this.options" />
+    </h5>
+{% endif %}
+
+{{ render_chart(chart, this.controller) }}

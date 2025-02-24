@@ -1,0 +1,26 @@
+<div class="{{ this.alertClass }} no-margin">
+
+    {% if data.dismissible|default(false) %}
+        <button class="close" data-dismiss="alert">×</button>
+    {% endif %}
+
+    {% if data.title is not empty %}
+        <div class="h5 alert-heading">
+            {% if data.icon is defined and data.icon is not empty %}
+                <i class="{{ data.icon }}"></i>
+            {% endif %}
+
+            {% if this.options.AllowHtml %} {{ data.title | raw  }} {% else %} {{ data.title }} {% endif %}
+
+        </div>
+    {% else %}
+        {% if data.icon is defined and data.icon is not empty %}
+            <i class="{{ data.icon }}"></i>
+        {% endif %}
+    {% endif %}
+
+    {% if this.options.AllowHtml %} {{ data.text | raw  }} {% else %} {{ data.text }} {% endif %}
+</div>
+
+    
+    

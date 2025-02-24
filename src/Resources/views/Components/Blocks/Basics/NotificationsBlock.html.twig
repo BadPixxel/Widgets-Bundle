@@ -1,0 +1,13 @@
+
+{% for alert in this.alerts %}
+    <twig:Widgets:Block:Alert
+            :level="alert.level|default('error')"
+            :text="alert.text"
+            :title="alert.title|default()"
+            :icon="alert.icon|default()"
+            :dismissible="alert.dismissible|default()"
+            :options="this.options"
+    />
+{% endfor %}
+    
+    

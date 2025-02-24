@@ -1,0 +1,14 @@
+{% trans_default_domain "BadPixxelWidgets" %}
+
+<div
+    class="card panel panel-default"
+    {{ attributes }}
+>
+    <div class="card-header panel-heading">
+        <h3>{{ 'list.title'|trans }}</h3>
+        <small>{{ 'list.tooltip'|trans }}</small>
+    </div>
+    <div class="card-body panel-body no-padding">
+        {% include '@BadpixxelWidgets/Components/Selectors/contents.html.twig' %}
+    </div>
+</div>

@@ -1,0 +1,28 @@
+<div class="table-responsive">
+
+    {% set HeadRow = this.options.HeadingRows %}
+
+    <table class="table {{ this.options.Layout }}">
+
+    {% if HeadRow > 0 %}
+        <thead>
+    {% endif %}           
+
+    {% for Row in this.data.rows %}
+            <tr>
+                {% for Cell in Row %}
+                    <td>
+                        <twig:Widgets:Block:Text :text="Cell" :options="this.options" />
+                    </td>
+                {% endfor %}
+            </tr>
+        {% set HeadRow = HeadRow - 1 %}
+        {% if HeadRow == 0 %}
+        </thead><tbody>
+        {% endif %}
+
+    {% endfor %}
+        </tbody>
+
+    </table>            
+</div>

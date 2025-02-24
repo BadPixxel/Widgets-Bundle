@@ -1,0 +1,70 @@
+{% trans_default_domain "BadPixxelWidgets" %}
+
+<!-- Nav tabs -->
+<ul class="nav nav-pills nav-justified nav-fill mb-2">
+    {% for Tab in this.tabs %}
+        <li class="nav-item {% if loop.first %}active{% endif %}" >
+            <a
+                    class="nav-link {% if loop.first %}active{% endif %}" href="#tab-{{ Tab.id }}"
+                    aria-controls="tab-{{ Tab.id }}" role="tab" data-toggle="tab"
+            >
+                {{ Tab.label | raw }}
+            </a>
+        </li>
+    {% endfor %}
+</ul>
+
+<!-- Tab panes -->
+<div class="tab-content">
+
+    {% for Tab in this.tabs %}
+        <div role="tabpanel" class="tab-pane {% if loop.first %}active{% endif %}" id="tab-{{ Tab.id }}">
+
+            <table class="table table-bordered table-striped no-padding" role="content" id='splash-widgets-list'>
+                <thead>
+                    <tr>
+                        <th>
+                            {{ 'list.name'|trans }}
+                        </th>
+                        <th>
+                            {{ 'list.desc'|trans }}
+                        </th>
+                        <th class="text-center">
+                            {{ 'list.actions'|trans }}
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for Hash, Configurator in Tab.widgets %}
+                        <tr>
+                            <td>
+                                <twig:Widgets:Widget:Icon :widget="Configurator.service" />
+                                <twig:Widgets:Widget:Title :widget="Configurator.service" />
+                            </td>
+                            <td>
+                                <twig:Widgets:Widget:Description :widget="Configurator.service" />
+                            </td>
+                            <td class="text-center">
+
+                                <twig:Widgets:Stimulus:Button
+                                        class="btn-success"
+                                        icon="fa fa-fw fa-plus-circle"
+                                        text="list.add"
+                                        translationDomain="BadPixxelWidgets"
+                                        action="add"
+                                >
+                                    data-live-hash-param="{{ Configurator.hash }}"
+                                </twig:Widgets:Stimulus:Button>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+
+        </div>
+    {% endfor %}
+
+</div>
+
+
+

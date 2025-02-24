@@ -1,0 +1,83 @@
+{% import _self as Macros %}
+
+<div class="text-center">
+    {% if data.title is not empty %}
+        <h5>
+            <twig:Widgets:Block:Text :text="data.title" :options="this.options" />
+        </h5>
+    {% endif %}
+
+    <div class="panel-body text-center p-2">
+
+        {% set chartConfig = options.ChartConfig %}
+        {% apply spaceless %}
+
+        {# Walk on Datasets #}
+        {% for dataset in data.dataset %}
+            {% if dataset is not empty %}
+                {{ Macros.ProgressBar(dataset, chartConfig) }}
+                {{ Macros.Legends(dataset, data.labels, chartConfig) }}
+            {% endif %}
+        {%  endfor %}
+        {% endapply %}
+
+    </div>
+
+</div>
+
+{% macro ProgressBar(dataset, chartOptions) %}
+
+    <div class="progress" style="height: {{ chartOptions.size|default("20") }}px;">
+        {% for dataPoint in dataset %}
+
+            {% set class = "" %}
+            {% if chartOptions.classes|length|default(0) %}
+                {% set class = chartOptions.classes[loop.index0 % (chartOptions.classes|length)] %}
+            {% endif %}
+
+            {% set color = "" %}
+            {% if chartOptions.colors|length|default(0) %}
+                {% set color = chartOptions.classes[loop.index0 % (chartOptions.colors|length)] %}
+            {% endif %}
+
+            <div class="progress-bar {{ chartOptions.class|default("") }} {{ class }}"
+                 role="progressbar" aria-valuenow="{{ dataPoint.value }}" aria-valuemin="0" aria-valuemax="100"
+                 style="width: {{ dataPoint.value }}%; {% if color is not empty %}background-color: {{ color }};{% endif %}"
+            >
+                {{ dataPoint.label|default("") }}
+            </div>
+        {% endfor %}
+    </div>
+
+
+{% endmacro %}
+
+{% macro Legends(dataset, labels, chartOptions) %}
+    {% if options.showLegend|default(true) %}
+         <ul class="p-2 mb-0">
+                {% for dataPoint in dataset %}
+
+                    {% set class = "" %}
+                    {% if chartOptions.classes|length|default(0) %}
+                        {% set class = chartOptions.classes[loop.index0 % (chartOptions.classes|length)] %}
+                    {% endif %}
+
+                    {% set color = "" %}
+                    {% if chartOptions.colors|length|default(0) %}
+                        {% set color = chartOptions.classes[loop.index0 % (chartOptions.colors|length)] %}
+                    {% endif %}
+
+                    <li class="" style="display:inline;" title="{{ dataPoint.value }}">
+                        <span
+                                class="badge badge-pill mx-2 pb-0 {{ class }}"
+                                style="{% if color is not empty %}background-color: {{ color }};{% endif %}"
+                        >
+                            &nbsp;
+                        </span>
+
+                        {{ labels[loop.index0]|default(dataPoint.label|default("")) }}
+                    </li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+{% endmacro %}

@@ -1,0 +1,24 @@
+
+<div class="text-center">
+
+    {% if data.title is not empty %}
+        <div class="h5">
+            <twig:Widgets:Block:Text :text="data.title" :options="options" />
+        </div>
+    {% endif %}
+
+    {% if data.fa_icon is not empty %}
+        <div class="{{ data.class|default("h2") }}">
+            <i class="fa fa-{{ data.fa_icon }}" aria-hidden="true"></i>
+            {{ data.value }}
+        </div>
+    {% endif %}
+
+    {% if data.glyph_icon is not empty %}
+        <div class="{{ data.class|default("h2") }}">
+            <i class="glyphicon glyphicon-{{ data.glyph_icon }}" aria-hidden="true"></i>
+            {{ data.value }}
+        </div>
+    {% endif %}
+
+</div>
