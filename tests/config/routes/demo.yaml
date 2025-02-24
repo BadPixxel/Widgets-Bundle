@@ -1,0 +1,6 @@
+
+################################################################################
+# BadPixxel Widget Bundle Demo Routes
+_badpixxel_widgets_bundle_demo_routes:
+    resource: "@WidgetsDemoBundle/Resources/config/routing.php"
+    prefix:   /  

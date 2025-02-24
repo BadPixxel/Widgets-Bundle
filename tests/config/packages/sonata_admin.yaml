@@ -1,0 +1,21 @@
+sonata_admin:
+    title: 'Sonata Admin'
+    dashboard:
+        blocks:
+            - { type: sonata.admin.block.admin_list, position: left }
+            - {
+                position: top,
+                class: "col-xs-12",
+                type: BadPixxel\Widgets\Sonata\Block\WidgetCollectionBlock,
+                settings: {
+                    title:          "My Admin Dashboard",
+                    icon:           "fa fa-tachometer-alt text-primary",
+                    channel:        "admin",
+                    configuration:  { mode: bs3 }
+                }
+            }
+
+sonata_block:
+    blocks:
+        sonata.admin.block.admin_list:
+            contexts: [admin]
