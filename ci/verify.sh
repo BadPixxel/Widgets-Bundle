@@ -46,5 +46,5 @@ do
     # Run Grumphp Test Suites
 #    docker compose exec -w $WORKDIR $ID php vendor/bin/grumphp run --testsuite=travis
 #    docker compose exec -w $WORKDIR $ID php vendor/bin/grumphp run --testsuite=csfixer
-#    docker compose exec -w $WORKDIR $ID php vendor/bin/grumphp run --testsuite=phpstan
+    docker compose exec -w $WORKDIR $ID php vendor/bin/grumphp run --testsuite=phpstan
 done

@@ -36,6 +36,7 @@ class WidgetCompiler
         //==============================================================================
         // Load Widget Blocks with Caching
         try {
+            /** @phpstan-var array $cacheItem */
             $cacheItem = $this->appCache->get(
                 $cacheKey,
                 function (ItemInterface $item) use ($widget, $options, $parameters): array {

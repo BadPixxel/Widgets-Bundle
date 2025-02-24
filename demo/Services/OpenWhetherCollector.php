@@ -178,11 +178,14 @@ class OpenWhetherCollector
         $cacheKey = sprintf("%s-%s", md5(self::class), md5($url));
         //==============================================================================
         // The callable will only be executed on a cache miss.
-        return $this->appCache->get($cacheKey, function (ItemInterface $item) use ($url): ?array {
+        /** @phpstan-var null|array $response */
+        $response = $this->appCache->get($cacheKey, function (ItemInterface $item) use ($url): ?array {
             $item->expiresAfter(60);
 
             return self::executeRequest($url);
         });
+
+        return $response;
     }
 
     /**
