@@ -11,7 +11,7 @@
  *  file that was distributed with this source code.
  */
 
-namespace Splash\Widgets\Tests\Traits;
+namespace BadPixxel\Widgets\Tests\Traits;
 
 use Symfony\Bundle\FrameworkBundle\KernelBrowser as Client;
 use Symfony\Component\DomCrawler\Crawler;

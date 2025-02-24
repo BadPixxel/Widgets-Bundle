@@ -11,14 +11,14 @@
  *  file that was distributed with this source code.
  */
 
-namespace Splash\Widgets\Tests\Controller;
+namespace BadPixxel\Widgets\Tests\Controller;
 
 use Exception;
-use Splash\Widgets\Entity\WidgetCache;
-use Splash\Widgets\Services\ManagerService;
-use Splash\Widgets\Tests\Services\SamplesFactoryService as SamplesFactory;
-use Splash\Widgets\Tests\Traits\ContainerAwareTrait;
-use Splash\Widgets\Tests\Traits\UrlCheckerTrait;
+use BadPixxel\Widgets\Entity\WidgetCache;
+use BadPixxel\Widgets\Services\ManagerService;
+use BadPixxel\Widgets\Tests\Services\SamplesFactoryService as SamplesFactory;
+use BadPixxel\Widgets\Tests\Traits\ContainerAwareTrait;
+use BadPixxel\Widgets\Tests\Traits\UrlCheckerTrait;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 /**

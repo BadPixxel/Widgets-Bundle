@@ -1,0 +1,12 @@
+{
+  "entrypoints": {
+    "widgets": {
+      "css": [
+        "/bundles/badpixxelwidgets/widgets.css"
+      ],
+      "js": [
+        "/bundles/badpixxelwidgets/widgets.js"
+      ]
+    }
+  }
+}

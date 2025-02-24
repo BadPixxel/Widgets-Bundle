@@ -11,16 +11,16 @@
  *  file that was distributed with this source code.
  */
 
-namespace Splash\Widgets\Tests\Controller;
+namespace BadPixxel\Widgets\Tests\Controller;
 
 use Exception;
-use Splash\Widgets\Models\Blocks\BaseBlock;
-use Splash\Widgets\Models\WidgetBase as Widget;
-use Splash\Widgets\Services\FactoryService;
-use Splash\Widgets\Services\ManagerService;
-use Splash\Widgets\Tests\Blocks\Test;
-use Splash\Widgets\Tests\Services\SamplesFactoryService as SamplesFactory;
-use Splash\Widgets\Tests\Traits\ContainerAwareTrait;
+use BadPixxel\Widgets\Models\AbstractBlock;
+use BadPixxel\Widgets\Models\WidgetBase as Widget;
+use BadPixxel\Widgets\Services\FactoryService;
+use BadPixxel\Widgets\Services\ManagerService;
+use BadPixxel\Widgets\Tests\Blocks\Test;
+use BadPixxel\Widgets\Tests\Services\SamplesFactoryService as SamplesFactory;
+use BadPixxel\Widgets\Tests\Traits\ContainerAwareTrait;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
 /**
@@ -183,7 +183,7 @@ class A002WidgetFactoryServiceTest extends KernelTestCase
 
         //====================================================================//
         // Check Block
-        $this->assertInstanceOf(BaseBlock::class, $block);
+        $this->assertInstanceOf(AbstractBlock::class, $block);
         $this->assertTrue(class_exists($blockClassName));
         $this->assertInstanceOf($blockClassName, $block);
 

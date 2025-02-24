@@ -11,15 +11,15 @@
  *  file that was distributed with this source code.
  */
 
-namespace Splash\Widgets\Tests\Controller;
+namespace BadPixxel\Widgets\Tests\Controller;
 
 use DateTime;
 use Exception;
-use Splash\Widgets\Entity\WidgetCache;
-use Splash\Widgets\Models\WidgetBase        as Widget;
-use Splash\Widgets\Services\ManagerService;
-use Splash\Widgets\Tests\Blocks\Test;
-use Splash\Widgets\Tests\Services\SamplesFactoryService as SamplesFactory;
+use BadPixxel\Widgets\Entity\WidgetCache;
+use BadPixxel\Widgets\Models\WidgetBase        as Widget;
+use BadPixxel\Widgets\Services\ManagerService;
+use BadPixxel\Widgets\Tests\Blocks\Test;
+use BadPixxel\Widgets\Tests\Services\SamplesFactoryService as SamplesFactory;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
 /**

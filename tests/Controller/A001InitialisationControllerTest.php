@@ -11,7 +11,7 @@
  *  file that was distributed with this source code.
  */
 
-namespace Splash\Widgets\Tests\Controller;
+namespace BadPixxel\Widgets\Tests\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Component\Process\Process;

@@ -11,13 +11,13 @@
  *  file that was distributed with this source code.
  */
 
-namespace Splash\Widgets\Tests\Traits;
+namespace BadPixxel\Widgets\Tests\Traits;
 
 use Doctrine\Bundle\DoctrineBundle\Registry;
 use Doctrine\Persistence\ObjectManager;
 use Exception;
-use Splash\Widgets\Services\FactoryService;
-use Splash\Widgets\Services\ManagerService;
+use BadPixxel\Widgets\Services\FactoryService;
+use BadPixxel\Widgets\Services\ManagerService;
 
 /**
  * Safe Load Symfony Service Container

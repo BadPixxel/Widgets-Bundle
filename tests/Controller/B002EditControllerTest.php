@@ -11,10 +11,10 @@
  *  file that was distributed with this source code.
  */
 
-namespace Splash\Widgets\Tests\Controller;
+namespace BadPixxel\Widgets\Tests\Controller;
 
-use Splash\Widgets\Services\ManagerService;
-use Splash\Widgets\Tests\Traits\UrlCheckerTrait;
+use BadPixxel\Widgets\Services\ManagerService;
+use BadPixxel\Widgets\Tests\Traits\UrlCheckerTrait;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 /**
