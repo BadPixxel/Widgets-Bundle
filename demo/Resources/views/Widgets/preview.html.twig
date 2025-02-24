@@ -1,0 +1,73 @@
+{% extends "base.html.twig" %}
+
+{#
+    Display Node Profile Title
+#}
+{% block headline %}
+    Preview of a Widgets : <twig:Widgets:Widget:Title :widget="Widget" />
+    <br />
+    <small><code>{{ Configurator.class }}</code></small>
+{% endblock %}    
+    
+{% block content_row %}
+
+    <div class='col-12 col-md-6'>
+        {% include '@WidgetsDemo/Widgets/Preview/editor.html.twig' %}
+    </div>
+    <div class='col-12 col-md-6'>
+        <h5>Widget Preview (As Component)</h5>
+
+        <twig:Widget
+                :configurator="Configurator"
+                loading="defer"
+        />
+
+    </div>
+
+{#    <div class="col-12 col-xs-12 p-4 text-center">#}
+{#        <h3 class="page-title txt-color-blueDark"><i class="fa fa-fw fa-info-circle "></i>#}
+{#            In Delayed Mode, Widget is rendered by Javascript, once page is fully loaded. #}
+{#        </h3>    #}
+{#        <p>#}
+{#            This method is better if your widgets have computing, because this method allow caching of widget contents.#}
+{#        </p>#}
+{#        <code>#}
+{#            Example#}
+{#            <PRE>render(controller('\\Splash\\\Widgets\\Controller\\EditController::panelAction', { 'service' : "{{ Widget.service }}",  'type' : "{{ Widget.type }}", "request" : app.request }))</PRE>#}
+{#        </code>#}
+{#        #}
+{#    </div>#}
+     
+{#    <div class="col-12 col-xs-12 col-md-4 col-lg-3">#}
+{#        {% include '@SplashWidgets/Edit/panel.html.twig' %}#}
+{#    </div>#}
+{#        #}
+{#    <div class="col-12 col-xs-12 col-md-8 col-lg-7">#}
+
+{#        <div class="row justify-content-center border border-primary bg-gray-200 border-primary py-3">#}
+{#            {{ component('BpWidget', {#}
+{#                service:        Widget.service,#}
+{#                type:           Widget.type,#}
+{#                options:        Widget.options | json_encode,#}
+{#                parameters:     Widget.parameters | json_encode,#}
+{#            }) }}#}
+
+
+{#            {{ render(controller('\\Splash\\\Widgets\\Controller\\ViewController::forcedAction', { #}
+{#                    'service' :     Widget.service,  #}
+{#                    'type' :        Widget.type,#}
+{#                    'options':      Widget.options | json_encode,#}
+{#                    'parameters':   Widget.parameters | json_encode,#}
+{#            })) }}#}
+{#        </div> #}
+{#        #}
+{#        <hr class="my-3" />#}
+
+
+{#        {{ dump(Widget.Parameters) }}   #}
+{#        #}
+{#    </div>#}
+            
+            
+{% endblock %}
+

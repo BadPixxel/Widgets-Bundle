@@ -1,0 +1,19 @@
+
+<div class="btn-group" role="group" aria-label="Basic example">
+    <a
+        type="button"
+        class="btn {% if Channel is empty %}btn-primary{% else %}btn-secondary{% endif %}"
+        href="{{ path(app.request.get('_route')) }}"
+    >
+        All
+    </a>
+    {% for channelCode in Channels %}
+        <a
+            type="button"
+            class="btn {% if Channel == channelCode %}btn-primary{% else %}btn-secondary{% endif %}"
+            href="{{ path(app.request.get('_route'), { channel: channelCode }) }}"
+        >
+            {{ channelCode }}
+        </a>
+    {% endfor %}
+</div>

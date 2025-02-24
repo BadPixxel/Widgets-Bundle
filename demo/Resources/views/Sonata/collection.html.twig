@@ -1,0 +1,49 @@
+{% extends "base.html.twig" %}
+
+{% block headline %}
+    Widgets Collection  as Sonata Block
+{% endblock %}
+
+{% block content_row %}
+    
+    <div class="col-xs-12 col-md-6 p-3">
+        <h3>
+            <i class="fa fa-fw fa-info-circle "></i>
+            You can use Sonata Blocks to render a Widgets Collections
+        </h3>   
+        <p>
+            Just pass a title, a channel code and your collection code, that's all...
+            <br />
+            If collection code is new, it will be created & persisted to database.
+            So you can create new widget collections on the demand.
+            <br />
+            In addition, you can pass few option to hide the menu, disable édition.
+        </p>
+    </div>
+
+    <div class="col-xs-12 col-md-6 p-3">
+
+        <h3>
+            <i class="fa fa-fw fa-code"></i> Example
+        </h3>
+
+<pre><code class="language-twig">{% verbatim %}
+{{ sonata_block_render({ 'type': 'badpixxel.widgets.collection' }, {
+    "title" :   "Title for Collection Header",
+    'channel':      'demo',
+}) }}
+{% endverbatim %}</code></pre>
+
+    </div>
+         
+    <div class="col-12 p-3">
+        {{ sonata_block_render({ 'type': 'badpixxel.widgets.collection' }, {
+            "type" :        "demo-custom",
+            'channel':      null,
+        }) }}
+    </div>
+
+
+        
+{% endblock %}
+

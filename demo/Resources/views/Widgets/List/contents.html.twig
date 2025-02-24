@@ -12,35 +12,42 @@
 
             <thead>
                 <td>Service</td>
-                <td>Type</td>
+                <td>Channels</td>
+                <td>Origin</td>
                 <td>Icon</td>
                 <td>Title</td>
                 <td>Description</td>
                 <td>Try it!!</td>
             </thead>
 
-            {% for Widget in Widgets %}
+            {% for Configurator in Configurators %}
 
             <tr>
                 <td>
-                    {{ Widget.service }}
+                    {{ Configurator.class }}
                 </td>
                 <td>
-                    {{ Widget.type }}
+                    {{ Configurator.channels|default(["none"])|join(', ') }}
                 </td>
                 <td>
-                    <i class="{{ Widget.icon }}"></i>
+                    <twig:Widgets:Widget:Origin :widget="Configurator.service" />
                 </td>
                 <td>
-                    {{ Widget.title }}
+                    <twig:Widgets:Widget:Icon :widget="Configurator.service" />
                 </td>
                 <td>
-                    {{ Widget.description }}
+                    <twig:Widgets:Widget:Title :widget="Configurator.service" />
                 </td>
-                <td>                    
-                    <a href="{{ path("splash_widgets_demo_single_edit", {"widgetType": Widget.type}) }}" class="btn btn-labeled btn-primary pull-right"> 
+                <td>
+                    <twig:Widgets:Widget:Description :widget="Configurator.service" />
+                </td>
+                <td>
+                    <a
+                            href="{{ path(PreviewRoute, {"hash": Configurator.hash}) }}"
+                            class="btn btn-labeled btn-primary"
+                    >
                         <i class="far fa-smile-wink"></i>
-                        Test me! 
+                        Test me!
                     </a>
                 </td>
             <tr>

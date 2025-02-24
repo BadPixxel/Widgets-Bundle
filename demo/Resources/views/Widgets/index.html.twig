@@ -1,0 +1,30 @@
+{% extends "@WidgetsDemo/layout.html.twig" %}
+
+{% block headline %}
+    List of Available Widgets in "{{ Channel|default("All") }}" channel
+{% endblock %}    
+
+{% block body %}
+    <p>
+        This is the list of Configured Widgets. You can create as many Widgets & Channels as needed.
+    </p>
+
+    <hr>
+{% endblock %}    
+        
+    
+{% block content_row %}
+    <div class='col-12 justify-content-center text-center my-2'>
+        {% include '@WidgetsDemo/Widgets/List/selector.html.twig' %}
+    </div>
+    <div class='col-12'>
+        {% include '@WidgetsDemo/Widgets/List/contents.html.twig' %}
+    </div>
+    <div class='col-12 col-md-6'>
+{#        {% include '@WidgetsDemo/Widgets/List/factory.html.twig' %}#}
+    </div>
+    <div class='col-12 col-md-6'>
+{#        {% include '@WidgetsDemo/Widgets/List/definition.html.twig' %}#}
+    </div>
+{% endblock %}
+

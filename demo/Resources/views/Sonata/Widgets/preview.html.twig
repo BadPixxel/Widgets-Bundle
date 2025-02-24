@@ -1,0 +1,30 @@
+{% extends "base.html.twig" %}
+
+{#
+    Display Node Profile Title
+#}
+{% block headline %}
+    Preview of a Widgets : <twig:Widgets:Widget:Title :widget="Widget" />
+    <br />
+    <small><code>{{ Configurator.class }}</code></small>
+{% endblock %}    
+    
+{% block content_row %}
+
+    <div class='col-12 col-md-6'>
+        {% include '@WidgetsDemo/Widgets/Preview/editor.html.twig' %}
+    </div>
+
+    <div class='col-12 col-md-6'>
+
+        <h5>Widget Preview (As Sonata Block)</h5>
+
+        {{ sonata_block_render({ 'type': 'badpixxel.widget.simple' }, {
+            configurator:   Configurator,
+            options:        Options,
+        }) }}
+
+    </div>
+
+{% endblock %}
+
