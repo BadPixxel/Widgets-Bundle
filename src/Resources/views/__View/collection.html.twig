@@ -1,0 +1,21 @@
+
+{#{% set CollectionId = "widgets-collection-" ~ Collection.id %}#}
+
+{#{% set sortUrl = path('splash_widgets_collections_reorder', { #}
+{#    'collectionId': Collection.id,  #}
+{#}) %}#}
+        
+<div class="row padding-10 {% if Edit %}splash-widget-sortable-collection{% endif %}" 
+     id="{{ collectionId }}"
+     data-sort="{{ sortUrl }}"
+    >
+    {% for Widget in collection.Widgets %}
+        {{ component("BpWidget", {
+            'service'   : collection.service,
+            'type'      : (Widget.id ~ "@" ~ collection.id),
+            'ajax'      : true,
+            'options'   : Widget.Options    | json_encode(),
+            'parameters': Widget.Parameters | json_encode()
+        }) }}
+    {% endfor %}
+</div>     

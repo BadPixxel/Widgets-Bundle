@@ -6,8 +6,8 @@
     <button type="button" class="btn dropdown-toggle  {{ Class | default("btn-primary") }}" id="splashWidgetPresetButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
         <i class="fa fas fa-clock" aria-hidden="true"></i>
         &nbsp;
-        {% if Collection.Preset is not empty %}
-            {{ ('dates.' ~ Collection.Preset)  | trans }}
+        {% if collection.Preset is not empty %}
+            {{ ('dates.' ~ collection.Preset)  | trans }}
         {% else %}
             {{ "dates.label" | trans }}
         {% endif %}
@@ -17,44 +17,44 @@
     <ul class="dropdown-menu" aria-labelledby="splashWidgetPresetButton">
         
         {# Preset Day Button #}
-        <li>{{ btns.Preset_Btn(Collection, "D")}}</li>
+        <li>{{ btns.Preset_Btn(collection, "D")}}</li>
         
         {# Preset Week Button #}
-        <li>{{ btns.Preset_Btn(Collection, "W")}}
+        <li>{{ btns.Preset_Btn(collection, "W")}}
         
         {# Preset Month Button #}
-        <li>{{ btns.Preset_Btn(Collection, "M")}}
+        <li>{{ btns.Preset_Btn(collection, "M")}}
 
         {# Preset Year Button #}
-        <li>{{ btns.Preset_Btn(Collection, "Y")}}
+        <li>{{ btns.Preset_Btn(collection, "Y")}}
             
         <li role="separator" class="divider"></li>
             
         {# Preset Month Button #}
-        <li>{{ btns.Preset_Btn(Collection, "LM")}}
+        <li>{{ btns.Preset_Btn(collection, "LM")}}
             
         {# Preset Month Button #}
-        <li>{{ btns.Preset_Btn(Collection, "LW")}}
+        <li>{{ btns.Preset_Btn(collection, "LW")}}
             
         {# Preset Month Button #}
-        <li>{{ btns.Preset_Btn(Collection, "L2W")}}
+        <li>{{ btns.Preset_Btn(collection, "L2W")}}
 
         {# Preset Year Button #}
-        <li>{{ btns.Preset_Btn(Collection, "LY")}}
+        <li>{{ btns.Preset_Btn(collection, "LY")}}
             
         <li role="separator" class="divider"></li>
             
         {# Preset Day-1 Button #}
-        <li>{{ btns.Preset_Btn(Collection, "PD")}}
+        <li>{{ btns.Preset_Btn(collection, "PD")}}
 
         {# Preset Week-1 Button #}
-        <li>{{ btns.Preset_Btn(Collection, "PW")}}
+        <li>{{ btns.Preset_Btn(collection, "PW")}}
         
         {# Preset Month-1 Button #}
-        <li>{{ btns.Preset_Btn(Collection, "PM")}}
+        <li>{{ btns.Preset_Btn(collection, "PM")}}
 
         {# Preset Year-1 Button #}
-        <li>{{ btns.Preset_Btn(Collection, "PY")}}
+        <li>{{ btns.Preset_Btn(collection, "PY")}}
 
   </ul>
 </div>
@@ -62,12 +62,12 @@
 {#
     Generate Date Preset Button
 #}
-{% macro Preset_Btn(Collection, Value) %}
+{% macro Preset_Btn(collection, Value) %}
         
-    {% set isCurrent = (Collection.Preset == Value) %}
+    {% set isCurrent = (collection.Preset == Value) %}
     
     {% set presetUrl = path('splash_widgets_collections_preset', { 
-        'collectionId': Collection.id,  
+        'collectionId': collection.id,
         'preset' : Value
     }) %}
         
