@@ -12,6 +12,8 @@ widget:
     add:            Add
     view:           View
     edit:           Edit
+    save:           Save
+    loading:        "Loading ..."
 
 ################################################################################    
 #    Widget Generic Actions
@@ -19,6 +21,7 @@ widget:
 actions:
     yes:            Yes
     no:             No
+    close:          Close
 
 remove:         
     label:          Remove    
@@ -72,7 +75,7 @@ dates:
     L2W:        Two Weeks
     LM:         One Month
     LY:         One Year
-    PD:         Yesteday
+    PD:         Yesterday
     PW:         Last Week
     PM:         Last Month
     PY:         Last Year
@@ -111,3 +114,18 @@ blocks:
         barcolor:
             label:      Bar Color
             tooltip:    "Adjust Color of Chart Bars (ie : #00FF00)"
+
+# ==============================================================================
+# Widget Translations
+# ==============================================================================
+
+widgets:
+    technical:
+        not-found:
+            title:          Widget not found
+            description:    Requested widget was not found
+            text:           'Requested widget was not found...'
+        not-allowed:
+            title:          Access denied
+            description:    Access to widget was denied
+            text:           "You don't have enough rights to access this widget..."

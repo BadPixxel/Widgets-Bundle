@@ -12,13 +12,16 @@ widget:
     add:            Ajouter
     view:           Voir
     edit:           Editer
-    
+    save:           Sauvegarder
+    loading:        "Chargement ..."
+
 ################################################################################    
 #    Widget Generic Actions
 ################################################################################  
 actions:
     yes:            Oui
     no:             Non
+    close:          Fermer
 
 remove:
     label:          Supprimer
