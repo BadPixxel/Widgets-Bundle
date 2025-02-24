@@ -1,0 +1,46 @@
+<?php
+
+namespace BadPixxel\Widgets\Dictionary\Collections;
+
+/**
+ * Widget Collection Live Components Events
+ */
+enum CollectionEvents
+{
+    //==============================================================================
+    // ADD WIDGET MODAL
+    //==============================================================================
+
+    /**
+     * When Add Widget to Collection is Opened
+     */
+    const OPEN_ADD_MODAL = "badpixxel.widget.collection.add.open";
+
+    /**
+     * When Add Widget to Collection is Closed
+     */
+    const CLOSE_ADD_MODAL = "badpixxel.widget.collection.add.close";
+
+    //==============================================================================
+    // EDIT MODE
+    //==============================================================================
+
+    /**
+     * Start Edition of a Collection
+     */
+    const START_EDIT = "badpixxel.widget.collection.edit.start";
+
+    /**
+     * End Edition of a Collection
+     */
+    const END_EDIT = "badpixxel.widget.collection.edit.end";
+
+    //==============================================================================
+    // COLLECTION EVENTS
+    //==============================================================================
+
+    /**
+     * Collection was Updated
+     */
+    const UPDATED = "badpixxel.widget.collection.updated";
+}
