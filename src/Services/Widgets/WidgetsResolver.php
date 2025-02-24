@@ -43,8 +43,6 @@ class WidgetsResolver
         }
         Assert::notEmpty($configurator);
 
-
-
         return $configurator;
     }
 

@@ -7,7 +7,7 @@ use DateTime;
 /**
  * This Widget or Collection is Aware of Date Presets
  */
-interface DatePresetAwareInterface
+interface DatePresetAwareInterface extends ParametersAwareWidgetInterface
 {
     /**
      * Set Date Preset

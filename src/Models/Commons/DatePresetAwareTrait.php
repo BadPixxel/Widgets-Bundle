@@ -59,11 +59,7 @@ trait DatePresetAwareTrait
     {
         //==============================================================================
         //  Get Parameters
-        if (method_exists($this, "getParameters")) {
-            $parameters = $this->getParameters();
-        } else {
-            $parameters = array();
-        }
+        $parameters = $this->getParameters();
         //==============================================================================
         //  Check If Preset Dates Mode Exists
         $preset = $this->getOption(Options::DATES_PRESET);
