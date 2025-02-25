@@ -32,9 +32,10 @@
 
 <pre><code class="language-twig">{% verbatim %}
 {{ component("WidgetsCollection"), {
-    type:   "my-custom-type",                   // Unique Collection Code
-    title:  "Demo Widgets Collection"           // Optional
-    icon:   "fa fa-check-double text-success"   // Optional
+    type:       "my-custom-type",                   // Unique Collection Code
+    title:      "Demo Widgets Collection"           // Optional
+    icon:       "fa fa-check-double text-success"   // Optional
+    channel:    "demo"                              // Optional
 } }}
 {% endverbatim %}</code></pre>
 
@@ -45,6 +46,7 @@
                 :type="Type"
                 title="Demo Widgets Collection"
                 icon="fa fa-check-double text-success"
+                :channel="null"
         />
         <twig:Widget:Selector:Card :type="Type" />
     </div>

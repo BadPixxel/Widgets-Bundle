@@ -116,6 +116,13 @@ class WidgetsCollection extends AbstractCollectionAwareComponent
             $collection->setIcon($icon);
             $this->manager->update($collection);
         }
+        //==============================================================================
+        // Setup Collection Channel
+        if (array_key_exists('channel', $data)) {
+            Assert::nullOrStringNotEmpty($channel = $data['channel'] ?? null);
+            $collection->setChannel($channel);
+            $this->manager->update($collection);
+        }
 
         return $data;
     }

@@ -21,7 +21,7 @@
     </div>
 
     {% if this.empty and this.configuration.editable %}
-        <twig:Widget:Selector:Card :collection="this.collection" :channel="channel" />
+        <twig:Widget:Selector:Card :collection="this.collection" :channel="this.collection.channel" />
     {% endif %}
 
 </div>

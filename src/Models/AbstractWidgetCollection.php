@@ -95,7 +95,7 @@ abstract class AbstractWidgetCollection
     /**
      * Set Collection Channel
      */
-    public function setChannel(string $channel) : self
+    public function setChannel(?string $channel) : self
     {
         $this->channel = $channel;
 

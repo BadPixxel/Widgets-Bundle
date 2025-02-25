@@ -1,4 +1,13 @@
-// mychart_controller.js
+/*
+ *  Copyright (C) BadPixxel <www.badpixxel.com>
+ *
+ *  This program is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ *
+ *  For the full copyright and license information, please view the LICENSE
+ *  file that was distributed with this source code.
+ */
 
 import { Controller } from '@hotwired/stimulus';
 
@@ -121,13 +130,6 @@ export default class MatrixController extends Controller {
      * @return {void} This method does not return a value; it modifies the passed configuration directly.
      */
     static setupBackground(config) {
-        // // For instance you can format Y axis
-        // // To avoid overriding existing config, you should distinguish 3 cases:
-        // // # 1. No existing scales config => add a new scales config
-
-
-        console.log(config);
-
         config.data.datasets.forEach(function (dataset, index) {
             //------------------------------------------------------------------------------
             // Fetch Initial Config

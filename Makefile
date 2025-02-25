@@ -14,4 +14,4 @@ build-assets:	## Build All Assets using Node & Webpack
 
 debug-assets:  ## Build All Assets for Dev
 	$(MAKE) build-assets
-	@$(DOCKER_COMPOSE) exec node yarn encore --config config.assets.js --config config.demo.js --watch
+	@$(DOCKER_COMPOSE) exec node yarn encore dev --config config.assets.js --config config.demo.js --watch
