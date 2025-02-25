@@ -40,7 +40,7 @@ class ChartJsBuilder
         $chart = $this->chartBuilder->createChart($type);
         //==============================================================================
         // Generate Chart Datasets
-        $datasets = $this->dataBuilder->getDatasets($blockData, $blockOptions);
+        $datasets = $this->dataBuilder->getDatasets($blockData);
         //==============================================================================
         // Apply Colors
         match ($type) {

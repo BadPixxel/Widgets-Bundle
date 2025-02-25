@@ -26,7 +26,7 @@ class ChartJsDatasetsBuilder
      *
      * @return array[]
      */
-    public function getDatasets(array $blockData, array $blockOptions): array
+    public function getDatasets(array $blockData): array
     {
         $yKeys = $blockData[ChartDataset::SERIES_VALUES_KEYS] ?? array();
         Assert::isArray($yKeys);

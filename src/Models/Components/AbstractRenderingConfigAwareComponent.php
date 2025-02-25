@@ -20,7 +20,7 @@ use Symfony\UX\TwigComponent\Attribute\PreMount;
 /**
  * This Component Receive Rendering Configuration
  */
-abstract class AbstractRenderingConfigurationAwareComponent
+abstract class AbstractRenderingConfigAwareComponent
 {
     /**
      * Widget Collection Object

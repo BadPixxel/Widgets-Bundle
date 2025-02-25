@@ -92,7 +92,7 @@ abstract class AbstractWidgetSelector extends AbstractCollectionAwareComponent
         //==============================================================================
         // Prepare Tabs List
         $this->tabs = array();
-        foreach ($this->widgetsResolver->findAll($this->channel) as $key => $widgetConfigurator) {
+        foreach ($this->widgetsResolver->findAll($this->channel) as $widgetConfigurator) {
             //==============================================================================
             // Get Widget Origin
             $widgetDescriptor = $widgetConfigurator->getService()->getDescriptor();

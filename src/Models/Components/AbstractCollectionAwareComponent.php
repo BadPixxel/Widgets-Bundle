@@ -25,7 +25,7 @@ use Webmozart\Assert\Assert;
 /**
  * This Component Receive a Widget as Input
  */
-abstract class AbstractCollectionAwareComponent extends AbstractRenderingConfigurationAwareComponent
+abstract class AbstractCollectionAwareComponent extends AbstractRenderingConfigAwareComponent
 {
     use DefaultActionTrait;
 

@@ -40,6 +40,8 @@ class ListWidgetsCommand extends Command
 
     /**
      * Render List of Available Widgets Configurations
+     *
+     * @SuppressWarnings(UnusedFormalParameter)
      */
     protected function execute(InputInterface $input, OutputInterface $output): int
     {

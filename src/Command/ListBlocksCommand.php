@@ -37,6 +37,8 @@ class ListBlocksCommand extends Command
 
     /**
      * Render List of Available Widgets Blocks
+     *
+     * @SuppressWarnings(UnusedFormalParameter)
      */
     protected function execute(InputInterface $input, OutputInterface $output): int
     {

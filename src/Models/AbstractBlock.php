@@ -172,6 +172,8 @@ abstract class AbstractBlock implements BlockInterface
 
     /**
      * @inheritdoc
+     *
+     * @phpstan-return array<string, mixed>
      */
     final public function getOptions(): array
     {
@@ -181,7 +183,6 @@ abstract class AbstractBlock implements BlockInterface
 
         //==============================================================================
         //  Update Options Array using OptionResolver
-        /** @var array<string, mixed> $options */
         return $resolver->resolve($this->options);
     }
 

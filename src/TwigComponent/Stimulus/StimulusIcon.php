@@ -13,7 +13,7 @@
 
 namespace BadPixxel\Widgets\TwigComponent\Stimulus;
 
-use BadPixxel\Widgets\Models\Components\AbstractRenderingConfigurationAwareComponent;
+use BadPixxel\Widgets\Models\Components\AbstractRenderingConfigAwareComponent;
 use Symfony\UX\TwigComponent\Attribute\AsTwigComponent;
 
 /**
@@ -23,7 +23,7 @@ use Symfony\UX\TwigComponent\Attribute\AsTwigComponent;
     name:       "Widgets:Stimulus:Icon",
     template:   "@BadpixxelWidgets/Components/Stimulus/icon.html.twig",
 )]
-class StimulusIcon extends AbstractRenderingConfigurationAwareComponent
+class StimulusIcon extends AbstractRenderingConfigAwareComponent
 {
     /**
      * Main Class

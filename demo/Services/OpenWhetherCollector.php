@@ -175,7 +175,7 @@ class OpenWhetherCollector
     }
 
     /**
-     *
+     * Execute Curl Request or Get Results from Cache
      */
     private function request(array $parameters): ?array
     {
@@ -189,12 +189,13 @@ class OpenWhetherCollector
 
         //==============================================================================
         // The callable will only be executed on a cache miss.
-        /** @phpstan-var null|array $response */
-        return $this->appCache->get($cacheKey, function (ItemInterface $item) use ($url): ?array {
+        $response = $this->appCache->get($cacheKey, function (ItemInterface $item) use ($url): ?array {
             $item->expiresAfter(60);
 
             return self::executeRequest($url);
         });
+
+        return is_array($response) ? $response : null;
     }
 
     /**

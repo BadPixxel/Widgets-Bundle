@@ -21,7 +21,7 @@ use Symfony\UX\LiveComponent\Attribute\LiveProp;
 /**
  * This Component Receive a Widget as Input
  */
-abstract class AbstractWidgetAwareComponent extends AbstractRenderingConfigurationAwareComponent
+abstract class AbstractWidgetAwareComponent extends AbstractRenderingConfigAwareComponent
 {
     /**
      * Enable Edition of this Widget

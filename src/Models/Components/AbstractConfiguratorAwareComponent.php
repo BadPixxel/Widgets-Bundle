@@ -26,7 +26,7 @@ use Webmozart\Assert\Assert;
 /**
  * This Component Receive a Widget Configurator as Input
  */
-abstract class AbstractConfiguratorAwareComponent extends AbstractRenderingConfigurationAwareComponent
+abstract class AbstractConfiguratorAwareComponent extends AbstractRenderingConfigAwareComponent
 {
     /**
      * Widget Component Key

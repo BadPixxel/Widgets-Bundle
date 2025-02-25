@@ -116,6 +116,7 @@ class WidgetCompiler
             try {
                 $this->appCache->delete($this->getCacheKey($widget, $options, $parameters));
             } catch (InvalidArgumentException) {
+                return $this;
             }
         }
 
