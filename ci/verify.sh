@@ -29,8 +29,8 @@ docker compose up -d
 
 ######################################
 # Run Grumphp Test Suites Locally
-#php vendor/bin/grumphp run --testsuite=travis
-#php vendor/bin/grumphp run --testsuite=csfixer
+php vendor/bin/grumphp run --testsuite=travis
+php vendor/bin/grumphp run --testsuite=csfixer
 
 ######################################
 # Walk on Docker Compose Container
@@ -44,7 +44,7 @@ do
     docker compose exec $ID apt install git -y
     docker compose exec $ID composer update  --no-progress --no-scripts
     # Run Grumphp Test Suites
-#    docker compose exec -w $WORKDIR $ID php vendor/bin/grumphp run --testsuite=travis
-#    docker compose exec -w $WORKDIR $ID php vendor/bin/grumphp run --testsuite=csfixer
+    docker compose exec -w $WORKDIR $ID php vendor/bin/grumphp run --testsuite=travis
+    docker compose exec -w $WORKDIR $ID php vendor/bin/grumphp run --testsuite=csfixer
     docker compose exec -w $WORKDIR $ID php vendor/bin/grumphp run --testsuite=phpstan
 done
