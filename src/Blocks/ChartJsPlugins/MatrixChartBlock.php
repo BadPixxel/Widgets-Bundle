@@ -14,17 +14,12 @@
 namespace BadPixxel\Widgets\Blocks\ChartJsPlugins;
 
 use BadPixxel\Widgets\Attribute\AsWidgetBlock;
-use BadPixxel\Widgets\Dictionary\ChartConfig;
-use BadPixxel\Widgets\Dictionary\ChartDataset;
 use BadPixxel\Widgets\Dictionary\Options;
 use BadPixxel\Widgets\Interfaces\Blocks\BlockWithDemoInterface;
 use BadPixxel\Widgets\Models\AbstractChartBlock;
 use BadPixxel\Widgets\OptionResolver\BlockOptionsResolver;
-use BadPixxel\Widgets\OptionResolver\ChartOptionsResolver;
 use InvalidArgumentException;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\OptionsResolver\Options as SymfonyOptions;
-use Webmozart\Assert\Assert;
 
 /**
  * Widget Matrix Chart Block
@@ -119,7 +114,6 @@ class MatrixChartBlock extends AbstractChartBlock implements BlockWithDemoInterf
                 self::Y_LABELS => $values,
             )
         ));
-
     }
 
     //==============================================================================
@@ -152,10 +146,10 @@ class MatrixChartBlock extends AbstractChartBlock implements BlockWithDemoInterf
      * @param string[] $xLabels An array of strings representing the X labels.
      * @param string[] $yLabels An array of strings representing the Y labels.
      *
+     * @throws InvalidArgumentException If any element in $xLabels or $yLabels is not a string.
+     *
      * @return array An array containing the randomly generated dataset,
      *               where each entry consists of value with keys 'x', 'y', 'd', and 'v'.
-     *
-     * @throws InvalidArgumentException If any element in $xLabels or $yLabels is not a string.
      */
     public function getDemoDataset(array $xLabels, array $yLabels): array
     {

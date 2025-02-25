@@ -24,7 +24,7 @@ trait PositionTrait
     /**
      * Widget Position / Priority
      */
-    #[ORM\Column(name:"position", type: Types::INTEGER, nullable:True)]
+    #[ORM\Column(name:"position", type: Types::INTEGER, nullable:true)]
     protected ?int $position = null;
 
     //==============================================================================

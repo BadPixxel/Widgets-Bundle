@@ -1,5 +1,16 @@
 <?php
 
+/*
+ *  Copyright (C) BadPixxel <www.badpixxel.com>
+ *
+ *  This program is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ *
+ *  For the full copyright and license information, please view the LICENSE
+ *  file that was distributed with this source code.
+ */
+
 namespace BadPixxel\Widgets\TwigComponent\WidgetRenderer;
 
 use BadPixxel\Widgets\Dictionary\Widgets\RenderingModes;
@@ -9,7 +20,7 @@ use Symfony\UX\TwigComponent\Attribute\AsTwigComponent;
 #[AsTwigComponent(
     name:       'Widget:Contents',
     template:   '@BadpixxelWidgets/Components/Widget/Contents/index.html.twig',
-    )]
+)]
 class WidgetContents extends AbstractWidgetAwareComponent
 {
     /**
@@ -28,7 +39,7 @@ class WidgetContents extends AbstractWidgetAwareComponent
      */
     public function getBoxClass(): string
     {
-        return match($this->getRenderingMode()) {
+        return match ($this->getRenderingMode()) {
             RenderingModes::BS3 => sprintf("panel panel-%s", $this->getColorClass()),
             default => sprintf("card border-%s", $this->getColorClass()),
         };

@@ -1,24 +1,30 @@
 <?php
 
+/*
+ *  Copyright (C) BadPixxel <www.badpixxel.com>
+ *
+ *  This program is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ *
+ *  For the full copyright and license information, please view the LICENSE
+ *  file that was distributed with this source code.
+ */
+
 namespace BadPixxel\Widgets\TwigComponent\Collections;
 
 use BadPixxel\Widgets\Dictionary\Collections\CollectionEvents;
-use BadPixxel\Widgets\Dictionary\Widgets\WidgetEvents;
 use BadPixxel\Widgets\Entity\WidgetCollection;
 use BadPixxel\Widgets\Form\CollectionDatesPresetType;
 use BadPixxel\Widgets\Models\Components\AbstractCollectionAwareComponent;
 use BadPixxel\Widgets\Services\CollectionManager;
-use BadPixxel\Widgets\Services\Widgets\WidgetFormFactory;
-use BadPixxel\Widgets\Services\Widgets\WidgetsResolver;
 use Exception;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\UX\LiveComponent\Attribute\AsLiveComponent;
 use Symfony\UX\LiveComponent\Attribute\LiveAction;
-use Symfony\UX\LiveComponent\Attribute\LiveProp;
 use Symfony\UX\LiveComponent\ComponentToolsTrait;
 use Symfony\UX\LiveComponent\ComponentWithFormTrait;
-use Symfony\UX\LiveComponent\DefaultActionTrait;
 use Webmozart\Assert\Assert;
 
 /**

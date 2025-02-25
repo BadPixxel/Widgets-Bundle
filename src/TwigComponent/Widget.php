@@ -1,21 +1,22 @@
 <?php
 
+/*
+ *  Copyright (C) BadPixxel <www.badpixxel.com>
+ *
+ *  This program is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ *
+ *  For the full copyright and license information, please view the LICENSE
+ *  file that was distributed with this source code.
+ */
+
 namespace BadPixxel\Widgets\TwigComponent;
 
 //use BadPixxel\Widgets\Entity\Widget;
 use BadPixxel\Widgets\Dictionary\Widgets\WidgetEvents;
-use BadPixxel\Widgets\Entity\WidgetCache;
-use BadPixxel\Widgets\Helpers\JsonParser;
 use BadPixxel\Widgets\Interfaces\WidgetInterface;
 use BadPixxel\Widgets\Models\Components\AbstractConfiguratorAwareComponent;
-use BadPixxel\Widgets\Services\FactoryService;
-use BadPixxel\Widgets\Services\FormFactory;
-use BadPixxel\Widgets\Services\ManagerService;
-use BadPixxel\Widgets\Services\Widgets\WidgetCompiler;
-use BadPixxel\Widgets\Services\Widgets\WidgetFormFactory;
-use BadPixxel\Widgets\Services\Widgets\WidgetsResolver;
-use Exception;
-use Symfony\Component\Form\FormInterface;
 use Symfony\UX\LiveComponent\Attribute\AsLiveComponent;
 use Symfony\UX\LiveComponent\Attribute\LiveAction;
 use Symfony\UX\LiveComponent\Attribute\LiveArg;
@@ -23,12 +24,8 @@ use Symfony\UX\LiveComponent\Attribute\LiveListener;
 use Symfony\UX\LiveComponent\Attribute\LiveProp;
 use Symfony\UX\LiveComponent\Attribute\PreReRender;
 use Symfony\UX\LiveComponent\ComponentToolsTrait;
-use Symfony\UX\LiveComponent\ComponentWithFormTrait;
 use Symfony\UX\LiveComponent\DefaultActionTrait;
-use Symfony\UX\TwigComponent\Attribute\ExposeInTemplate;
 use Symfony\UX\TwigComponent\Attribute\PostMount;
-use Symfony\UX\TwigComponent\Attribute\PreMount;
-use Webmozart\Assert\Assert;
 
 /**
  * Render a Widget
@@ -94,13 +91,16 @@ class Widget extends AbstractConfiguratorAwareComponent
     }
 
     /**
-     * @param array<string, scalar|null> $parameters
+     * @param array<string, null|scalar> $parameters
      */
     #[LiveListener(WidgetEvents::UPDATED)]
     public function updated(
-        #[LiveArg] string $key,
-        #[LiveArg] array $options,
-        #[LiveArg] array $parameters,
+        #[LiveArg]
+        string $key,
+        #[LiveArg]
+        array $options,
+        #[LiveArg]
+        array $parameters,
     ): void {
         //==============================================================================
         // This is Current Component
@@ -110,7 +110,7 @@ class Widget extends AbstractConfiguratorAwareComponent
         //==============================================================================
         // Update Widget Configuration
         $this->options = array_replace_recursive($this->options, $options);
-        /** @var array<string, bool|float|int|string|null> $parameters */
+        /** @var array<string, null|bool|float|int|string> $parameters */
         $parameters = array_replace_recursive($this->parameters, $parameters);
         $this->parameters = $parameters;
         //==============================================================================
@@ -172,5 +172,4 @@ class Widget extends AbstractConfiguratorAwareComponent
             "key" => $this->key
         ));
     }
-
 }

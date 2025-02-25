@@ -14,7 +14,6 @@
 namespace BadPixxel\Widgets\Demo\Actions\Blocks;
 
 use BadPixxel\Widgets\Demo\Dictionary\WidgetsDemoRoutes;
-use Exception;
 use BadPixxel\Widgets\Interfaces\Blocks\BlockWithDemoInterface;
 use BadPixxel\Widgets\Services\Blocks\BlockResolver;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;

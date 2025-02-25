@@ -40,7 +40,6 @@ class BadpixxelWidgetsExtension extends Extension implements PrependExtensionInt
 
         $container->setParameter('badpixxel_widgets', $config);
 
-
         $bundles = $container->getParameter('kernel.bundles');
         //====================================================================//
         // Register Blocks Services if Sonata Block is Installed

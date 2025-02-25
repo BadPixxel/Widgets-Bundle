@@ -1,8 +1,18 @@
 <?php
 
+/*
+ *  Copyright (C) BadPixxel <www.badpixxel.com>
+ *
+ *  This program is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ *
+ *  For the full copyright and license information, please view the LICENSE
+ *  file that was distributed with this source code.
+ */
+
 namespace BadPixxel\Widgets\TwigComponent\BlockRenderer\Bootstrap;
 
-use BadPixxel\Widgets\Blocks\Basics\TextBlock;
 use BadPixxel\Widgets\Blocks\Bootstrap\AlertBlock;
 use BadPixxel\Widgets\Dictionary\Options;
 use BadPixxel\Widgets\Interfaces\BlockInterface;
@@ -72,10 +82,10 @@ class AlertRenderer extends AbstractBlockRenderer
     {
         return match ($this->data["level"] ?? AlertBlock::ERROR) {
             AlertBlock::SUCCESS => "success",
-            AlertBlock::INFO    => "info",
+            AlertBlock::INFO => "info",
             AlertBlock::WARNING => "warning",
-            AlertBlock::ERROR   => "danger",
-            default   => "secondary",
+            AlertBlock::ERROR => "danger",
+            default => "secondary",
         };
     }
 }

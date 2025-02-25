@@ -1,9 +1,20 @@
 <?php
 
+/*
+ *  Copyright (C) BadPixxel <www.badpixxel.com>
+ *
+ *  This program is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ *
+ *  For the full copyright and license information, please view the LICENSE
+ *  file that was distributed with this source code.
+ */
+
 namespace BadPixxel\Widgets\Services\ChartJs;
 
-use BadPixxel\Widgets\Dictionary\ChartDataset;
 use BadPixxel\Widgets\Dictionary\ChartConfig;
+use BadPixxel\Widgets\Dictionary\ChartDataset;
 use BadPixxel\Widgets\Dictionary\Options;
 use Exception;
 use Webmozart\Assert\Assert;
@@ -129,6 +140,7 @@ class ChartJsOptionsBuilder
     private function getRawOptions(array $blockOptions): array
     {
         Assert::isArray($chartOptions = $blockOptions[Options::CHART_OPTIONS] ?? array());
+
         //==============================================================================
         // Verify Options are Serializable
         try {

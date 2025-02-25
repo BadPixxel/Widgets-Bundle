@@ -29,9 +29,9 @@ abstract class AbstractBlock implements BlockInterface
     /**
      * Class Constructor
      *
-     * @param string $type      Block Type Code
-     * @param array $data       Block Input Data
-     * @param array $options    Block Options
+     * @param string $type    Block Type Code
+     * @param array  $data    Block Input Data
+     * @param array  $options Block Options
      */
     public function __construct(
         private readonly string $type,
@@ -67,6 +67,7 @@ abstract class AbstractBlock implements BlockInterface
 
             return $this;
         }
+
         //==============================================================================
         //  Update Options Array using OptionResolver
         try {
@@ -86,6 +87,7 @@ abstract class AbstractBlock implements BlockInterface
         //==============================================================================
         //  Init Data Array using OptionResolver
         $resolver = $this->getDataResolver();
+
         //==============================================================================
         //  Update Options Array using OptionResolver
         return $resolver
@@ -143,11 +145,12 @@ abstract class AbstractBlock implements BlockInterface
         //==============================================================================
         //  Init Options Array using OptionResolver
         $resolver = $this->getOptionsResolver();
+
         //==============================================================================
         //  Update Options Array using OptionResolver
         try {
             $this->options = $resolver->resolve($options);
-        } catch (InvalidArgumentException ) {
+        } catch (InvalidArgumentException) {
             $this->options = $resolver->resolve();
         }
 
@@ -175,12 +178,11 @@ abstract class AbstractBlock implements BlockInterface
         //==============================================================================
         //  Init Options Array using OptionResolver
         $resolver = $this->getOptionsResolver();
+
         //==============================================================================
         //  Update Options Array using OptionResolver
         /** @var array<string, mixed> $options */
-        $options = $resolver->resolve($this->options);
-
-        return $options;
+        return $resolver->resolve($this->options);
     }
 
     /**
@@ -196,7 +198,7 @@ abstract class AbstractBlock implements BlockInterface
      */
     final public function setWidth(string $width = BlockWidth::DEFAULT) : static
     {
-        $this->options[Options::WIDTH] = match($width) {
+        $this->options[Options::WIDTH] = match ($width) {
             "xs" => BlockWidth::XS,
             "sm" => BlockWidth::SM,
             "m" => BlockWidth::M,

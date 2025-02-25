@@ -198,6 +198,4 @@ class WidgetOptionsType extends AbstractType
             'expanded' => false,
         ));
     }
-
-
 }

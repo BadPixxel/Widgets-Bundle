@@ -37,22 +37,6 @@ trait BlocksAwareTestTrait
     }
 
     /**
-     * Safe Load Block Resolver Service
-     */
-    protected static function getBlockResolver() : BlockResolver
-    {
-        static $blockResolver;
-
-        if (!$blockResolver instanceof BlockResolver) {
-            $service = static::getContainer()->get(BlockResolver::class);
-            MozartAssert::isInstanceOf($service, BlockResolver::class);
-            return $blockResolver = $service;
-        }
-
-        return $blockResolver;
-    }
-
-    /**
      * All Blocks Codes Provider
      *
      * @return array[]
@@ -68,5 +52,22 @@ trait BlocksAwareTestTrait
         }
 
         return $blocks;
+    }
+
+    /**
+     * Safe Load Block Resolver Service
+     */
+    protected static function getBlockResolver() : BlockResolver
+    {
+        static $blockResolver;
+
+        if (!$blockResolver instanceof BlockResolver) {
+            $service = static::getContainer()->get(BlockResolver::class);
+            MozartAssert::isInstanceOf($service, BlockResolver::class);
+
+            return $blockResolver = $service;
+        }
+
+        return $blockResolver;
     }
 }

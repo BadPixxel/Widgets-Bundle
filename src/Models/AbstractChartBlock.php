@@ -13,8 +13,8 @@
 
 namespace BadPixxel\Widgets\Models;
 
-use BadPixxel\Widgets\Dictionary\ChartDataset;
 use BadPixxel\Widgets\Dictionary\ChartConfig;
+use BadPixxel\Widgets\Dictionary\ChartDataset;
 use BadPixxel\Widgets\Dictionary\Options;
 use BadPixxel\Widgets\OptionResolver\BlockOptionsResolver;
 use BadPixxel\Widgets\OptionResolver\ChartDataResolver;
@@ -32,15 +32,15 @@ abstract class AbstractChartBlock extends AbstractBlock
      */
     const TYPE = "ChartBlock";
 
-    /**
-     * Get Chart Type to Render
-     */
-    abstract public function getChartType(): string;
-
     public function __construct(array $data = array(), array $options = array())
     {
         parent::__construct(static::TYPE, $data, $options);
     }
+
+    /**
+     * Get Chart Type to Render
+     */
+    abstract public function getChartType(): string;
 
     /**
      * @inheritdoc

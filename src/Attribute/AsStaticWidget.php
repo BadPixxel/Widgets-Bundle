@@ -1,12 +1,14 @@
 <?php
 
 /*
- * This file is part of the Symfony package.
+ *  Copyright (C) BadPixxel <www.badpixxel.com>
  *
- * (c) Fabien Potencier <fabien@symfony.com>
+ *  This program is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
+ *  For the full copyright and license information, please view the LICENSE
+ *  file that was distributed with this source code.
  */
 
 namespace BadPixxel\Widgets\Attribute;
@@ -21,7 +23,7 @@ use Symfony\Component\DependencyInjection\Attribute\Autoconfigure;
  *
  * Static Widgets are Defined in Symfony DI Only
  */
-#[Attribute(Attribute::TARGET_CLASS| Attribute::IS_REPEATABLE)]
+#[Attribute(Attribute::TARGET_CLASS | Attribute::IS_REPEATABLE)]
 class AsStaticWidget extends Autoconfigure
 {
     /**
@@ -30,27 +32,26 @@ class AsStaticWidget extends Autoconfigure
     const TAG = "badpixxel.widgets.widget.static";
 
     /**
-     * @param string|array $channels    Available only in given  Channels
-     * @param string|array $roles       Require Anny of this Security Roles
-     * @param int $priority             Display Priority
-     * @param array $options            Static Widget Options
+     * @param array|string $channels Available only in given  Channels
+     * @param array|string $roles    Require Anny of this Security Roles
+     * @param int          $priority Display Priority
+     * @param array        $options  Static Widget Options
      */
     public function __construct(
         string|array $channels = array(),
         string|array $roles = array(),
         int $priority = 0,
         array $options = array(),
-    )
-    {
+    ) {
         parent::__construct(
             tags: array(
-                array(self::TAG  => array(
+                array(self::TAG => array(
                     'channels' => TagsEncoder::encode($channels),
                     'roles' => TagsEncoder::encode($roles),
                     'priority' => $priority,
                     'options' => TagsEncoder::encode($options),
                 )),
-                array(WidgetInterface::TAG  => array()),
+                array(WidgetInterface::TAG => array()),
             )
         );
     }

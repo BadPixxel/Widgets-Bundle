@@ -15,7 +15,6 @@ namespace BadPixxel\Widgets\Models\Widgets;
 
 use BadPixxel\Widgets\Dictionary\Options;
 
-
 /**
  * Trait CacheableTrait provides functionality for handling cache-related options.
  */

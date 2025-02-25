@@ -1,11 +1,17 @@
 <?php
 
-namespace BadPixxel\Widgets\Blocks\ChartJs\Traits;
+/*
+ *  Copyright (C) BadPixxel <www.badpixxel.com>
+ *
+ *  This program is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ *
+ *  For the full copyright and license information, please view the LICENSE
+ *  file that was distributed with this source code.
+ */
 
-use BadPixxel\Widgets\Dictionary\ChartConfig;
-use BadPixxel\Widgets\Dictionary\Options;
-use BadPixxel\Widgets\OptionResolver\BlockOptionsResolver;
-use BadPixxel\Widgets\OptionResolver\ChartOptionsResolver;
+namespace BadPixxel\Widgets\Blocks\ChartJs\Traits;
 
 /**
  * Generate Chart Demonstration Values
@@ -30,7 +36,7 @@ trait PieDemoTrait
      * Generates a dataset containing random values for demonstration purposes.
      * *
      * * @return array The generated dataset with random values and associated labels.
- */
+     */
     private function getDemoDataset(): array
     {
         //==============================================================================
@@ -43,7 +49,8 @@ trait PieDemoTrait
                 "value" => $next,
             );
             $next += rand(-50, 50);
-        } while (count($values) < 5);
+            $total = count($values);
+        } while ($total < 5);
 
         return $values;
     }

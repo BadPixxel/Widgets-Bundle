@@ -1,5 +1,16 @@
 <?php
 
+/*
+ *  Copyright (C) BadPixxel <www.badpixxel.com>
+ *
+ *  This program is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ *
+ *  For the full copyright and license information, please view the LICENSE
+ *  file that was distributed with this source code.
+ */
+
 namespace BadPixxel\Widgets\Demo\Services;
 
 use DateTime;
@@ -25,18 +36,17 @@ class OpenWhetherCollector
      * Fetch historical temperature data for Paris over a defined date range using Open-Meteo API.
      *
      * @param DateTime $startDate Start date
-     * @param DateTime $endDate End date
-     * @param string $interval Interval for data points
+     * @param DateTime $endDate   End date
+     * @param string   $interval  Interval for data points
      *
-     * @return array|null Returns an associative array with date => temperature or null on failure.
+     * @return null|array Returns an associative array with date => temperature or null on failure.
      */
     public function fetchTemperatureHistory(
         string $cityName,
         DateTime $startDate,
         DateTime $endDate,
         string $interval = 'd'
-    ): ?array
-    {
+    ): ?array {
         //==============================================================================
         // Build query parameters
         $params = array_replace_recursive(
@@ -47,6 +57,7 @@ class OpenWhetherCollector
         //==============================================================================
         // Execute the cURL request
         $response = $this->request($params);
+
         //==============================================================================
         // Build Dataset
         return $this->doDataset($response ?? array());
@@ -93,21 +104,21 @@ class OpenWhetherCollector
         //==============================================================================
         // Build Daily Records Dataset
         if (($daily = ($data['daily'] ?? null)) && is_array($daily)) {
-            $temperatureHistory = [];
+            $temperatureHistory = array();
             $time = $daily['time'] ?? null;
             foreach (is_array($time) ? $time : array() as $index => $date) {
                 /**
                  * @var array<string, array<scalar, float>> $daily
                  */
-                $temperatureHistory[$index] = [
+                $temperatureHistory[$index] = array(
                     'date' => $date,
                     'min' => $daily['temperature_2m_min'][$index],
                     'max' => $daily['temperature_2m_max'][$index],
                     'avg' => round(
-                        ($daily['temperature_2m_min'][$index] + $daily['temperature_2m_max'][$index]) /2,
+                        ($daily['temperature_2m_min'][$index] + $daily['temperature_2m_max'][$index]) / 2,
                         2
                     ),
-                ];
+                );
             }
 
             return $temperatureHistory;
@@ -115,17 +126,17 @@ class OpenWhetherCollector
         //==============================================================================
         // Build Hourly Records Dataset
         if (($hourly = ($data['hourly'] ?? null)) && is_array($hourly)) {
-            $temperatureHistory = [];
+            $temperatureHistory = array();
             $time = $hourly['time'] ?? null;
             foreach (is_array($time) ? $time : array() as $index => $date) {
                 /**
-                 * @var string $date
+                 * @var string                              $date
                  * @var array<string, array<scalar, float>> $hourly
                  */
-                $temperatureHistory[$index] = [
+                $temperatureHistory[$index] = array(
                     'date' => substr($date, -5),
                     'avg' => $hourly['temperature_2m'][$index],
-                ];
+                );
             }
 
             return $temperatureHistory;
@@ -137,7 +148,7 @@ class OpenWhetherCollector
     /**
      *
      */
-    private function getDatesParameter(DateTime $start, Datetime $end): array
+    private function getDatesParameter(DateTime $start, DateTime $end): array
     {
         $now = new DateTime("-1 hour");
         if ($end > $now) {
@@ -148,20 +159,19 @@ class OpenWhetherCollector
             'start_date' => $start->format('Y-m-d'),
             'end_date' => $end->format('Y-m-d'),
         );
-
     }
 
     /**
      *
      */
-    private function getGroupByParameter(string $groupBy = 'd'): array {
-        Assert::inArray($groupBy, ['h', 'd', 'w', 'm']);
+    private function getGroupByParameter(string $groupBy = 'd'): array
+    {
+        Assert::inArray($groupBy, array('h', 'd', 'w', 'm'));
 
-        return match($groupBy) {
+        return match ($groupBy) {
             'h' => array('hourly' => 'temperature_2m'),
             default => array('daily' => 'temperature_2m_min,temperature_2m_max'),
         };
-
     }
 
     /**
@@ -172,20 +182,19 @@ class OpenWhetherCollector
         //==============================================================================
         // Build Request Url
         $parameters['timezone'] ??= $this->timezone;
-        $url = self::API_URL . "?" . http_build_query($parameters);
+        $url = self::API_URL."?".http_build_query($parameters);
         //==============================================================================
         // Build Cache Key
         $cacheKey = sprintf("%s-%s", md5(self::class), md5($url));
+
         //==============================================================================
         // The callable will only be executed on a cache miss.
         /** @phpstan-var null|array $response */
-        $response = $this->appCache->get($cacheKey, function (ItemInterface $item) use ($url): ?array {
+        return $this->appCache->get($cacheKey, function (ItemInterface $item) use ($url): ?array {
             $item->expiresAfter(60);
 
             return self::executeRequest($url);
         });
-
-        return $response;
     }
 
     /**
@@ -193,29 +202,29 @@ class OpenWhetherCollector
      *
      * @param string $url The URL to send the request to.
      *
-     * @return array|null The decoded JSON response as an associative array, or null if an error occurred.
+     * @return null|array The decoded JSON response as an associative array, or null if an error occurred.
      */
     private static function executeRequest(string $url): ?array
     {
         Assert::notEmpty($url);
         //==============================================================================
         // Initialize cURL
-        $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, $url);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_TIMEOUT, 10);
-        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, true);
+        $curlH = curl_init();
+        curl_setopt($curlH, CURLOPT_URL, $url);
+        curl_setopt($curlH, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($curlH, CURLOPT_TIMEOUT, 10);
+        curl_setopt($curlH, CURLOPT_SSL_VERIFYPEER, true);
         //==============================================================================
         // Execute the cURL request
-        $response = curl_exec($ch);
+        $response = curl_exec($curlH);
         //==============================================================================
         // Check for cURL errors
-        if (curl_errno($ch)) {
-            curl_close($ch);
+        if (curl_errno($curlH)) {
+            curl_close($curlH);
 
             return null;
         }
-        curl_close($ch);
+        curl_close($curlH);
 
         //==============================================================================
         // Decode the JSON response
@@ -227,5 +236,4 @@ class OpenWhetherCollector
             return null;
         }
     }
-
 }

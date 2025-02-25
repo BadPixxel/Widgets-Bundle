@@ -1,13 +1,21 @@
 <?php
 
+/*
+ *  Copyright (C) BadPixxel <www.badpixxel.com>
+ *
+ *  This program is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ *
+ *  For the full copyright and license information, please view the LICENSE
+ *  file that was distributed with this source code.
+ */
+
 namespace BadPixxel\Widgets\Models\Components;
 
 use BadPixxel\Widgets\Dictionary\Options;
-use BadPixxel\Widgets\Dictionary\Widgets\RenderingModes;
 use BadPixxel\Widgets\Dictionary\Widgets\WidgetColors;
-use BadPixxel\Widgets\Dictionary\Widgets\WidgetEvents;
 use BadPixxel\Widgets\Interfaces\WidgetInterface;
-use Symfony\UX\LiveComponent\Attribute\LiveListener;
 use Symfony\UX\LiveComponent\Attribute\LiveProp;
 
 /**
@@ -50,6 +58,6 @@ abstract class AbstractWidgetAwareComponent extends AbstractRenderingConfigurati
     {
         $class = $this->getColorClass();
 
-        return empty($class) || ($class == WidgetColors::DEFAULT) ? "" : "text-white";
+        return empty($class) || (WidgetColors::DEFAULT == $class) ? "" : "text-white";
     }
 }

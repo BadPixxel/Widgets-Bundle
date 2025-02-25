@@ -1,5 +1,16 @@
 <?php
 
+/*
+ *  Copyright (C) BadPixxel <www.badpixxel.com>
+ *
+ *  This program is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ *
+ *  For the full copyright and license information, please view the LICENSE
+ *  file that was distributed with this source code.
+ */
+
 namespace BadPixxel\Widgets\Widgets;
 
 use BadPixxel\Widgets\Interfaces\WidgetInterface;
@@ -16,12 +27,12 @@ class WidgetConfigurator
     private string $hash;
 
     /**
-     * @param string $loader Name of Source Widget Loader
-     * @param WidgetInterface $service Target Widget Service
-     * @param string|array $channels Available only in given Channels
-     * @param string|array $roles Require Anny of this Security Roles
-     * @param int $priority Display Priority
-     * @param array $options Static Widget Options
+     * @param string          $loader   Name of Source Widget Loader
+     * @param WidgetInterface $service  Target Widget Service
+     * @param array|string    $channels Available only in given Channels
+     * @param array|string    $roles    Require Anny of this Security Roles
+     * @param int             $priority Display Priority
+     * @param array           $options  Static Widget Options
      */
     public function __construct(
         private readonly string $loader,
@@ -108,7 +119,6 @@ class WidgetConfigurator
         Assert::allStringNotEmpty($roles);
 
         return $roles;
-
     }
 
     /**

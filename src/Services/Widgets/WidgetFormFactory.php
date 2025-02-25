@@ -1,17 +1,25 @@
 <?php
 
+/*
+ *  Copyright (C) BadPixxel <www.badpixxel.com>
+ *
+ *  This program is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ *
+ *  For the full copyright and license information, please view the LICENSE
+ *  file that was distributed with this source code.
+ */
+
 namespace BadPixxel\Widgets\Services\Widgets;
 
+use BadPixxel\Widgets\Form\WidgetOptionsType;
 use BadPixxel\Widgets\Interfaces\WidgetInterface;
 use BadPixxel\Widgets\Interfaces\Widgets\ConfigurableWidgetInterface;
 use BadPixxel\Widgets\Interfaces\Widgets\DatePresetAwareInterface;
-use BadPixxel\Widgets\Models\AbstractWidget;
-use BadPixxel\Widgets\Form\WidgetDatesType;
-use BadPixxel\Widgets\Form\WidgetOptionsType;
-use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\FormType;
-use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormFactoryInterface;
+use Symfony\Component\Form\FormInterface;
 
 /**
  * Build Widget Configuration Forms
@@ -43,7 +51,6 @@ class WidgetFormFactory
             'label' => false,
         ));
         if ($widget instanceof ConfigurableWidgetInterface) {
-
             $widget->buildForm($paramForm);
         }
 

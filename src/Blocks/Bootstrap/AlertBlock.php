@@ -14,12 +14,9 @@
 namespace BadPixxel\Widgets\Blocks\Bootstrap;
 
 use BadPixxel\Widgets\Attribute\AsWidgetBlock;
-use BadPixxel\Widgets\Dictionary\Options;
 use BadPixxel\Widgets\Interfaces\Blocks\BlockWithDemoInterface;
-use BadPixxel\Widgets\Interfaces\Widgets\OptionsAwareWidgetInterface;
 use BadPixxel\Widgets\Models\AbstractBlock;
 use BadPixxel\Widgets\Models\Commons\OptionsSafeAwareTrait;
-use BadPixxel\Widgets\OptionResolver\BlockOptionsResolver;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Webmozart\Assert\Assert;
 

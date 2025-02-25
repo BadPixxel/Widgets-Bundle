@@ -38,7 +38,7 @@ class NotAllowedWidget extends AbstractWidget
 {
     public function __construct(
         private readonly TranslatorInterface $translator
-    ){
+    ) {
         parent::__construct();
     }
 

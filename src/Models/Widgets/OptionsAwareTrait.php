@@ -13,19 +13,13 @@
 
 namespace BadPixxel\Widgets\Models\Widgets;
 
-use ArrayObject;
 use BadPixxel\Widgets\Dictionary\Options;
 use BadPixxel\Widgets\Dictionary\Widgets\WidgetColors;
 use BadPixxel\Widgets\Dictionary\Widgets\WidgetWidth;
 use BadPixxel\Widgets\OptionResolver\WidgetOptionsResolver;
-use DateTime;
 use Doctrine\DBAL\Types\Types;
-use Doctrine\ORM\Mapping                        as ORM;
-use Exception;
+use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\OptionsResolver\Exception\InvalidArgumentException;
-use Symfony\Component\OptionsResolver\Exception\InvalidOptionsException;
-use Symfony\Component\OptionsResolver\Exception\UndefinedOptionsException;
-use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * Widget Options Management Trait
@@ -116,11 +110,12 @@ trait OptionsAwareTrait
         //==============================================================================
         //  Take Care of Border Flag
         $options[Options::SHOW_BORDER] = !(($options[Options::COLOR_CLASS] ?? null) == WidgetColors::NONE);
+
         //==============================================================================
         //  Update Options Array using OptionResolver
         try {
             $this->options = $resolver->resolve($options);
-        } catch (InvalidArgumentException ) {
+        } catch (InvalidArgumentException) {
             $this->options = $resolver->resolve();
         }
 

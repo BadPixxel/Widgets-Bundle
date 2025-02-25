@@ -13,9 +13,8 @@
 
 namespace BadPixxel\Widgets\Models\Widgets;
 
-use DateTime;
 use Doctrine\DBAL\Types\Types;
-use Doctrine\ORM\Mapping                        as ORM;
+use Doctrine\ORM\Mapping as ORM;
 
 /**
  * Widget Parameters Trait

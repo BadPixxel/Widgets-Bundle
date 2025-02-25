@@ -1,7 +1,17 @@
 <?php
 
-namespace BadPixxel\Widgets\Services\Widgets;
+/*
+ *  Copyright (C) BadPixxel <www.badpixxel.com>
+ *
+ *  This program is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ *
+ *  For the full copyright and license information, please view the LICENSE
+ *  file that was distributed with this source code.
+ */
 
+namespace BadPixxel\Widgets\Services\Widgets;
 
 use BadPixxel\Widgets\Interfaces\Widgets\Loader\WidgetsLoaderInterface;
 use BadPixxel\Widgets\Services\Widgets\Technical\NotAllowedWidget;
@@ -50,8 +60,8 @@ class WidgetsResolver
     /**
      * Get All Available Widgets Configurations
      *
-     * @param string|null $channel  Filter on a Specific Channel
-     * @param bool $disableRoles    Disable Roles Checking (DEBUG ONLY)
+     * @param null|string $channel      Filter on a Specific Channel
+     * @param bool        $disableRoles Disable Roles Checking (DEBUG ONLY)
      *
      * @return WidgetConfigurator[]
      */
@@ -118,7 +128,7 @@ class WidgetsResolver
 
         return array_unique($channels);
     }
-    
+
     /**
      * Get a Widget Configuration by Service Class
      */
@@ -156,25 +166,19 @@ class WidgetsResolver
         //==============================================================================
         // Walk on Widgets Loaders
         foreach ($this->widgetsLoaders as $widgetLoader) {
-
             //==============================================================================
             // Walk on Configured Widgets
             Assert::isInstanceOf($widgetLoader, WidgetsLoaderInterface::class);
             foreach ($widgetLoader->getConfigurators() as $configurator) {
-
                 //==============================================================================
                 // Register Widget Configuration
                 Assert::isInstanceOf($configurator, WidgetConfigurator::class);
                 $configurators[$configurator->getHash()] ??= $configurator;
-
             }
-
         }
 
         return $configurators;
     }
-
-
 
     /**
      * Check this Configured Service is for Requested Channel
@@ -186,6 +190,7 @@ class WidgetsResolver
         if (is_null($channel)) {
             return true;
         }
+
         //==============================================================================
         // Allowed for this Channel ??
         return in_array($channel, $configurator->getChannels(), true);

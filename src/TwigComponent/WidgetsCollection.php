@@ -1,5 +1,16 @@
 <?php
 
+/*
+ *  Copyright (C) BadPixxel <www.badpixxel.com>
+ *
+ *  This program is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ *
+ *  For the full copyright and license information, please view the LICENSE
+ *  file that was distributed with this source code.
+ */
+
 namespace BadPixxel\Widgets\TwigComponent;
 
 use BadPixxel\Widgets\Dictionary\Collections\CollectionEvents;
@@ -35,7 +46,7 @@ class WidgetsCollection extends AbstractCollectionAwareComponent
      * Component Constructor
      */
     public function __construct(
-         CollectionManager $manager,
+        CollectionManager $manager,
         protected readonly WidgetsResolver $resolver,
     ) {
         parent::__construct($manager);
@@ -88,7 +99,7 @@ class WidgetsCollection extends AbstractCollectionAwareComponent
         $collection = $data['collection'] ?? null;
         //==============================================================================
         // Widget Collection is Loaded
-        if (!$collection instanceof WidgetCollection ) {
+        if (!$collection instanceof WidgetCollection) {
             return $data;
         }
         //==============================================================================
@@ -136,8 +147,10 @@ class WidgetsCollection extends AbstractCollectionAwareComponent
      */
     #[LiveListener(CollectionEvents::UPDATED)]
     public function collectionUpdated(
-        #[LiveArg] string $type,
-        #[LiveArg] array $options,
+        #[LiveArg]
+        string $type,
+        #[LiveArg]
+        array $options,
     ): void {
         //==============================================================================
         // This is Current Collection
@@ -172,9 +185,12 @@ class WidgetsCollection extends AbstractCollectionAwareComponent
      */
     #[LiveListener(WidgetEvents::UPDATED)]
     public function widgetUpdated(
-        #[LiveArg] string $key,
-        #[LiveArg] array $options,
-        #[LiveArg] array $parameters,
+        #[LiveArg]
+        string $key,
+        #[LiveArg]
+        array $options,
+        #[LiveArg]
+        array $parameters,
     ): void {
         $collection = $this->getCollection();
         //==============================================================================
@@ -199,7 +215,8 @@ class WidgetsCollection extends AbstractCollectionAwareComponent
      */
     #[LiveListener(WidgetEvents::DELETED)]
     public function widgetDeleted(
-        #[LiveArg] string $key,
+        #[LiveArg]
+        string $key,
     ): void {
         $collection = $this->getCollection();
         //==============================================================================
@@ -221,7 +238,8 @@ class WidgetsCollection extends AbstractCollectionAwareComponent
      */
     #[LiveListener("sort")]
     public function sortWidgets(
-        #[LiveArg] array $ordering,
+        #[LiveArg]
+        array $ordering,
     ): void {
         $collection = $this->getCollection();
         //==============================================================================

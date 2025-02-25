@@ -14,7 +14,6 @@
 namespace BadPixxel\Widgets\Blocks\Basics;
 
 use BadPixxel\Widgets\Attribute\AsWidgetBlock;
-use BadPixxel\Widgets\Dictionary\Options;
 use BadPixxel\Widgets\Interfaces\Blocks\BlockWithDemoInterface;
 use BadPixxel\Widgets\Models\AbstractBlock;
 use BadPixxel\Widgets\Models\Commons\OptionsSafeAwareTrait;

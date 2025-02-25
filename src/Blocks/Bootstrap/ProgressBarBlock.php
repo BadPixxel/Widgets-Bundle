@@ -75,7 +75,10 @@ class ProgressBarBlock extends AbstractBlock implements BlockWithDemoInterface
             $chartResolver->addAllowedTypes(ChartConfig::COLORS, "string[]");
             $chartResolver->setDefault(ChartConfig::CHART_CLASS, "progress-bar-striped");
             $chartResolver->addAllowedTypes(ChartConfig::CHART_CLASS, "string");
-            $chartResolver->setDefault(ChartConfig::CLASSES, array("bg-success", "bg-primary", "bg-warning", "bg-danger", "bg-info"));
+            $chartResolver->setDefault(
+                ChartConfig::CLASSES,
+                array("bg-success", "bg-primary", "bg-warning", "bg-danger", "bg-info")
+            );
             $chartResolver->addAllowedTypes(ChartConfig::CLASSES, "string[]");
             $chartResolver->setDefault(ChartConfig::SIZE, null);
             $chartResolver->addAllowedTypes(ChartConfig::SIZE, array("null", "integer"));
@@ -105,7 +108,7 @@ class ProgressBarBlock extends AbstractBlock implements BlockWithDemoInterface
     /**
      * Set Chart Datasets
      *
-     * @param array<float|int|array> $data
+     * @param array<array|float|int> $data
      */
     public function setDataSet(array $data) : static
     {
@@ -231,8 +234,6 @@ class ProgressBarBlock extends AbstractBlock implements BlockWithDemoInterface
         return $this;
     }
 
-
-
     /**
      * @inheritDoc
      */
@@ -290,7 +291,5 @@ class ProgressBarBlock extends AbstractBlock implements BlockWithDemoInterface
         // Block Options
         $this->setClass("progress-bar-striped progress-bar-animated");
         $this->setBarHeight(rand(10, 25));
-
-
     }
 }

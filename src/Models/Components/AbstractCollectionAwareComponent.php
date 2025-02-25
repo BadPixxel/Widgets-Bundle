@@ -1,5 +1,16 @@
 <?php
 
+/*
+ *  Copyright (C) BadPixxel <www.badpixxel.com>
+ *
+ *  This program is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ *
+ *  For the full copyright and license information, please view the LICENSE
+ *  file that was distributed with this source code.
+ */
+
 namespace BadPixxel\Widgets\Models\Components;
 
 use BadPixxel\Widgets\Entity\WidgetCollection;
@@ -48,7 +59,7 @@ abstract class AbstractCollectionAwareComponent extends AbstractRenderingConfigu
         $collection = $data['collection'] ?? null;
         //==============================================================================
         // Load Widget Collection from Object
-        if ($collection instanceof WidgetCollection ) {
+        if ($collection instanceof WidgetCollection) {
             $data['type'] = $collection->getType();
         }
         Assert::stringNotEmpty($data['type']);

@@ -13,13 +13,12 @@
 
 namespace BadPixxel\Widgets\Entity;
 
-
 use BadPixxel\Widgets\Models\AbstractWidgetCollection;
-use BadPixxel\Widgets\Models\Widgets\OptionsAwareTrait;
-use BadPixxel\Widgets\Models\Widgets\ParametersAwareTrait;
 use BadPixxel\Widgets\Models\WidgetCollectionItems\ConfiguratorTrait;
 use BadPixxel\Widgets\Models\WidgetCollectionItems\ParentTrait;
 use BadPixxel\Widgets\Models\WidgetCollectionItems\PositionTrait;
+use BadPixxel\Widgets\Models\Widgets\OptionsAwareTrait;
+use BadPixxel\Widgets\Models\Widgets\ParametersAwareTrait;
 use Doctrine\ORM\Mapping as ORM;
 
 /**

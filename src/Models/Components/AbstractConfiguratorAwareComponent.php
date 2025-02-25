@@ -1,5 +1,16 @@
 <?php
 
+/*
+ *  Copyright (C) BadPixxel <www.badpixxel.com>
+ *
+ *  This program is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ *
+ *  For the full copyright and license information, please view the LICENSE
+ *  file that was distributed with this source code.
+ */
+
 namespace BadPixxel\Widgets\Models\Components;
 
 use BadPixxel\Widgets\Dictionary\Widgets\WidgetEvents;
@@ -38,15 +49,10 @@ abstract class AbstractConfiguratorAwareComponent extends AbstractRenderingConfi
     /**
      * Widget Parameters
      *
-     * @var array<string, scalar|null>
+     * @var array<string, null|scalar>
      */
     #[LiveProp(writable: true)]
     public array $parameters;
-
-    /**
-     * Widget Loading is Deferred
-     */
-    private bool $deferred = false;
 
     /**
      * Enable Edition of this Widget
@@ -58,6 +64,11 @@ abstract class AbstractConfiguratorAwareComponent extends AbstractRenderingConfi
      * Widget Configurator
      */
     public ?WidgetConfigurator $configurator = null;
+
+    /**
+     * Widget Loading is Deferred
+     */
+    private bool $deferred = false;
 
     /**
      * Component Constructor
@@ -108,14 +119,13 @@ abstract class AbstractConfiguratorAwareComponent extends AbstractRenderingConfi
         );
         //==============================================================================
         // Widget need to be compiled => Defer rendering
-        if (!$hasCache && !in_array($data["loading"] ?? null, array("lazy", "defer"))) {
+        if (!$hasCache && !in_array($data["loading"] ?? null, array("lazy", "defer"), true)) {
             $data["loading"] = "defer";
             $data["deferred"] = true;
         }
 
         return $data;
     }
-
 
     /**
      * Ensure Configurator Detection before mount
@@ -135,11 +145,11 @@ abstract class AbstractConfiguratorAwareComponent extends AbstractRenderingConfi
     /**
      * Mount Component from Widget Configurator
      *
-     * @param string $key   Unique Component ID Key
-     * @param string $configuratorHash  Widget Configurator Hash
-     * @param WidgetConfigurator|null $configurator Widget Configurator
-     * @param array $options Widget Options
-     * @param array<string, scalar|null> $parameters Widget Parameters
+     * @param string                     $key              Unique Component ID Key
+     * @param string                     $configuratorHash Widget Configurator Hash
+     * @param null|WidgetConfigurator    $configurator     Widget Configurator
+     * @param array                      $options          Widget Options
+     * @param array<string, null|scalar> $parameters       Widget Parameters
      */
     public function mount(
         string $key,
@@ -167,25 +177,6 @@ abstract class AbstractConfiguratorAwareComponent extends AbstractRenderingConfi
     }
 
     /**
-     * Check if Widget Loading is deferred
-     */
-    protected function isDeferred(): bool
-    {
-        return $this->deferred && $this->configuration->deferred;
-    }
-
-
-    /**
-     * Get Current Widget Configurator
-     */
-    protected function getConfigurator(): ?WidgetConfigurator
-    {
-        Assert::notEmpty($this->configuratorHash);
-
-        return $this->configurator ??= $this->widgetsResolver->resolve($this->configuratorHash);
-    }
-
-    /**
      * Get Current Widget
      */
     public function getWidget(): WidgetInterface
@@ -197,5 +188,23 @@ abstract class AbstractConfiguratorAwareComponent extends AbstractRenderingConfi
             ->mergeOptions($this->options)
             ->setParameters($this->parameters)
         ;
+    }
+
+    /**
+     * Check if Widget Loading is deferred
+     */
+    protected function isDeferred(): bool
+    {
+        return $this->deferred && $this->configuration->deferred;
+    }
+
+    /**
+     * Get Current Widget Configurator
+     */
+    protected function getConfigurator(): ?WidgetConfigurator
+    {
+        Assert::notEmpty($this->configuratorHash);
+
+        return $this->configurator ??= $this->widgetsResolver->resolve($this->configuratorHash);
     }
 }

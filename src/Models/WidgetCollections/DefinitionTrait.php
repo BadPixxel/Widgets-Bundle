@@ -24,19 +24,19 @@ trait DefinitionTrait
     /**
      * Name Given to the Collection
      */
-    #[ORM\Column(name: "name", type: Types::STRING, length:255, nullable: True)]
+    #[ORM\Column(name: "name", type: Types::STRING, length:255, nullable: true)]
     protected ?string $name = null;
 
     /**
      * Widget Collection Icon
      */
-    #[ORM\Column(name: "icon", type: Types::STRING, length:255, nullable: True)]
+    #[ORM\Column(name: "icon", type: Types::STRING, length:255, nullable: true)]
     protected ?string $icon = null;
 
     /**
      * Collection Name Translation Domain
      */
-    #[ORM\Column(name: "trans_domain", type: Types::STRING, length:255, nullable: True)]
+    #[ORM\Column(name: "trans_domain", type: Types::STRING, length:255, nullable: true)]
     protected ?string $translationDomain = null;
 
     /**

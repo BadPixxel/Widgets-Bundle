@@ -66,26 +66,12 @@ trait DatePresetAwareTrait
         if (!is_string($preset) || !DatePresetsParser::isPreset($preset)) {
             $preset = DatePresets::THIS_MONTH;
         }
+
         //==============================================================================
         //  Build Parameters with Dates Presets
         return array_replace_recursive(
             $parameters,
             $this->getDatesPresets($preset)
-        );
-    }
-
-    /**
-     * Get Dates Array From Preset
-     */
-    private function getDatesPresets(string $preset) : array
-    {
-        //==============================================================================
-        //  Return Dates Array
-        return array(
-            DatesOptions::START => DatePresetsParser::getStart($preset),
-            DatesOptions::END => DatePresetsParser::getEnd($preset),
-            DatesOptions::FORMAT => DatePresetsParser::getFormat($preset),
-            DatesOptions::GROUP_BY => DatePresetsParser::getGroupBy($preset),
         );
     }
 
@@ -119,5 +105,20 @@ trait DatePresetAwareTrait
     public function getDateGroupBy(): string
     {
         return DatePresetsParser::getGroupBy($this->getDatesPreset());
+    }
+
+    /**
+     * Get Dates Array From Preset
+     */
+    private function getDatesPresets(string $preset) : array
+    {
+        //==============================================================================
+        //  Return Dates Array
+        return array(
+            DatesOptions::START => DatePresetsParser::getStart($preset),
+            DatesOptions::END => DatePresetsParser::getEnd($preset),
+            DatesOptions::FORMAT => DatePresetsParser::getFormat($preset),
+            DatesOptions::GROUP_BY => DatePresetsParser::getGroupBy($preset),
+        );
     }
 }

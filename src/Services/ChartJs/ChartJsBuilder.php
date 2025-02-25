@@ -1,5 +1,16 @@
 <?php
 
+/*
+ *  Copyright (C) BadPixxel <www.badpixxel.com>
+ *
+ *  This program is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ *
+ *  For the full copyright and license information, please view the LICENSE
+ *  file that was distributed with this source code.
+ */
+
 namespace BadPixxel\Widgets\Services\ChartJs;
 
 use Symfony\UX\Chartjs\Builder\ChartBuilderInterface;
@@ -22,7 +33,7 @@ class ChartJsBuilder
     /**
      * Build a new Chart Js Definition Object
      */
-    public  function build(string $type, array $blockData, array $blockOptions): Chart
+    public function build(string $type, array $blockData, array $blockOptions): Chart
     {
         //==============================================================================
         // Create a New Chart Object
@@ -32,8 +43,10 @@ class ChartJsBuilder
         $datasets = $this->dataBuilder->getDatasets($blockData, $blockOptions);
         //==============================================================================
         // Apply Colors
-        match($type) {
-            Chart::TYPE_DOUGHNUT, Chart::TYPE_PIE, Chart::TYPE_POLAR_AREA => $this->colorBuilder->applyToDataPoints($datasets, $blockOptions),
+        match ($type) {
+            Chart::TYPE_DOUGHNUT,
+            Chart::TYPE_PIE,
+            Chart::TYPE_POLAR_AREA => $this->colorBuilder->applyToDataPoints($datasets, $blockOptions),
             default => $this->colorBuilder->applyToDatasets($datasets, $blockOptions),
         };
         //==============================================================================

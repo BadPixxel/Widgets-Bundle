@@ -1,5 +1,16 @@
 <?php
 
+/*
+ *  Copyright (C) BadPixxel <www.badpixxel.com>
+ *
+ *  This program is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ *
+ *  For the full copyright and license information, please view the LICENSE
+ *  file that was distributed with this source code.
+ */
+
 namespace BadPixxel\Widgets\Demo\Widgets;
 
 use BadPixxel\Widgets\Attribute\AsStaticWidget;
@@ -44,7 +55,7 @@ class TemperaturesHistory extends AbstractWidget implements ConfigurableWidgetIn
         Assert::nullOrStringNotEmpty($city = $parameters[self::CITY] ?? null);
 
         return new SimpleDescriptor(
-            title: "Temperature Historic".(($city) ? " for $city" : ""),
+            title: "Temperature Historic".(($city) ? " for {$city}" : ""),
             description: "Render a Historic Chart of Temperatures for a Place.",
             icon: "fa fa-fw fa-thermometer-quarter",
             origin: "Whether Widgets Collection"
@@ -73,8 +84,8 @@ class TemperaturesHistory extends AbstractWidget implements ConfigurableWidgetIn
         $lineChartBlock
             ->setDataSet($dataset ?? array())
             ->setPointLabelKey("date")
-            ->setPointValuesKeys(($interval == "h") ? array("avg") : array("min", "max", "avg"))
-            ->setLabels(($interval == "h") ? array("Temperature 2M") : array("Min", "Max", "Avg"))
+            ->setPointValuesKeys(("h" == $interval) ? array("avg") : array("min", "max", "avg"))
+            ->setLabels(("h" == $interval) ? array("Temperature 2M") : array("Min", "Max", "Avg"))
             ->setMin(-10)
             ->setMax(40)
         ;

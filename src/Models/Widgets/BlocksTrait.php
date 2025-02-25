@@ -13,9 +13,8 @@
 
 namespace BadPixxel\Widgets\Models\Widgets;
 
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use BadPixxel\Widgets\Models\AbstractBlock;
+use Doctrine\Common\Collections\Collection;
 
 /**
  * Widget Blocks Collection Trait

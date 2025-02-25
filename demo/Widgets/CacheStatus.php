@@ -64,13 +64,14 @@ class CacheStatus extends AbstractWidget
         $textBlock = new TextBlock();
         $textBlock
             ->setText($this->getCacheTtl()
-                ? sprintf("<h5><i class='fa fa-fw fa-check-double text-success'></i> Cache Enabled</h5> For %s seconds", $this->getCacheTtl())
-                : "<h5><i class='fa fa-fw fa-times text-danger'></i> Cache Disabled</h5>"
-            )
+                ? sprintf(
+                    "<h5><i class='fa fa-fw fa-check-double text-success'></i> Cache Enabled</h5> For %s seconds",
+                    $this->getCacheTtl()
+                )
+                : "<h5><i class='fa fa-fw fa-times text-danger'></i> Cache Disabled</h5>")
             ->setWidth(BlockWidth::M)
             ->setSafe(true)
         ;
         $this->addBlock($textBlock);
     }
-
 }

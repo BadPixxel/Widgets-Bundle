@@ -1,12 +1,22 @@
 <?php
 
+/*
+ *  Copyright (C) BadPixxel <www.badpixxel.com>
+ *
+ *  This program is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ *
+ *  For the full copyright and license information, please view the LICENSE
+ *  file that was distributed with this source code.
+ */
+
 namespace BadPixxel\Widgets\Phpunit\Tests\A;
 
 use BadPixxel\Widgets\Interfaces\WidgetInterface;
 use BadPixxel\Widgets\Phpunit\Traits\WidgetsAwareTestTrait;
 use BadPixxel\Widgets\Services\Widgets\Technical\NotAllowedWidget;
 use BadPixxel\Widgets\Services\Widgets\Technical\NotFoundWidget;
-use BadPixxel\Widgets\Services\Widgets\WidgetsResolver;
 use PHPUnit\Framework\Assert;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
@@ -24,7 +34,6 @@ class A201WidgetResolverTest extends KernelTestCase
     {
         static::getWidgetResolver();
     }
-
 
     /**
      * Test Widget Configurator Loading

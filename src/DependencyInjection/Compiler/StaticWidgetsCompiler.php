@@ -1,12 +1,22 @@
 <?php
 
+/*
+ *  Copyright (C) BadPixxel <www.badpixxel.com>
+ *
+ *  This program is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ *
+ *  For the full copyright and license information, please view the LICENSE
+ *  file that was distributed with this source code.
+ */
+
 namespace BadPixxel\Widgets\DependencyInjection\Compiler;
 
 use BadPixxel\Widgets\Attribute\AsStaticWidget;
 use BadPixxel\Widgets\Helpers\TagsEncoder;
 use BadPixxel\Widgets\Interfaces\WidgetInterface;
 use BadPixxel\Widgets\Services\Widgets\Loaders\StaticWidgetsLoader;
-use BadPixxel\Widgets\Services\Widgets\WidgetsResolver;
 use JsonException;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;

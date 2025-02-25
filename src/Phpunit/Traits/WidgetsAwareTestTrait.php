@@ -13,9 +13,6 @@
 
 namespace BadPixxel\Widgets\Phpunit\Traits;
 
-use BadPixxel\Widgets\Interfaces\BlockInterface;
-use BadPixxel\Widgets\Interfaces\WidgetInterface;
-use BadPixxel\Widgets\Services\Blocks\BlockResolver;
 use BadPixxel\Widgets\Services\Widgets\WidgetsResolver;
 use BadPixxel\Widgets\Widgets\WidgetConfigurator;
 use PHPUnit\Framework\Assert;
@@ -68,22 +65,6 @@ trait WidgetsAwareTestTrait
         );
 
         return $configurator;
-    }
-
-    /**
-     * Safe Load Widget Resolver Service
-     */
-    protected static function getWidgetResolver() : WidgetsResolver
-    {
-        static $widgetResolver;
-
-        if (!$widgetResolver instanceof WidgetsResolver) {
-            $service = static::getContainer()->get(WidgetsResolver::class);
-            MozartAssert::isInstanceOf($service, WidgetsResolver::class);
-            return $widgetResolver = $service;
-        }
-
-        return $widgetResolver;
     }
 
     /**
@@ -144,5 +125,22 @@ trait WidgetsAwareTestTrait
         }
 
         return $widgetHash;
+    }
+
+    /**
+     * Safe Load Widget Resolver Service
+     */
+    protected static function getWidgetResolver() : WidgetsResolver
+    {
+        static $widgetResolver;
+
+        if (!$widgetResolver instanceof WidgetsResolver) {
+            $service = static::getContainer()->get(WidgetsResolver::class);
+            MozartAssert::isInstanceOf($service, WidgetsResolver::class);
+
+            return $widgetResolver = $service;
+        }
+
+        return $widgetResolver;
     }
 }

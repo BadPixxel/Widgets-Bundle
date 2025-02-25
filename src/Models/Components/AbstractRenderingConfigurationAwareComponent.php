@@ -1,16 +1,21 @@
 <?php
 
+/*
+ *  Copyright (C) BadPixxel <www.badpixxel.com>
+ *
+ *  This program is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ *
+ *  For the full copyright and license information, please view the LICENSE
+ *  file that was distributed with this source code.
+ */
+
 namespace BadPixxel\Widgets\Models\Components;
 
-use BadPixxel\Widgets\Dictionary\Widgets\WidgetEvents;
 use BadPixxel\Widgets\Helpers\RenderingConfiguration;
-use BadPixxel\Widgets\Interfaces\WidgetInterface;
-use BadPixxel\Widgets\Services\Widgets\WidgetsResolver;
-use BadPixxel\Widgets\Widgets\WidgetConfigurator;
-use Symfony\UX\LiveComponent\Attribute\LiveListener;
 use Symfony\UX\LiveComponent\Attribute\LiveProp;
 use Symfony\UX\TwigComponent\Attribute\PreMount;
-use Webmozart\Assert\Assert;
 
 /**
  * This Component Receive Rendering Configuration
@@ -41,7 +46,6 @@ abstract class AbstractRenderingConfigurationAwareComponent
             $this->configuration->fromArray($data["configuration"]);
             unset($data["configuration"]);
         }
-
 
         return $data;
     }

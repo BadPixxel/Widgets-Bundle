@@ -34,10 +34,10 @@ trait WidgetsTrait
     #[ORM\OneToMany(
         mappedBy: 'collection',
         targetEntity: WidgetCollectionItem::class,
-        cascade: ['all'],
+        cascade: array('all'),
         orphanRemoval: true,
     )]
-    #[ORM\OrderBy(['position' => 'ASC'])]
+    #[ORM\OrderBy(array('position' => 'ASC'))]
     protected Collection $widgets;
 
     /**
@@ -56,24 +56,6 @@ trait WidgetsTrait
         ;
 
         return $this->addWidget($widget);
-    }
-
-    //==============================================================================
-    //      Getters & Setters
-    //==============================================================================
-
-    /**
-     * Add Widget using Widget Configurator
-     *
-     * @param WidgetCollectionItem $widget
-     *
-     * @return $this
-     */
-    protected function addWidget(WidgetCollectionItem $widget) : static
-    {
-        $this->widgets->add($widget);
-
-        return $this;
     }
 
     /**
@@ -136,5 +118,23 @@ trait WidgetsTrait
         }
 
         return true;
+    }
+
+    //==============================================================================
+    //      Getters & Setters
+    //==============================================================================
+
+    /**
+     * Add Widget using Widget Configurator
+     *
+     * @param WidgetCollectionItem $widget
+     *
+     * @return $this
+     */
+    protected function addWidget(WidgetCollectionItem $widget) : static
+    {
+        $this->widgets->add($widget);
+
+        return $this;
     }
 }

@@ -1,10 +1,19 @@
 <?php
 
+/*
+ *  Copyright (C) BadPixxel <www.badpixxel.com>
+ *
+ *  This program is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ *
+ *  For the full copyright and license information, please view the LICENSE
+ *  file that was distributed with this source code.
+ */
+
 namespace BadPixxel\Widgets\TwigComponent\Collections;
 
 use BadPixxel\Widgets\Dictionary\Collections\CollectionEvents;
-use BadPixxel\Widgets\Dictionary\Widgets\WidgetEvents;
-use BadPixxel\Widgets\Entity\WidgetCollection;
 use BadPixxel\Widgets\Models\Components\AbstractCollectionAwareComponent;
 use Symfony\UX\LiveComponent\Attribute\AsLiveComponent;
 use Symfony\UX\LiveComponent\Attribute\LiveAction;
@@ -70,7 +79,7 @@ class CollectionToolbar extends AbstractCollectionAwareComponent
     #[LiveAction]
     public function startEditor(): void
     {
-//        $this->editMode = true;
+        //        $this->editMode = true;
         $this->emit(CollectionEvents::START_EDIT, array(
             "type" => $this->getCollection()->getType(),
         ));
@@ -82,10 +91,9 @@ class CollectionToolbar extends AbstractCollectionAwareComponent
     #[LiveAction]
     public function closeEditor(): void
     {
-//        $this->editMode = false;
+        //        $this->editMode = false;
         $this->emit(CollectionEvents::END_EDIT, array(
             "type" => $this->getCollection()->getType(),
         ));
     }
-
 }

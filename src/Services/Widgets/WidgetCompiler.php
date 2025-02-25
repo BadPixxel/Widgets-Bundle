@@ -1,12 +1,23 @@
 <?php
 
+/*
+ *  Copyright (C) BadPixxel <www.badpixxel.com>
+ *
+ *  This program is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ *
+ *  For the full copyright and license information, please view the LICENSE
+ *  file that was distributed with this source code.
+ */
+
 namespace BadPixxel\Widgets\Services\Widgets;
 
 use BadPixxel\Widgets\Interfaces\WidgetInterface;
-use Psr\Cache\InvalidArgumentException;
-use Symfony\Contracts\Cache\ItemInterface;
-use Symfony\Contracts\Cache\CacheInterface;
 use Psr\Cache\CacheItemPoolInterface;
+use Psr\Cache\InvalidArgumentException;
+use Symfony\Contracts\Cache\CacheInterface;
+use Symfony\Contracts\Cache\ItemInterface;
 
 /**
  * Manage Caching of Widgets Contents (Blocks)
@@ -33,6 +44,7 @@ class WidgetCompiler
         //==============================================================================
         // Build Cache Key
         $cacheKey = $this->getCacheKey($widget, $options, $parameters);
+
         //==============================================================================
         // Load Widget Blocks with Caching
         try {
@@ -43,6 +55,7 @@ class WidgetCompiler
                     //==============================================================================
                     // Setup Cache TTL
                     $item->expiresAfter($widget->getCacheTtl());
+
                     //==============================================================================
                     // Compile Widget & return Blocks
                     return array(
@@ -80,6 +93,7 @@ class WidgetCompiler
         if (!$widget->getCacheTtl() || !$this->appCache instanceof CacheItemPoolInterface) {
             return false;
         }
+
         //==============================================================================
         // Check if Widget Blocks are Cached
         try {
@@ -115,7 +129,6 @@ class WidgetCompiler
      */
     public function compileNoCache(WidgetInterface $widget, array $options, array $parameters): WidgetInterface
     {
-
         $widget
             ->resetBlocks()
             ->mergeOptions($options)
@@ -138,5 +151,4 @@ class WidgetCompiler
             serialize($parameters),
         )));
     }
-
 }

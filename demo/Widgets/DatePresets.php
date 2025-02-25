@@ -65,9 +65,8 @@ class DatePresets extends AbstractWidget implements DatePresetAwareInterface
             ->setText(sprintf(
                 "<p class='text-center'>This is demo for Dates Presets. "
                     ."Current Preset is %s.</p>",
-                    $this->getDatesPreset()
-                )
-            )
+                $this->getDatesPreset()
+            ))
             ->setSafe(true)
         ;
         $this->addBlock($title);

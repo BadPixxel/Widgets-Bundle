@@ -1,5 +1,16 @@
 <?php
 
+/*
+ *  Copyright (C) BadPixxel <www.badpixxel.com>
+ *
+ *  This program is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ *
+ *  For the full copyright and license information, please view the LICENSE
+ *  file that was distributed with this source code.
+ */
+
 namespace BadPixxel\Widgets\Services;
 
 use BadPixxel\Widgets\Entity\WidgetCollection;
@@ -17,9 +28,9 @@ class CollectionManager
 
     /**
      * Get Widget Collection from Database or Create
-     * 
-     * @param string $type The type of the widget collection
-     * @param bool $selfCreate If true, creates the collection if it doesn't exist
+     *
+     * @param string $type       The type of the widget collection
+     * @param bool   $selfCreate If true, creates the collection if it doesn't exist
      *
      * @phpstan-return ($selfCreate is true ? WidgetCollection : WidgetCollection|null)
      */
@@ -63,17 +74,16 @@ class CollectionManager
         $collection
             ->setType($code)
         ;
-//            //==============================================================================
-//            // Load Demo Widgets from Channel List
-//            $widgets = $manager->getList(ManagerService::DEMO_WIDGETS);
-//            foreach ($widgets as $widget) {
-//                $demoCollection->addWidget($widget);
-//            }
+        //            //==============================================================================
+        //            // Load Demo Widgets from Channel List
+        //            $widgets = $manager->getList(ManagerService::DEMO_WIDGETS);
+        //            foreach ($widgets as $widget) {
+        //                $demoCollection->addWidget($widget);
+        //            }
         //==============================================================================
         // Save Collection
         $this->update($collection);
 
         return $collection;
     }
-
 }

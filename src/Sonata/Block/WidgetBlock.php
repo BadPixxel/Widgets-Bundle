@@ -13,17 +13,10 @@
 
 namespace BadPixxel\Widgets\Sonata\Block;
 
-use BadPixxel\Widgets\Dictionary\Options;
 use BadPixxel\Widgets\OptionResolver\WidgetOptionsResolver;
 use BadPixxel\Widgets\Widgets\WidgetConfigurator;
-use Exception;
-use Sonata\BlockBundle\Block\BlockContextInterface;
 use Sonata\BlockBundle\Block\Service\AbstractBlockService;
-use BadPixxel\Widgets\Models\Traits\ParametersAwareTrait;
-use BadPixxel\Widgets\Services\ManagerService;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Twig\Environment;
 
 /**
  * Sonata Block to render just a Widget
