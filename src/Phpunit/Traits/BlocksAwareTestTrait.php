@@ -65,7 +65,7 @@ trait BlocksAwareTestTrait
             $service = static::getContainer()->get(BlockResolver::class);
             MozartAssert::isInstanceOf($service, BlockResolver::class);
 
-            return $blockResolver = $service;
+            $blockResolver = $service;
         }
 
         return $blockResolver;

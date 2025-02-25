@@ -17,6 +17,7 @@ use BadPixxel\Widgets\Interfaces\WidgetInterface;
 use BadPixxel\Widgets\Phpunit\Traits\WidgetsAwareTestTrait;
 use BadPixxel\Widgets\Services\Widgets\Technical\NotAllowedWidget;
 use BadPixxel\Widgets\Services\Widgets\Technical\NotFoundWidget;
+use BadPixxel\Widgets\Services\Widgets\WidgetsResolver;
 use PHPUnit\Framework\Assert;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
@@ -32,7 +33,10 @@ class A201WidgetResolverTest extends KernelTestCase
      */
     public function testWidgetResolverService() : void
     {
-        static::getWidgetResolver();
+        Assert::assertEquals(
+            WidgetsResolver::class,
+            get_class(static::getWidgetResolver())
+        );
     }
 
     /**

@@ -138,7 +138,7 @@ trait WidgetsAwareTestTrait
             $service = static::getContainer()->get(WidgetsResolver::class);
             MozartAssert::isInstanceOf($service, WidgetsResolver::class);
 
-            return $widgetResolver = $service;
+            $widgetResolver = $service;
         }
 
         return $widgetResolver;

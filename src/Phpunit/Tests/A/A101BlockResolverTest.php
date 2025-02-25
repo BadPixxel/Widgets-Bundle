@@ -15,6 +15,7 @@ namespace BadPixxel\Widgets\Phpunit\Tests\A;
 
 use BadPixxel\Widgets\Interfaces\BlockInterface;
 use BadPixxel\Widgets\Phpunit\Traits\BlocksAwareTestTrait;
+use BadPixxel\Widgets\Services\Blocks\BlockResolver;
 use PHPUnit\Framework\Assert;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
@@ -30,7 +31,10 @@ class A101BlockResolverTest extends KernelTestCase
      */
     public function testBlockResolverService() : void
     {
-        static::getBlockResolver();
+        Assert::assertEquals(
+            BlockResolver::class,
+            get_class(static::getBlockResolver())
+        );
     }
 
     /**
