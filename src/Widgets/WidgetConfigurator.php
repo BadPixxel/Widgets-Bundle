@@ -27,12 +27,13 @@ class WidgetConfigurator
     private string $hash;
 
     /**
-     * @param string          $loader   Name of Source Widget Loader
-     * @param WidgetInterface $service  Target Widget Service
-     * @param array|string    $channels Available only in given Channels
-     * @param array|string    $roles    Require Anny of this Security Roles
-     * @param int             $priority Display Priority
-     * @param array           $options  Static Widget Options
+     * @param string          $loader     Name of Source Widget Loader
+     * @param WidgetInterface $service    Target Widget Service
+     * @param array|string    $channels   Available only in given Channels
+     * @param array|string    $roles      Require Anny of this Security Roles
+     * @param int             $priority   Display Priority
+     * @param array           $options    Static Widget Options
+     * @param array           $parameters Static Widget Parameters
      */
     public function __construct(
         private readonly string $loader,
@@ -41,6 +42,7 @@ class WidgetConfigurator
         private readonly string|array $roles = array(),
         private readonly int $priority = 0,
         private readonly array $options = array(),
+        private readonly array $parameters = array(),
     ) {
         //==============================================================================
         // Build Configuration Hash
@@ -50,6 +52,7 @@ class WidgetConfigurator
             $channels,
             $roles,
             $options,
+            $parameters,
         )));
     }
 
@@ -76,6 +79,7 @@ class WidgetConfigurator
     {
         return $this->service
             ->setOptions($this->options)
+            ->setParameters($this->parameters)
         ;
     }
 
@@ -135,6 +139,14 @@ class WidgetConfigurator
     public function getOptions(): array
     {
         return $this->options;
+    }
+
+    /**
+     * @return array
+     */
+    public function getParameters(): array
+    {
+        return $this->parameters;
     }
 
     /**
