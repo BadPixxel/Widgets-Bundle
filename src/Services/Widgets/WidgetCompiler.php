@@ -133,8 +133,8 @@ class WidgetCompiler
         $widget
             ->resetBlocks()
             ->mergeOptions($options)
-            ->setParameters($parameters)
-            ->setRefreshAt(null)
+            ->mergeParameters($parameters)
+            ->setRefreshAt()
             ->build()
         ;
 

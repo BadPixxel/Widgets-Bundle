@@ -70,6 +70,17 @@ trait ParametersAwareTrait
     }
 
     /**
+     * Update Widget Parameters With Given Values
+     */
+    public function mergeParameters(array $parameters = array()) : static
+    {
+        return $this->setParameters(array_replace_recursive(
+            $this->getParameters(),
+            $parameters
+        ));
+    }
+
+    /**
      * Get Parameters
      */
     public function getParameters() : array

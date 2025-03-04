@@ -28,4 +28,9 @@ interface ParametersAwareWidgetInterface
      * @return array<string, null|scalar>
      */
     public function getParameters() : array;
+
+    /**
+     * Update Parameters Options With Given Values
+     */
+    public function mergeParameters(array $parameters) : static;
 }
