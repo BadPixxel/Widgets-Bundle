@@ -37,17 +37,27 @@ class WidgetsResolver
     /**
      * Get a Widget Configuration by Hash - Or return an Error Widget
      */
-    public function resolve(string $hash, bool $disableRoles = false) : WidgetConfigurator
+    public function resolve(string $hashOrClass, bool $disableRoles = false) : WidgetConfigurator
     {
         //==============================================================================
         // Search for Configurator
-        $configurator = $this->findByHash($hash, $disableRoles);
+        $isClass = class_exists($hashOrClass);
+        //==============================================================================
+        // Search for Configurator
+        $configurator = $isClass
+            ? $this->findByClass($hashOrClass, $disableRoles)
+            : $this->findByHash($hashOrClass, $disableRoles)
+        ;
         if ($configurator instanceof WidgetConfigurator) {
             return $configurator;
         }
         //==============================================================================
         // NO Configurator => Due to Rights ?
-        if ($this->findByHash($hash, true)) {
+        $configuratorWithoutRoles = $isClass
+            ? $this->findByClass($hashOrClass, true)
+            : $this->findByHash($hashOrClass, true)
+        ;
+        if ($configuratorWithoutRoles) {
             $configurator = $this->findByClass(NotAllowedWidget::class, true);
         } else {
             $configurator = $this->findByClass(NotFoundWidget::class, true);

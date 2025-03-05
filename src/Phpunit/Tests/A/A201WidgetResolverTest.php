@@ -77,6 +77,24 @@ class A201WidgetResolverTest extends KernelTestCase
     }
 
     /**
+     * Test Widget Resolution by Class
+     *
+     * @dataProvider widgetHashProvider
+     */
+    public function testClassWidgetResolution(string $widgetHash) : void
+    {
+        $configurator = $this->assertWidgetConfiguratorExists($widgetHash);
+        Assert::assertNotEmpty($widgetClass = $configurator->getClass());
+        Assert::assertTrue(class_exists($widgetClass));
+        //====================================================================//
+        // Resolving Widget by Class Works
+        $widgetConfigurator = static::getWidgetResolver()->resolve($widgetClass, true);
+        Assert::assertNotEmpty($widgetConfigurator);
+        Assert::assertEquals($widgetHash, $widgetConfigurator->getHash());
+        Assert::assertEquals($widgetClass, $widgetConfigurator->getClass());
+    }
+
+    /**
      * Test Widget Resolution
      */
     public function testMissingWidgetResolution() : void

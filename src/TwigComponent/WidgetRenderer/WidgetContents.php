@@ -24,6 +24,17 @@ use Symfony\UX\TwigComponent\Attribute\AsTwigComponent;
 class WidgetContents extends AbstractWidgetAwareComponent
 {
     /**
+     * Check if Rendering Mode Allow Loading Box
+     */
+    public function isAllowedLoading(): bool
+    {
+        return match ($this->getRenderingMode()) {
+            RenderingModes::BS3 => false,
+            default => true,
+        };
+    }
+
+    /**
      * Get Widget Box Css Style
      */
     public function getBoxStyle(): string

@@ -14,6 +14,7 @@
 namespace BadPixxel\Widgets\Services\Blocks;
 
 use BadPixxel\Widgets\Interfaces\BlockInterface;
+use BadPixxel\Widgets\Models\AbstractBlock;
 use Symfony\Component\DependencyInjection\Attribute\TaggedIterator;
 
 /**
@@ -22,7 +23,7 @@ use Symfony\Component\DependencyInjection\Attribute\TaggedIterator;
 class BlockResolver
 {
     /**
-     * @param iterable<string, BlockInterface> $blocks
+     * @param iterable<string, AbstractBlock> $blocks
      */
     public function __construct(
         #[TaggedIterator(tag: BlockInterface::TAG, indexAttribute: "id")]
@@ -33,7 +34,7 @@ class BlockResolver
     /**
      * Get All Available Blocks
      *
-     * @return iterable<string, BlockInterface>
+     * @return iterable<string, AbstractBlock>
      */
     public function all() : iterable
     {
@@ -43,7 +44,7 @@ class BlockResolver
     /**
      * Get Block by Type
      */
-    public function findByType(string $type) : ?BlockInterface
+    public function findByType(string $type) : ?AbstractBlock
     {
         foreach ($this->blocks as $block) {
             if ($block->getType() === $type) {

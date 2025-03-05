@@ -18,6 +18,7 @@ use BadPixxel\Widgets\Blocks\Bootstrap\AlertBlock;
 use BadPixxel\Widgets\Interfaces\Blocks\BlockWithDemoInterface;
 use BadPixxel\Widgets\Models\AbstractBlock;
 use BadPixxel\Widgets\Models\Commons\OptionsSafeAwareTrait;
+use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Webmozart\Assert\Assert;
 
@@ -87,7 +88,14 @@ class NotificationsBlock extends AbstractBlock implements BlockWithDemoInterface
         $resolver = new OptionsResolver();
         foreach (AlertBlock::LEVELS as $level) {
             $resolver->setDefault($level, null);
-            $resolver->addAllowedTypes($level, array("null", "string[]", "array"));
+            $resolver->addAllowedTypes($level, array("null", "string", "string[]", "array"));
+            $resolver->setNormalizer($level, function (Options $options, null|string|array $value): ?array {
+                if (is_string($value)) {
+                    $value = array($value);
+                }
+
+                return $value;
+            });
         }
 
         return $resolver;
