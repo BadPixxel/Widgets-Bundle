@@ -100,12 +100,15 @@
 
     <script type="module">
         import NetworkDiagram from './network-diagram.js';
+        import { ControlsManager } from './controls-manager.js';
+        import { PathUtils } from './path-utils.js';
+        import { DEFAULT_CONFIG } from './config.js';
 
         // Initialisation du diagramme
         const networkDiagram = new NetworkDiagram({
             container: '#network-diagram',
-            width: 1200,
-            height: 800,
+            width: window.innerWidth * 0.8,
+            height: window.innerHeight * 0.8,
             data: {
                 nodes: [
                     { id: "Server 1", label: "Main Server", type: "primary" },
@@ -127,6 +130,11 @@
                     { source: "Server 7", target: "Server 8", value: 2, bidirectional: true }
                 ]
             }
+        });
+
+        // Handle window resize
+        window.addEventListener('resize', () => {
+            networkDiagram.resize(window.innerWidth * 0.8, window.innerHeight * 0.8);
         });
     </script>
 </body>
