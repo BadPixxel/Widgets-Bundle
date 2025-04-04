@@ -3,237 +3,130 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>POC D3.js - Cheminement</title>
+    <title>Server Network Diagram</title>
     <script src="https://d3js.org/d3.v7.min.js"></script>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            background-color: #f0f0f0;
-        }
-
-        svg {
-            border: 1px solid #ccc;
-            background-color: #fff;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-
-        text {
-            font-size: 12px;
-            font-weight: bold;
-            text-anchor: middle;
-            dominant-baseline: middle;
-        }
-
-        .node circle {
-            fill: #f5c6a5; /* Couleur orange blanchâtre grisâtre */
-            stroke: #333;
-            stroke-width: 2;
-        }
-
-        .node image {
-            pointer-events: none;
-        }
-
-        .link {
-            stroke: #aaa;
-            stroke-width: 2;
-        }
-
-        .arrow {
-            fill: red;
-        }
-    </style>
+    <link rel="stylesheet" href="network-diagram.css">
 </head>
 <body>
-    <svg width="800" height="600">
-        <defs>
-            <marker id="arrow" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-                <path d="M 0 0 L 10 5 L 0 10 z" />
-            </marker>
-            <clipPath id="circle-clip">
-                <circle cx="0" cy="0" r="20"></circle> <!-- Rayon réduit à 20 -->
-            </clipPath>
-        </defs>
-    </svg>
-    <script>
-        const data = {
-            nodes: [
-                { id: "Server 1", label: "Main Server", logo: "https://upload.wikimedia.org/wikipedia/commons/4/4a/Logo_2013_Google.png" },
-                { id: "Server 2", label: "Satellite", logo: "https://upload.wikimedia.org/wikipedia/commons/a/a9/Amazon_logo.svg" },
-                { id: "Server 3", label: "Storage", logo: "https://upload.wikimedia.org/wikipedia/commons/5/51/IBM_logo.svg" },
-                { id: "Server 4", label: "Web Server", logo: "https://upload.wikimedia.org/wikipedia/commons/f/fa/Apple_logo_black.svg" },
-                { id: "Server 5", label: "Database", logo: "https://upload.wikimedia.org/wikipedia/commons/4/44/Microsoft_logo.svg" },
-                { id: "Server 6", label: "Backup", logo: "https://upload.wikimedia.org/wikipedia/commons/4/44/Meta_Platforms_Inc._logo.svg" },
-                { id: "Server 7", label: "Proxy", logo: "https://upload.wikimedia.org/wikipedia/commons/6/6a/JavaScript-logo.png" },
-                { id: "Server 8", label: "Cache", logo: "https://upload.wikimedia.org/wikipedia/commons/4/4f/Twitter-logo.svg" },
-                { id: "Server 9", label: "Load Balancer", logo: "https://upload.wikimedia.org/wikipedia/commons/5/51/IBM_logo.svg" },
-                { id: "Server 10", label: "Firewall", logo: "https://upload.wikimedia.org/wikipedia/commons/f/fa/Apple_logo_black.svg" },
-            ],
-            links: [
-                { source: "Server 1", target: "Server 3", value: 5, type: "test", direction: "forward", bidirectional: true },
-                { source: "Server 1", target: "Server 4", value: 3, direction: "forward", bidirectional: false },
-                { source: "Server 2", target: "Server 5", value: 4, direction: "forward", bidirectional: true },
-                { source: "Server 2", target: "Server 6", value: 2, direction: "forward", bidirectional: false },
-                { source: "Server 3", target: "Server 7", value: 6, direction: "forward", bidirectional: true },
-                { source: "Server 4", target: "Server 8", value: 8, direction: "forward", bidirectional: false },
-                { source: "Server 5", target: "Server 9", value: 1, direction: "forward", bidirectional: true },
-                { source: "Server 6", target: "Server 10", value: 7, direction: "forward", bidirectional: false },
-                { source: "Server 7", target: "Server 1", value: 9, direction: "forward", bidirectional: true },
-                { source: "Server 8", target: "Server 2", value: 5, direction: "forward", bidirectional: false },
-                { source: "Server 9", target: "Server 3", value: 3, direction: "forward", bidirectional: true },
-                { source: "Server 10", target: "Server 4", value: 4, direction: "forward", bidirectional: false },
-            ]
-        };
+    <div class="container">
+        <div class="controls">
+            <div class="controls-header">
+                <h3>Contrôles</h3>
+                <button id="toggle-controls" class="toggle-controls-btn">◀</button>
+            </div>
+            <div class="control-group">
+                <h4>Type de liens</h4>
+                <select id="link-type">
+                    <option value="orthogonal" selected>Orthogonales</option>
+                    <option value="curves">Courbes</option>
+                    <option value="lines">Lignes droites</option>
+                </select>
+            </div>
+            <div class="control-group">
+                <h4>Style des lignes</h4>
+                <select id="line-style">
+                    <option value="solid">Ligne continue</option>
+                    <option value="dashed">Pointillés</option>
+                </select>
+                <div class="dash-speed-control" style="display: none;">
+                    <label>Vitesse de défilement:</label>
+                    <input type="range" id="dash-speed" min="0.1" max="3" step="0.1" value="1">
+                    <span id="dash-speed-value">1.0x</span>
+                </div>
+            </div>
+            <div class="control-group">
+                <h4>Style des indicateurs</h4>
+                <select id="arrow-style">
+                    <option value="arrow">Flèches</option>
+                    <option value="dot">Points</option>
+                    <option value="chevrons">Chevrons</option>
+                </select>
+            </div>
+            <div class="control-group">
+                <h4>Couleurs des flèches</h4>
+                <div class="direction-colors">
+                    <div>
+                        <label>Direction positive:</label>
+                        <input type="color" id="positive-direction-color" value="#ff4444">
+                        <div class="color-box" style="background-color: #ff4444;"></div>
+                    </div>
+                    <div>
+                        <label>Direction négative:</label>
+                        <input type="color" id="negative-direction-color" value="#4444ff">
+                        <div class="color-box" style="background-color: #4444ff;"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="control-group">
+                <h4>Ajouter un serveur</h4>
+                <input type="text" id="server-id" placeholder="ID du serveur">
+                <input type="text" id="server-label" placeholder="Label du serveur">
+                <select id="server-type">
+                    <option value="primary">Principal</option>
+                    <option value="database">Base de données</option>
+                    <option value="web">Serveur Web</option>
+                    <option value="cache">Cache</option>
+                    <option value="loadbalancer">Load Balancer</option>
+                    <option value="backup">Backup</option>
+                    <option value="proxy">Proxy</option>
+                    <option value="storage">Stockage</option>
+                </select>
+                <button id="add-server">Ajouter</button>
+            </div>
+            <div class="control-group">
+                <h4>Supprimer un serveur</h4>
+                <select id="server-to-remove">
+                    <option value="">Sélectionner un serveur</option>
+                </select>
+                <button id="remove-server">Supprimer</button>
+            </div>
+            <div class="control-group">
+                <h4>Créer une relation</h4>
+                <div class="node-relationship-controls">
+                    <select id="source-node" class="node-select">
+                        <option value="">Source</option>
+                    </select>
+                    <select id="target-node" class="node-select">
+                        <option value="">Destination</option>
+                    </select>
+                    <button id="create-relation" class="create-relation-btn">Créer la relation</button>
+                </div>
+            </div>
+        </div>
+        <svg id="network-diagram"></svg>
+    </div>
 
-        const width = 800;
-        const height = 600;
-        const radius = 25; // Rayon des cercles réduit à 20
+    <div class="tooltip"></div>
 
-        const svg = d3.select("svg");
+    <script type="module">
+        import NetworkDiagram from './network-diagram.js';
 
-        function createSimulation(nodes, links) {
-            const linkForce = d3.forceLink(links)
-                .id(d => d.id)
-                .distance(150);
-
-            return d3.forceSimulation(nodes)
-                .force("link", linkForce)
-                .force("charge", d3.forceManyBody().strength(-300)) // Adjusted for better performance
-                .force("center", d3.forceCenter(width / 2, height / 2))
-                .force("y", d3.forceY(height / 2).strength(0.05)) // Ajoute une contrainte verticale
-                .on("tick", () => {
-                    links.forEach(link => {
-                        link.source = nodes.find(node => node.id === link.source.id);
-                        link.target = nodes.find(node => node.id === link.target.id);
-                    });
-                });
-        }
-
-        function createLinks(svg, links) {
-            return svg.append("g")
-                .selectAll("line")
-                .data(links)
-                .join("line")
-                .attr("class", "link");
-        }
-
-        function createNodes(svg, nodes, simulation) {
-            const node = svg.append("g")
-                .selectAll("g")
-                .data(nodes)
-                .join("g")
-                .attr("class", "node")
-                .call(drag(simulation));
-
-            node.append("circle")
-                .attr("r", radius);
-
-            node.append("image")
-                .attr("xlink:href", d => d.logo)
-                .attr("x", -radius)
-                .attr("y", -radius)
-                .attr("width", radius * 2)
-                .attr("height", radius * 2)
-                .attr("clip-path", "url(#circle-clip)");
-
-            return node;
-        }
-
-        function createArrows(svg, links) {
-            return svg.append("g")
-                .selectAll("path")
-                .data(links)
-                .join("path")
-                .attr("class", "arrow")
-                .attr("marker-end", "url(#arrow)");
-        }
-
-        function animateArrow(arrow, d) {
-            const source = d.direction === "forward" ? d.source : d.target;
-            const target = d.direction === "forward" ? d.target : d.source;
-
-            const angle = Math.atan2(target.y - source.y, target.x - source.x);
-            const sourceX = source.x + radius * Math.cos(angle);
-            const sourceY = source.y + radius * Math.sin(angle);
-            const targetX = target.x - radius * Math.cos(angle);
-            const targetY = target.y - radius * Math.sin(angle);
-
-            arrow
-                .attr("d", `M${sourceX},${sourceY} L${sourceX},${sourceY}`)
-                .transition()
-                .duration(5000 / d.value) // Ajustez la durée pour ralentir l'animation
-                .ease(d3.easeLinear)
-                .attrTween("d", function() {
-                    return function(t) {
-                        const x = sourceX + (targetX - sourceX) * t;
-                        const y = sourceY + (targetY - sourceY) * t;
-                        return `M${sourceX},${sourceY} L${x},${y}`;
-                    };
-                })
-                .on("end", function() {
-                    if (d.bidirectional) {
-                        d.direction = d.direction === "forward" ? "backward" : "forward";
-                    }
-                    animateArrow(d3.select(this), d);
-                });
-        }
-
-        function updatePositions(link, node, movingArrows) {
-            link
-                .attr("x1", d => d.source.x)
-                .attr("y1", d => d.source.y)
-                .attr("x2", d => d.target.x)
-                .attr("y2", d => d.target.y);
-
-            node
-                .attr("transform", d => `translate(${d.x},${d.y})`);
-
-            movingArrows
-                .attr("d", d => {
-                    const angle = Math.atan2(d.target.y - d.source.y, d.target.x - d.source.x);
-                    const sourceX = d.source.x + radius * Math.cos(angle);
-                    const sourceY = d.source.y + radius * Math.sin(angle);
-                    const targetX = d.target.x - radius * Math.cos(angle);
-                    const targetY = d.target.y - radius * Math.sin(angle);
-                    return `M${sourceX},${sourceY} L${targetX},${targetY}`;
-                });
-        }
-
-        function drag(simulation) {
-            return d3.drag()
-                .on("start", (event, d) => {
-                    if (!event.active) simulation.alphaTarget(0.3).restart();
-                    d.fx = d.x;
-                    d.fy = d.y;
-                })
-                .on("drag", (event, d) => {
-                    d.fx = event.x;
-                    d.fy = event.y;
-                })
-                .on("end", (event, d) => {
-                    if (!event.active) simulation.alphaTarget(0);
-                    d.fx = null;
-                    d.fy = null;
-                });
-        }
-
-        const simulation = createSimulation(data.nodes, data.links);
-        const link = createLinks(svg, data.links);
-        const node = createNodes(svg, data.nodes, simulation);
-        const movingArrows = createArrows(svg, data.links);
-
-        movingArrows.each(function(d) {
-            animateArrow(d3.select(this), d);
-        });
-
-        simulation.on("tick", () => {
-            updatePositions(link, node, movingArrows);
+        // Initialisation du diagramme
+        const networkDiagram = new NetworkDiagram({
+            container: '#network-diagram',
+            width: 1200,
+            height: 800,
+            data: {
+                nodes: [
+                    { id: "Server 1", label: "Main Server", type: "primary" },
+                    { id: "Server 2", label: "Database", type: "database" },
+                    { id: "Server 3", label: "Web Server", type: "web" },
+                    { id: "Server 4", label: "Cache Server", type: "cache" },
+                    { id: "Server 5", label: "Load Balancer", type: "loadbalancer" },
+                    { id: "Server 6", label: "Backup Server", type: "backup" },
+                    { id: "Server 7", label: "Proxy Server", type: "proxy" },
+                    { id: "Server 8", label: "File Storage", type: "storage" }
+                ],
+                links: [
+                    { source: "Server 1", target: "Server 2", value: 5, bidirectional: true },
+                    { source: "Server 1", target: "Server 3", value: 3, bidirectional: true },
+                    { source: "Server 3", target: "Server 4", value: 4, bidirectional: false },
+                    { source: "Server 3", target: "Server 5", value: 2, bidirectional: true },
+                    { source: "Server 2", target: "Server 6", value: 1, bidirectional: false },
+                    { source: "Server 5", target: "Server 7", value: 3, bidirectional: true },
+                    { source: "Server 7", target: "Server 8", value: 2, bidirectional: true }
+                ]
+            }
         });
     </script>
 </body>

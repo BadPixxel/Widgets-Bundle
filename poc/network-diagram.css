@@ -1,0 +1,294 @@
+:root {
+    --primary-color: #007bff;
+    --primary-hover: #0056b3;
+    --background-color: #f5f5f5;
+    --container-bg: white;
+    --border-color: #ddd;
+    --text-color: #333;
+    --control-bg: #f8f9fa;
+    --shadow-color: rgba(0,0,0,0.1);
+    --tooltip-bg: rgba(0, 0, 0, 0.8);
+    --border-radius: 4px;
+    --spacing: 20px;
+    --small-spacing: 10px;
+    --font-size: 13px;
+    --small-font: 12px;
+}
+
+body {
+    margin: 0;
+    padding: var(--spacing);
+    background-color: var(--background-color);
+    font-family: Arial, sans-serif;
+}
+
+.container {
+    display: flex;
+    background-color: var(--container-bg);
+    border-radius: calc(var(--border-radius) * 2);
+    box-shadow: 0 2px 4px var(--shadow-color);
+    padding: var(--spacing);
+    margin: 0 auto;
+    max-width: 1400px;
+    gap: var(--spacing);
+}
+
+.controls {
+    min-width: 250px;
+    max-height: calc(100vh - 40px);
+    overflow-y: auto;
+    padding: calc(var(--spacing) * 0.75);
+    background-color: var(--control-bg);
+    border-radius: calc(var(--border-radius) * 1.5);
+    border: 1px solid var(--border-color);
+    transition: transform 0.3s ease-in-out;
+}
+
+.controls.collapsed {
+    transform: translateX(-100%);
+}
+
+.controls-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--spacing);
+}
+
+.toggle-controls-btn {
+    width: auto;
+    padding: 4px 8px;
+    background: none;
+    border: 1px solid var(--border-color);
+    color: var(--text-color);
+    font-size: 16px;
+    cursor: pointer;
+    transition: transform 0.3s ease-in-out;
+}
+
+.toggle-controls-btn:hover {
+    background-color: var(--control-bg);
+    transform: scale(1.1);
+}
+
+.controls.collapsed .toggle-controls-btn {
+    transform: rotate(180deg);
+}
+
+/* Style de la barre de défilement */
+.controls::-webkit-scrollbar {
+    width: 8px;
+}
+
+.controls::-webkit-scrollbar-track {
+    background: var(--control-bg);
+    border-radius: 4px;
+}
+
+.controls::-webkit-scrollbar-thumb {
+    background: var(--border-color);
+    border-radius: 4px;
+}
+
+.controls::-webkit-scrollbar-thumb:hover {
+    background: var(--primary-color);
+}
+
+.control-group {
+    margin-bottom: var(--spacing);
+    padding: var(--small-spacing);
+    background-color: var(--container-bg);
+    border-radius: var(--border-radius);
+    box-shadow: 0 1px 3px var(--shadow-color);
+}
+
+.control-group h4 {
+    margin: 0 0 var(--small-spacing) 0;
+    color: #495057;
+    font-size: 14px;
+}
+
+.control-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: var(--font-size);
+    color: #666;
+}
+
+.direction-colors {
+    display: flex;
+    flex-direction: column;
+    gap: var(--small-spacing);
+}
+
+.direction-colors > div {
+    display: flex;
+    align-items: center;
+    gap: var(--small-spacing);
+}
+
+input[type="color"] {
+    width: 40px;
+    height: 20px;
+    padding: 0;
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    cursor: pointer;
+}
+
+.color-box {
+    width: 20px;
+    height: 20px;
+    border-radius: var(--border-radius);
+    border: 1px solid var(--border-color);
+}
+
+input[type="text"], 
+select {
+    width: 100%;
+    padding: 6px;
+    margin-bottom: 8px;
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    font-size: var(--font-size);
+}
+
+button {
+    width: 100%;
+    padding: 8px;
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    font-size: var(--font-size);
+    transition: background-color 0.2s;
+}
+
+button:hover {
+    background-color: var(--primary-hover);
+}
+
+svg {
+    flex-grow: 1;
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    background-color: var(--container-bg);
+}
+
+.node {
+    cursor: pointer;
+}
+
+.node-label {
+    font-size: var(--small-font);
+    font-weight: bold;
+    text-anchor: middle;
+    fill: var(--text-color);
+}
+
+.link {
+    fill: none;
+    stroke: #999;
+    stroke-opacity: 0.6;
+}
+
+.flow-arrow {
+    fill: #ff4444;
+}
+
+.flow-arrow.reverse {
+    fill: #4444ff;
+}
+
+.tooltip {
+    position: absolute;
+    padding: 8px;
+    background: var(--tooltip-bg);
+    color: white;
+    border-radius: var(--border-radius);
+    font-size: var(--small-font);
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.2s;
+    z-index: 1000;
+}
+
+.node-relationship-controls {
+    display: flex;
+    flex-direction: column;
+    gap: var(--small-spacing);
+    margin-top: 15px;
+}
+
+.node-select {
+    width: 100%;
+    padding: 6px;
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    font-size: var(--font-size);
+    background-color: var(--container-bg);
+}
+
+.create-relation-btn {
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: var(--border-radius);
+    padding: 8px;
+    cursor: pointer;
+    font-size: var(--font-size);
+    transition: background-color 0.2s;
+}
+
+.create-relation-btn:hover {
+    background-color: var(--primary-hover);
+}
+
+.create-relation-btn:disabled {
+    background-color: #6c757d;
+    cursor: not-allowed;
+}
+
+.dash-speed-control {
+    display: flex;
+    align-items: center;
+    gap: var(--small-spacing);
+    margin-top: 8px;
+}
+
+.dash-speed-control label {
+    margin: 0;
+    min-width: 120px;
+}
+
+.dash-speed-control input[type="range"] {
+    flex-grow: 1;
+    height: 4px;
+    -webkit-appearance: none;
+    appearance: none;
+    background: var(--border-color);
+    border-radius: 2px;
+    outline: none;
+}
+
+.dash-speed-control input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 16px;
+    height: 16px;
+    background: var(--primary-color);
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.dash-speed-control input[type="range"]::-webkit-slider-thumb:hover {
+    background: var(--primary-hover);
+}
+
+#dash-speed-value {
+    min-width: 40px;
+    text-align: right;
+    font-size: var(--small-font);
+    color: var(--text-color);
+} 
