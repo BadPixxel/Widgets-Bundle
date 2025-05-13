@@ -39,8 +39,9 @@ export class NetworkDiagram {
         this.simulationManager = new SimulationManager(this.config);
         this.simulation = this.simulationManager.setupSimulation();
         
-        this.nodeManager = new NodeManager(this.config, this.svg, this.simulation);
         this.linkManager = new LinkManager(this.config, this.svg, this.simulation);
+        this.config.linkManager = this.linkManager;  // Ajouter le linkManager à la configuration
+        this.nodeManager = new NodeManager(this.config, this.svg, this.simulation);
         this.tooltipManager = new TooltipManager();
         this.animationManager = new AnimationManager(this.config, this.linkManager);
     }
@@ -118,6 +119,10 @@ export class NetworkDiagram {
         nodes.call(this.simulationManager.getDragBehavior());
         this.tooltipManager.setupTooltips(nodes);
         this.simulationManager.updateSimulation();
+        
+        // Mettre à jour les listes déroulantes
+        this.controls.updateNodeSelects();
+        this.controls.updateRelationSelects();
     }
 
     createLink(sourceId, targetId) {

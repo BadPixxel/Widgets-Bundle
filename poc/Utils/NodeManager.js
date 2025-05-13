@@ -124,6 +124,12 @@ export class NodeManager {
     // Mettre à jour la simulation
     this.simulation.nodes(this.config.data.nodes);
     
+    // Nettoyer les éléments visuels existants
+    if (this.nodes) {
+      this.nodes.remove();
+      this.nodes = null;
+    }
+    
     // Recréer les nœuds visuels
     return this.createNodes();
   }
@@ -163,6 +169,13 @@ export class NodeManager {
     }
     
     // Recréer les nœuds visuels
-    return this.createNodes();
+    const newNodes = this.createNodes();
+
+    // Forcer la mise à jour des liens
+    if (this.config.linkManager) {
+      this.config.linkManager.createLinks();
+    }
+    
+    return newNodes;
   }
 }

@@ -91,6 +91,7 @@ export class ControlsManager {
                 this.diagram.addNode({ id, label, type });
                 this.clearServerInputs();
                 this.updateServerList();
+                this.updateNodeSelects();
             }
         });
 
@@ -186,32 +187,24 @@ export class ControlsManager {
         const unidirectionalDirectionSelect = document.getElementById('unidirectional-direction');
         const currentValue = relationSelect.value;
         
+        // Réinitialiser les sélecteurs de direction
+        directionSelect.value = 'bidirectional';
+        unidirectionalDirectionSelect.style.display = 'none';
+        
         relationSelect.innerHTML = '<option value="">Sélectionner une relation</option>';
         this.diagram.config.data.links.forEach(link => {
             const option = document.createElement('option');
             const relationId = `${link.source.id}-${link.target.id}`;
             option.value = relationId;
-            const directionSymbol = link.bidirectional ? '↔' : (link.direction === 'forward' ? '→' : '←');
+            const directionSymbol = link.bidirectional ? '↔' : (link.direction === 1 ? '→' : '←');
             option.textContent = `${link.source.label} ${directionSymbol} ${link.target.label}`;
             relationSelect.appendChild(option);
         });
 
+        // Ne restaurer la valeur précédente que si la relation existe toujours
         if (currentValue && this.diagram.config.data.links.some(l => 
             `${l.source.id}-${l.target.id}` === currentValue)) {
             relationSelect.value = currentValue;
-            const link = this.diagram.config.data.links.find(l => 
-                `${l.source.id}-${l.target.id}` === currentValue
-            );
-            if (link) {
-                directionSelect.value = link.bidirectional ? 'bidirectional' : 'unidirectional';
-                unidirectionalDirectionSelect.style.display = 
-                    directionSelect.value === 'unidirectional' ? 'block' : 'none';
-                if (!link.bidirectional) {
-                    // On détermine la direction en fonction de l'ordre des nœuds
-                    const isForward = `${link.source.id}-${link.target.id}` === currentValue;
-                    unidirectionalDirectionSelect.value = isForward ? 'forward' : 'reverse';
-                }
-            }
         }
     }
 
