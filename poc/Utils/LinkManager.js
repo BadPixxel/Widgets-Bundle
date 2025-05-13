@@ -122,9 +122,16 @@ export class LinkManager {
                 ? this.config.data.nodes.find(n => n.id === link.target)
                 : link.target;
 
-            return link.bidirectional 
-                ? [{ ...link, source, target, direction: 1 }, { ...link, source, target, direction: -1 }]
-                : [{ ...link, source, target, direction: 1 }];
+            if (link.bidirectional) {
+                return [
+                    { ...link, source, target, direction: 1 },
+                    { ...link, source, target, direction: -1 }
+                ];
+            } else {
+                // Pour les liens unidirectionnels, utiliser la direction spécifiée
+                const direction = link.direction || 1;
+                return [{ ...link, source, target, direction }];
+            }
         });
 
         // Mettre à jour la simulation
@@ -183,11 +190,18 @@ export class LinkManager {
     createFlowArrows() {
         this.flowArrows = this.svg.append("g")
             .selectAll("g")
-            .data(this.config.data.links.flatMap(link => 
-                link.bidirectional 
-                    ? [{ ...link, direction: 1 }, { ...link, direction: -1 }]
-                    : [{ ...link, direction: 1 }]
-            ))
+            .data(this.config.data.links.flatMap(link => {
+                if (link.bidirectional) {
+                    return [
+                        { ...link, direction: 1 },
+                        { ...link, direction: -1 }
+                    ];
+                } else {
+                    // Pour les liens unidirectionnels, utiliser la direction spécifiée
+                    const direction = link.direction || 1;
+                    return [{ ...link, direction }];
+                }
+            }))
             .join("g")
             .attr("class", d => `flow-arrow ${d.direction === -1 ? 'reverse' : ''}`);
 

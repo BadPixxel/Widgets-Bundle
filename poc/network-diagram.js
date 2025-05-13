@@ -112,6 +112,9 @@ export class NetworkDiagram {
         nodes.call(this.simulationManager.getDragBehavior());
         this.tooltipManager.setupTooltips(nodes);
         this.simulationManager.updateSimulation();
+        // Mettre à jour les listes déroulantes
+        this.controls.updateNodeSelects();
+        this.controls.updateRelationSelects();
     }
 
     removeNode(nodeId) {
@@ -128,12 +131,18 @@ export class NetworkDiagram {
     createLink(sourceId, targetId) {
         this.linkManager.createLink(sourceId, targetId);
         this.simulationManager.updateSimulation();
+        // Mettre à jour les listes déroulantes
+        this.controls.updateNodeSelects();
+        this.controls.updateRelationSelects();
     }
 
     updateData(newData) {
         this.config.data = newData;
         this.createVisualElements();
         this.simulationManager.updateSimulation();
+        // Mettre à jour les listes déroulantes
+        this.controls.updateNodeSelects();
+        this.controls.updateRelationSelects();
     }
 
     resize(width, height) {
@@ -151,12 +160,34 @@ export class NetworkDiagram {
     }
 
     updateTransferDirection(relationId, isBidirectional, unidirectionalDirection = 'forward') {
-        const link = this.config.data.links.find(l => l.id === relationId);
+        // Extraire les IDs source et target de l'ID de relation
+        const [sourceId, targetId] = relationId.split('-');
+        
+        // Trouver le lien correspondant
+        const link = this.config.data.links.find(l => {
+            const linkSourceId = typeof l.source === 'string' ? l.source : l.source.id;
+            const linkTargetId = typeof l.target === 'string' ? l.target : l.target.id;
+            return (linkSourceId === sourceId && linkTargetId === targetId) ||
+                   (linkSourceId === targetId && linkTargetId === sourceId);
+        });
+
         if (link) {
             link.bidirectional = isBidirectional;
             link.direction = unidirectionalDirection === 'forward' ? 1 : -1;
+            
+            // Mettre à jour la simulation
+            this.simulationManager.synchronizeData();
+            this.simulation.force("link").links(this.config.data.links);
+            
+            // Recréer les liens et les flèches
             this.linkManager.createLinks();
             this.linkManager.createFlowArrows();
+            
+            // Redémarrer la simulation
+            this.simulation.alpha(0.3).restart();
+            // Mettre à jour les listes déroulantes
+            this.controls.updateNodeSelects();
+            this.controls.updateRelationSelects();
         }
     }
 
