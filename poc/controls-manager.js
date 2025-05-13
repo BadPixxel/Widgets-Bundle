@@ -2,6 +2,10 @@ export class ControlsManager {
     constructor(networkDiagram) {
         this.diagram = networkDiagram;
         this.setupControls();
+        // Initialiser les sélecteurs avec les données existantes
+        this.updateNodeSelects();
+        this.updateRelationSelects();
+        this.updateServerList();
     }
 
     setupControls() {
@@ -11,6 +15,7 @@ export class ControlsManager {
         this.setupColorControls();
         this.setupServerControls();
         this.setupRelationshipControls();
+        this.setupTransferDirectionControls();
     }
 
     setupLinkTypeControl() {
@@ -110,6 +115,32 @@ export class ControlsManager {
         });
     }
 
+    setupTransferDirectionControls() {
+        const relationSelect = document.getElementById('relation-to-modify');
+        const directionSelect = document.getElementById('transfer-direction');
+        const unidirectionalDirectionSelect = document.getElementById('unidirectional-direction');
+        const updateButton = document.getElementById('update-direction');
+
+        directionSelect.addEventListener('change', () => {
+            unidirectionalDirectionSelect.style.display = 
+                directionSelect.value === 'unidirectional' ? 'block' : 'none';
+        });
+
+        updateButton.addEventListener('click', () => {
+            const relationId = relationSelect.value;
+            const isBidirectional = directionSelect.value === 'bidirectional';
+            const unidirectionalDirection = unidirectionalDirectionSelect.value;
+            
+            if (relationId) {
+                this.diagram.updateTransferDirection(
+                    relationId, 
+                    isBidirectional,
+                    unidirectionalDirection
+                );
+            }
+        });
+    }
+
     updateServerList() {
         const select = document.getElementById('server-to-remove');
         select.innerHTML = '<option value="">Sélectionner un serveur</option>';
@@ -146,6 +177,41 @@ export class ControlsManager {
         }
         if (this.diagram.config.data.nodes.some(n => n.id === currentTarget)) {
             targetSelect.value = currentTarget;
+        }
+    }
+
+    updateRelationSelects() {
+        const relationSelect = document.getElementById('relation-to-modify');
+        const directionSelect = document.getElementById('transfer-direction');
+        const unidirectionalDirectionSelect = document.getElementById('unidirectional-direction');
+        const currentValue = relationSelect.value;
+        
+        relationSelect.innerHTML = '<option value="">Sélectionner une relation</option>';
+        this.diagram.config.data.links.forEach(link => {
+            const option = document.createElement('option');
+            const relationId = `${link.source.id}-${link.target.id}`;
+            option.value = relationId;
+            const directionSymbol = link.bidirectional ? '↔' : (link.direction === 'forward' ? '→' : '←');
+            option.textContent = `${link.source.label} ${directionSymbol} ${link.target.label}`;
+            relationSelect.appendChild(option);
+        });
+
+        if (currentValue && this.diagram.config.data.links.some(l => 
+            `${l.source.id}-${l.target.id}` === currentValue)) {
+            relationSelect.value = currentValue;
+            const link = this.diagram.config.data.links.find(l => 
+                `${l.source.id}-${l.target.id}` === currentValue
+            );
+            if (link) {
+                directionSelect.value = link.bidirectional ? 'bidirectional' : 'unidirectional';
+                unidirectionalDirectionSelect.style.display = 
+                    directionSelect.value === 'unidirectional' ? 'block' : 'none';
+                if (!link.bidirectional) {
+                    // On détermine la direction en fonction de l'ordre des nœuds
+                    const isForward = `${link.source.id}-${link.target.id}` === currentValue;
+                    unidirectionalDirectionSelect.value = isForward ? 'forward' : 'reverse';
+                }
+            }
         }
     }
 

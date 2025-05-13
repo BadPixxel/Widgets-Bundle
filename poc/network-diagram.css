@@ -189,8 +189,14 @@ svg {
 
 .link {
     fill: none;
-    stroke: #999;
-    stroke-opacity: 0.6;
+    stroke: #666;
+    stroke-opacity: 1;
+    stroke-width: 2;
+}
+
+.link.reverse {
+    stroke-opacity: 1;
+    stroke: #666;
 }
 
 .flow-arrow {

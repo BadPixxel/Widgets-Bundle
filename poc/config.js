@@ -1,9 +1,9 @@
 export const DEFAULT_CONFIG = {
-    width: 1200,
+    width: 500,
     height: 800,
     nodeRadius: 30,
     linkDistance: 150,
-    linkType: 'orthogonal',
+    linkType: 'lines',
     colors: {
         primary: "#4CAF50",
         database: "#2196F3",

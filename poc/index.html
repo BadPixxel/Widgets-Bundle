@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,6 +8,7 @@
     <script src="https://d3js.org/d3.v7.min.js"></script>
     <link rel="stylesheet" href="network-diagram.css">
 </head>
+
 <body>
     <div class="container">
         <div class="controls">
@@ -39,7 +41,6 @@
                 <select id="arrow-style">
                     <option value="arrow">Flèches</option>
                     <option value="dot">Points</option>
-                    <option value="chevrons">Chevrons</option>
                 </select>
             </div>
             <div class="control-group">
@@ -92,6 +93,21 @@
                     <button id="create-relation" class="create-relation-btn">Créer la relation</button>
                 </div>
             </div>
+            <div class="control-group">
+                <h4>Modifier le sens de transfert</h4>
+                <select id="relation-to-modify">
+                    <option value="">Sélectionner une relation</option>
+                </select>
+                <select id="transfer-direction">
+                    <option value="bidirectional">Dans les deux sens</option>
+                    <option value="unidirectional">Unidirectionnel</option>
+                </select>
+                <select id="unidirectional-direction" style="display: none;">
+                    <option value="forward">Source → Destination</option>
+                    <option value="reverse">Destination → Source</option>
+                </select>
+                <button id="update-direction">Mettre à jour</button>
+            </div>
         </div>
         <svg id="network-diagram"></svg>
     </div>
@@ -99,9 +115,8 @@
     <div class="tooltip"></div>
 
     <script type="module">
-        import NetworkDiagram from './network-diagram.js';
+        import { NetworkDiagram } from './network-diagram.js';
         import { ControlsManager } from './controls-manager.js';
-        import { PathUtils } from './path-utils.js';
         import { DEFAULT_CONFIG } from './config.js';
 
         // Initialisation du diagramme
@@ -121,7 +136,7 @@
                     { id: "Server 8", label: "File Storage", type: "storage" }
                 ],
                 links: [
-                    { source: "Server 1", target: "Server 2", value: 5, bidirectional: true },
+                    { source: "Server 1", target: "Server 2", value: 10, bidirectional: true },
                     { source: "Server 1", target: "Server 3", value: 3, bidirectional: true },
                     { source: "Server 3", target: "Server 4", value: 4, bidirectional: false },
                     { source: "Server 3", target: "Server 5", value: 2, bidirectional: true },
@@ -138,4 +153,5 @@
         });
     </script>
 </body>
+
 </html>
