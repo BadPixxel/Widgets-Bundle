@@ -105,14 +105,15 @@ trait OptionsAwareTrait
         /** @var null|WidgetOptionsResolver $resolver */
         static $resolver;
         //==============================================================================
-        //  Init Options Array using OptionResolver
+        // Init Options Array using OptionResolver
         $resolver ??= new WidgetOptionsResolver();
         //==============================================================================
-        //  Take Care of Border Flag
-        $options[Options::SHOW_BORDER] = !(($options[Options::COLOR_CLASS] ?? null) == WidgetColors::NONE);
-
+        // Take Care of Border Flag
+        if (($options[Options::COLOR_CLASS] ?? null) == WidgetColors::NONE) {
+            $options[Options::SHOW_BORDER] = false;
+        }
         //==============================================================================
-        //  Update Options Array using OptionResolver
+        // Update Options Array using OptionResolver
         try {
             $this->options = $resolver->resolve($options);
         } catch (InvalidArgumentException) {
