@@ -39,6 +39,16 @@ enum ChartConfig
     const MAX = "y_max";
 
     /**
+     * Aspect Ratio
+     *
+     * Canvas aspect ratio (i.e. width / height, a value of 1 representing a square canvas).
+     * Note that this option is ignored if the height is explicitly defined either as attribute or via the style.
+     * The default value varies by chart type;
+     * Radial charts (doughnut, pie, polarArea, radar) default to 1 and others default to 2.
+     */
+    const RATIO = "aspectRatio";
+
+    /**
      * Chart Class
      */
     const CHART_CLASS = "class";

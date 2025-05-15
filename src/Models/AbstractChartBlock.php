@@ -157,6 +157,19 @@ abstract class AbstractChartBlock extends AbstractBlock
     }
 
     /**
+     * Set Aspect Ratio
+     */
+    public function setRatio(int $aspectRatio) : static
+    {
+        return $this->mergeOptions(array(
+            Options::CHART_OPTIONS => array(
+                ChartConfig::RATIO => $aspectRatio,
+            )
+        ));
+    }
+
+
+    /**
      * Set Stimulus Controller Identifier
      */
     public function setController(string $controller) : static
