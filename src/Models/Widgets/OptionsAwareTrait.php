@@ -112,6 +112,7 @@ trait OptionsAwareTrait
         if (($options[Options::COLOR_CLASS] ?? null) == WidgetColors::NONE) {
             $options[Options::SHOW_BORDER] = false;
         }
+
         //==============================================================================
         // Update Options Array using OptionResolver
         try {

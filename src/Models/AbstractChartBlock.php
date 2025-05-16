@@ -168,6 +168,17 @@ abstract class AbstractChartBlock extends AbstractBlock
         ));
     }
 
+    /**
+     * Add Chart Options
+     *
+     * @param array<string, array|scalar> $chartOptions
+     */
+    public function addChartOptions(array $chartOptions) : static
+    {
+        return $this->mergeOptions(array(
+            Options::CHART_OPTIONS => $chartOptions
+        ));
+    }
 
     /**
      * Set Stimulus Controller Identifier
