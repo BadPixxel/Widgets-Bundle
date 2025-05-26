@@ -6,109 +6,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Server Network Diagram</title>
     <script src="https://d3js.org/d3.v7.min.js"></script>
-    <link rel="stylesheet" href="network-diagram.css">
+    <link rel="stylesheet" href="styles/variables.css">
+    <link rel="stylesheet" href="styles/layout.css">
+    <link rel="stylesheet" href="styles/controls.css">
+    <link rel="stylesheet" href="styles/network.css">
 </head>
 
 <body>
     <div class="container">
-        <div class="controls">
-            <div class="controls-header">
-                <h3>Contrôles</h3>
-                <button id="toggle-controls" class="toggle-controls-btn">◀</button>
-            </div>
-            <div class="control-group">
-                <h4>Type de liens</h4>
-                <select id="link-type">
-                    <option value="orthogonal" selected>Orthogonales</option>
-                    <option value="curves">Courbes</option>
-                    <option value="lines">Lignes droites</option>
-                </select>
-            </div>
-            <div class="control-group">
-                <h4>Style des lignes</h4>
-                <select id="line-style">
-                    <option value="solid">Ligne continue</option>
-                    <option value="dashed">Pointillés</option>
-                </select>
-                <div class="dash-speed-control" style="display: none;">
-                    <label>Vitesse de défilement:</label>
-                    <input type="range" id="dash-speed" min="0.1" max="3" step="0.1" value="1">
-                    <span id="dash-speed-value">1.0x</span>
-                </div>
-            </div>
-            <div class="control-group">
-                <h4>Style des indicateurs</h4>
-                <select id="arrow-style">
-                    <option value="arrow">Flèches</option>
-                    <option value="dot">Points</option>
-                </select>
-            </div>
-            <div class="control-group">
-                <h4>Couleurs des flèches</h4>
-                <div class="direction-colors">
-                    <div>
-                        <label>Direction positive:</label>
-                        <input type="color" id="positive-direction-color" value="#ff4444">
-                        <div class="color-box" style="background-color: #ff4444;"></div>
-                    </div>
-                    <div>
-                        <label>Direction négative:</label>
-                        <input type="color" id="negative-direction-color" value="#4444ff">
-                        <div class="color-box" style="background-color: #4444ff;"></div>
-                    </div>
-                </div>
-            </div>
-            <div class="control-group">
-                <h4>Ajouter un serveur</h4>
-                <input type="text" id="server-id" placeholder="ID du serveur">
-                <input type="text" id="server-label" placeholder="Label du serveur">
-                <select id="server-type">
-                    <option value="primary">Principal</option>
-                    <option value="database">Base de données</option>
-                    <option value="web">Serveur Web</option>
-                    <option value="cache">Cache</option>
-                    <option value="loadbalancer">Load Balancer</option>
-                    <option value="backup">Backup</option>
-                    <option value="proxy">Proxy</option>
-                    <option value="storage">Stockage</option>
-                </select>
-                <button id="add-server">Ajouter</button>
-            </div>
-            <div class="control-group">
-                <h4>Supprimer un serveur</h4>
-                <select id="server-to-remove">
-                    <option value="">Sélectionner un serveur</option>
-                </select>
-                <button id="remove-server">Supprimer</button>
-            </div>
-            <div class="control-group">
-                <h4>Créer une relation</h4>
-                <div class="node-relationship-controls">
-                    <select id="source-node" class="node-select">
-                        <option value="">Source</option>
-                    </select>
-                    <select id="target-node" class="node-select">
-                        <option value="">Destination</option>
-                    </select>
-                    <button id="create-relation" class="create-relation-btn">Créer la relation</button>
-                </div>
-            </div>
-            <div class="control-group">
-                <h4>Modifier le sens de transfert</h4>
-                <select id="relation-to-modify">
-                    <option value="">Sélectionner une relation</option>
-                </select>
-                <select id="transfer-direction">
-                    <option value="bidirectional">Dans les deux sens</option>
-                    <option value="unidirectional">Unidirectionnel</option>
-                </select>
-                <select id="unidirectional-direction" style="display: none;">
-                    <option value="forward">Source → Destination</option>
-                    <option value="reverse">Destination → Source</option>
-                </select>
-                <button id="update-direction">Mettre à jour</button>
-            </div>
-        </div>
+        <div id="control-panel"></div>
         <svg id="network-diagram"></svg>
     </div>
 
@@ -116,8 +22,7 @@
 
     <script type="module">
         import { NetworkDiagram } from './network-diagram.js';
-        import { ControlsManager } from './controls-manager.js';
-        import { DEFAULT_CONFIG } from './config.js';
+        import { DEFAULT_CONFIG } from './config/index.js';
 
         // Initialisation du diagramme
         const networkDiagram = new NetworkDiagram({

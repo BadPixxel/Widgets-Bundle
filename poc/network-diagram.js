@@ -1,10 +1,10 @@
-import { DEFAULT_CONFIG } from './config.js';
+import { DEFAULT_CONFIG, COLOR_CONFIG, ANIMATION_CONFIG } from './config/index.js';
 import { NodeManager } from './Utils/NodeManager.js';
 import { LinkManager } from './Utils/LinkManager.js';
 import { SimulationManager } from './Utils/SimulationManager.js';
 import { TooltipManager } from './Utils/TooltipManager.js';
 import { AnimationManager } from './Utils/AnimationManager.js';
-import { ControlsManager } from './controls-manager.js';
+import { ControlManager } from './controls-manager.js';
 
 export class NetworkDiagram {
     constructor(config) {
@@ -12,13 +12,15 @@ export class NetworkDiagram {
             ...DEFAULT_CONFIG,
             ...config,
             data: config.data || { nodes: [], links: [] },
+            colors: COLOR_CONFIG,
+            animation: ANIMATION_CONFIG,
             arrowStyle: 'arrow',  // Style par défaut
             lineStyle: 'solid',   // Style de ligne par défaut
             dashSpeed: 0.5        // Vitesse de défilement des pointillés
         };
 
         this.init();
-        this.controls = new ControlsManager(this);
+        this.controls = new ControlManager(this);
         this.setupToggleControls();
     }
 
