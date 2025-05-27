@@ -30,6 +30,8 @@ export class StyleControls {
             <select id="arrow-style">
                 <option value="arrow">Flèches</option>
                 <option value="dot">Points</option>
+                <option value="multiple-arrows">Flèches multiples</option>
+                <option value="multiple-dots">Points multiples</option>
             </select>
 
             <h4>Couleurs des flèches</h4>

@@ -1,4 +1,4 @@
-import { ControlPanel } from './components/ControlPanel.js';
+import { ControlPanel } from '../components/ControlPanel.js';
 
 export class ControlManager {
     constructor(networkDiagram) {

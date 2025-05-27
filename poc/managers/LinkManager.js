@@ -197,7 +197,6 @@ export class LinkManager {
                         { ...link, direction: -1 }
                     ];
                 } else {
-                    // Pour les liens unidirectionnels, utiliser la direction spécifiée
                     const direction = link.direction || 1;
                     return [{ ...link, direction }];
                 }
@@ -209,14 +208,38 @@ export class LinkManager {
             const g = d3.select(nodes[i]);
             const color = d.direction === -1 ? this.config.arrowColors.negative : this.config.arrowColors.positive;
 
-            if (this.config.arrowStyle === 'arrow') {
+            if (this.config.arrowStyle === 'multiple-arrows') {
+                // Créer un groupe pour les 3 flèches
+                const arrowGroup = g.append("g").attr("class", "multiple-arrows-group");
+                // Créer 3 flèches
+                for (let j = 0; j < 3; j++) {
+                    arrowGroup.append("path")
+                        .attr("class", `arrow-${j}`)
+                        .attr("d", "M-4,-2 L4,0 L-4,2 Z")
+                        .attr("transform", `scale(${this.config.animation.arrowSize})`)
+                        .attr("fill", color)
+                        .attr("opacity", 0.7);
+                }
+            } else if (this.config.arrowStyle === 'multiple-dots') {
+                // Créer un groupe pour les 3 points
+                const dotGroup = g.append("g").attr("class", "multiple-dots-group");
+                // Créer 3 points
+                for (let j = 0; j < 3; j++) {
+                    dotGroup.append("circle")
+                        .attr("class", `dot-${j}`)
+                        .attr("r", 3)
+                        .attr("fill", color)
+                        .attr("opacity", 0.7);
+                }
+            } else if (this.config.arrowStyle === 'dot') {
+                // Créer un seul point
+                g.append("circle")
+                    .attr("r", 3)
+                    .attr("fill", color);
+            } else if (this.config.arrowStyle === 'arrow') {
                 g.append("path")
                     .attr("d", "M-4,-2 L4,0 L-4,2 Z")
                     .attr("transform", `scale(${this.config.animation.arrowSize})`)
-                    .attr("fill", color);
-            } else {
-                g.append("circle")
-                    .attr("r", 3)
                     .attr("fill", color);
             }
         });
@@ -244,19 +267,41 @@ export class LinkManager {
         if (!this.flowArrows) return;
 
         this.flowArrows.each((d, i, nodes) => {
-            // Recalculer le chemin à chaque frame pour prendre en compte les nouvelles positions
             const path = this.createPath(d, this.config.linkType);
             const progress = (performance.now() % this.config.animation.duration) / this.config.animation.duration;
-            const { x, y, rotationAngle } = this.calculateArrowPosition(path, progress, d.direction);
             
             const g = d3.select(nodes[i]);
-            if (this.config.arrowStyle === 'arrow') {
+            
+            if (this.config.arrowStyle === 'multiple-arrows') {
+                const arrowGroup = g.select(".multiple-arrows-group");
+                // Calculer les positions pour les 3 flèches avec un décalage
+                for (let j = 0; j < 3; j++) {
+                    const arrowProgress = (progress + j * 0.33) % 1;
+                    const { x, y, rotationAngle } = this.calculateArrowPosition(path, arrowProgress, d.direction);
+                    
+                    arrowGroup.select(`.arrow-${j}`)
+                        .attr("transform", `translate(${x},${y}) rotate(${rotationAngle}) scale(${this.config.animation.arrowSize})`);
+                }
+            } else if (this.config.arrowStyle === 'multiple-dots') {
+                const dotGroup = g.select(".multiple-dots-group");
+                // Calculer les positions pour les 3 points avec un décalage
+                for (let j = 0; j < 3; j++) {
+                    const dotProgress = (progress + j * 0.33) % 1;
+                    const { x, y } = this.calculateArrowPosition(path, dotProgress, d.direction);
+                    
+                    dotGroup.select(`.dot-${j}`)
+                        .attr("transform", `translate(${x},${y})`);
+                }
+            } else if (this.config.arrowStyle === 'dot') {
+                const { x, y } = this.calculateArrowPosition(path, progress, d.direction);
+                g.attr("transform", `translate(${x},${y})`);
+            } else if (this.config.arrowStyle === 'arrow') {
+                const { x, y, rotationAngle } = this.calculateArrowPosition(path, progress, d.direction);
                 g.attr("transform", `translate(${x},${y}) rotate(${rotationAngle})`);
             } else if (this.config.arrowStyle === 'chevrons') {
+                const { x, y, rotationAngle } = this.calculateArrowPosition(path, progress, d.direction);
                 g.select(".chevron-group")
                     .attr("transform", `translate(${x},${y}) rotate(${rotationAngle})`);
-            } else {
-                g.attr("transform", `translate(${x},${y})`);
             }
         });
     }

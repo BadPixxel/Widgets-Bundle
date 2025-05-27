@@ -1,10 +1,10 @@
 import { DEFAULT_CONFIG, COLOR_CONFIG, ANIMATION_CONFIG } from './config/index.js';
-import { NodeManager } from './Utils/NodeManager.js';
-import { LinkManager } from './Utils/LinkManager.js';
-import { SimulationManager } from './Utils/SimulationManager.js';
-import { TooltipManager } from './Utils/TooltipManager.js';
-import { AnimationManager } from './Utils/AnimationManager.js';
-import { ControlManager } from './controls-manager.js';
+import { NodeManager } from './managers/NodeManager.js';
+import { LinkManager } from './managers/LinkManager.js';
+import { SimulationManager } from './managers/SimulationManager.js';
+import { TooltipManager } from './managers/TooltipManager.js';
+import { AnimationManager } from './managers/AnimationManager.js';
+import { ControlManager } from './managers/ControlManager.js';
 
 export class NetworkDiagram {
     constructor(config) {
