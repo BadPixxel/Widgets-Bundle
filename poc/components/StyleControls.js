@@ -32,7 +32,14 @@ export class StyleControls {
                 <option value="dot">Points</option>
                 <option value="multiple-arrows">Flèches multiples</option>
                 <option value="multiple-dots">Points multiples</option>
+                <option value="loading-bar">Barre de chargement</option>
             </select>
+
+            <div id="loading-bar-color-group" style="display:none; margin-top:8px;">
+                <label>Couleur de la loading bar:</label>
+                <input type="color" id="loading-bar-color" value="#4CAF50">
+                <div class="color-box" id="loading-bar-color-box" style="background-color: #4CAF50;"></div>
+            </div>
 
             <h4>Couleurs des flèches</h4>
             <div class="direction-colors">
@@ -49,6 +56,13 @@ export class StyleControls {
             </div>
         `;
         this.container.appendChild(styleControls);
+
+        // Affichage conditionnel du color picker loading bar
+        const arrowStyleSelect = styleControls.querySelector('#arrow-style');
+        const loadingBarColorGroup = styleControls.querySelector('#loading-bar-color-group');
+        arrowStyleSelect.addEventListener('change', () => {
+            loadingBarColorGroup.style.display = arrowStyleSelect.value === 'loading-bar' ? 'block' : 'none';
+        });
     }
 
     getElements() {
@@ -58,6 +72,8 @@ export class StyleControls {
             dashSpeed: document.getElementById('dash-speed'),
             dashSpeedValue: document.getElementById('dash-speed-value'),
             arrowStyle: document.getElementById('arrow-style'),
+            loadingBarColor: document.getElementById('loading-bar-color'),
+            loadingBarColorBox: document.getElementById('loading-bar-color-box'),
             positiveColor: document.getElementById('positive-direction-color'),
             negativeColor: document.getElementById('negative-direction-color')
         };

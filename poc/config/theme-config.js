@@ -11,5 +11,12 @@ export const COLOR_CONFIG = {
 
 export const ANIMATION_CONFIG = {
     duration: 3000,
-    arrowSize: 1.5
+    arrowSize: 1.5,
+    loadingBar: {
+        width: 20,
+        height: 4,
+        color: "#4CAF50",
+        backgroundColor: "rgba(76, 175, 80, 0.2)",
+        speed: 1
+    }
 }; 

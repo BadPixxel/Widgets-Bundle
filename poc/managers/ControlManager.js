@@ -34,6 +34,19 @@ export class ControlManager {
             this.diagram.updateArrowStyle(e.target.value);
         });
 
+        // Ajout gestion couleur loading bar
+        if (elements.style.loadingBarColor) {
+            elements.style.loadingBarColor.addEventListener('input', (e) => {
+                const color = e.target.value;
+                elements.style.loadingBarColorBox.style.backgroundColor = color;
+                this.diagram.config.animation.loadingBar.color = color;
+                // Rafraîchir les loading bars
+                if (this.diagram.config.arrowStyle === 'loading-bar') {
+                    this.diagram.updateArrowStyle('loading-bar');
+                }
+            });
+        }
+
         elements.style.positiveColor.addEventListener('input', (e) => {
             const color = e.target.value;
             e.target.nextElementSibling.style.backgroundColor = color;

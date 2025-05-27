@@ -11,6 +11,7 @@ export class LinkManager {
         this.simulation = simulation;
         this.links = null;
         this.flowArrows = null;
+        this.loadingBars = null;
         this.updateQueue = [];
         this.isUpdating = false;
     }
@@ -189,6 +190,7 @@ export class LinkManager {
 
     createFlowArrows() {
         this.flowArrows = this.svg.append("g")
+            .attr("class", "flow-arrows")
             .selectAll("g")
             .data(this.config.data.links.flatMap(link => {
                 if (link.bidirectional) {
@@ -208,7 +210,15 @@ export class LinkManager {
             const g = d3.select(nodes[i]);
             const color = d.direction === -1 ? this.config.arrowColors.negative : this.config.arrowColors.positive;
 
-            if (this.config.arrowStyle === 'multiple-arrows') {
+            if (this.config.arrowStyle === 'loading-bar') {
+                // Ajoute le chemin de la loading bar (par-dessus le lien principal)
+                g.append("path")
+                    .attr("class", "loading-bar-path")
+                    .attr("stroke", this.config.animation.loadingBar.color)
+                    .attr("stroke-width", this.config.animation.loadingBar.height)
+                    .attr("fill", "none")
+                    .attr("stroke-linecap", "round");
+            } else if (this.config.arrowStyle === 'multiple-arrows') {
                 // Créer un groupe pour les 3 flèches
                 const arrowGroup = g.append("g").attr("class", "multiple-arrows-group");
                 // Créer 3 flèches
@@ -268,27 +278,46 @@ export class LinkManager {
 
         this.flowArrows.each((d, i, nodes) => {
             const path = this.createPath(d, this.config.linkType);
-            const progress = (performance.now() % this.config.animation.duration) / this.config.animation.duration;
-            
             const g = d3.select(nodes[i]);
-            
-            if (this.config.arrowStyle === 'multiple-arrows') {
+
+            // Séparation du progress selon le style
+            let progress;
+            if (this.config.arrowStyle === 'loading-bar') {
+                // Loading bar : vitesse indépendante
+                progress = (performance.now() / 1000 * this.config.animation.loadingBar.speed) % 1;
+            } else {
+                // Autres styles : durée globale
+                progress = (performance.now() % this.config.animation.duration) / this.config.animation.duration;
+            }
+
+            if (this.config.arrowStyle === 'loading-bar') {
+                // On récupère la longueur totale du chemin
+                const tempPath = document.createElementNS("http://www.w3.org/2000/svg", "path");
+                tempPath.setAttribute("d", path);
+                const totalLength = tempPath.getTotalLength();
+                const barLength = totalLength * 0.25; // 25% du lien visible comme loading bar
+                // Sens de l'animation selon la direction
+                const offset = d.direction === 1
+                    ? totalLength * progress
+                    : totalLength * (1 - progress);
+
+                g.select(".loading-bar-path")
+                    .attr("d", path)
+                    .attr("stroke-dasharray", `${barLength} ${totalLength - barLength}`)
+                    .attr("stroke-dashoffset", -offset);
+            } else if (this.config.arrowStyle === 'multiple-arrows') {
                 const arrowGroup = g.select(".multiple-arrows-group");
-                // Calculer les positions pour les 3 flèches avec un décalage
                 for (let j = 0; j < 3; j++) {
                     const arrowProgress = (progress + j * 0.33) % 1;
                     const { x, y, rotationAngle } = this.calculateArrowPosition(path, arrowProgress, d.direction);
-                    
                     arrowGroup.select(`.arrow-${j}`)
                         .attr("transform", `translate(${x},${y}) rotate(${rotationAngle}) scale(${this.config.animation.arrowSize})`);
                 }
             } else if (this.config.arrowStyle === 'multiple-dots') {
                 const dotGroup = g.select(".multiple-dots-group");
-                // Calculer les positions pour les 3 points avec un décalage
                 for (let j = 0; j < 3; j++) {
                     const dotProgress = (progress + j * 0.33) % 1;
                     const { x, y } = this.calculateArrowPosition(path, dotProgress, d.direction);
-                    
                     dotGroup.select(`.dot-${j}`)
                         .attr("transform", `translate(${x},${y})`);
                 }
