@@ -8,6 +8,21 @@
 </head>
 <body>
     <div id="graph-container"></div>
+    <script type="application/json" id="graph-data">
+    {
+      "nodes": [
+        { "id": "1", "x": 100, "y": 100, "label": "Nœud 1", "color": "#ff7f0e", "radius": 15, "image": "https://cdn-icons-png.flaticon.com/512/149/149071.png", "imageSize": 25 },
+        { "id": "2", "x": 200, "y": 200, "label": "Nœud 2", "color": "#2ca02c", "radius": 20 },
+        { "id": "3", "x": 300, "y": 150, "label": "Nœud 3", "color": "#d62728", "radius": 40, "image": "https://upload.wikimedia.org/wikipedia/commons/0/0e/Shopify_logo_2018.svg", "imageSize": 60 },
+        { "id": "4", "x": 400, "y": 200, "label": "Nœud 4", "color": "#9467bd", "radius": 50 }
+      ],
+      "links": [
+        { "source": "2", "target": "1", "strokeWidth": 30, "strokeColor": "#00bcd4", "indicator": { "type": "chevron", "color": "#d62728", "speed": 1.5, "count": 5 } },
+        { "source": "2", "target": "3", "strokeWidth": 2, "strokeColor": "#999", "lineStyle": "dashed", "curveType": "curved", "curveStrength": 50, "indicator": { "type": "dot", "color": "#00ff00", "size": 6, "speed": 1 } },
+        { "source": "3", "target": "4", "strokeWidth": 10, "strokeColor": "#9467bd", "lineStyle": "dashed", "curveType": "orthogonal" }
+      ]
+    }
+    </script>
     <script type="module" src="src/main.js"></script>
 </body>
 </html> 
