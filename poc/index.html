@@ -1,62 +1,13 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Server Network Diagram</title>
-    <script src="https://d3js.org/d3.v7.min.js"></script>
-    <link rel="stylesheet" href="styles/variables.css">
-    <link rel="stylesheet" href="styles/layout.css">
-    <link rel="stylesheet" href="styles/controls.css">
-    <link rel="stylesheet" href="styles/network.css">
+    <title>Visualisation de Graphe D3.js</title>
+    <link rel="stylesheet" href="src/styles/main.css">
 </head>
-
 <body>
-    <div class="container">
-        <div id="control-panel"></div>
-        <svg id="network-diagram"></svg>
-    </div>
-
-    <div class="tooltip"></div>
-
-    <script type="module">
-        import { NetworkDiagram } from './network-diagram.js';
-        import { DEFAULT_CONFIG } from './config/index.js';
-
-        // Initialisation du diagramme
-        const networkDiagram = new NetworkDiagram({
-            container: '#network-diagram',
-            width: window.innerWidth * 0.8,
-            height: window.innerHeight * 0.8,
-            data: {
-                nodes: [
-                    { id: "Server 1", label: "Main Server", type: "primary" },
-                    { id: "Server 2", label: "Database", type: "database" },
-                    { id: "Server 3", label: "Web Server", type: "web" },
-                    { id: "Server 4", label: "Cache Server", type: "cache" },
-                    { id: "Server 5", label: "Load Balancer", type: "loadbalancer" },
-                    { id: "Server 6", label: "Backup Server", type: "backup" },
-                    { id: "Server 7", label: "Proxy Server", type: "proxy" },
-                    { id: "Server 8", label: "File Storage", type: "storage" }
-                ],
-                links: [
-                    { source: "Server 1", target: "Server 2", value: 10, bidirectional: true },
-                    { source: "Server 1", target: "Server 3", value: 3, bidirectional: true },
-                    { source: "Server 3", target: "Server 4", value: 4, bidirectional: false },
-                    { source: "Server 3", target: "Server 5", value: 2, bidirectional: true },
-                    { source: "Server 2", target: "Server 6", value: 1, bidirectional: false },
-                    { source: "Server 5", target: "Server 7", value: 3, bidirectional: true },
-                    { source: "Server 7", target: "Server 8", value: 2, bidirectional: true }
-                ]
-            }
-        });
-
-        // Handle window resize
-        window.addEventListener('resize', () => {
-            networkDiagram.resize(window.innerWidth * 0.8, window.innerHeight * 0.8);
-        });
-    </script>
+    <div id="graph-container"></div>
+    <script type="module" src="src/main.js"></script>
 </body>
-
-</html>
+</html> 

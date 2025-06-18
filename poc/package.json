@@ -1,0 +1,17 @@
+{
+  "name": "d3-graph-visualization",
+  "version": "1.0.0",
+  "description": "Visualisation de graphe avec D3.js",
+  "main": "index.js",
+  "scripts": {
+    "start": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "d3": "^7.8.5"
+  },
+  "devDependencies": {
+    "vite": "^5.0.0"
+  }
+} 
