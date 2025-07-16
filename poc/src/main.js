@@ -1,18 +1,13 @@
-import { count } from 'd3';
 import { Graph } from './js/components/Graph.js';
 
 document.addEventListener('DOMContentLoaded', () => {
-    // Détection de la configuration JSON dans la page
     const graphDataScript = document.getElementById('graph-data');
     let graph;
-    console.log(graphDataScript);
     if (graphDataScript) {
-        console.log("Mode HTML/JSON détecté !");
         let config;
         try {
             config = JSON.parse(graphDataScript.textContent);
         } catch (e) {
-            console.error("Erreur de parsing JSON", e);
             throw e;
         }
         graph = new Graph('graph-container', window.innerWidth, window.innerHeight);

@@ -8,10 +8,10 @@ export class Node {
         this.label = '';
         this.data = {};
         this.image = null;
-        this.imageSize = 20; // Taille par défaut de l'image
+        this.imageSize = 20; // Default image size
     }
 
-    // Méthodes pour personnaliser l'apparence
+    // Methods to customize appearance
     setRadius(radius) {
         this.radius = radius;
         return this;
@@ -33,14 +33,14 @@ export class Node {
         return this;
     }
 
-    // Méthode pour dessiner le nœud
+    // Method to draw the node
     draw(selection) {
-        // Ajout du cercle
+        // Add the circle
         selection.append('circle')
             .attr('r', this.radius)
             .attr('fill', this.color);
 
-        // Ajout de l'image si elle est définie
+        // Add the image if defined
         if (this.image) {
             const imageSize = this.imageSize;
             selection.append('image')
@@ -51,7 +51,7 @@ export class Node {
                 .attr('xlink:href', this.image);
         }
 
-        // Ajout du texte si un label est défini
+        // Add the text if a label is defined
         if (this.label) {
             selection.append('text')
                 .text(this.label)
@@ -62,7 +62,7 @@ export class Node {
         return selection;
     }
 
-    // Méthode pour mettre à jour la position
+    // Method to update the position
     updatePosition(x, y) {
         this.x = x;
         this.y = y;

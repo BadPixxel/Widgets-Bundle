@@ -14,12 +14,12 @@ export class Link {
         this.indicatorSize = 10;
         this.indicatorSpeed = 1;
         this.indicatorAnimationId = null;
-        this.indicatorCount = 4; // Par défaut 4 chevrons
+        this.indicatorCount = 4; // Default: 4 chevrons
         this.curveType = 'straight'; // 'straight', 'curved', 'orthogonal'
-        this.curveStrength = 50; // Pour les courbes, distance de la ligne droite
+        this.curveStrength = 50; // For curves, distance from the straight line
     }
 
-    // Méthodes pour personnaliser l'apparence
+    // Methods to customize appearance
     setStrokeWidth(width) {
         this.strokeWidth = width;
         return this;
@@ -39,18 +39,18 @@ export class Link {
         return this;
     }
 
-    // Nouvelles méthodes pour les indicateurs
+    // New methods for indicators
     setIndicator(type, options = {}) {
         this.indicatorType = type;
         this.indicatorColor = options.color || this.indicatorColor;
-        // Taille auto : 80% de l'épaisseur du lien si non précisé
+        // Auto size: 80% of link thickness if not specified
         if (typeof options.size === 'number') {
             this.indicatorSize = options.size;
         } else {
             this.indicatorSize = this.strokeWidth * 0.8;
         }
         this.indicatorSpeed = options.speed || this.indicatorSpeed;
-        this.indicatorCount = options.count || 4; // Par défaut 4 chevrons
+        this.indicatorCount = options.count || 4; // Default: 4 chevrons
         return this;
     }
 
@@ -73,12 +73,12 @@ export class Link {
         return this;
     }
 
-    // Méthode pour dessiner le lien
+    // Method to draw the link
     draw(selection) {
-        // Supprimer l'ancienne ligne si elle existe
+        // Remove the old line if it exists
         selection.selectAll('.link-line').remove();
 
-        // Créer un nouveau path
+        // Create a new path
         const line = selection.append('path')
             .attr('class', 'link-line')
             .attr('stroke-width', this.strokeWidth)
@@ -126,12 +126,12 @@ export class Link {
             }
         }
 
-        // Gestion de l'indicateur
+        // Indicator management
         if (this.indicatorType) {
-            // Supprimer l'ancien indicateur s'il existe
+            // Remove the old indicator if it exists
             selection.selectAll('.indicator').remove();
 
-            // Créer le nouvel indicateur
+            // Create the new indicator
             const indicator = selection.append('g')
                 .attr('class', 'indicator');
 
@@ -146,7 +146,7 @@ export class Link {
                     .attr('r', this.indicatorSize/2)
                     .attr('fill', this.indicatorColor);
             } else if (this.indicatorType === 'chevron') {
-                // Ajout de plusieurs chevrons
+                // Add multiple chevrons
                 for (let i = 0; i < this.indicatorCount; i++) {
                     indicator.append('path')
                         .attr('class', 'chevron')
@@ -157,15 +157,15 @@ export class Link {
                 }
             }
 
-            // Animation de l'indicateur
+            // Indicator animation
             let progress = 0;
             const animateIndicator = () => {
                 progress = (progress + this.indicatorSpeed * 0.01) % 1;
                 if (this.indicatorType === 'chevron') {
-                    // Animation de chaque chevron
+                    // Animate each chevron
                     const chevrons = indicator.selectAll('.chevron');
                     chevrons.each((d, i, nodes) => {
-                        // Décalage pour chaque chevron
+                        // Offset for each chevron
                         const offset = ((progress) + (i / this.indicatorCount)) % 1;
                         const pos = this.getPositionAtProgress(offset);
                         d3.select(nodes[i])
@@ -187,9 +187,9 @@ export class Link {
         return line;
     }
 
-    // Méthode pour calculer la position de l'indicateur
+    // Method to compute the indicator position
     getPositionAtProgress(progress) {
-        // Helper pour clamp progress
+        // Helper to clamp progress
         function clamp(val, min, max) {
             return Math.max(min, Math.min(max, val));
         }
@@ -198,21 +198,21 @@ export class Link {
         let angle = 0;
 
         if (this.curveType === 'curved') {
-            // Dérivée analytique de la courbe de Bézier quadratique
+            // Analytical derivative of the quadratic Bézier curve
             const midX = (this.source.x + this.target.x) / 2;
             const midY = (this.source.y + this.target.y) / 2;
             const angleBase = Math.atan2(this.target.y - this.source.y, this.target.x - this.source.x);
             const perpX = midX + Math.cos(angleBase + Math.PI/2) * this.curveStrength;
             const perpY = midY + Math.sin(angleBase + Math.PI/2) * this.curveStrength;
 
-            // Dérivée de Bézier quadratique
+            // Derivative of quadratic Bézier
             const dx = 2*(1-t)*(perpX - this.source.x) + 2*t*(this.target.x - perpX);
             const dy = 2*(1-t)*(perpY - this.source.y) + 2*t*(this.target.y - perpY);
             angle = Math.atan2(dy, dx) * 180 / Math.PI;
         } else if (this.curveType === 'straight') {
             angle = Math.atan2(this.target.y - this.source.y, this.target.x - this.source.x) * 180 / Math.PI;
         } else if (this.curveType === 'orthogonal') {
-            // Pour orthogonal, on peut garder l'approximation numérique
+            // For orthogonal, keep the numerical approximation
             const delta = 0.0001;
             const p1 = this._pointAtProgress(clamp(t - delta, 0, 1));
             const p2 = this._pointAtProgress(clamp(t + delta, 0, 1));
@@ -222,7 +222,7 @@ export class Link {
         return { x: p.x, y: p.y, angle };
     }
 
-    // Nouvelle méthode utilitaire pour obtenir la position exacte sur la courbe
+    // Utility method to get the exact position on the curve
     _pointAtProgress(progress) {
         let x, y;
         if (this.curveType === 'straight') {
@@ -258,14 +258,14 @@ export class Link {
         return { x, y };
     }
 
-    // Méthode pour obtenir le path SVG d'un chevron
+    // Method to get the SVG path of a chevron
     getChevronPath() {
         const s = this.indicatorSize;
-        // Chevron centré sur (0,0), ouvert vers la droite
+        // Chevron centered at (0,0), open to the right
         return `M${-s/2},${-s/2} L0,0 L${-s/2},${s/2}`;
     }
 
-    // Méthode pour mettre à jour la position du lien
+    // Method to update the link position
     updatePosition() {
         return {
             x1: this.source.x,
@@ -275,7 +275,7 @@ export class Link {
         };
     }
 
-    // Met à jour le path existant selon la position courante des nœuds
+    // Updates the existing path according to the current position of the nodes
     updatePath(selection) {
         let d;
         if (this.curveType === 'straight') {
