@@ -37,7 +37,7 @@
 
             {% set color = "" %}
             {% if chartOptions.colors|length|default(0) %}
-                {% set color = chartOptions.classes[loop.index0 % (chartOptions.colors|length)] %}
+                {% set color = chartOptions.colors[loop.index0 % (chartOptions.colors|length)] %}
             {% endif %}
 
             <div class="progress-bar {{ chartOptions.class|default("") }} {{ class }}"

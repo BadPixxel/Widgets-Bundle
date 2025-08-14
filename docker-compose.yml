@@ -127,7 +127,7 @@ services:
     ################################################################################
     # Node JS Container    
     node:
-        image:          'node:18'
+        image:          'node:22'
         user:           'node'
         container_name: node.widgets.local
         tty:            true
