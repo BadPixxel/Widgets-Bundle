@@ -1,0 +1,35 @@
+{# Bootstrap Version Switcher Menu #}
+<div class="bootstrap-test-menu text-center my-4">
+    <div class="btn-group" role="group">
+        {% set versions = {'bs3': '3', 'bs4': '4', 'bs5': '5'} %}
+        {% for versionKey, versionNum in versions %}
+            <div class="btn-group" role="group">
+                <button
+                        type="button"
+                        class="btn btn-{% if bsVersion == versionKey %}primary{% else %}{% if bsVersion == 'bs3' %}default{% else %}secondary{% endif %}{% endif %} dropdown-toggle"
+                        data-toggle="dropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                    Bootstrap {{ versionNum }}
+                </button>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" href="{{ path('homepage', {'bsMode': versionKey}) }}">Home</a>
+                    <hr class="dropdown-divider">
+                    <a class="dropdown-item" href="{{ path('widget_demo_blocks_list', {'bsMode': versionKey}) }}">Blocks List</a>
+                    <hr class="dropdown-divider">
+                    <a class="dropdown-item" href="{{ path('widget_demo_widgets_list', {'bsMode': versionKey}) }}">Widgets List</a>
+                    <hr class="dropdown-divider">
+                    <a class="dropdown-item" href="{{ path('widget_demo_widget_collection_component', {'bsMode': versionKey}) }}">Widget Collection</a>
+                </div>
+            </div>
+        {% endfor %}
+
+        <div class="btn-group" role="group">
+            <a
+                    class="btn btn-{% if bsVersion == 'bs3' %}default{% else %}secondary{% endif %} dropdown-toggle"
+                    href="{{ path('sonata_admin_dashboard') }}"
+                    target="_blank"
+            >
+                Sonata Admin
+            </a>
+        </div>
+    </div>
+</div>

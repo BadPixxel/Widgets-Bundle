@@ -1,0 +1,114 @@
+{% extends "@WidgetsDemo/Bootstrap/base.html.twig" %}
+
+{% block title %}Bootstrap 5 Test{% endblock %}
+
+{% block stylesheets %}
+    {# Bootstrap 5.3.3 from CDN #}
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    {# jQuery UI #}
+    <link href="https://code.jquery.com/ui/1.13.2/themes/base/jquery-ui.min.css" rel="stylesheet">
+    {# FontAwesome 5 #}
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    {# Prism.js CSS - Tomorrow Night theme #}
+    <link href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/line-numbers/prism-line-numbers.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/toolbar/prism-toolbar.min.css" rel="stylesheet">
+{% endblock %}
+
+{% block body %}
+    {# Version Badge #}
+    <div class="version-badge">
+        <span class="badge bg-primary">Bootstrap 5</span>
+    </div>
+
+    <div class="container-fluid">
+
+        <h1 class="display-4 text-center mb-5">Bootstrap 5 Compatibility Test</h1>
+
+        {# Version Switcher Menu #}
+        {% include '@WidgetsDemo/Bootstrap/_menu.html.twig' with {'bsVersion': 'bs5'} %}
+
+        {# Page Content Block - can be overridden #}
+        {% block page_content %}
+        {# Alert Component Test #}
+        <div class="row">
+            <div class="col-md-6">
+                <h3>Alert Component</h3>
+                <div class="alert alert-success alert-dismissible fade show">
+                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                    <strong>Success!</strong> Bootstrap 5 alert with <code>data-bs-dismiss</code>.
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <h3>Progress Bar</h3>
+                <div class="progress" role="progressbar" aria-label="Success" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">
+                    <div class="progress-bar bg-success" style="width: 75%">
+                        75%
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <hr class="my-5">
+
+        {# Card Component Test #}
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card text-white bg-primary mb-3">
+                    <div class="card-header">Card Primary</div>
+                    <div class="card-body">
+                        Bootstrap 5 uses <code>card</code> component.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {# Button Test #}
+        <div class="text-center mt-5">
+            <h3>Buttons</h3>
+            <button class="btn btn-primary">Primary</button>
+            <button class="btn btn-success">Success</button>
+            <button class="btn btn-warning">Warning</button>
+            <button class="btn btn-danger">Danger</button>
+        </div>
+        {% endblock page_content %}
+
+    </div>
+
+    <footer class="text-center text-muted mt-5 pt-5">
+        <p>
+            <small>
+                Bootstrap 5 Compatibility Test<br>
+                BadPixxel Widgets Bundle v3.0
+            </small>
+        </p>
+    </footer>
+{% endblock %}
+
+{% block jquery %}
+    {# jQuery (required for jQuery UI) #}
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    {# jQuery UI #}
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"></script>
+{% endblock %}
+
+{% block javascripts %}
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    {# Prism.js Core #}
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/prism.min.js"></script>
+    {# Prism.js Languages - Load dependencies first #}
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-markup.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-markup-templating.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-php.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-javascript.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-twig.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-json.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-yaml.min.js"></script>
+    {# Prism.js Plugins #}
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/line-numbers/prism-line-numbers.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/toolbar/prism-toolbar.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/copy-to-clipboard/prism-copy-to-clipboard.min.js"></script>
+
+    {{ parent() }}
+{% endblock %}
