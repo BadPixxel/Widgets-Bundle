@@ -3,11 +3,11 @@ framework:
     esi:                { enabled: true }
     translator:         { fallbacks: ["%locale%"] }
     default_locale:     "%locale%"
-    form:               true
+    form:               ~
     csrf_protection:    true
+    validation:         ~
     session:            ~
-    assets:
-        base_path:      '/'
+    assets: ~
 
 when@test:
     framework:

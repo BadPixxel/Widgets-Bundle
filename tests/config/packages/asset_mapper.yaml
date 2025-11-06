@@ -1,0 +1,9 @@
+framework:
+    asset_mapper:
+        # The paths to make available to the asset mapper.
+        paths:
+            - assets/
+        missing_import_mode: strict
+    assets:
+        # On désactive toute stratégie de versioning pour l'environnement 'dev'
+        version_strategy: false

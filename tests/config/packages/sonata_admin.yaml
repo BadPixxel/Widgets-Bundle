@@ -10,7 +10,6 @@ sonata_admin:
                 settings: {
                     title:          "My Admin Dashboard",
                     icon:           "fa fa-tachometer-alt text-primary",
-                    channel:        "admin",
                     configuration:  { mode: bs3 }
                 }
             }
