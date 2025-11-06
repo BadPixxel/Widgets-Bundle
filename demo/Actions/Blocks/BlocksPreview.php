@@ -35,7 +35,7 @@ class BlocksPreview extends AbstractController
     ) {
     }
 
-    public function __invoke(string $type) : Response
+    public function __invoke(string $bsMode, string $type) : Response
     {
         //==============================================================================
         //  Search for requested block
@@ -50,6 +50,7 @@ class BlocksPreview extends AbstractController
         $block->setupForDemo();
 
         return $this->render('@WidgetsDemo/Blocks/preview.html.twig', array(
+            'bsMode' => $bsMode,
             'Blocks' => $this->blockResolver->all(),
             'Block' => $block,
             'Type' => $block->getType(),

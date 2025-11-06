@@ -33,9 +33,10 @@ class Component extends AbstractController
     ) {
     }
 
-    public function __invoke() : Response
+    public function __invoke(string $bsMode) : Response
     {
         return $this->render('@WidgetsDemo/Collections/index.html.twig', array(
+            'bsMode' => $bsMode,
             'Channels' => $this->widgetsResolver->getAllChannels(),
             'Type' => "test-collection",
         ));

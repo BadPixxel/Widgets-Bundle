@@ -35,13 +35,14 @@ class WidgetPreview extends AbstractController
     ) {
     }
 
-    public function __invoke(string $hash) : Response
+    public function __invoke(string $bsMode, string $hash) : Response
     {
         //==============================================================================
         // Identify Widget Configuration
         $configurator = $this->widgetsResolver->resolve($hash, true);
 
         return $this->render('@WidgetsDemo/Widgets/preview.html.twig', array(
+            'bsMode' => $bsMode,
             'Hash' => $hash,
             'Configurator' => $configurator,
             'Widget' => $configurator->getService(),

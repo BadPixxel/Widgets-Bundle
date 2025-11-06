@@ -33,11 +33,12 @@ class WidgetsList extends AbstractController
     ) {
     }
 
-    public function __invoke(?string $channel = null) : Response
+    public function __invoke(string $bsMode, ?string $channel = null) : Response
     {
         //==============================================================================
         // Fetch All Configure Widgets Services for Resolver
         return $this->render('@WidgetsDemo/Widgets/index.html.twig', array(
+            'bsMode' => $bsMode,
             'Channel' => $channel,
             'Channels' => $this->widgetsResolver->getAllChannels(),
             'Configurators' => $this->widgetsResolver->findAll($channel, true),

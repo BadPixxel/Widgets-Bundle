@@ -33,10 +33,11 @@ class BlocksList extends AbstractController
     ) {
     }
 
-    public function __invoke() : Response
+    public function __invoke(string $bsMode) : Response
     {
         return $this->render('@WidgetsDemo/Blocks/index.html.twig', array(
             'Blocks' => $this->blockResolver->all(),
+            'bsMode' => $bsMode,
         ));
     }
 }
