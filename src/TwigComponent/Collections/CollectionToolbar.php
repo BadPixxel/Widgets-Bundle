@@ -14,10 +14,10 @@
 namespace BadPixxel\Widgets\TwigComponent\Collections;
 
 use BadPixxel\Widgets\Dictionary\Collections\CollectionEvents;
+use BadPixxel\Widgets\Dictionary\Widgets\RenderingModes;
 use BadPixxel\Widgets\Models\Components\AbstractCollectionAwareComponent;
 use Symfony\UX\LiveComponent\Attribute\AsLiveComponent;
 use Symfony\UX\LiveComponent\Attribute\LiveAction;
-use Symfony\UX\LiveComponent\Attribute\LiveListener;
 use Symfony\UX\LiveComponent\Attribute\LiveProp;
 use Symfony\UX\LiveComponent\ComponentToolsTrait;
 use Symfony\UX\LiveComponent\DefaultActionTrait;
@@ -80,5 +80,42 @@ class CollectionToolbar extends AbstractCollectionAwareComponent
         $this->emit(CollectionEvents::END_EDIT, array(
             "type" => $this->getCollection()->getType(),
         ));
+    }
+
+    //==============================================================================
+    // Bootstrap Version Classes
+    //==============================================================================
+
+    /**
+     * Get Actions Column Class
+     */
+    public function getActionsColClass(): string
+    {
+        return match ($this->getRenderingMode()) {
+            RenderingModes::BS3 => "col-xs-12 col-md-6 pull-right text-right",
+            default => "col-12 col-md-6 text-end",
+        };
+    }
+
+    /**
+     * Get Toolbar Container Class
+     */
+    public function getToolbarClass(): string
+    {
+        return match ($this->getRenderingMode()) {
+            RenderingModes::BS3 => "btn-toolbar pull-right justify-content-end",
+            default => "d-flex justify-content-end gap-2",
+        };
+    }
+
+    /**
+     * Get Button Spacing Class
+     */
+    public function getButtonSpacingClass(): string
+    {
+        return match ($this->getRenderingMode()) {
+            RenderingModes::BS3, RenderingModes::BS4 => "mr-2",
+            default => "", // BS5 uses gap-2 on parent
+        };
     }
 }
