@@ -73,7 +73,9 @@ abstract class AbstractWidgetSelector extends AbstractCollectionAwareComponent
         $this->manager->update($collection);
         //==============================================================================
         // Re-Render Collection
-        $this->dispatchBrowserEvent("modal:close");
+        $this->emit(CollectionEvents::END_ADD, array(
+            "type" => $collection->getType()
+        ));
         $this->emit(CollectionEvents::END_EDIT, array(
             "type" => $collection->getType()
         ));
