@@ -699,3 +699,8 @@ phpstan.neon
 /src/Resources/assets/ux-widgets/node_modules/chartjs-plugin-datalabels/LICENSE.md
 /src/Resources/assets/ux-widgets/node_modules/chartjs-plugin-datalabels/package.json
 /src/Resources/assets/ux-widgets/node_modules/chartjs-plugin-datalabels/README.md
+
+###> symfony/asset-mapper ###
+/tests/public/assets/
+/assets/vendor/
+###< symfony/asset-mapper ###
