@@ -1,8 +1,20 @@
 
 {% trans_default_domain "BadPixxelWidgetsBundle" %}
-{% form_theme form 'bootstrap_4_layout.html.twig' %}
 
-<div  class="card" {{ attributes }} >
+{% if configuration.mode == 'bs3' %}
+    {% form_theme form 'bootstrap_3_layout.html.twig' %}
+{% elseif configuration.mode == 'bs4' %}
+    {% form_theme form 'bootstrap_4_layout.html.twig' %}
+{% else %}
+    {% form_theme form 'bootstrap_5_layout.html.twig' %}
+{% endif %}
+
+<div  class="{{ this.mainDivClass }}" {{ attributes }} >
+
+    <div class="{{ this.headerDivClass }}">
+        <twig:Widgets:Widget:Icon :widget="this.widget" />
+        <twig:Widgets:Widget:Title :widget="this.widget" />
+    </div>
 
     {{ form_start(form, {
         attr: {
@@ -12,17 +24,11 @@
         }
     }) }}
 
-    <div class="card-header">
-        <twig:Widgets:Widget:Icon :widget="this.widget" />
-        <twig:Widgets:Widget:Title :widget="this.widget" />
-    </div>
-
-
-    <div class="card-body">
+    <div class="{{ this.bodyDivClass }}">
         {{ form_widget(form, { 'show_legend': false }) }}
     </div>
 
-    <div class="card-footer text-muted text-right">
+    <div class="{{ this.footerDivClass }}">
         <twig:Widgets:Stimulus:Button
                 class="btn-primary"
                 icon="fa fa-fw fa-save"

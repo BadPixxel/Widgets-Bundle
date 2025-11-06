@@ -1,0 +1,28 @@
+<div {{ attributes }} class="row" style="margin-bottom: 10px;">
+
+    <div class="{{ this.leftColClass }}">
+        <twig:Widgets:Stimulus:Button
+                class="{{ this.leftButtonClass }}"
+                icon="fa fa-fw fa-arrow-left"
+                text="actions.move-left"
+                translationDomain="BadPixxelWidgets"
+                action="moveLeft"
+        />
+    </div>
+
+    <div class="d-block {{ this.centerColClass }}">
+        {{ "actions.move"|trans({}, "BadPixxelWidgets") }}
+    </div>
+
+    <div class="{{ this.rightColClass }}">
+        <twig:Widgets:Stimulus:Button
+                class="{{ this.rightButtonClass }}"
+                icon="fa fa-fw fa-arrow-right"
+                text="actions.move-right"
+                translationDomain="BadPixxelWidgets"
+                action="moveRight"
+        />
+    </div>
+
+</div>
+

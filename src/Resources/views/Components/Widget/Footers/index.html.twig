@@ -8,12 +8,18 @@
             &nbsp;|&nbsp;<twig:Widgets:Widget:Origin :widget="widget" />&nbsp;|&nbsp;
             <twig:Widgets:Stimulus:Icon class="btn-info text-xs" icon="fa fa-fw fa-sync" action="refresh" />
 
-            {% if widget.options.Editable | default(false) %}
-                <twig:Widgets:Stimulus:Icon icon="fa fa-fw fa-cog" action="openEditor" />
+            {% if configuration.editable | default(false) %}
+                {% if configuration.edited %}
+                    <twig:Widgets:Stimulus:Icon icon="fa fa-fw fa-cog text-danger" action="closeEditor" />
+                {% else %}
+                    <twig:Widgets:Stimulus:Icon icon="fa fa-fw fa-cog" action="openEditor" />
+                {% endif %}
             {% endif %}
 
-            {% if configuration.edited and configuration.deletable %}
-                <twig:Widgets:Stimulus:Icon icon="fa fa-fw fa-trash text-danger" action="delete" />
+            {% if configuration.deletable %}
+                {% if configuration.edited or configuration.sortable %}
+                    <twig:Widgets:Stimulus:Icon icon="fa fa-fw fa-trash text-danger" action="delete" />
+                {% endif %}
             {% endif %}
 
         </small>

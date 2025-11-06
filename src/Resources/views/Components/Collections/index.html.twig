@@ -1,5 +1,6 @@
 
-<div    id="{{ type }}"
+<div
+        id="{{ type }}"
         class="{% if editMode|default(false) %}splash-widget-sortable-collection{% endif %}"
         {{ attributes.defaults(stimulus_controller('BadPixxelWidgetsSortableController', {
             sortable: this.configuration.sortable
@@ -14,14 +15,20 @@
         />
     {% endif %}
 
-    <div id="{{ type }}-widgets" class="row padding-10 collection-widgets">
-        {% for widget in this.widgets %}
-            {{ component("Widget", widget) }}
-        {% endfor %}
-    </div>
+    {% if this.showAddCard %}
 
-    {% if this.empty and this.configuration.editable %}
-        <twig:Widget:Selector:Card :collection="this.collection" :channel="this.collection.channel" />
+        <div class="col-12">
+            <twig:Widget:Selector:Card :collection="collection" />
+        </div>
+
+    {% else %}
+
+        <div id="{{ type }}-widgets" class="row padding-10 collection-widgets">
+            {% for widget in this.widgets %}
+                {{ component("Widget", widget) }}
+            {% endfor %}
+        </div>
+
     {% endif %}
 
 </div>

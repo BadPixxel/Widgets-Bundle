@@ -1,0 +1,51 @@
+
+{% trans_default_domain "BadPixxelWidgetsBundle" %}
+
+{% if configuration.mode == 'bs3' %}
+    {% form_theme this.getFormView() 'bootstrap_3_layout.html.twig' %}
+{% elseif configuration.mode == 'bs4' %}
+    {% form_theme this.getFormView() 'bootstrap_4_layout.html.twig' %}
+{% else %}
+    {% form_theme this.getFormView() 'bootstrap_5_layout.html.twig' %}
+{% endif %}
+
+
+<div {{ attributes }} >
+
+    {{ form_start(this.getFormView(), {
+        attr: {
+            'class': 'mb-0 px-0',
+            'data-action': 'live#action:prevent',
+            'data-live-action-param': 'save'
+        }
+    }) }}
+
+    {# Widget Configurator Form Body Only #}
+    <div class="widget-configurator-body" style="padding: 15px;">
+        {{ form_widget(this.getFormView(), { 'show_legend': false }) }}
+    </div>
+
+    <div class="{{ this.footerDivClass }}">
+
+        <twig:Widgets:Stimulus:Button
+                class="btn-secondary"
+                icon="fa fa-fw fa-times"
+                text="actions.close"
+                translationDomain="BadPixxelWidgets"
+                action="close"
+        />
+
+        <twig:Widgets:Stimulus:Button
+                class="btn-primary"
+                icon="fa fa-fw fa-save"
+                text="widget.save"
+                translationDomain="BadPixxelWidgets"
+                action="saveAndClose"
+        />
+    </div>
+
+    {{ form_end(this.getFormView()) }}
+</div>
+
+
+

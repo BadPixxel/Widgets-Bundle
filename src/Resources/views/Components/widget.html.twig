@@ -1,19 +1,26 @@
 <div
         {{ attributes }}
-        class="{{ widget.options.Class|default("splash-widget mb-3")}} {{ widget.options.Width }} "
+        class="{{ widget.options.Class|default("splash-widget mb-3")}} {{ this.divClass }} "
         data-id="{{ key }}"
 >
 
-    <twig:Widget:Contents :widget="widget" :configuration="configuration" />
-
-    {% if editMode|default(false) %}
-        <twig:Widget:Configurator:Modal
+    {% if configuration.sortable %}
+        <twig:Widget:Mover
+                :widget="widget"
+                :configuration="configuration"
                 :key="key"
                 :configuratorHash="configuratorHash"
-                :options="widget.options"
-                :parameters="widget.parameters"
+                :position="position"
+                :total="total"
         />
     {% endif %}
+
+    <twig:Widget:Contents
+            :widget="widget"
+            :configuration="configuration"
+            :key="key"
+            :configuratorHash="configuratorHash"
+    />
 
 </div>
 
