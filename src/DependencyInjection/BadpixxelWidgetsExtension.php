@@ -15,7 +15,6 @@ namespace BadPixxel\Widgets\DependencyInjection;
 
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface;
 use Symfony\Component\DependencyInjection\Loader;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 
@@ -24,7 +23,7 @@ use Symfony\Component\HttpKernel\DependencyInjection\Extension;
  *
  * To learn more see {@link http://symfony.com/doc/current/cookbook/bundles/extension.html}
  */
-class BadpixxelWidgetsExtension extends Extension implements PrependExtensionInterface
+class BadpixxelWidgetsExtension extends Extension
 {
     /**
      * {@inheritdoc}
@@ -52,26 +51,6 @@ class BadpixxelWidgetsExtension extends Extension implements PrependExtensionInt
         //====================================================================//
         if (is_array($bundles) && isset($bundles['SonataAdminBundle'])) {
             $loader->load('services/admin.yaml');
-        }
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function prepend(ContainerBuilder $container): void
-    {
-        $bundles = $container->getParameter('kernel.bundles');
-        //====================================================================//
-        // Register Extra Javascript if Sonata Admin is Installed
-        //====================================================================//
-        if (is_array($bundles) && isset($bundles['SonataAdminBundle'])) {
-            $container->prependExtensionConfig('sonata_admin', array(
-                'assets' => array(
-                    'extra_javascripts' => array(
-                        'bundles/badpixxelwidgets/widgets.js'
-                    )
-                ),
-            ));
         }
     }
 }
