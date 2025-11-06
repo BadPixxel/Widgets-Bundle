@@ -21,7 +21,7 @@ class WidgetsDemoRoutes
     /**
      * Home / Landing Page
      */
-    const HOME = "widget_demo_homepage";
+    const HOME = "homepage";
 
     /**
      * BLOCKS - Render List of Available Blocks
