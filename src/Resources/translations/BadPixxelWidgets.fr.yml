@@ -2,83 +2,86 @@
 #    General String Translations
 #
 
-################################################################################    
+################################################################################
 #    Widget Generic Names
-################################################################################  
+################################################################################
 widget:
-    type:           Type de Widget 
-    name:           Nome du Widget
+    type:           Type de Widget
+    name:           Nom du Widget
     params:         Paramètres
     add:            Ajouter
     view:           Voir
     edit:           Editer
     save:           Sauvegarder
-    loading:        "Chargement ..."
+    loading:        "Chargement..."
 
-################################################################################    
+################################################################################
 #    Widget Generic Actions
-################################################################################  
+################################################################################
 actions:
     yes:            Oui
     no:             Non
     close:          Fermer
+    move:           Déplacer ce widget
+    move-left:      Gauche
+    move-right:     Droite
 
 remove:
     label:          Supprimer
     title:          Supprimer ce Widget
-    contents:       Voulez-vous vraiment supprimer ce Widget?
+    contents:       Voulez-vous vraiment supprimer ce widget?
             
-################################################################################    
+################################################################################
 #    Options Form Translations
-################################################################################    
+################################################################################
 options:
     label:          Affichage
     width:
         label:      Largeur
-        tooltip:    Choisissez la bonne largeur de votre Widget et nous l'ajusterons à la taille de votre écran.
-        xs:         Extra Small !! - 25% sur ordinateur
-        sm:         Small - 33%  sur ordinateur
-        m:          Medium (Default) - 50%  sur ordinateur
-        l:          Large - 66%  sur ordinateur
+        tooltip:    "Sélectionnez la largeur de votre widget et nous l'ajusterons sur tous les appareils."
+        xs:         Extra Small !! - 25% sur grands écrans
+        sm:         Small - 33% sur grands écrans
+        m:          Medium (Default) - 50% sur grands écrans
+        l:          Large - 66% sur grands écrans
         xl:         Extra Large - Toujours 100%
     color:
         label:      Couleur
-        tooltip:    Couleur de ce Widget
-        none:       Aucune - Pas de cadre         
-        default:    Défaut        
+        tooltip:    Sélectionnez la couleur du widget
+        none:       Aucune (Pas de bordure)
+        default:    Défaut
         primary:    Principale
-        success:    Succés
+        success:    Succès
         info:       Information
-        warning:    Warning
+        warning:    Attention
         danger:     Danger
     header:
         label:      Afficher le titre
-        tooltip:    Désactivez cette option pour cacher le bandeau de titre
+        tooltip:    Désactivez cette option pour ne pas afficher le titre du widget
     footer:
         label:      Afficher le footer
-        tooltip:    Désactivez cette option pour cacher le bandeau du bas
+        tooltip:    Désactivez cette option pour ne pas afficher le bloc du bas du widget
     usecache:
         label:      Utiliser le Cache
-        tooltip:    Désactivez cette option pour ne pas stocker cacher le contenu en cache
+        tooltip:    Désactivez cette option pour ne pas stocker le contenu du widget en cache
  
-################################################################################    
+################################################################################
 #    Dates Form Translations
-################################################################################ 
-dates:  
-    label:      Dates
-    tooltip:    Sélectionnez la plage de dates pour le vue 
-    D:          Aujourd'hui
+################################################################################
+dates:
+    label:      Plage de dates
+    tooltip:    "Sélectionnez la plage de dates pour la vue"
+    D:          "Aujourd'hui"
     W:          Cette Semaine
     M:          Ce Mois
     Y:          Cette Année
-    LW:         1 Semaine
-    L2W:        2 Semaines
+    LW:         Une Semaine
+    L2W:        Deux Semaines
     LM:         Un Mois
     LY:         Un An
     PD:         Hier
-    PW:         Semaine -1
-    PM:         Mois -1
-    PY:         Année -1
+    PW:         "Semaine Dernière"
+    PM:         Mois Dernier
+    PY:         "Année Dernière"
     
 # ==============================================================================
 # Widget Parameter Setup
@@ -103,15 +106,30 @@ list:
 # ==============================================================================
 
 blocks:
-    
+
     sparkbar:
         height:
-            label:      Hauteur du Garphique
-            tooltip:    Ajustez la Hauteur du Garphique (Pixels)
+            label:      Hauteur du Graphique
+            tooltip:    Ajustez la hauteur du graphique (Pixels)
         barwidth:
             label:      Largeur de Barres
-            tooltip:    Ajustez la Largeur de Barres (Pixels)
+            tooltip:    Ajustez la largeur de barres (Pixels)
         barcolor:
             label:      Couleur de Barres
-            tooltip:    "Ajustez la Couleur de Barres (ex : #00FF00)"
+            tooltip:    "Ajustez la couleur de barres (ex : #00FF00)"
+
+# ==============================================================================
+# Widget Translations
+# ==============================================================================
+
+widgets:
+    technical:
+        not-found:
+            title:          Widget non trouvé
+            description:    "Le widget demandé n'existe pas"
+            text:           "Désolé, le widget que vous recherchez n'existe pas ou n'est plus disponible."
+        not-allowed:
+            title:          Accès refusé
+            description:    Accès non autorisé à ce widget
+            text:           "Vous ne disposez pas des droits suffisants pour accéder à ce widget."
 

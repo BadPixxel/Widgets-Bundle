@@ -126,9 +126,9 @@ widgets:
     technical:
         not-found:
             title:          Widget not found
-            description:    Requested widget was not found
-            text:           'Requested widget was not found...'
+            description:    Requested widget does not exist
+            text:           "Sorry, the widget you are looking for does not exist or is no longer available."
         not-allowed:
             title:          Access denied
-            description:    Access to widget was denied
-            text:           "You don't have enough rights to access this widget..."
+            description:    Unauthorized access to this widget
+            text:           "You do not have sufficient permissions to access this widget."
