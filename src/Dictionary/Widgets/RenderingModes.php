@@ -21,7 +21,7 @@ class RenderingModes
     /**
      * Default
      */
-    const DEFAULT = self::BS4;
+    const DEFAULT = self::BS5;
 
     /**
      * Bootstrap 3

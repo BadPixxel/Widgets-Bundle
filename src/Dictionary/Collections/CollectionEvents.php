@@ -25,12 +25,12 @@ enum CollectionEvents
     /**
      * When Add Widget to Collection is Opened
      */
-    const OPEN_ADD_MODAL = "badpixxel.widget.collection.add.open";
+    const START_ADD = "badpixxel.widget.collection.add.start";
 
     /**
      * When Add Widget to Collection is Closed
      */
-    const CLOSE_ADD_MODAL = "badpixxel.widget.collection.add.close";
+    const END_ADD = "badpixxel.widget.collection.add.end";
 
     //==============================================================================
     // EDIT MODE
@@ -54,4 +54,19 @@ enum CollectionEvents
      * Collection was Updated
      */
     const UPDATED = "badpixxel.widget.collection.updated";
+
+    /**
+     * Collection was Sorted
+     */
+    const SORT = "badpixxel.widget.collection.updated";
+
+    /**
+     * Collection Move Widget to Left
+     */
+    const MOVE_LEFT = "badpixxel.widget.collection.move.left";
+
+    /**
+     * Collection Move Widget to Right
+     */
+    const MOVE_RIGHT = "badpixxel.widget.collection.move.right";
 }
