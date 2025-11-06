@@ -13,6 +13,7 @@
 
 namespace BadPixxel\Widgets\TwigComponent\WidgetConfigurator;
 
+use BadPixxel\Widgets\Dictionary\Widgets\RenderingModes;
 use BadPixxel\Widgets\Dictionary\Widgets\WidgetEvents;
 use BadPixxel\Widgets\Models\AbstractWidget;
 use BadPixxel\Widgets\Models\Components\AbstractConfiguratorAwareComponent;
@@ -85,5 +86,54 @@ class CardConfigurator extends AbstractConfiguratorAwareComponent
     protected function instantiateForm(): FormInterface
     {
         return $this->widgetFormFactory->createForm($this->getWidget());
+    }
+
+    //==============================================================================
+    // RENDERING CONFIGURATION
+    //==============================================================================
+
+    /**
+     * Get Main Div Class
+     */
+    public function getMainDivClass(): string
+    {
+        return match ($this->getRenderingMode()) {
+            RenderingModes::BS3 => "panel panel-default",
+            default => "card",
+        };
+    }
+
+    /**
+     * Get Header Div Class
+     */
+    public function getHeaderDivClass(): string
+    {
+        return match ($this->getRenderingMode()) {
+            RenderingModes::BS3 => "panel-heading",
+            default => "card-header",
+        };
+    }
+
+    /**
+     * Get Body Div Class
+     */
+    public function getBodyDivClass(): string
+    {
+        return match ($this->getRenderingMode()) {
+            RenderingModes::BS3 => "panel-body",
+            default => "card-body",
+        };
+    }
+
+    /**
+     * Get Footer Div Class
+     */
+    public function getFooterDivClass(): string
+    {
+        return match ($this->getRenderingMode()) {
+            RenderingModes::BS3 => "panel-footer text-muted text-right",
+            RenderingModes::BS4 => "card-footer text-muted text-right",
+            default => "card-footer text-muted text-end",
+        };
     }
 }

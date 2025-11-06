@@ -24,6 +24,16 @@ use Symfony\UX\TwigComponent\Attribute\AsTwigComponent;
 class WidgetContents extends AbstractWidgetAwareComponent
 {
     /**
+     * Widget Key (for configurator)
+     */
+    public ?string $key = null;
+
+    /**
+     * Configurator Hash (for configurator)
+     */
+    public ?string $configuratorHash = null;
+
+    /**
      * Check if Rendering Mode Allow Loading Box
      */
     public function isAllowedLoading(): bool

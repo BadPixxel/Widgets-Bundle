@@ -30,7 +30,8 @@ class WidgetFooter extends AbstractWidgetAwareComponent
     {
         return match ($this->getRenderingMode()) {
             RenderingModes::BS3 => "panel-footer font-xs text-right",
-            default => "card-footer py-1 text-right text-footer",
+            RenderingModes::BS4 => "card-footer py-1 text-right text-footer",
+            default => "card-footer py-1 text-end text-footer",
         };
     }
 }

@@ -16,16 +16,15 @@ namespace BadPixxel\Widgets\TwigComponent\WidgetConfigurator;
 use BadPixxel\Widgets\Dictionary\Widgets\WidgetEvents;
 use Symfony\UX\LiveComponent\Attribute\AsLiveComponent;
 use Symfony\UX\LiveComponent\Attribute\LiveAction;
-use Symfony\UX\LiveComponent\Attribute\LiveListener;
 
 /**
- * Render Widget Configurator Modal
+ * Render Widget Configurator Embedded (No Card Header/Footer)
  */
 #[AsLiveComponent(
-    name:       "Widget:Configurator:Modal",
-    template:   "@BadpixxelWidgets/Components/Configurators/modal.html.twig"
+    name:       "Widget:Configurator:Embedded",
+    template:   "@BadpixxelWidgets/Components/Configurators/embedded.html.twig"
 )]
-class ModalConfigurator extends CardConfigurator
+class EmbeddedConfigurator extends CardConfigurator
 {
     /**
      * Save Widget Configuration & Close Modal
@@ -34,18 +33,15 @@ class ModalConfigurator extends CardConfigurator
     public function saveAndClose(): void
     {
         $this->save();
-        $this->dispatchBrowserEvent("modal:close");
         $this->emit(WidgetEvents::CLOSE_EDIT_MODAL);
     }
 
     /**
-     * Close Editor Modal
+     * Close Widget Configuration Form
      */
     #[LiveAction]
-    #[LiveListener("modal:close")]
     public function close(): void
     {
-        $this->dispatchBrowserEvent("modal:close");
         $this->emit(WidgetEvents::CLOSE_EDIT_MODAL);
     }
 }

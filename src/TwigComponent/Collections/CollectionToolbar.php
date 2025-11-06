@@ -35,12 +35,6 @@ class CollectionToolbar extends AbstractCollectionAwareComponent
     use ComponentToolsTrait;
 
     /**
-     * Enable Add Mode
-     */
-    #[LiveProp]
-    public bool $addMode = false;
-
-    /**
      * Enable Edition Mode
      */
     #[LiveProp(updateFromParent: true)]
@@ -51,22 +45,14 @@ class CollectionToolbar extends AbstractCollectionAwareComponent
     //==============================================================================
 
     /**
-     * Open Widgets Add Modal
+     * Start Open Widgets Add Mode
      */
     #[LiveAction]
-    public function openAddModal(): void
+    public function startAdd(): void
     {
-        $this->addMode = true;
-        $this->emit(CollectionEvents::OPEN_ADD_MODAL);
-    }
-
-    /**
-     * When Add Modal is Closed
-     */
-    #[LiveListener(CollectionEvents::CLOSE_ADD_MODAL)]
-    public function editorClosed(): void
-    {
-        $this->addMode = false;
+        $this->emit(CollectionEvents::START_ADD, array(
+            "type" => $this->getCollection()->getType(),
+        ));
     }
 
     //==============================================================================
@@ -79,7 +65,6 @@ class CollectionToolbar extends AbstractCollectionAwareComponent
     #[LiveAction]
     public function startEditor(): void
     {
-        //        $this->editMode = true;
         $this->emit(CollectionEvents::START_EDIT, array(
             "type" => $this->getCollection()->getType(),
         ));
