@@ -22,6 +22,9 @@ actions:
     yes:            Yes
     no:             No
     close:          Close
+    move:           Move this widget
+    move-left:      Left
+    move-right:     Right
 
 remove:         
     label:          Remove    
