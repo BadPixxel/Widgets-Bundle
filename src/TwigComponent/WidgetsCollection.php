@@ -37,6 +37,18 @@ class WidgetsCollection extends AbstractCollectionAwareComponent
     use ComponentToolsTrait;
 
     /**
+     * Enable Add Mode
+     */
+    #[LiveProp()]
+    public bool $addMode = false;
+
+    /**
+     * Enable Edit Mode
+     */
+    #[LiveProp()]
+    public bool $editMode = false;
+
+    /**
      * Enable Collection to Toolbar
      */
     #[LiveProp]
@@ -64,6 +76,13 @@ class WidgetsCollection extends AbstractCollectionAwareComponent
     public function getWidgets(): array
     {
         $widgets = array();
+
+        //==============================================================================
+        // Rework Widgets Configuration for Collection Edit Mode
+        $configuration = $this->getConfiguration();
+        $configuration->sortable = $configuration->sortable && $this->editMode;
+        $configuration->setEdited(false);
+
         //==============================================================================
         // Walk on Defined Widgets
         foreach ($this->getCollection()->getWidgets() as $item) {
@@ -73,21 +92,35 @@ class WidgetsCollection extends AbstractCollectionAwareComponent
                 "options" => $item->getOptions(),
                 "parameters" => $item->getParameters(),
                 "configuration" => $this->getConfiguration(),
+                "position" => $item->getPosition(),
             );
         }
+
         //==============================================================================
         // Sort Widgets by Position
         ksort($widgets);
+
+        //==============================================================================
+        // Add Total Count to All Widgets
+        $total = count($widgets);
+        foreach ($widgets as &$widget) {
+            $widget["total"] = $total;
+        }
 
         return $widgets;
     }
 
     /**
-     * No Widgets on this Collection
+     * Check if Add Widget Card Should be Rendered
+     * - Only if Editable
+     * - No Widgets on this Collection &&
+     * - or if Add Mode is Active
      */
-    public function isEmpty(): bool
+    public function isShowAddCard(): bool
     {
-        return $this->getCollection()->getWidgets()->isEmpty();
+        return $this->getConfiguration()->isEditable()
+            && ($this->addMode || $this->getCollection()->getWidgets()->isEmpty())
+        ;
     }
 
     /**
@@ -127,27 +160,7 @@ class WidgetsCollection extends AbstractCollectionAwareComponent
         return $data;
     }
 
-    /**
-     * When Collection Edit Mode Started
-     */
-    #[LiveListener(CollectionEvents::START_EDIT)]
-    public function editorStart(#[LiveArg] string $type): void
-    {
-        if ($this->type == $type) {
-            $this->getConfiguration()->setEdited(true);
-        }
-    }
 
-    /**
-     * When Collection Edit Mode Stopped
-     */
-    #[LiveListener(CollectionEvents::END_EDIT)]
-    public function editorEnd(#[LiveArg] string $type): void
-    {
-        if ($this->type == $type) {
-            $this->getConfiguration()->setEdited(false);
-        }
-    }
 
     /**
      * Save Changes to Collection
@@ -243,11 +256,8 @@ class WidgetsCollection extends AbstractCollectionAwareComponent
     /**
      * Save Changes to Collection Items
      */
-    #[LiveListener("sort")]
-    public function sortWidgets(
-        #[LiveArg]
-        array $ordering,
-    ): void {
+    #[LiveListener(CollectionEvents::SORT)]
+    public function sortWidgets(#[LiveArg] array $ordering): void {
         $collection = $this->getCollection();
         //==============================================================================
         // Reorder Widgets
@@ -260,5 +270,137 @@ class WidgetsCollection extends AbstractCollectionAwareComponent
         //==============================================================================
         // Save Collection
         $this->manager->update($collection);
+    }
+
+    /**
+     * Move Widget to Left on Collection
+     */
+    #[LiveListener(CollectionEvents::MOVE_LEFT)]
+    public function moveWidgetLeft(#[LiveArg] string $key): void
+    {
+        $collection = $this->getCollection();
+        //==============================================================================
+        // Get Target Widget
+        $targetWidget = $collection->getWidget($key);
+        if (!$targetWidget || null === $targetWidget->getPosition()) {
+            return;
+        }
+        $targetPosition = $targetWidget->getPosition();
+        //==============================================================================
+        // Cannot Move Left if Already First
+        if ($targetPosition <= 0) {
+            return;
+        }
+        //==============================================================================
+        // Find Widget to Swap With (position - 1)
+        $leftWidget = null;
+        foreach ($collection->getWidgets() as $item) {
+            if ($item->getPosition() === ($targetPosition - 1)) {
+                $leftWidget = $item;
+                break;
+            }
+        }
+        //==============================================================================
+        // Swap Positions
+        if ($leftWidget) {
+            $targetWidget->setPosition($targetPosition - 1);
+            $leftWidget->setPosition($targetPosition);
+        }
+        //==============================================================================
+        // Save Collection
+        $this->manager->update($collection);
+    }
+
+    /**
+     * Move Widget to Right on Collection
+     */
+    #[LiveListener(CollectionEvents::MOVE_RIGHT)]
+    public function moveWidgetRight(#[LiveArg] string $key): void
+    {
+        $collection = $this->getCollection();
+        //==============================================================================
+        // Get Target Widget
+        $targetWidget = $collection->getWidget($key);
+        if (!$targetWidget || null === $targetWidget->getPosition()) {
+            return;
+        }
+        $targetPosition = $targetWidget->getPosition();
+        //==============================================================================
+        // Find Widget to Swap With (position + 1)
+        $rightWidget = null;
+        $maxPosition = -1;
+        foreach ($collection->getWidgets() as $item) {
+            $itemPosition = $item->getPosition() ?? 0;
+            $maxPosition = max($maxPosition, $itemPosition);
+            if ($itemPosition === ($targetPosition + 1)) {
+                $rightWidget = $item;
+            }
+        }
+        //==============================================================================
+        // Cannot Move Right if Already Last
+        if ($targetPosition >= $maxPosition) {
+            return;
+        }
+        //==============================================================================
+        // Swap Positions
+        if ($rightWidget) {
+            $targetWidget->setPosition($targetPosition + 1);
+            $rightWidget->setPosition($targetPosition);
+        }
+        //==============================================================================
+        // Save Collection
+        $this->manager->update($collection);
+    }
+
+    //==============================================================================
+    // Manage Collection Events
+    //==============================================================================
+
+    /**
+     * Start Open Widgets Add Mode
+     */
+    #[LiveListener(CollectionEvents::START_ADD)]
+    public function startAdd(#[LiveArg] string $type): void
+    {
+        if ($this->type == $type) {
+            $this->addMode = true;
+        }
+    }
+
+    /**
+     * End Widgets Add Mode
+     */
+    #[LiveListener(CollectionEvents::START_EDIT)]
+    public function endAdd(#[LiveArg] string $type): void
+    {
+        if ($this->type == $type) {
+            $this->addMode = false;
+        }
+    }
+
+    /**
+     * When Collection Edit Mode Started
+     */
+    #[LiveListener(CollectionEvents::START_EDIT)]
+    public function editorStart(#[LiveArg] string $type): void
+    {
+        if ($this->type == $type) {
+            $this->getConfiguration()->setEdited(true);
+            $this->addMode = false;
+            $this->editMode = true;
+        }
+    }
+
+    /**
+     * When Collection Edit Mode Stopped
+     */
+    #[LiveListener(CollectionEvents::END_EDIT)]
+    public function editorEnd(#[LiveArg] string $type): void
+    {
+        if ($this->type == $type) {
+            $this->getConfiguration()->setEdited(false);
+            $this->addMode = false;
+            $this->editMode = false;
+        }
     }
 }

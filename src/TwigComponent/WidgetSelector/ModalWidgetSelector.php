@@ -35,6 +35,6 @@ class ModalWidgetSelector extends CardWidgetSelector
     public function close(): void
     {
         $this->dispatchBrowserEvent("modal:close");
-        $this->emit(CollectionEvents::CLOSE_ADD_MODAL);
+        $this->emit(CollectionEvents::END_ADD);
     }
 }

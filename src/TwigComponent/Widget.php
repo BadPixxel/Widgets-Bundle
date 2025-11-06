@@ -13,8 +13,10 @@
 
 namespace BadPixxel\Widgets\TwigComponent;
 
-//use BadPixxel\Widgets\Entity\Widget;
+use BadPixxel\Widgets\Dictionary\Collections\CollectionEvents;
+use BadPixxel\Widgets\Dictionary\Options;
 use BadPixxel\Widgets\Dictionary\Widgets\WidgetEvents;
+use BadPixxel\Widgets\Dictionary\Widgets\WidgetWidth;
 use BadPixxel\Widgets\Interfaces\WidgetInterface;
 use BadPixxel\Widgets\Models\Components\AbstractConfiguratorAwareComponent;
 use Symfony\UX\LiveComponent\Attribute\AsLiveComponent;
@@ -49,6 +51,18 @@ class Widget extends AbstractConfiguratorAwareComponent
      */
     #[LiveProp()]
     public bool $editMode = false;
+
+    /**
+     * Widget Position in Collection (for Mover buttons)
+     */
+    #[LiveProp(updateFromParent: true)]
+    public ?int $position = null;
+
+    /**
+     * Total Widgets in Collection (for Mover buttons)
+     */
+    #[LiveProp()]
+    public ?int $total = null;
 
     /**
      * Compile Widget for Rendering
@@ -147,6 +161,17 @@ class Widget extends AbstractConfiguratorAwareComponent
     public function openEditor(): void
     {
         $this->editMode = true;
+        $this->configuration->edited = true;
+    }
+
+    /**
+     * Close Widget Configurator
+     */
+    #[LiveAction]
+    public function closeEditor(): void
+    {
+        $this->editMode = false;
+        $this->configuration->edited = false;
     }
 
     /**
@@ -156,11 +181,34 @@ class Widget extends AbstractConfiguratorAwareComponent
     public function editorClosed(): void
     {
         $this->editMode = false;
+        $this->configuration->edited = false;
     }
 
     //==============================================================================
     // COLLECTION ACTIONS
     //==============================================================================
+
+    /**
+     * Move Widget to Left on Collection
+     */
+    #[LiveAction]
+    public function moveLeft(): void
+    {
+        $this->emit(CollectionEvents::MOVE_LEFT, array(
+            "key" => $this->key
+        ));
+    }
+
+    /**
+     * Move Widget to Right on Collection
+     */
+    #[LiveAction]
+    public function moveRight(): void
+    {
+        $this->emit(CollectionEvents::MOVE_RIGHT, array(
+            "key" => $this->key
+        ));
+    }
 
     /**
      * Delete Widget from Collection
@@ -171,5 +219,20 @@ class Widget extends AbstractConfiguratorAwareComponent
         $this->emit(WidgetEvents::DELETED, array(
             "key" => $this->key
         ));
+    }
+
+    //==============================================================================
+    // RENDERING CONFIGURATION
+    //==============================================================================
+
+    /**
+     * Get Widget Div Class
+     */
+    public function getDivClass(): string
+    {
+        return $this->getConfiguration()->isEdited()
+            ? WidgetWidth::M
+            : $this->options[Options::WIDTH] ?? WidgetWidth::M
+        ;
     }
 }
