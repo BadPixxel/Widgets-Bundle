@@ -1,21 +1,22 @@
 {% trans_default_domain "SplashWidgetsBundle" %}   
 {% extends "base.html.twig" %}
 
-{% block headline %}
+{% block title %}
     List of Available Widgets Blocks
 {% endblock %}    
 
-{% block body %}
-    <p>
-        Blocks are Symfony Services, Implementing <code>BlockInterface</code>, and tagged using <code>#[AsWidgetBlock]</code> attribute.
-    </p>
+{% block page_content %}
 
-    <hr>
-{% endblock %}    
-        
-    
-{% block content_row %}
-    <div class='col-12 col-md-10'>
+<div class='row text-center justify-content-center'>
+    <div class='col-12'>
+        <p>
+            Blocks are Symfony Services, Implementing <code>BlockInterface</code>, and tagged using <code>#[AsWidgetBlock]</code> attribute.
+        </p>
+
+        <hr>
+    </div>
+
+    <div class='col-12 col-md-6'>
         {% include '@WidgetsDemo/Blocks/List/contents.html.twig' %}
     </div>
     <div class='col-12 col-md-6'>
@@ -24,5 +25,7 @@
     <div class='col-12 col-md-6'>
 {#        {% include '@WidgetsDemo/List/definition.html.twig' %}#}
     </div>
+
+</div>
 {% endblock %}
 

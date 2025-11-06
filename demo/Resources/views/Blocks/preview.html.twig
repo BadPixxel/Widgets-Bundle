@@ -1,20 +1,20 @@
 {% trans_default_domain "SplashWidgetsBundle" %}   
 {% extends "base.html.twig" %}
 
-{% block headline %}
+{% block title %}
     Widgets Blocks Preview
 {% endblock %}    
 
-{% block body %}
-    <p>
-        Let's see what block <code>{{ Block.type }}</code> looks like!
-    </p>
+{% block page_content %}
 
-    <hr>
-{% endblock %}    
-        
-    
-{% block content_row %}
+<div class='row justify-content-center'>
+    <div class='col-12'>
+        <p>
+            Let's see what block <code>{{ Block.type }}</code> looks like!
+        </p>
+
+        <hr>
+    </div>
     <div class='col-12 col-md-6'>
         {% include '@WidgetsDemo/Blocks/Preview/inputs.html.twig' %}
     </div>
@@ -24,5 +24,6 @@
     <div class='col-12 col-md-10'>
         {% include '@WidgetsDemo/Blocks/List/contents.html.twig' %}
     </div>
+</div>
 {% endblock %}
 

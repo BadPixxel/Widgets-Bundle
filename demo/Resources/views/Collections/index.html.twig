@@ -1,11 +1,13 @@
 
 {% extends "base.html.twig" %}
 
-{% block headline %}
+{% block title %}
     Widgets Collection as Twig Component
 {% endblock %}
 
-{% block content_row %}
+{% block page_content %}
+
+    <div class='row  justify-content-center'>
 
     <div class="col-xs-12 col-md-6 p-3">
         <h3>
@@ -47,6 +49,7 @@
                 title="Demo Widgets Collection"
                 icon="fa fa-check-double text-success"
                 :channel="null"
+                configuration="{{ { "mode": bsMode } }}"
         />
         <twig:Widget:Selector:Card :type="Type" />
     </div>

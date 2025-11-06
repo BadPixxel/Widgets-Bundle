@@ -28,7 +28,10 @@
                 <td class="text-center">
                     {% if Block.hasDemo() %}
                     <a
-                            href="{{ path(constant('BadPixxel\\Widgets\\Demo\\Dictionary\\WidgetsDemoRoutes::BLOCKS_PREVIEW'), {"type": Block.type}) }}"
+                            href="{{ path(constant('BadPixxel\\Widgets\\Demo\\Dictionary\\WidgetsDemoRoutes::BLOCKS_PREVIEW'), {
+                                "type": Block.type,
+                                "bsMode": bsMode
+                            }) }}"
                             class="btn btn-labeled btn-primary"
                     >
                         <i class="far fa-smile-wink"></i>

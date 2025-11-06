@@ -3,7 +3,7 @@
     <a
         type="button"
         class="btn {% if Channel is empty %}btn-primary{% else %}btn-secondary{% endif %}"
-        href="{{ path(app.request.get('_route')) }}"
+        href="{{ path(app.request.get('_route'), { bsMode: bsMode }) }}"
     >
         All
     </a>
@@ -11,7 +11,7 @@
         <a
             type="button"
             class="btn {% if Channel == channelCode %}btn-primary{% else %}btn-secondary{% endif %}"
-            href="{{ path(app.request.get('_route'), { channel: channelCode }) }}"
+            href="{{ path(app.request.get('_route'), { channel: channelCode, bsMode: bsMode }) }}"
         >
             {{ channelCode }}
         </a>
