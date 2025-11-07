@@ -1,7 +1,5 @@
 {% extends "@WidgetsDemo/Bootstrap/base.html.twig" %}
 
-{% block title %}Bootstrap 4 Test{% endblock %}
-
 {% block stylesheets %}
     {# Bootstrap 4.6.2 from CDN #}
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -23,54 +21,26 @@
 
     <div class="mx-4">
 
-        <h1 class="text-center mb-5">Bootstrap 4 Compatibility Test</h1>
+        <h1 class="text-center mb-5">
+            {% block title %}BadPixxel Widgets{% endblock %} - Bootstrap 4
+        </h1>
 
         {# Version Switcher Menu #}
         {% include '@WidgetsDemo/Bootstrap/_menu.html.twig' with {'bsVersion': 'bs4'} %}
 
         {# Page Content Block - can be overridden #}
         {% block page_content %}
-        {# Alert Component Test #}
-        <div class="row">
-            <div class="col-md-6">
-                <h3>Alert Component</h3>
-                <div class="alert alert-success alert-dismissible fade show">
-                    <button type="button" class="close" data-dismiss="alert">&times;</button>
-                    <strong>Success!</strong> Bootstrap 4 alert with <code>data-dismiss</code>.
-                </div>
-            </div>
+        <div class="alert alert-info">
+            <h4><i class="fa fa-info-circle"></i> Content Block Empty</h4>
+            <p>
+                This page uses Bootstrap 4 layout. To add content, override the <code>page_content</code> block in your template:
+            </p>
+            <pre><code>{% verbatim %}{% extends "@WidgetsDemo/Bootstrap/base.bs4.html.twig" %}
 
-            <div class="col-md-6">
-                <h3>Progress Bar</h3>
-                <div class="progress">
-                    <div class="progress-bar bg-success" style="width: 75%">
-                        75%
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <hr class="my-5">
-
-        {# Card Component Test #}
-        <div class="row">
-            <div class="col-md-4">
-                <div class="card text-white bg-primary mb-3">
-                    <div class="card-header">Card Primary</div>
-                    <div class="card-body">
-                        Bootstrap 4 uses <code>card</code> component.
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        {# Button Test #}
-        <div class="text-center mt-5">
-            <h3>Buttons</h3>
-            <button class="btn btn-primary">Primary</button>
-            <button class="btn btn-success">Success</button>
-            <button class="btn btn-warning">Warning</button>
-            <button class="btn btn-danger">Danger</button>
+{% block page_content %}
+    {# Your content here #}
+    <twig:WidgetPreview configurator="{{ configurator }}" />
+{% endblock %}{% endverbatim %}</code></pre>
         </div>
         {% endblock page_content %}
 
@@ -80,7 +50,7 @@
         <p>
             <small>
                 Bootstrap 4 Compatibility Test<br>
-                BadPixxel Widgets Bundle v3.0
+                BadPixxel Widgets Bundle
             </small>
         </p>
     </footer>

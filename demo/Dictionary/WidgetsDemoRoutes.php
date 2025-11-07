@@ -19,7 +19,7 @@ namespace BadPixxel\Widgets\Demo\Dictionary;
 class WidgetsDemoRoutes
 {
     /**
-     * Home / Landing Page
+     * Home Page
      */
     const HOME = "homepage";
 

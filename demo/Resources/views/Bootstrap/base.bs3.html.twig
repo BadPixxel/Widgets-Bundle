@@ -1,7 +1,5 @@
 {% extends "@WidgetsDemo/Bootstrap/base.html.twig" %}
 
-{% block title %}Bootstrap 3 Test{% endblock %}
-
 {% block stylesheets %}
     {# Bootstrap 3.4.1 from CDN #}
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -23,54 +21,26 @@
 
     <div class="">
 
-        <h1 class="text-center">Bootstrap 3 Compatibility Test</h1>
+        <h1 class="text-center">
+            {% block title %}BadPixxel Widgets{% endblock %} - Bootstrap 3
+        </h1>
 
         {# Version Switcher Menu #}
         {% include '@WidgetsDemo/Bootstrap/_menu.html.twig' with {'bsVersion': 'bs3'} %}
 
         {# Page Content Block - can be overridden #}
         {% block page_content %}
-        {# Alert Component Test #}
-        <div class="row">
-            <div class="col-md-6">
-                <h3>Alert Component</h3>
-                <div class="alert alert-success">
-                    <button type="button" class="close" data-dismiss="alert">&times;</button>
-                    <strong>Success!</strong> Bootstrap 3 alert with <code>data-dismiss</code>.
-                </div>
-            </div>
+        <div class="alert alert-info">
+            <h4><i class="fa fa-info-circle"></i> Content Block Empty</h4>
+            <p>
+                This page uses Bootstrap 3 layout. To add content, override the <code>page_content</code> block in your template:
+            </p>
+            <pre><code>{% verbatim %}{% extends "@WidgetsDemo/Bootstrap/base.bs3.html.twig" %}
 
-            <div class="col-md-6">
-                <h3>Progress Bar</h3>
-                <div class="progress">
-                    <div class="progress-bar progress-bar-success" style="width: 75%">
-                        75%
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <hr style="margin: 40px 0;">
-
-        {# Panel Component Test #}
-        <div class="row">
-            <div class="col-md-4">
-                <div class="panel panel-primary">
-                    <div class="panel-heading">Panel Primary</div>
-                    <div class="panel-body">
-                        Bootstrap 3 uses <code>panel</code> component.
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        {# Button Test #}
-        <div class="text-center" style="margin-top: 40px;">
-            <h3>Buttons</h3>
-            <button class="btn btn-primary">Primary</button>
-            <button class="btn btn-success">Success</button>
-            <button class="btn btn-warning">Warning</button>
-            <button class="btn btn-danger">Danger</button>
+{% block page_content %}
+    {# Your content here #}
+    <twig:WidgetPreview configurator="{{ configurator }}" />
+{% endblock %}{% endverbatim %}</code></pre>
         </div>
         {% endblock page_content %}
 
@@ -80,7 +50,7 @@
         <p>
             <small>
                 Bootstrap 3 Compatibility Test<br>
-                BadPixxel Widgets Bundle v3.0
+                BadPixxel Widgets Bundle
             </small>
         </p>
     </footer>

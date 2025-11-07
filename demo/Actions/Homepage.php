@@ -14,6 +14,7 @@
 namespace BadPixxel\Widgets\Demo\Actions;
 
 use BadPixxel\Widgets\Demo\Dictionary\WidgetsDemoRoutes;
+use BadPixxel\Widgets\Dictionary\Widgets\RenderingModes;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -27,8 +28,16 @@ use Symfony\Component\Routing\Annotation\Route;
 )]
 class Homepage extends AbstractController
 {
-    public function __invoke() : Response
+    public function __invoke(string $bsMode): Response
     {
+        // If Bootstrap version specified, render Bootstrap layout
+        if ($bsMode && in_array($bsMode, RenderingModes::all(), true)) {
+            return $this->render('@WidgetsDemo/index.html.twig', array(
+                'bsMode' => $bsMode,
+            ));
+        }
+
+        // Default: render standard homepage
         return $this->render('@WidgetsDemo/index.html.twig');
     }
 }
