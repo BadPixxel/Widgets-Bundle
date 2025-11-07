@@ -14,7 +14,10 @@
 namespace BadPixxel\Widgets\Demo\Actions;
 
 use BadPixxel\Widgets\Demo\Dictionary\WidgetsDemoRoutes;
+use BadPixxel\Widgets\Demo\Widgets\CacheStatus;
+use BadPixxel\Widgets\Demo\Widgets\Text;
 use BadPixxel\Widgets\Dictionary\Widgets\RenderingModes;
+use BadPixxel\Widgets\Services\Widgets\WidgetsResolver;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -28,16 +31,31 @@ use Symfony\Component\Routing\Annotation\Route;
 )]
 class Homepage extends AbstractController
 {
+    public function __construct(
+        private readonly WidgetsResolver $widgetsResolver
+    ) {
+    }
+
     public function __invoke(string $bsMode): Response
     {
+        //==============================================================================
+        // Load Widget Configurators by Class
+        $textConfigurator = $this->widgetsResolver->resolve(Text::class, true);
+        $cacheConfigurator = $this->widgetsResolver->resolve(CacheStatus::class, true);
+
         // If Bootstrap version specified, render Bootstrap layout
         if ($bsMode && in_array($bsMode, RenderingModes::all(), true)) {
             return $this->render('@WidgetsDemo/index.html.twig', array(
                 'bsMode' => $bsMode,
+                'textConfigurator' => $textConfigurator,
+                'cacheConfigurator' => $cacheConfigurator,
             ));
         }
 
         // Default: render standard homepage
-        return $this->render('@WidgetsDemo/index.html.twig');
+        return $this->render('@WidgetsDemo/index.html.twig', array(
+            'textConfigurator' => $textConfigurator,
+            'cacheConfigurator' => $cacheConfigurator,
+        ));
     }
 }
