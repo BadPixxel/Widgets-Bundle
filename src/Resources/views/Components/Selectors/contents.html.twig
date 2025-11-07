@@ -3,10 +3,17 @@
 <!-- Nav tabs -->
 <ul class="nav nav-pills nav-justified nav-fill mb-2">
     {% for Tab in this.tabs %}
-        <li class="nav-item {% if loop.first %}active{% endif %}" >
+        <li class="nav-item {{ this.getNavItemActiveClass(loop.first) }}">
             <a
-                    class="nav-link {% if loop.first %}active{% endif %}" href="#tab-{{ Tab.id }}"
-                    aria-controls="tab-{{ Tab.id }}" role="tab" data-toggle="tab"
+                    class="nav-link {{ this.getNavLinkActiveClass(loop.first) }}"
+                    href="#tab-{{ Tab.id }}"
+                    aria-controls="tab-{{ Tab.id }}"
+                    role="tab"
+                    {% if this.configuration.mode == 'bs5' %}
+                        data-bs-toggle="tab"
+                    {% else %}
+                        data-toggle="tab"
+                    {% endif %}
             >
                 {{ Tab.label | raw }}
             </a>
@@ -18,7 +25,7 @@
 <div class="tab-content">
 
     {% for Tab in this.tabs %}
-        <div role="tabpanel" class="tab-pane {% if loop.first %}active{% endif %}" id="tab-{{ Tab.id }}">
+        <div role="tabpanel" class="tab-pane {{ this.getNavLinkActiveClass(loop.first) }} {{ this.getTabPaneShowClass(loop.first) }}" id="tab-{{ Tab.id }}">
 
             <table class="table table-bordered table-striped no-padding" role="content" id='splash-widgets-list'>
                 <thead>

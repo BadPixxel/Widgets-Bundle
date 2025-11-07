@@ -18,7 +18,10 @@
     {% if this.showAddCard %}
 
         <div class="col-12">
-            <twig:Widget:Selector:Card :collection="collection" />
+            <twig:Widget:Selector:Card
+                    :collection="collection"
+                    :configuration="this.configuration"
+            />
         </div>
 
     {% else %}

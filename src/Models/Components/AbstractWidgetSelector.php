@@ -14,6 +14,7 @@
 namespace BadPixxel\Widgets\Models\Components;
 
 use BadPixxel\Widgets\Dictionary\Collections\CollectionEvents;
+use BadPixxel\Widgets\Dictionary\Widgets\RenderingModes;
 use BadPixxel\Widgets\Services\CollectionManager;
 use BadPixxel\Widgets\Services\Widgets\WidgetsResolver;
 use BadPixxel\Widgets\Widgets\Descriptor\TranslatableDescriptor;
@@ -116,5 +117,39 @@ abstract class AbstractWidgetSelector extends AbstractCollectionAwareComponent
         }
 
         return $this->tabs;
+    }
+
+    //==============================================================================
+    // Bootstrap Version Classes
+    //==============================================================================
+
+    /**
+     * Get Nav Link Active Class for First Tab
+     */
+    public function getNavLinkActiveClass(bool $isFirst): string
+    {
+        return $isFirst ? "active" : "";
+    }
+
+    /**
+     * Get Nav Item Active Class (BS3 only)
+     */
+    public function getNavItemActiveClass(bool $isFirst): string
+    {
+        return match ($this->getRenderingMode()) {
+            RenderingModes::BS3 => $isFirst ? "active" : "",
+            default => "",
+        };
+    }
+
+    /**
+     * Get Tab Pane Show Class (BS5 only)
+     */
+    public function getTabPaneShowClass(bool $isFirst): string
+    {
+        return match ($this->getRenderingMode()) {
+            RenderingModes::BS3, RenderingModes::BS4 => "",
+            default => $isFirst ? "show" : "",
+        };
     }
 }
