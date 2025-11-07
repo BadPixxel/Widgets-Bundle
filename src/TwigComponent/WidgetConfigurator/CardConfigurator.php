@@ -78,16 +78,6 @@ class CardConfigurator extends AbstractConfiguratorAwareComponent
         ));
     }
 
-    /**
-     * @inheritDoc
-     *
-     * @throws Exception
-     */
-    protected function instantiateForm(): FormInterface
-    {
-        return $this->widgetFormFactory->createForm($this->getWidget());
-    }
-
     //==============================================================================
     // RENDERING CONFIGURATION
     //==============================================================================
@@ -135,5 +125,15 @@ class CardConfigurator extends AbstractConfiguratorAwareComponent
             RenderingModes::BS4 => "card-footer text-muted text-right",
             default => "card-footer text-muted text-end",
         };
+    }
+
+    /**
+     * @inheritDoc
+     *
+     * @throws Exception
+     */
+    protected function instantiateForm(): FormInterface
+    {
+        return $this->widgetFormFactory->createForm($this->getWidget());
     }
 }

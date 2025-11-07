@@ -182,7 +182,6 @@ class WidgetsResolver
             foreach ($widgetLoader->getConfigurators() as $configurator) {
                 //==============================================================================
                 // Register Widget Configuration
-                Assert::isInstanceOf($configurator, WidgetConfigurator::class);
                 $configurators[$configurator->getHash()] ??= $configurator;
             }
         }

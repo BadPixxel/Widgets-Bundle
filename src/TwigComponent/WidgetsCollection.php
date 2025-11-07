@@ -17,6 +17,7 @@ use BadPixxel\Widgets\Dictionary\Collections\CollectionEvents;
 use BadPixxel\Widgets\Dictionary\Widgets\WidgetEvents;
 use BadPixxel\Widgets\Entity\WidgetCollection;
 use BadPixxel\Widgets\Models\Components\AbstractCollectionAwareComponent;
+use BadPixxel\Widgets\Models\Components\CollectionModesAwareTrait;
 use BadPixxel\Widgets\Services\CollectionManager;
 use BadPixxel\Widgets\Services\Widgets\WidgetsResolver;
 use Symfony\UX\LiveComponent\Attribute\AsLiveComponent;
@@ -35,18 +36,7 @@ use Webmozart\Assert\Assert;
 class WidgetsCollection extends AbstractCollectionAwareComponent
 {
     use ComponentToolsTrait;
-
-    /**
-     * Enable Add Mode
-     */
-    #[LiveProp()]
-    public bool $addMode = false;
-
-    /**
-     * Enable Edit Mode
-     */
-    #[LiveProp()]
-    public bool $editMode = false;
+    use CollectionModesAwareTrait;
 
     /**
      * Enable Collection to Toolbar
@@ -160,8 +150,6 @@ class WidgetsCollection extends AbstractCollectionAwareComponent
         return $data;
     }
 
-
-
     /**
      * Save Changes to Collection
      */
@@ -257,7 +245,8 @@ class WidgetsCollection extends AbstractCollectionAwareComponent
      * Save Changes to Collection Items
      */
     #[LiveListener(CollectionEvents::SORT)]
-    public function sortWidgets(#[LiveArg] array $ordering): void {
+    public function sortWidgets(#[LiveArg] array $ordering): void
+    {
         $collection = $this->getCollection();
         //==============================================================================
         // Reorder Widgets
@@ -297,6 +286,7 @@ class WidgetsCollection extends AbstractCollectionAwareComponent
         foreach ($collection->getWidgets() as $item) {
             if ($item->getPosition() === ($targetPosition - 1)) {
                 $leftWidget = $item;
+
                 break;
             }
         }
@@ -350,57 +340,5 @@ class WidgetsCollection extends AbstractCollectionAwareComponent
         //==============================================================================
         // Save Collection
         $this->manager->update($collection);
-    }
-
-    //==============================================================================
-    // Manage Collection Events
-    //==============================================================================
-
-    /**
-     * Start Open Widgets Add Mode
-     */
-    #[LiveListener(CollectionEvents::START_ADD)]
-    public function startAdd(#[LiveArg] string $type): void
-    {
-        if ($this->type == $type) {
-            $this->addMode = true;
-        }
-    }
-
-    /**
-     * End Widgets Add Mode
-     */
-    #[LiveListener(CollectionEvents::START_EDIT)]
-    public function endAdd(#[LiveArg] string $type): void
-    {
-        if ($this->type == $type) {
-            $this->addMode = false;
-        }
-    }
-
-    /**
-     * When Collection Edit Mode Started
-     */
-    #[LiveListener(CollectionEvents::START_EDIT)]
-    public function editorStart(#[LiveArg] string $type): void
-    {
-        if ($this->type == $type) {
-            $this->getConfiguration()->setEdited(true);
-            $this->addMode = false;
-            $this->editMode = true;
-        }
-    }
-
-    /**
-     * When Collection Edit Mode Stopped
-     */
-    #[LiveListener(CollectionEvents::END_EDIT)]
-    public function editorEnd(#[LiveArg] string $type): void
-    {
-        if ($this->type == $type) {
-            $this->getConfiguration()->setEdited(false);
-            $this->addMode = false;
-            $this->editMode = false;
-        }
     }
 }

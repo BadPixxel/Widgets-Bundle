@@ -102,7 +102,6 @@ class TableBlock extends AbstractBlock implements BlockWithDemoInterface
     public function addRows(array $rows) : self
     {
         foreach ($rows as $row) {
-            Assert::isArray($row, "Table Row must an Array");
             $this->addRow($row);
         }
 
