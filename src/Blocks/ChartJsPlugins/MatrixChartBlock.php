@@ -137,7 +137,7 @@ class MatrixChartBlock extends AbstractChartBlock implements BlockWithDemoInterf
         ;
         //==============================================================================
         // Block Options
-        $this->setShowLegend();
+        $this->setShowLegend(false);
     }
 
     /**
