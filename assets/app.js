@@ -25,6 +25,6 @@ app.debug = true;
 
 //------------------------------------------------------------------------------
 // Register 3rd party Controllers & More
-// MUST be after window.app is set
+// Using static import to ensure plugins are registered BEFORE any chart loads
 //------------------------------------------------------------------------------
-import('@badpixxel/ux-widgets');
+import '@badpixxel/ux-widgets';
