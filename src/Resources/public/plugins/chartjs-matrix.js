@@ -9,17 +9,15 @@
  *  file that was distributed with this source code.
  */
 
-//------------------------------------------------------------------------------
-// Matrix Chart JS Extensions
-//------------------------------------------------------------------------------
+//==============================================================================
+// Chart.js Matrix Plugin Loader
+// Loads chartjs-chart-matrix plugin for building chart.js matrix/heatmap charts
+//==============================================================================
+
 import { MatrixController, MatrixElement } from 'chartjs-chart-matrix';
 document.addEventListener('chartjs:init', function (event) {
     const Chart = event.detail.Chart;
     Chart.register(MatrixController, MatrixElement);
-});
 
-//------------------------------------------------------------------------------
-// Register Symfony Live Controller
-//------------------------------------------------------------------------------
-import ChartJsMatrixController from '@badpixxel/ux-widgets/stimulus/plugins/chartjs_matrix_controller';
-app.register('BadPixxelWidgetsChartJsMatrixController', ChartJsMatrixController);
+    console.debug("✅ BadPixxel Widgets: Registered Chart.js Matrix plugin");
+});

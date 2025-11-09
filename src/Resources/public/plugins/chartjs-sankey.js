@@ -9,11 +9,16 @@
  *  file that was distributed with this source code.
  */
 
-//------------------------------------------------------------------------------
-// Matrix Chart JS Extensions
-//------------------------------------------------------------------------------
+//==============================================================================
+// Chart.js Sankey Plugin Loader
+// Loads chartjs-chart-sankey plugin for flow diagrams
+//==============================================================================
+
 import {SankeyController, Flow} from 'chartjs-chart-sankey';
 document.addEventListener('chartjs:init', function (event) {
     const Chart = event.detail.Chart;
     Chart.register(SankeyController, Flow);
+
+    console.debug("✅ BadPixxel Widgets: Registered Chart.js Sankey plugin");
 });
+
