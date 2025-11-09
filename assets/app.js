@@ -13,6 +13,12 @@ const app = startStimulusApp();
 window.app = app;
 
 //------------------------------------------------------------------------------
+// Register Symfony Live Controller
+//------------------------------------------------------------------------------
+import LiveController from '@symfony/ux-live-component';
+app.register('live', LiveController);
+
+//------------------------------------------------------------------------------
 // Enable Stimulus Debug in DEV
 //------------------------------------------------------------------------------
 app.debug = true;
