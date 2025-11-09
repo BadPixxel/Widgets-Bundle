@@ -10,13 +10,15 @@ window.$ = window.jQuery = $;
 //------------------------------------------------------------------------------
 import { startStimulusApp } from '@symfony/stimulus-bundle';
 const app = startStimulusApp();
-window.app = app ;
-
-//------------------------------------------------------------------------------
-// Register 3rd party Controllers & More
-//------------------------------------------------------------------------------
-import '@badpixxel/ux-widgets';
+window.app = app;
 
 //------------------------------------------------------------------------------
 // Enable Stimulus Debug in DEV
+//------------------------------------------------------------------------------
 app.debug = true;
+
+//------------------------------------------------------------------------------
+// Register 3rd party Controllers & More
+// MUST be after window.app is set
+//------------------------------------------------------------------------------
+import('@badpixxel/ux-widgets');
