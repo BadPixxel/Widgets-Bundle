@@ -10,7 +10,6 @@
  */
 
 import { Controller } from '@hotwired/stimulus';
-
 import { color } from 'chart.js/helpers';
 
 export default class MatrixController extends Controller {
@@ -169,5 +168,4 @@ export default class MatrixController extends Controller {
             return color('green').alpha(alpha);
         }
     }
-
 }
