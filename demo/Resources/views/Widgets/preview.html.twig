@@ -18,7 +18,7 @@
 
         <twig:Widget:Configurator:Card
                 :configurator="Configurator"
-                configuration="{{ { "mode": bsMode } }}"
+                :configuration="Configuration"
         />
     </div>
 
@@ -27,7 +27,8 @@
 
         <twig:Widget
                 :configurator="Configurator"
-                configuration="{{ { "mode": bsMode } }}"
+                :configuration="Configuration"
+                :options="Options"
                 loading="defer"
         />
 

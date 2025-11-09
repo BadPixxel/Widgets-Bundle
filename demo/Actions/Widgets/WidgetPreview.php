@@ -46,6 +46,9 @@ class WidgetPreview extends AbstractController
             'Hash' => $hash,
             'Configurator' => $configurator,
             'Widget' => $configurator->getService(),
+            'Configuration' => array(
+                "mode" => $bsMode
+            ),
             'Options' => array(
                 Options::WIDTH => WidgetWidth::XL
             ),
