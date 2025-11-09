@@ -13,19 +13,21 @@ import { Controller } from '@hotwired/stimulus';
 import { color } from 'chart.js/helpers';
 
 export default class MatrixController extends Controller {
+    static matrixPluginLoaded = false;
+
     connect() {
-        this.element.addEventListener('chartjs:pre-connect', this._onPreConnect);
+        this.element.addEventListener('chartjs:pre-connect', this._onPreConnect.bind(this));
     }
 
     disconnect() {
         // You should always remove listeners when the controller is disconnected to avoid side effects
-        this.element.removeEventListener('chartjs:pre-connect', this._onPreConnect);
+        this.element.removeEventListener('chartjs:pre-connect', this._onPreConnect.bind(this));
     }
 
     /**
      * Configure Chart for Matrix Plugin
      */
-    _onPreConnect(event) {
+    async _onPreConnect(event) {
         //------------------------------------------------------------------------------
         // Safety Check
         if (event.detail.config.type !== 'matrix') {
