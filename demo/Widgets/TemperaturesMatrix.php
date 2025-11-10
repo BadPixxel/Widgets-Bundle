@@ -146,6 +146,7 @@ class TemperaturesMatrix extends AbstractWidget implements ConfigurableWidgetInt
             }
 
             // Extract hour from time string (format: "HH:MM")
+            /** @var string[] $timeParts */
             $timeParts = explode(':', $record['date']);
             $hour = $timeParts[0] ?? '00';
 

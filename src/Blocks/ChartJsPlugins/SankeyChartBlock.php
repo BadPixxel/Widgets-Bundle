@@ -71,6 +71,8 @@ class SankeyChartBlock extends AbstractChartBlock implements BlockWithDemoInterf
      * Generates a demo dataset showing company revenue flows
      *
      * @return array An array containing the flow diagram data
+     *
+     * @SuppressWarnings(ExcessiveMethodLength)
      */
     public function getDemoDataset(): array
     {
@@ -88,29 +90,104 @@ class SankeyChartBlock extends AbstractChartBlock implements BlockWithDemoInterf
         // Format: from → to, flow amount
         $flows = array(
             // Revenue Sources → Total Revenue
-            array("from" => "Product Sales", "to" => "Total Revenue", "flow" => 150000, "color" => $colors['revenue']),
-            array("from" => "Services", "to" => "Total Revenue", "flow" => 80000, "color" => $colors['revenue']),
-            array("from" => "Subscriptions", "to" => "Total Revenue", "flow" => 50000, "color" => $colors['revenue']),
+            array(
+                "from" => "Product Sales",
+                "to" => "Total Revenue",
+                "flow" => 150000,
+                "color" => $colors['revenue']
+            ),
+            array(
+                "from" => "Services",
+                "to" => "Total Revenue",
+                "flow" => 80000,
+                "color" => $colors['revenue']
+            ),
+            array(
+                "from" => "Subscriptions",
+                "to" => "Total Revenue",
+                "flow" => 50000,
+                "color" => $colors['revenue']
+            ),
 
             // Total Revenue → Main Categories
-            array("from" => "Total Revenue", "to" => "Operating Costs", "flow" => 120000, "color" => $colors['expenses']),
-            array("from" => "Total Revenue", "to" => "Marketing", "flow" => 60000, "color" => $colors['expenses']),
-            array("from" => "Total Revenue", "to" => "R&D", "flow" => 40000, "color" => $colors['expenses']),
-            array("from" => "Total Revenue", "to" => "Net Profit", "flow" => 60000, "color" => $colors['profit']),
+            array(
+                "from" => "Total Revenue",
+                "to" => "Operating Costs",
+                "flow" => 120000,
+                "color" => $colors['expenses']
+            ),
+            array(
+                "from" => "Total Revenue",
+                "to" => "Marketing",
+                "flow" => 60000,
+                "color" => $colors['expenses']
+            ),
+            array(
+                "from" => "Total Revenue",
+                "to" => "R&D",
+                "flow" => 40000,
+                "color" => $colors['expenses']
+            ),
+            array(
+                "from" => "Total Revenue",
+                "to" => "Net Profit",
+                "flow" => 60000,
+                "color" => $colors['profit']
+            ),
 
             // Operating Costs Breakdown
-            array("from" => "Operating Costs", "to" => "Salaries", "flow" => 70000, "color" => $colors['operations']),
-            array("from" => "Operating Costs", "to" => "Infrastructure", "flow" => 30000, "color" => $colors['operations']),
-            array("from" => "Operating Costs", "to" => "Supplies", "flow" => 20000, "color" => $colors['operations']),
+            array(
+                "from" => "Operating Costs",
+                "to" => "Salaries",
+                "flow" => 70000,
+                "color" => $colors['operations']
+            ),
+            array(
+                "from" => "Operating Costs",
+                "to" => "Infrastructure",
+                "flow" => 30000,
+                "color" => $colors['operations']
+            ),
+            array(
+                "from" => "Operating Costs",
+                "to" => "Supplies",
+                "flow" => 20000,
+                "color" => $colors['operations']
+            ),
 
             // Marketing Breakdown
-            array("from" => "Marketing", "to" => "Digital Ads", "flow" => 35000, "color" => $colors['operations']),
-            array("from" => "Marketing", "to" => "Events", "flow" => 15000, "color" => $colors['operations']),
-            array("from" => "Marketing", "to" => "Content", "flow" => 10000, "color" => $colors['operations']),
+            array(
+                "from" => "Marketing",
+                "to" => "Digital Ads",
+                "flow" => 35000,
+                "color" => $colors['operations']
+            ),
+            array(
+                "from" => "Marketing",
+                "to" => "Events",
+                "flow" => 15000,
+                "color" => $colors['operations']
+            ),
+            array(
+                "from" => "Marketing",
+                "to" => "Content",
+                "flow" => 10000,
+                "color" => $colors['operations']
+            ),
 
             // R&D Allocation
-            array("from" => "R&D", "to" => "New Products", "flow" => 25000, "color" => $colors['operations']),
-            array("from" => "R&D", "to" => "Improvements", "flow" => 15000, "color" => $colors['operations']),
+            array(
+                "from" => "R&D",
+                "to" => "New Products",
+                "flow" => 25000,
+                "color" => $colors['operations']
+            ),
+            array(
+                "from" => "R&D",
+                "to" => "Improvements",
+                "flow" => 15000,
+                "color" => $colors['operations']
+            ),
         );
 
         //==============================================================================
