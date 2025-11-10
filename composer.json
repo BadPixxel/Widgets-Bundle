@@ -33,6 +33,7 @@
         "symfony/http-kernel":                          "^5.4",
         "symfony/monolog-bundle":                       "^2.0|^3.0",
         "doctrine/orm":                                 "^2.14",
+        "doctrine/annotations":                         "^2.0",
         "doctrine/doctrine-bundle":                     "^2.0",
         "knplabs/knp-time-bundle":                      "~1.6",
         "knplabs/knp-menu-bundle":                      "~2.0|~3.0",
