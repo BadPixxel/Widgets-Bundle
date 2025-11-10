@@ -7,11 +7,21 @@ SF_CONTAINERS += app sf7 sf6 sf5
 
 include vendor/badpixxel/php-sdk/make/sdk.mk
 
-build-assets:	## Build All Assets using Node & Webpack
-	@$(DOCKER_COMPOSE) exec node yarn install --no-default-rc
-	@$(DOCKER_COMPOSE) exec node yarn upgrade --no-default-rc
-	@$(DOCKER_COMPOSE) exec node yarn encore production --config config.assets.js --config config.demo.js
+.PHONY: serve
+serve:		# Direct Serve using Symfony CLI
+	symfony serve --no-tls
 
-debug-assets:  ## Build All Assets for Dev
-	$(MAKE) build-assets
-	@$(DOCKER_COMPOSE) exec node yarn encore dev --config config.assets.js --config config.demo.js --watch
+.PHONY: upgrade
+upgrade:	# Update Vendor of a Containers
+	$(MAKE) up
+	$(MAKE) all COMMAND="git config --global --add safe.directory /var/www/html"
+	$(MAKE) all COMMAND="composer update -q || composer update"
+
+
+.PHONY: all
+all: 		# Execute a Command in All Containers
+	@$(foreach service,$(shell docker compose config --services | sort), \
+		set -e; \
+		echo "$(COLOR_CYAN) >> Executing '$(COMMAND)' in container: $(service) $(COLOR_RESET)"; \
+		docker compose exec $(service) bash -c "$(COMMAND)"; \
+	)
