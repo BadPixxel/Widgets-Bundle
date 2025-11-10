@@ -3,7 +3,7 @@
   "description":  "BadPixxel Widgets Assets",
   "type":         "module",
   "main":         "widgets.js",
-  "version":      "1.0.0-dev",
+  "version":      "3.0.0-dev",
   "license":      "MIT",
   "keywords":     ["symfony-ux", "twig", "components"],
 
@@ -17,11 +17,9 @@
           "chartjs-chart-matrix":         "^1.3",
           "chartjs-chart-sankey":         "^0.14.0",
           "@badpixxel/ux-widgets":        "path:%PACKAGE%/../public/widgets.js",
-          "@badpixxel/ux-widgets-app":    {
-              "path":         "%PACKAGE%/../public/app.js",
-              "entrypoint":   true
-          }
-      }
+          "@badpixxel/ux-widgets-app":    "path:%PACKAGE%/../public/widgets-app.js"
+      },
+      "entrypoints": ["@badpixxel/ux-widgets-app"]
   },
 
   "peerDependencies": {
