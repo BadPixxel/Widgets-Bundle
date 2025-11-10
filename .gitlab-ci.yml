@@ -128,19 +128,19 @@ sf6:php-8.1:
 # Symfony 5
 ################################################################
 
-sf5:php-8.2:
-    <<: *core_tests
-    stage:            Symfony-5
-    image:            registry.gitlab.com/badpixxel-projects/php-sdk:php-8.2
-    variables:
-        SYMFONY_REQUIRE: 5.4.*
-
-sf5:php-8.1:
-    <<: *core_tests
-    stage:            Symfony-5
-    image:            registry.gitlab.com/badpixxel-projects/php-sdk:php-8.1
-    variables:
-        SYMFONY_REQUIRE: 5.4.*
+#sf5:php-8.2:
+#    <<: *core_tests
+#    stage:            Symfony-5
+#    image:            registry.gitlab.com/badpixxel-projects/php-sdk:php-8.2
+#    variables:
+#        SYMFONY_REQUIRE: 5.4.*
+#
+#sf5:php-8.1:
+#    <<: *core_tests
+#    stage:            Symfony-5
+#    image:            registry.gitlab.com/badpixxel-projects/php-sdk:php-8.1
+#    variables:
+#        SYMFONY_REQUIRE: 5.4.*
 
 
 
