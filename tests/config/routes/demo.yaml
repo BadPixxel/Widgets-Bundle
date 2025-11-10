@@ -1,7 +1,4 @@
-
 ################################################################################
-# BadPixxel Widget Bundle Demo Routes
-
 # Redirect root to Bootstrap 5 demo
 _badpixxel_widgets_demo_home:
     path: /
@@ -11,6 +8,8 @@ _badpixxel_widgets_demo_home:
         bsMode: 'bs5'
         permanent: true
 
+################################################################################
+# BadPixxel Widget Bundle Demo Routes
 _badpixxel_widgets_bundle_demo_routes:
     resource: "@WidgetsDemoBundle/Resources/config/routing.php"
     prefix:   /{bsMode}
