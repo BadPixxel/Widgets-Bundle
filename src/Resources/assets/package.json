@@ -22,6 +22,13 @@
       "entrypoints": ["@badpixxel/ux-widgets-app"]
   },
 
+  "dependencies": {
+      "jquery":                           "*",
+      "chart.js":                         "^3.4.1 || ^4.0",
+      "chartjs-chart-matrix":             "^1.3",
+      "chartjs-chart-sankey":             "^0.14.0"
+  },
+
   "peerDependencies": {
       "jquery":                           "*",
       "chart.js":                         "^3.4.1 || ^4.0",
