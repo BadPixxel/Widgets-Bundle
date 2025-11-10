@@ -1,6 +1,16 @@
 
 ################################################################################
 # BadPixxel Widget Bundle Demo Routes
+
+# Redirect root to Bootstrap 5 demo
+_badpixxel_widgets_demo_home:
+    path: /
+    controller: Symfony\Bundle\FrameworkBundle\Controller\RedirectController
+    defaults:
+        route: 'homepage'
+        bsMode: 'bs5'
+        permanent: true
+
 _badpixxel_widgets_bundle_demo_routes:
     resource: "@WidgetsDemoBundle/Resources/config/routing.php"
     prefix:   /{bsMode}
