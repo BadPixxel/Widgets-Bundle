@@ -2,7 +2,7 @@
     "name":             "badpixxel/widgets-bundle",
     "description":      "Easy Widgets & Information boxes for Symfony Applications",
     "type":             "symfony-bundle",
-    "keywords":         ["Symfony", "Bundle", "Widget", "PHP", "Simple", "Bootstrap"],
+    "keywords":         ["symfony", "symfony-ux", "Bundle", "Widget", "PHP", "Simple", "Bootstrap"],
     "homepage":         "https://www.badpixxel.com",
     "license":          "MIT",
     "prefer-stable":    true,
