@@ -7,8 +7,8 @@ framework:
     csrf_protection:    true
     validation:         ~
     session:            ~
-    assets: ~
+    assets:             ~
 
 when@test:
     framework:
-        test: ~
+        test:           ~
