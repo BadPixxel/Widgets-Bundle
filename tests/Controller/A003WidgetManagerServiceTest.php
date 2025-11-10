@@ -16,7 +16,7 @@ namespace Splash\Widgets\Tests\Controller;
 use DateTime;
 use Exception;
 use Splash\Widgets\Entity\WidgetCache;
-use Splash\Widgets\Models\WidgetBase        as Widget;
+use Splash\Widgets\Models\WidgetBase as Widget;
 use Splash\Widgets\Services\ManagerService;
 use Splash\Widgets\Tests\Blocks\Test;
 use Splash\Widgets\Tests\Services\SamplesFactoryService as SamplesFactory;

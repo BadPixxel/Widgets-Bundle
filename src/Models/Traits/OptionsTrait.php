@@ -15,7 +15,7 @@ namespace Splash\Widgets\Models\Traits;
 
 use ArrayObject;
 use DateTime;
-use Doctrine\ORM\Mapping                        as ORM;
+use Doctrine\ORM\Mapping as ORM;
 use Exception;
 use Symfony\Component\OptionsResolver\Exception\InvalidOptionsException;
 use Symfony\Component\OptionsResolver\Exception\UndefinedOptionsException;
@@ -237,6 +237,7 @@ trait OptionsTrait
         //==============================================================================
         //  Configure OptionResolver
         $resolver->setDefaults($this->getDefaultOptions());
+
         //==============================================================================
         //  Update Options Array using OptionResolver
         try {

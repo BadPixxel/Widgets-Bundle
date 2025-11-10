@@ -81,6 +81,7 @@ class CollectionController extends AbstractController
                 "EditMode" => false,
             ));
         }
+
         //==============================================================================
         // Render Response
         return $this->render('@SplashWidgets/View/collection.html.twig', array(

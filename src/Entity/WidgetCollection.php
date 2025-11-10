@@ -14,7 +14,7 @@
 namespace Splash\Widgets\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\ORM\Mapping                        as ORM;
+use Doctrine\ORM\Mapping as ORM;
 use Splash\Widgets\Models\Traits\CollectionTrait;
 use Splash\Widgets\Models\Traits\LifecycleTrait;
 use Splash\Widgets\Models\WidgetCollectionBase;

@@ -14,7 +14,7 @@
 namespace Splash\Widgets\Models\Traits;
 
 use Doctrine\Common\Collections\Collection;
-use Doctrine\ORM\Mapping                        as ORM;
+use Doctrine\ORM\Mapping as ORM;
 use Splash\Widgets\Entity\Widget;
 
 /**

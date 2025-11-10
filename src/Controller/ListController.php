@@ -59,6 +59,7 @@ class ListController extends AbstractController
         //==============================================================================
         // Read List of Available Widgets & Prepare Response Array
         $params = $this->prepare($manager, $collectionId, $channel);
+
         //==============================================================================
         // Render Panel List
         return $this->render('@SplashWidgets/List/panel.html.twig', $params);
@@ -89,6 +90,7 @@ class ListController extends AbstractController
         //==============================================================================
         // Import Form Data & Prepare Data for Form Display
         $params = $this->prepare($manager, $collectionId, $channel);
+
         //==============================================================================
         //Render Modal List
         return $this->render('@SplashWidgets/List/modal.html.twig', $params);

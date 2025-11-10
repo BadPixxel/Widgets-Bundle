@@ -176,6 +176,7 @@ class BaseBlock
         //==============================================================================
         //  Configure OptionResolver
         $resolver->setDefaults(static::$DATA);
+
         //==============================================================================
         //  Update Options Array using OptionResolver
         try {
@@ -226,6 +227,7 @@ class BaseBlock
         //==============================================================================
         //  Configure OptionResolver
         $resolver->setDefaults(static::$OPTIONS);
+
         //==============================================================================
         //  Update Options Array using OptionResolver
         try {

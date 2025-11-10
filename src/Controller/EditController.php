@@ -75,6 +75,7 @@ class EditController extends AbstractController
         //==============================================================================
         // Import Form Data & Prepare Data for Form Display
         $params = $this->prepare($request, $manager, $factory, $service, $type);
+
         //==============================================================================
         // Render Widget Edit Modal
         return $this->render('@SplashWidgets/Edit/modal.html.twig', $params);
@@ -112,6 +113,7 @@ class EditController extends AbstractController
         //==============================================================================
         // Import Form Data & Prepare Data for Form Display
         $params = $this->prepare($request, $manager, $factory, $service, $type);
+
         //==============================================================================
         // Render Widget Edit Well
         return $this->render('@SplashWidgets/Edit/panel.html.twig', $params);
@@ -177,6 +179,7 @@ class EditController extends AbstractController
             $manager->setWidgetOptions($service, $type, $widget->getOptions());
             $manager->setWidgetParameters($service, $type, $widget->getParameters());
         }
+
         //==============================================================================
         // Prepare Template Parameters
         return array(

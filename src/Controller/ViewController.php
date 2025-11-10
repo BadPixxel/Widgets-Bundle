@@ -65,6 +65,7 @@ class ViewController extends AbstractController
         if (is_array($decodedOptions) && !empty($decodedOptions)) {
             $widget->mergeOptions($decodedOptions);
         }
+
         //==============================================================================
         // Render Response
         return $this->render('@SplashWidgets/Widget/base.html.twig', array(
@@ -118,6 +119,7 @@ class ViewController extends AbstractController
             //==============================================================================
             // Setup Widget Options
             $cache->mergeOptions($widgetOptions);
+
             //==============================================================================
             // Render Cached Widget
             return $this->render('@SplashWidgets/Widget/base.html.twig', array(

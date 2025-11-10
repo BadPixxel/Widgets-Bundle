@@ -13,7 +13,7 @@
 
 namespace Splash\Widgets\Models\Traits;
 
-use Doctrine\ORM\Mapping                        as ORM;
+use Doctrine\ORM\Mapping as ORM;
 
 /**
  * Widget Position Trait

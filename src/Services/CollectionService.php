@@ -112,6 +112,7 @@ class CollectionService implements WidgetProviderInterface
         /** @var WidgetCollection $collection */
         $collection = $this->repository->find($widgetId[1]);
         $this->collection = $collection;
+
         //====================================================================//
         // Load Widget Definition from Collection
         return $this->collection->getWidget($widgetId[0]);

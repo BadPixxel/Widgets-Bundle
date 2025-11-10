@@ -13,7 +13,7 @@
 
 namespace Splash\Widgets\Models;
 
-use Doctrine\ORM\Mapping                        as ORM;
+use Doctrine\ORM\Mapping as ORM;
 
 /**
  * Widgets Collection Base Object
