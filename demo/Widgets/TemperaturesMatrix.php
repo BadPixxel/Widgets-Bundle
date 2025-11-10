@@ -23,7 +23,6 @@ use BadPixxel\Widgets\Interfaces\Widgets\DatePresetAwareInterface;
 use BadPixxel\Widgets\Models\AbstractWidget;
 use BadPixxel\Widgets\Models\Commons\DatePresetAwareTrait;
 use BadPixxel\Widgets\Widgets\Descriptor\SimpleDescriptor;
-use DateTime;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Webmozart\Assert\Assert;
@@ -105,6 +104,32 @@ class TemperaturesMatrix extends AbstractWidget implements ConfigurableWidgetInt
     }
 
     /**
+     * @inheritDoc
+     */
+    public function buildForm(FormBuilderInterface $builder): void
+    {
+        $cityNames = array();
+        foreach (array_keys($this->collector->getFrCitiesCoordinates()) as $cityName) {
+            $cityNames[$cityName] = $cityName;
+        }
+
+        $builder->add(self::CITY, ChoiceType::class, array(
+            "label" => "Select a City",
+            "choices" => $cityNames
+        ));
+    }
+
+    public function getCity(): string
+    {
+        return (string) $this->getParameter(self::CITY);
+    }
+
+    public function setCity(string $city): static
+    {
+        return $this->setParameter(self::CITY, $city);
+    }
+
+    /**
      * Transform hourly dataset to matrix format
      *
      * @param array $dataset
@@ -167,7 +192,7 @@ class TemperaturesMatrix extends AbstractWidget implements ConfigurableWidgetInt
         $labels = array();
         foreach ($matrixDataset as $item) {
             $xLabel = $item['value']['x'] ?? null;
-            if ($xLabel && !in_array($xLabel, $labels)) {
+            if ($xLabel && !in_array($xLabel, $labels, true)) {
                 $labels[] = $xLabel;
             }
         }
@@ -188,31 +213,5 @@ class TemperaturesMatrix extends AbstractWidget implements ConfigurableWidgetInt
         }
 
         return $hours;
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function buildForm(FormBuilderInterface $builder): void
-    {
-        $cityNames = array();
-        foreach (array_keys($this->collector->getFrCitiesCoordinates()) as $cityName) {
-            $cityNames[$cityName] = $cityName;
-        }
-
-        $builder->add(self::CITY, ChoiceType::class, array(
-            "label" => "Select a City",
-            "choices" => $cityNames
-        ));
-    }
-
-    public function getCity(): string
-    {
-        return (string) $this->getParameter(self::CITY);
-    }
-
-    public function setCity(string $city): static
-    {
-        return $this->setParameter(self::CITY, $city);
     }
 }
