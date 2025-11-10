@@ -26,9 +26,7 @@
 # 172.205.1.10          app.widgets.local
 # 172.205.1.74          74.widgets.local
 # 172.205.1.64          64.widgets.local
-# 172.205.1.54          54.widgets.local
-# 172.205.1.100         db.widgets.local
-# 172.205.1.200         phpmyadmin.widgets.local
+# 172.205.1.54          54.widgets.local (Deprecated)
 #
 ################################################################################
 
@@ -79,30 +77,11 @@ services:
         networks:
             default: { ipv4_address: 172.205.1.64, aliases: [ sf6.widgets.local ] }
 
-    ################################################################################
-    # Symfony 6 + PHP 8.2
-    sf5:
-        image:          "registry.gitlab.com/badpixxel-projects/php-sdk:php-8.1"
-        command:        sh /var/www/html/docker/docker-entrypoint.sh
-        container_name: sf5.widgets.local
-        hostname:       sf5.widgets.local
-        volumes:
-            - ./:/var/www/html
-            - ./docker/sites-available/000-default.conf:/etc/apache2/sites-available/000-default.conf
-            - sf5-var:/var/www/html/var
-            - sf5-vendor:/var/www/html/vendor
-        environment:
-            SYMFONY_REQUIRE: 5.4.*
-        networks:
-            default: { ipv4_address: 172.205.1.54, aliases: [ sf5.widgets.local ] }
-
 volumes:
     sf7-var:        ~
     sf7-vendor:     ~
     sf6-var:        ~
     sf6-vendor:     ~
-    sf5-var:        ~
-    sf5-vendor:     ~
 
 networks:
     ################################################################################
