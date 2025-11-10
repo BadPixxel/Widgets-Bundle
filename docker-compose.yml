@@ -38,12 +38,12 @@ services:
     # Develop Image
     app:
         image:          "registry.gitlab.com/badpixxel-projects/php-sdk:php-8.3"
-        command:        sh /var/www/html/docker/docker-entrypoint.sh
         container_name: app.widgets.local
         hostname:       app.widgets.local
+        environment:
+            SERVER_ROOT: /var/www/html/tests/public
         volumes:
             - ./:/var/www/html/
-            - ./docker/sites-available/000-default.conf:/etc/apache2/sites-available/000-default.conf
         networks:
             default: { ipv4_address: 172.205.1.10, aliases: [ app.widgets.local ] }
 
@@ -51,15 +51,14 @@ services:
     # Symfony 7 + PHP 8.3
     sf7:
         image:          "registry.gitlab.com/badpixxel-projects/php-sdk:php-8.3"
-        command:        sh /var/www/html/docker/docker-entrypoint.sh
         container_name: sf7.widgets.local
         hostname:       sf7.widgets.local
         volumes:
             - ./:/var/www/html
-            - ./docker/sites-available/000-default.conf:/etc/apache2/sites-available/000-default.conf
             - sf7-var:/var/www/html/var
             - sf7-vendor:/var/www/html/vendor
         environment:
+            SERVER_ROOT: /var/www/html/tests/public
             SYMFONY_REQUIRE: 7.*
         networks:
             default: { ipv4_address: 172.205.1.74, aliases: [ sf7.widgets.local ] }
@@ -68,15 +67,14 @@ services:
     # Symfony 6 + PHP 8.2
     sf6:
         image:          "registry.gitlab.com/badpixxel-projects/php-sdk:php-8.2"
-        command:        sh /var/www/html/docker/docker-entrypoint.sh
         container_name: sf6.widgets.local
         hostname:       sf6.widgets.local
         volumes:
             - ./:/var/www/html
-            - ./docker/sites-available/000-default.conf:/etc/apache2/sites-available/000-default.conf
             - sf6-var:/var/www/html/var
             - sf6-vendor:/var/www/html/vendor
         environment:
+            SERVER_ROOT: /var/www/html/tests/public
             SYMFONY_REQUIRE: 6.4.*
         networks:
             default: { ipv4_address: 172.205.1.64, aliases: [ sf6.widgets.local ] }
@@ -97,46 +95,6 @@ services:
             SYMFONY_REQUIRE: 5.4.*
         networks:
             default: { ipv4_address: 172.205.1.54, aliases: [ sf5.widgets.local ] }
-
-    ################################################################################
-    # MariaDb Container
-    mariadb:
-        image:              mariadb
-        container_name:     db.widgets.local
-        logging: { driver: "none" }
-        environment:
-            - "MYSQL_ROOT_PASSWORD=Widgets-Bundle"
-            - "MYSQL_DATABASE=symfony"
-        networks:
-            default:        { ipv4_address: 172.205.1.100, aliases: [ db.widgets.local ] }
-
-    ################################################################################
-    # PhpMyAdmin Container
-    phpmyadmin:
-        image: phpmyadmin/phpmyadmin:5
-        container_name:     phpmyadmin.widgets.local
-        logging: { driver: "none" }
-        depends_on:
-            - mariadb
-        environment:
-            - "PMA_HOST=mariadb"
-            - "MYSQL_ROOT_PASSWORD=Widgets-Bundle"
-        networks:
-            default:        { ipv4_address: 172.205.1.200, aliases: [ phpmyadmin.widgets.local ] }
-
-    ################################################################################
-    # Node JS Container    
-    node:
-        image:          'node:22'
-        user:           'node'
-        container_name: node.widgets.local
-        tty:            true
-        volumes:
-            - './:/app'
-            - ~/.cache/yarn:/home/node/.yarn-cache
-        working_dir:    '/app'
-        networks:
-            default:        { ipv4_address: 172.205.1.101 }
 
 volumes:
     sf7-var:        ~
