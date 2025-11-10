@@ -56,6 +56,11 @@ abstract class AbstractWidgetSelector extends AbstractCollectionAwareComponent
     #[PostMount]
     public function postMount(): void
     {
+        //==============================================================================
+        // Load Channel if Not Set on Template
+        $this->channel ??= $this->getCollection()->getChannel();
+        //==============================================================================
+        // Load Selector Tabs
         $this->getTabs();
     }
 

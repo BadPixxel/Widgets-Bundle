@@ -53,6 +53,7 @@ trait WidgetsTrait
         $widget
             ->setConfiguratorHash($configurator->getHash())
             ->setOptions($configurator->getOptions())
+            ->setParameters($configurator->getParameters())
         ;
 
         return $this->addWidget($widget);
