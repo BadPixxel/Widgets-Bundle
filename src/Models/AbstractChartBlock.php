@@ -169,6 +169,23 @@ abstract class AbstractChartBlock extends AbstractBlock
     }
 
     /**
+     * Set Aspect Ratio
+     */
+    public function setStacked(bool $horizontal = true, bool $vertical = false) : static
+    {
+        return $this->addChartOptions(array(
+            "scales" => array(
+                "x" => array(
+                    "stacked" => $vertical,
+                ),
+                "y" => array(
+                    "stacked" => $horizontal,
+                ),
+            )
+        ));
+    }
+
+    /**
      * Add Chart Options
      *
      * @param array<string, array|scalar> $chartOptions
