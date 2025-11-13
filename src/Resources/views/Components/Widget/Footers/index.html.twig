@@ -1,5 +1,5 @@
 
-{% if widget.options.Footer or configuration.edited %}
+{% if widget.options.Footer or configuration.edited or configuration.sortable %}
     <div class="{{ this.divClass }}">
         <small>
             {% if widget.refreshAt | default("Now") is not empty %}
