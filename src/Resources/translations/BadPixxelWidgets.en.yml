@@ -132,3 +132,7 @@ widgets:
             title:          Access denied
             description:    Unauthorized access to this widget
             text:           "You do not have sufficient permissions to access this widget."
+        compilation-error:
+            title:          Widget compilation error
+            description:    An error occurred while compiling the widget
+            text:           "An error occurred while compiling this widget. Please check the error details below or contact your administrator."

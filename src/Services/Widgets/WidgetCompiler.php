@@ -14,10 +14,13 @@
 namespace BadPixxel\Widgets\Services\Widgets;
 
 use BadPixxel\Widgets\Interfaces\WidgetInterface;
+use BadPixxel\Widgets\Services\Widgets\Technical\CompilationErrorWidget;
 use Psr\Cache\CacheItemPoolInterface;
 use Psr\Cache\InvalidArgumentException;
+use Psr\Log\LoggerInterface;
 use Symfony\Contracts\Cache\CacheInterface;
 use Symfony\Contracts\Cache\ItemInterface;
+use Throwable;
 
 /**
  * Manage Caching of Widgets Contents (Blocks)
@@ -25,7 +28,9 @@ use Symfony\Contracts\Cache\ItemInterface;
 class WidgetCompiler
 {
     public function __construct(
-        private readonly CacheInterface $appCache
+        private readonly CacheInterface $appCache,
+        private readonly CompilationErrorWidget $compilationErrorWidget,
+        private readonly LoggerInterface $logger
     ) {
     }
 
@@ -130,15 +135,43 @@ class WidgetCompiler
      */
     public function compileNoCache(WidgetInterface $widget, array $options, array $parameters): WidgetInterface
     {
-        $widget
-            ->resetBlocks()
-            ->mergeOptions($options)
-            ->mergeParameters($parameters)
-            ->setRefreshAt()
-            ->build()
-        ;
+        try {
+            $widget
+                ->resetBlocks()
+                ->mergeOptions($options)
+                ->mergeParameters($parameters)
+                ->setRefreshAt()
+            ;
+            $widget->build();
 
-        return $widget;
+            return $widget;
+        } catch (Throwable $exception) {
+            //==============================================================================
+            // Log Compilation Error
+            $this->logger->error(sprintf(
+                "Widget compilation failed for %s: %s",
+                $widget::class,
+                $exception->getMessage()
+            ), array(
+                "exception" => $exception,
+                "widget" => $widget::class,
+                "options" => $options,
+                "parameters" => $parameters,
+            ));
+
+            //==============================================================================
+            // Return Error Widget
+            $errorWidget = clone $this->compilationErrorWidget;
+            $errorWidget
+                ->setException($exception)
+                ->resetBlocks()
+                ->mergeOptions($options)
+                ->setRefreshAt()
+            ;
+            $errorWidget->build();
+
+            return $errorWidget;
+        }
     }
 
     /**

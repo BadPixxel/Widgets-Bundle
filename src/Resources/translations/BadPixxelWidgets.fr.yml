@@ -132,4 +132,8 @@ widgets:
             title:          Accès refusé
             description:    Accès non autorisé à ce widget
             text:           "Vous ne disposez pas des droits suffisants pour accéder à ce widget."
+        compilation-error:
+            title:          Erreur de compilation
+            description:    Une erreur est survenue lors de la compilation du widget
+            text:           "Une erreur est survenue lors de la compilation de ce widget. Veuillez vérifier les détails de l'erreur ci-dessous ou contacter votre administrateur."
 
