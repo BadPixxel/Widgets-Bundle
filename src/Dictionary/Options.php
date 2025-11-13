@@ -64,7 +64,7 @@ enum Options
     const CACHE_ENABLED = "UseCache";
 
     /**
-     * Widget Cache Lifetime
+     * Widget Cache Lifetime in Seconds
      */
     const CACHE_TTL = "CacheLifeTime";
 
