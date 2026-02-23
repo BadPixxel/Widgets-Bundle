@@ -1,11 +1,7 @@
-<div class="panel-body text-center p-2">
+<div class="{{ this.data.Class }}">
     {% if this.options.AllowHtml %}
         {{ this.data.text | raw  }}
     {% else %}
         {{ this.data.text }}
     {% endif %}
 </div>
-    
-
-    
-    

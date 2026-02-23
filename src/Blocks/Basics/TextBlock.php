@@ -14,6 +14,7 @@
 namespace BadPixxel\Widgets\Blocks\Basics;
 
 use BadPixxel\Widgets\Attribute\AsWidgetBlock;
+use BadPixxel\Widgets\Dictionary\Options;
 use BadPixxel\Widgets\Interfaces\Blocks\BlockWithDemoInterface;
 use BadPixxel\Widgets\Models\AbstractBlock;
 use BadPixxel\Widgets\Models\Commons\OptionsSafeAwareTrait;
@@ -60,6 +61,8 @@ class TextBlock extends AbstractBlock implements BlockWithDemoInterface
         $resolver = new OptionsResolver();
         $resolver->setDefault("text", "");
         $resolver->addAllowedTypes("text", "string");
+        $resolver->setDefault(Options::MAIN_CLASS, "text-center p-1");
+        $resolver->addAllowedTypes(Options::MAIN_CLASS, array("null", "string"));
 
         return $resolver;
     }
