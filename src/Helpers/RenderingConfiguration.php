@@ -47,6 +47,14 @@ class RenderingConfiguration
     }
 
     /**
+     * Check if Widget Rendering is Deferred
+     */
+    public function isDeferred() : bool
+    {
+        return $this->deferred;
+    }
+
+    /**
      * Check if Widget or Collection is Editable
      */
     public function isEditable() : bool

@@ -25,7 +25,7 @@
                 </div>
                 {% endif %}
 
-                <div data-loading="hide">
+                <div {% if this.allowedLoading %}data-loading="hide"{% endif %}>
                     {% if configuration.edited|default(false) %}
 
                         {# Show Configurator in Edit Mode #}

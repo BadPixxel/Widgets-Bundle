@@ -38,6 +38,10 @@ class WidgetContents extends AbstractWidgetAwareComponent
      */
     public function isAllowedLoading(): bool
     {
+        if (!$this->getConfiguration()->isDeferred()) {
+            return false;
+        }
+
         return match ($this->getRenderingMode()) {
             RenderingModes::BS3 => false,
             default => true,
