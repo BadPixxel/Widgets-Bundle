@@ -71,20 +71,9 @@ class Widget extends AbstractConfiguratorAwareComponent
     public function onPostMount(): void
     {
         //==============================================================================
-        // Check if Deferred Rendering is Requested
+        // Deferred Rendering => Widget will be Compiled by Deferred Live Request
         if ($this->isDeferred()) {
-            //==============================================================================
-            // Check if Widget is Already Cached
-            $hasCache = $this->widgetCompiler->hasCache(
-                $this->getWidget(),
-                $this->options,
-                $this->parameters
-            );
-            //==============================================================================
-            // Widget need to be compiled => Defer rendering
-            if (!$hasCache) {
-                return;
-            }
+            return;
         }
         //==============================================================================
         // Compile Widget Right Now

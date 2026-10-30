@@ -14,6 +14,7 @@
 namespace BadPixxel\Widgets\Models\Components;
 
 use BadPixxel\Widgets\Dictionary\Widgets\WidgetEvents;
+use BadPixxel\Widgets\Dictionary\Widgets\WidgetLoading;
 use BadPixxel\Widgets\Interfaces\WidgetInterface;
 use BadPixxel\Widgets\Services\Widgets\WidgetCompiler;
 use BadPixxel\Widgets\Services\Widgets\WidgetsResolver;
@@ -100,10 +101,26 @@ abstract class AbstractConfiguratorAwareComponent extends AbstractRenderingConfi
 
     /**
      * Detect & Manage Deferred Rendering
+     *
+     * - Loading explicitly deferred by caller => never compile on main request
+     * - No loading requested & no cache => auto-defer, unless disabled by rendering configuration
+     * - No loading requested & cache exists => render inline
      */
     #[PreMount()]
     public function detectDeferredRendering(array $data): array
     {
+        //==============================================================================
+        // Deferred Loading Explicitly Requested
+        if (in_array($data[WidgetLoading::KEY] ?? null, WidgetLoading::DEFERRED, true)) {
+            $this->deferred = true;
+
+            return $data;
+        }
+        //==============================================================================
+        // Auto-Deferral Disabled by Rendering Configuration
+        if (!$this->getConfiguration()->isDeferred()) {
+            return $data;
+        }
         $configurator = $data["configurator"] ?? null;
         if (!$configurator instanceof WidgetConfigurator) {
             return $data;
@@ -111,17 +128,15 @@ abstract class AbstractConfiguratorAwareComponent extends AbstractRenderingConfi
         Assert::isArray($options = $data["options"] ?? array());
         Assert::isArray($parameters = $data["parameters"] ?? array());
         //==============================================================================
-        // Check if Widget is Already Cached
+        // Widget need to be compiled => Defer rendering
         $hasCache = $this->widgetCompiler->hasCache(
-            $configurator->getService(),
+            $this->buildWidget($configurator, $options, $parameters),
             $options,
             $parameters
         );
-        //==============================================================================
-        // Widget need to be compiled => Defer rendering
-        if (!$hasCache && !in_array($data["loading"] ?? null, array("lazy", "defer"), true)) {
-            $data["loading"] = "defer";
-            $data["deferred"] = true;
+        if (!$hasCache) {
+            $data[WidgetLoading::KEY] = WidgetLoading::DEFER;
+            $this->deferred = true;
         }
 
         return $data;
@@ -183,19 +198,32 @@ abstract class AbstractConfiguratorAwareComponent extends AbstractRenderingConfi
     {
         Assert::notEmpty($configurator = $this->getConfigurator());
 
-        return $configurator
-            ->getService()
-            ->mergeOptions($this->options)
-            ->setParameters($this->parameters)
-        ;
+        return $this->buildWidget($configurator, $this->options, $this->parameters);
     }
 
     /**
-     * Check if Widget Loading is deferred
+     * Check if Widget Loading is Deferred, i.e. Widget must not be Compiled on Main Request
      */
     protected function isDeferred(): bool
     {
-        return $this->deferred && $this->configuration->deferred;
+        return $this->deferred;
+    }
+
+    /**
+     * Configure Widget Service with Options & Parameters
+     *
+     * @param array<string, null|scalar> $parameters
+     */
+    protected function buildWidget(
+        WidgetConfigurator $configurator,
+        array $options,
+        array $parameters
+    ): WidgetInterface {
+        return $configurator
+            ->getService()
+            ->mergeOptions($options)
+            ->setParameters($parameters)
+        ;
     }
 
     /**
