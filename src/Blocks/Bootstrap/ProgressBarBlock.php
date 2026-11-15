@@ -17,6 +17,7 @@ use BadPixxel\Widgets\Attribute\AsWidgetBlock;
 use BadPixxel\Widgets\Dictionary\ChartConfig;
 use BadPixxel\Widgets\Dictionary\ChartDataset;
 use BadPixxel\Widgets\Dictionary\Options;
+use BadPixxel\Widgets\Helpers\NestedOptions;
 use BadPixxel\Widgets\Interfaces\Blocks\BlockWithDemoInterface;
 use BadPixxel\Widgets\Models\AbstractBlock;
 use BadPixxel\Widgets\OptionResolver\BlockOptionsResolver;
@@ -68,7 +69,7 @@ class ProgressBarBlock extends AbstractBlock implements BlockWithDemoInterface
     {
         $resolver = new ChartOptionsResolver();
 
-        $resolver->setDefault(Options::CHART_CONFIG, function (OptionsResolver $chartResolver): void {
+        NestedOptions::define($resolver, Options::CHART_CONFIG, function (OptionsResolver $chartResolver): void {
             $chartResolver->setDefault(ChartConfig::SHOW_LEGEND, true);
             $chartResolver->addAllowedTypes(ChartConfig::SHOW_LEGEND, "bool");
             $chartResolver->setDefault(ChartConfig::COLORS, array());

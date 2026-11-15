@@ -15,6 +15,7 @@ namespace BadPixxel\Widgets\Blocks\ChartJsPlugins;
 
 use BadPixxel\Widgets\Attribute\AsWidgetBlock;
 use BadPixxel\Widgets\Dictionary\Options;
+use BadPixxel\Widgets\Helpers\NestedOptions;
 use BadPixxel\Widgets\Interfaces\Blocks\BlockWithDemoInterface;
 use BadPixxel\Widgets\Models\AbstractChartBlock;
 use BadPixxel\Widgets\OptionResolver\BlockOptionsResolver;
@@ -80,7 +81,7 @@ class MatrixChartBlock extends AbstractChartBlock implements BlockWithDemoInterf
     {
         $resolver = parent::getOptionsResolver();
 
-        $resolver->setDefault(Options::CHART_OPTIONS, function (OptionsResolver $chartResolver): void {
+        NestedOptions::define($resolver, Options::CHART_OPTIONS, function (OptionsResolver $chartResolver): void {
             $chartResolver->setDefault(self::X_LABELS, array());
             $chartResolver->addAllowedTypes(self::X_LABELS, "string[]");
             $chartResolver->setDefault(self::Y_LABELS, array());

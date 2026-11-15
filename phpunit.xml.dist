@@ -26,7 +26,6 @@
       <server name="KERNEL_CLASS" value="BadPixxel\Widgets\Tests\Kernel"/>
       <server name="KERNEL_DIR" value="tests/"/>
       <env name="SYMFONY_DEPRECATIONS_HELPER" value="disabled"/>
-      <env name="DATABASE_URL" value="mysql://root:Widgets-Bundle@mariadb:3306/symfony"/>
   </php>
 
 </phpunit>

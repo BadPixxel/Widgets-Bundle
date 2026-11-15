@@ -33,7 +33,7 @@ trait OptionsAwareTrait
     /**
      * Widget Options Array
      */
-    #[ORM\Column(name:"Options", type: Types::ARRAY)]
+    #[ORM\Column(name:"Options", type: Types::JSON)]
     protected array $options = array();
 
     //==============================================================================

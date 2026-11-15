@@ -17,7 +17,7 @@ use BadPixxel\Widgets\Interfaces\WidgetInterface;
 use BadPixxel\Widgets\Interfaces\Widgets\Loader\WidgetsLoaderInterface;
 use BadPixxel\Widgets\Widgets\WidgetConfigurator;
 use Symfony\Component\DependencyInjection\Attribute\AutoconfigureTag;
-use Symfony\Component\DependencyInjection\Attribute\TaggedIterator;
+use Symfony\Component\DependencyInjection\Attribute\AutowireIterator;
 use Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException;
 
 /**
@@ -47,7 +47,7 @@ class StaticWidgetsLoader implements WidgetsLoaderInterface
      * @param iterable<string, WidgetInterface> $widgetsServices
      */
     public function __construct(
-        #[TaggedIterator(tag: WidgetInterface::TAG, indexAttribute: "id")]
+        #[AutowireIterator(tag: WidgetInterface::TAG, indexAttribute: "id")]
         private readonly iterable                 $widgetsServices,
     ) {
     }

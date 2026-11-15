@@ -15,6 +15,7 @@ namespace BadPixxel\Widgets\OptionResolver;
 
 use BadPixxel\Widgets\Dictionary\ChartConfig;
 use BadPixxel\Widgets\Dictionary\Options;
+use BadPixxel\Widgets\Helpers\NestedOptions;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
@@ -28,7 +29,7 @@ class ChartOptionsResolver extends BlockOptionsResolver
 
         //==============================================================================
         // Chart Configuration & Parameters
-        $this->setDefault(Options::CHART_CONFIG, function (OptionsResolver $chartResolver): void {
+        NestedOptions::define($this, Options::CHART_CONFIG, function (OptionsResolver $chartResolver): void {
             $chartResolver->setDefault(ChartConfig::SHOW_LEGEND, true);
             $chartResolver->addAllowedTypes(ChartConfig::SHOW_LEGEND, "bool");
             $chartResolver->setDefault(ChartConfig::COLORS, array());

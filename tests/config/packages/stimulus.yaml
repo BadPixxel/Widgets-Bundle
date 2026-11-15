@@ -1,0 +1,9 @@
+################################################################################
+# Stimulus Controllers for Test & Demo Kernel
+#
+# Flex rewrites assets/controllers.json on each composer update, and removes
+# the root package entry (@badpixxel/widgets-bundle), so the test kernel reads
+# its own copy, including Widgets Bundle controllers.
+################################################################################
+stimulus:
+    controllers_json:   '%kernel.project_dir%/tests/config/controllers.json'

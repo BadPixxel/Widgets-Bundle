@@ -13,6 +13,7 @@
 
 namespace BadPixxel\Widgets\Sonata\Block;
 
+use BadPixxel\Widgets\Helpers\NestedOptions;
 use BadPixxel\Widgets\OptionResolver\WidgetOptionsResolver;
 use BadPixxel\Widgets\Widgets\WidgetConfigurator;
 use Sonata\BlockBundle\Block\Service\AbstractBlockService;
@@ -38,13 +39,13 @@ class WidgetBlock extends AbstractBlockService
         $resolver->setDefaults(array(
             'hash' => null,
             'configurator' => null,
-            'options' => function (OptionsResolver $optionsResolver): void {
-                //==============================================================================
-                // Import Configuration from Widget Resolver
-                WidgetOptionsResolver::configure($optionsResolver);
-            },
             'parameters' => array()
         ));
+        NestedOptions::define($resolver, 'options', function (OptionsResolver $optionsResolver): void {
+            //==============================================================================
+            // Import Configuration from Widget Resolver
+            WidgetOptionsResolver::configure($optionsResolver);
+        });
         $resolver->addAllowedTypes('options', "array");
         $resolver->addAllowedTypes('parameters', "array");
         $resolver->addAllowedTypes('hash', array("string", "null"));

@@ -18,22 +18,15 @@
 ################################################################
 # Set any variables we need
 variables:
-  MYSQL_DATABASE:               symfony
-  MYSQL_ROOT_PASSWORD:          Widgets-Bundle
   COMPOSER_MEMORY_LIMIT:        -1
   SYMFONY_DEPRECATIONS_HELPER:  disabled
 
 ################################################################
-# Configure Services
-services:
-  - mariadb
-
-################################################################
 # Defined Pipeline Stages
 stages:
-  - Symfony-5
   - Symfony-6
   - Symfony-7
+  - Symfony-8
 #  - Builds
 
 
@@ -75,32 +68,50 @@ stages:
       - curl -s https://raw.githubusercontent.com/BadPixxel/Php-Sdk/main/ci/after.sh | sh
 
 ################################################################
-# Symfony 7
+# Symfony 8 (PHP 8.4+)
 ################################################################
+
+sf8:php-8.5:
+    <<: *core_tests
+    stage:            Symfony-8
+    image:            registry.gitlab.com/badpixxel-projects/php-sdk:php-8.5
+    variables:
+        SYMFONY_REQUIRE: 8.0.*
+
+sf8:php-8.4:
+    <<: *core_tests
+    stage:            Symfony-8
+    image:            registry.gitlab.com/badpixxel-projects/php-sdk:php-8.4
+    variables:
+        SYMFONY_REQUIRE: 8.0.*
+
+################################################################
+# Symfony 7 (PHP 8.2+)
+################################################################
+
+sf7:php-8.4:
+    <<: *core_tests
+    stage:            Symfony-7
+    image:            registry.gitlab.com/badpixxel-projects/php-sdk:php-8.4
+    variables:
+        SYMFONY_REQUIRE: 7.4.*
 
 sf7:php-8.3:
     <<: *core_tests
     stage:            Symfony-7
     image:            registry.gitlab.com/badpixxel-projects/php-sdk:php-8.3
     variables:
-        SYMFONY_REQUIRE: 7.*
+        SYMFONY_REQUIRE: 7.4.*
 
 sf7:php-8.2:
     <<: *core_tests
     stage:            Symfony-7
     image:            registry.gitlab.com/badpixxel-projects/php-sdk:php-8.2
     variables:
-        SYMFONY_REQUIRE: 7.*
-
-sf7:php-8.1:
-    <<: *core_tests
-    stage:            Symfony-7
-    image:            registry.gitlab.com/badpixxel-projects/php-sdk:php-8.1
-    variables:
-        SYMFONY_REQUIRE: 7.*
+        SYMFONY_REQUIRE: 7.4.*
 
 ################################################################
-# Symfony 6
+# Symfony 6 (PHP 8.1+)
 ################################################################
 
 sf6:php-8.3:
@@ -123,25 +134,6 @@ sf6:php-8.1:
     image:            registry.gitlab.com/badpixxel-projects/php-sdk:php-8.1
     variables:
         SYMFONY_REQUIRE: 6.4.*
-
-################################################################
-# Symfony 5
-################################################################
-
-#sf5:php-8.2:
-#    <<: *core_tests
-#    stage:            Symfony-5
-#    image:            registry.gitlab.com/badpixxel-projects/php-sdk:php-8.2
-#    variables:
-#        SYMFONY_REQUIRE: 5.4.*
-#
-#sf5:php-8.1:
-#    <<: *core_tests
-#    stage:            Symfony-5
-#    image:            registry.gitlab.com/badpixxel-projects/php-sdk:php-8.1
-#    variables:
-#        SYMFONY_REQUIRE: 5.4.*
-
 
 
 ################################################################

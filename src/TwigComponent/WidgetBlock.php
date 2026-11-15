@@ -16,7 +16,7 @@ namespace BadPixxel\Widgets\TwigComponent;
 use BadPixxel\Widgets\Interfaces\BlockInterface;
 use BadPixxel\Widgets\Interfaces\BlockRendererInterface;
 use BadPixxel\Widgets\Services\Blocks\BlockResolver;
-use Symfony\Component\DependencyInjection\Attribute\TaggedIterator;
+use Symfony\Component\DependencyInjection\Attribute\AutowireIterator;
 use Symfony\UX\TwigComponent\Attribute\AsTwigComponent;
 use Webmozart\Assert\Assert;
 
@@ -44,7 +44,7 @@ class WidgetBlock
      */
     public function __construct(
         private readonly BlockResolver $blockResolver,
-        #[TaggedIterator(tag: "twig.component", indexAttribute: "key")]
+        #[AutowireIterator(tag: "twig.component", indexAttribute: "key")]
         private readonly iterable $twigComponents,
     ) {
     }

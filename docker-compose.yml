@@ -21,72 +21,32 @@
 # This Docker File intend to Create a Complete Widget Environment
 # for Development or Tests of Widget Bundle
 #
-# You can to add host to /etc/hosts
-# 
+# One file per image in docker/, vendor & var are dedicated volumes per container:
+# local sources are shared, dependencies are installed by each container.
+#
+# You can add hosts to /etc/hosts
+#
 # 172.205.1.10          app.widgets.local
-# 172.205.1.74          74.widgets.local
-# 172.205.1.64          64.widgets.local
-# 172.205.1.54          54.widgets.local (Deprecated)
+# 172.205.1.64          sf6.widgets.local
+# 172.205.1.74          sf7.widgets.local
+# 172.205.1.84          sf8.widgets.local
 #
 ################################################################################
 
-services:
+name: "badpixxel-widgets"
 
-    ################################################################################
-    # Develop Image
-    app:
-        image:          "registry.gitlab.com/badpixxel-projects/php-sdk:php-8.3"
-        container_name: app.widgets.local
-        hostname:       app.widgets.local
-        environment:
-            SERVER_ROOT: /var/www/html/tests/public
-        volumes:
-            - ./:/var/www/html/
-        networks:
-            default: { ipv4_address: 172.205.1.10, aliases: [ app.widgets.local ] }
+################################################################################
+# Multi-versions Dev Services
+include:
+    - docker/develop.yaml
+    - docker/symfony-6.yaml
+    - docker/symfony-7.yaml
+    - docker/symfony-8.yaml
 
-    ################################################################################
-    # Symfony 7 + PHP 8.3
-    sf7:
-        image:          "registry.gitlab.com/badpixxel-projects/php-sdk:php-8.3"
-        container_name: sf7.widgets.local
-        hostname:       sf7.widgets.local
-        volumes:
-            - ./:/var/www/html
-            - sf7-var:/var/www/html/var
-            - sf7-vendor:/var/www/html/vendor
-        environment:
-            SERVER_ROOT: /var/www/html/tests/public
-            SYMFONY_REQUIRE: 7.*
-        networks:
-            default: { ipv4_address: 172.205.1.74, aliases: [ sf7.widgets.local ] }
-
-    ################################################################################
-    # Symfony 6 + PHP 8.2
-    sf6:
-        image:          "registry.gitlab.com/badpixxel-projects/php-sdk:php-8.2"
-        container_name: sf6.widgets.local
-        hostname:       sf6.widgets.local
-        volumes:
-            - ./:/var/www/html
-            - sf6-var:/var/www/html/var
-            - sf6-vendor:/var/www/html/vendor
-        environment:
-            SERVER_ROOT: /var/www/html/tests/public
-            SYMFONY_REQUIRE: 6.4.*
-        networks:
-            default: { ipv4_address: 172.205.1.64, aliases: [ sf6.widgets.local ] }
-
-volumes:
-    sf7-var:        ~
-    sf7-vendor:     ~
-    sf6-var:        ~
-    sf6-vendor:     ~
-
+################################################################################
+# Default Private Network
 networks:
-    ################################################################################
-    # Default Private Network
-    default:
+    widgets:
         driver: bridge
         ipam:
             config:

@@ -67,9 +67,9 @@ class CollectionDatesPresetType extends AbstractType
     }
 
     /**
-     * @return void
+     * Configure Form Options
      */
-    public function configureOptions(OptionsResolver $resolver)
+    public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults(array(
             'data_class' => AbstractWidgetCollection::class,

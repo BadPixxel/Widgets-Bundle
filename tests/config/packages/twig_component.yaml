@@ -1,0 +1,9 @@
+################################################################################
+# Twig Components for Test & Demo Kernel
+#
+# Required since symfony/ux-twig-component 3.0.
+# Widgets Bundle components declare their own templates: no namespace defaults.
+################################################################################
+twig_component:
+    anonymous_template_directory:   'components/'
+    defaults:                       { }

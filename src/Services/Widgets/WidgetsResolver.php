@@ -17,7 +17,7 @@ use BadPixxel\Widgets\Interfaces\Widgets\Loader\WidgetsLoaderInterface;
 use BadPixxel\Widgets\Services\Widgets\Technical\NotAllowedWidget;
 use BadPixxel\Widgets\Services\Widgets\Technical\NotFoundWidget;
 use BadPixxel\Widgets\Widgets\WidgetConfigurator;
-use Symfony\Component\DependencyInjection\Attribute\TaggedIterator;
+use Symfony\Component\DependencyInjection\Attribute\AutowireIterator;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 use Symfony\Component\Security\Core\Exception\AuthenticationCredentialsNotFoundException;
 use Webmozart\Assert\Assert;
@@ -29,7 +29,7 @@ class WidgetsResolver
 {
     public function __construct(
         private readonly AuthorizationCheckerInterface $authorizationChecker,
-        #[TaggedIterator(tag: WidgetsLoaderInterface::TAG, indexAttribute: "id")]
+        #[AutowireIterator(tag: WidgetsLoaderInterface::TAG, indexAttribute: "id")]
         private readonly iterable                 $widgetsLoaders,
     ) {
     }

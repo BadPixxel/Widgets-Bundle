@@ -15,7 +15,7 @@ namespace BadPixxel\Widgets\Services\Blocks;
 
 use BadPixxel\Widgets\Interfaces\BlockInterface;
 use BadPixxel\Widgets\Models\AbstractBlock;
-use Symfony\Component\DependencyInjection\Attribute\TaggedIterator;
+use Symfony\Component\DependencyInjection\Attribute\AutowireIterator;
 
 /**
  * List & Resolver Available Widget Blocks
@@ -26,7 +26,7 @@ class BlockResolver
      * @param iterable<string, AbstractBlock> $blocks
      */
     public function __construct(
-        #[TaggedIterator(tag: BlockInterface::TAG, indexAttribute: "id")]
+        #[AutowireIterator(tag: BlockInterface::TAG, indexAttribute: "id")]
         private readonly iterable $blocks,
     ) {
     }

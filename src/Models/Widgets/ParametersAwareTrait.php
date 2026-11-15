@@ -32,7 +32,7 @@ trait ParametersAwareTrait
      *
      * @var array<string, null|scalar>
      */
-    #[ORM\Column(name:"Parameters", type: Types::ARRAY)]
+    #[ORM\Column(name:"Parameters", type: Types::JSON)]
     protected array $parameters = array();
 
     //==============================================================================
