@@ -8,8 +8,8 @@ SF_CONTAINERS += app sf6 sf7 sf8
 include vendor/badpixxel/php-sdk/make/sdk.mk
 
 COMMAND ?= echo "No command given"
-COLOR_CYAN := $(shell tput setaf 6)
-COLOR_RESET := $(shell tput sgr0)
+COLOR_CYAN := $(shell tput setaf 6 2>/dev/null)
+COLOR_RESET := $(shell tput sgr0 2>/dev/null)
 
 .PHONY: serve
 serve:		# Direct Serve using Symfony CLI
@@ -24,10 +24,7 @@ upgrade:	# Update Vendor of all Containers
 .PHONY: verify
 verify:		# Run the whole CI/CD Test Suite in all Containers (Symfony 6, 7 & 8)
 	$(MAKE) upgrade
-	$(MAKE) all COMMAND="php bin/console doctrine:schema:update --force --complete -q"
-	$(MAKE) all COMMAND="php vendor/bin/grumphp run -n --testsuite=travis"
-	$(MAKE) all COMMAND="php vendor/bin/grumphp run -n --testsuite=csfixer"
-	$(MAKE) all COMMAND="php vendor/bin/grumphp run -n --testsuite=phpstan"
+	$(MAKE) all COMMAND="make quality"
 	$(MAKE) all COMMAND="php vendor/bin/phpunit"
 
 .PHONY: test

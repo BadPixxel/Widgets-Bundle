@@ -84,19 +84,24 @@ class MigrateJsonColumnsCommand extends Command
             $table
         ));
         foreach ($rows as $row) {
+            $identifier = $row[$idColumn];
             foreach (self::COLUMNS as $column) {
                 $json = self::toJson($row[$column] ?? null);
                 if (null === $json) {
                     continue;
                 }
                 if (false === $json) {
-                    $style->warning(sprintf("Widget %s: %s is not a serialized array", $row[$idColumn], $column));
+                    $style->warning(sprintf(
+                        "Widget %s: %s is not a serialized array",
+                        is_scalar($identifier) ? (string) $identifier : "?",
+                        $column
+                    ));
                     $failed++;
 
                     continue;
                 }
                 if (!$dryRun) {
-                    $this->update($connection, $table, $idColumn, $row[$idColumn], $column, $json);
+                    $this->update($connection, $table, $idColumn, $identifier, $column, $json);
                 }
                 $converted++;
             }

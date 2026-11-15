@@ -43,29 +43,21 @@ stages:
         reports:
             junit: "$CI_PROJECT_DIR/*-report.xml"
     ################################################################################
-    # Install & Configure Environment
+    # Install Dependencies: Flex restricts Symfony to SYMFONY_REQUIRE,
+    # composer auto-scripts build the cache, assets & SQLite database
     before_script:
-        # Setup Travis
-        - curl -s https://raw.githubusercontent.com/BadPixxel/Php-Sdk/main/ci/configure.sh  | sh
-        # Deploy Symfony Files
-        - curl -s https://raw.githubusercontent.com/BadPixxel/Php-Sdk/main/symfony/deploy.sh | sh
-        # Setup Symfony Version & Create Database
-        - curl -s https://raw.githubusercontent.com/BadPixxel/Php-Sdk/main/symfony/configure.sh | sh
-        # Install Symfony
-        - curl -s https://raw.githubusercontent.com/BadPixxel/Php-Sdk/main/symfony/install.sh | sh
+        - composer update --no-interaction --no-progress
 
     ################################################################################
-    # Run Test Script
+    # Run Test Suites, same steps as "make verify" in local containers
     script:
-        # Execute Grumphp Testsuite
-        - curl -s https://raw.githubusercontent.com/BadPixxel/Php-Sdk/main/ci/grumphp.sh  | sh
-        # Execute PhpUnit Tests
-        - vendor/bin/phpunit --log-junit $CI_PROJECT_DIR/test-report.xml
+        - make quality
+        - php vendor/bin/phpunit --log-junit $CI_PROJECT_DIR/test-report.xml
 
     ################################################################################
-    # Run After Script
+    # Outdated Packages & Statistics
     after_script:
-      - curl -s https://raw.githubusercontent.com/BadPixxel/Php-Sdk/main/ci/after.sh | sh
+        - curl -s https://raw.githubusercontent.com/BadPixxel/Php-Sdk/3.0/ci/after.sh | sh
 
 ################################################################
 # Symfony 8 (PHP 8.4+)

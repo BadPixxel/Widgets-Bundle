@@ -15,6 +15,7 @@ namespace BadPixxel\Widgets\Helpers;
 
 use Closure;
 use ReflectionClass;
+use ReflectionMethod;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
@@ -39,7 +40,8 @@ class NestedOptions
     {
         self::$hasSetOptions ??= (new ReflectionClass(OptionsResolver::class))->hasMethod("setOptions");
         if (self::$hasSetOptions) {
-            $resolver->setOptions($option, $nested);
+            // Called by reflection: method does not exist on Symfony 6.4
+            (new ReflectionMethod($resolver, "setOptions"))->invoke($resolver, $option, $nested);
 
             return;
         }
