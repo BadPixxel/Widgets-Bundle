@@ -62,16 +62,17 @@ class WidgetCompiler
                     $item->expiresAfter($widget->getCacheTtl());
 
                     //==============================================================================
-                    // Compile Widget & return Blocks
+                    // Compile Widget & return a Copy of Blocks
+                    // Widget Blocks Collection is cleared below by resetBlocks()
                     return array(
-                        "blocks" => $this->compileNoCache($widget, $options, $parameters)->getBlocks(),
+                        "blocks" => $this->compileNoCache($widget, $options, $parameters)->getBlocks()->toArray(),
                         "refreshAt" => $widget->getRefreshAt(),
                     );
                 }
             );
         } catch (InvalidArgumentException $e) {
             $cacheItem = array(
-                "blocks" => $this->compileNoCache($widget, $options, $parameters)->getBlocks(),
+                "blocks" => $this->compileNoCache($widget, $options, $parameters)->getBlocks()->toArray(),
                 "refreshAt" => $widget->getRefreshAt(),
             );
         }

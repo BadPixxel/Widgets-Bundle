@@ -16,12 +16,14 @@ export default class MatrixController extends Controller {
     static matrixPluginLoaded = false;
 
     connect() {
-        this.element.addEventListener('chartjs:pre-connect', this._onPreConnect.bind(this));
+        // Keep bound handler reference, so the same listener is removed on disconnect
+        this._preConnectHandler = this._onPreConnect.bind(this);
+        this.element.addEventListener('chartjs:pre-connect', this._preConnectHandler);
     }
 
     disconnect() {
         // You should always remove listeners when the controller is disconnected to avoid side effects
-        this.element.removeEventListener('chartjs:pre-connect', this._onPreConnect.bind(this));
+        this.element.removeEventListener('chartjs:pre-connect', this._preConnectHandler);
     }
 
     /**

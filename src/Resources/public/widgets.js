@@ -16,16 +16,10 @@
 // Usage:
 //  import '@badpixxel/ux-widgets';
 //
+// Stimulus Controllers (i.e. Matrix Chart) are declared in assets/package.json,
+// and registered by StimulusBundle from host assets/controllers.json.
+//
 //==============================================================================
-
-//------------------------------------------------------------------------------
-// Safety Check - Ensure Load is Sync
-//------------------------------------------------------------------------------
-if (typeof window.app !== 'undefined') {
-    // Chargé via import('@badpixxel/ux-widgets') - async
-    console.error("✗ BadPixxel Widgets: App already loaded, this module should be loaded sync");
-    console.error("  → Use: import '@badpixxel/ux-widgets';");
-}
 
 //------------------------------------------------------------------------------
 // Register Chart JS Extensions for Dynamic Loading
@@ -34,14 +28,11 @@ import './plugins/chartjs-matrix.js';
 import './plugins/chartjs-sankey.js';
 
 //------------------------------------------------------------------------------
-// Register Widgets Controllers for Dynamic Loading
-//------------------------------------------------------------------------------
-import './controllers.js';
-
-//------------------------------------------------------------------------------
 // On Window Loaded, Trigger Widgets Init Events
+// "widget:controllers:register" is kept for extensions relying on a global
+// window.app, prefer declaring controllers in your assets/package.json
 //------------------------------------------------------------------------------
-window.onload = function() {
+window.addEventListener('load', function() {
     //------------------------------------------------------------------------------
     // Dispatch Widgets Plugin Init Event
     //------------------------------------------------------------------------------
@@ -57,5 +48,5 @@ window.onload = function() {
     console.debug("✅ BadPixxel Widgets: Dispatch Widgets Controllers Init Event");
 
     console.log("✅ BadPixxel Widgets: Module loaded");
-}
+});
 

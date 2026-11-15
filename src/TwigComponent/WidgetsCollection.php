@@ -76,7 +76,7 @@ class WidgetsCollection extends AbstractCollectionAwareComponent
         //==============================================================================
         // Walk on Defined Widgets
         foreach ($this->getCollection()->getWidgets() as $item) {
-            $widgets[$item->getPosition()] = array(
+            $widgets[] = array(
                 "key" => $item->getKey(),
                 "configuratorHash" => $item->getConfiguratorHash(),
                 "options" => $item->getOptions(),
@@ -87,8 +87,11 @@ class WidgetsCollection extends AbstractCollectionAwareComponent
         }
 
         //==============================================================================
-        // Sort Widgets by Position
-        ksort($widgets);
+        // Sort Widgets by Position, Widgets without Position Last
+        // Sort is stable: widgets sharing a position keep their collection order
+        usort($widgets, static fn (array $first, array $second): int => (
+            ($first["position"] ?? PHP_INT_MAX) <=> ($second["position"] ?? PHP_INT_MAX)
+        ));
 
         //==============================================================================
         // Add Total Count to All Widgets

@@ -24,16 +24,18 @@ import '@badpixxel/ux-widgets';
 //==============================================================================
 // Load jQuery (optional - for legacy compatibility)
 //==============================================================================
-try {
-    const $ = import('jquery');
-    window.$ = window.jQuery = $.default || $;
-    console.log("✓ jQuery loaded");
-} catch (error) {
-    console.warn("⚠ jQuery not available (optional)");
-}
+import('jquery')
+    .then(module => {
+        window.$ = window.jQuery = module.default || module;
+        console.log("✓ jQuery loaded");
+    })
+    .catch(() => console.warn("⚠ jQuery not available (optional)"))
+;
 
 //==============================================================================
 // Initialize Stimulus Application
+// Widgets Controllers are registered from assets/controllers.json
+// window.app is kept for extensions relying on "widget:controllers:register"
 //==============================================================================
 import { startStimulusApp } from '@symfony/stimulus-bundle';
 
@@ -44,27 +46,23 @@ console.log("✓ Stimulus application started");
 //==============================================================================
 // Load Symfony UX Controllers
 //==============================================================================
-try {
-    // Symfony UX Chart.js Controller
-    const ChartController = import('@symfony/ux-chartjs');
-    ChartController.then(module => {
+// Symfony UX Chart.js Controller
+import('@symfony/ux-chartjs')
+    .then(module => {
         app.register('symfony--ux-chartjs--chart', module.default);
         console.log("✓ Chart.js controller registered");
-    });
-} catch (error) {
-    console.warn("⚠ Chart.js controller not available");
-}
+    })
+    .catch(() => console.warn("⚠ Chart.js controller not available"))
+;
 
-try {
-    // Symfony UX Live Component Controller
-    const LiveController = import('@symfony/ux-live-component');
-    LiveController.then(module => {
+// Symfony UX Live Component Controller
+import('@symfony/ux-live-component')
+    .then(module => {
         app.register('live', module.default);
         console.log("✓ Live Component controller registered");
-    });
-} catch (error) {
-    console.warn("⚠ Live Component controller not available");
-}
+    })
+    .catch(() => console.warn("⚠ Live Component controller not available"))
+;
 
 //==============================================================================
 // Application Ready

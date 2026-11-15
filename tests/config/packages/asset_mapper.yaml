@@ -3,6 +3,9 @@ framework:
         # The paths to make available to the asset mapper.
         paths:
             - assets/
+        # Bundle UX package definition, read by StimulusBundle & Flex, not a public asset
+        excluded_patterns:
+            - '*/assets/package.json'
         missing_import_mode: strict
     assets:
         # On désactive toute stratégie de versioning pour l'environnement 'dev'
