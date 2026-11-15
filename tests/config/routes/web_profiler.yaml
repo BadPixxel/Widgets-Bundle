@@ -1,8 +1,11 @@
+# Symfony 6.4 ships XML routing files, Symfony 8 ships PHP only: load whichever exists
 when@dev:
     web_profiler_wdt:
-        resource: '@WebProfilerBundle/Resources/config/routing/wdt.xml'
+        resource: '@WebProfilerBundle/Resources/config/routing/wdt.{php,xml}'
+        type: glob
         prefix: /_wdt
 
     web_profiler_profiler:
-        resource: '@WebProfilerBundle/Resources/config/routing/profiler.xml'
+        resource: '@WebProfilerBundle/Resources/config/routing/profiler.{php,xml}'
+        type: glob
         prefix: /_profiler

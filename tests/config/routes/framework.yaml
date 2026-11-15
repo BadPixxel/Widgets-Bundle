@@ -1,4 +1,6 @@
+# Symfony 6.4 ships XML routing files, Symfony 8 ships PHP only: load whichever exists
 when@dev:
     _errors:
-        resource: '@FrameworkBundle/Resources/config/routing/errors.xml'
+        resource: '@FrameworkBundle/Resources/config/routing/errors.{php,xml}'
+        type: glob
         prefix: /_error
