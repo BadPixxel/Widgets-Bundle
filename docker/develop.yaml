@@ -1,0 +1,31 @@
+
+################################################################################
+#
+#  This file is part of SplashSync Project.
+#
+#  Copyright (C) Splash Sync <www.splashsync.com>
+#
+################################################################################
+
+services:
+
+    ################################################################################
+    # Develop Image: Symfony 7.4 + PHP 8.5 (same PHP as host)
+    app:
+        image:          "registry.gitlab.com/badpixxel-projects/php-sdk:php-8.5"
+        init:           true
+        container_name: app.widgets.local
+        hostname:       app.widgets.local
+        volumes:
+            - ../:/var/www/html
+            - app-var:/var/www/html/var
+            - app-vendor:/var/www/html/vendor
+        environment:
+            SERVER_ROOT:        /var/www/html/tests/public
+            SYMFONY_REQUIRE:    7.4.*
+        networks:
+            widgets:            { ipv4_address: 172.205.1.10, aliases: [ app.widgets.local ] }
+
+volumes:
+    app-var:         ~
+    app-vendor:      ~
