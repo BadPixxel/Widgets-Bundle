@@ -33,7 +33,7 @@ interface LifecycleAwareInterface
     /**
      * Set Last Refresh Datetime
      */
-    public function setRefreshAt(DateTime $refreshAt = null) : static;
+    public function setRefreshAt(?DateTime $refreshAt = null) : static;
 
     /**
      * Get Last Refresh Datetime

@@ -91,7 +91,9 @@ class OpenWhetherCollector
      */
     public function getFrCityCoordinates(?string $cityName): array
     {
-        return $this->getFrCitiesCoordinates()[$cityName]
+        //==============================================================================
+        // Unknown or Missing City => Paris
+        return $this->getFrCitiesCoordinates()[$cityName ?? ""]
             ?? array('latitude' => 48.8566, 'longitude' => 2.3522)
         ;
     }

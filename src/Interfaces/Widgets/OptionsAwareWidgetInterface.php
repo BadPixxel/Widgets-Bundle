@@ -29,17 +29,17 @@ interface OptionsAwareWidgetInterface
     /**
      * Set Show Header Option
      */
-    public function setHeader(bool $state = null) : static;
+    public function setHeader(?bool $state = null) : static;
 
     /**
      * Set Show Footer Option
      */
-    public function setFooter(bool $state = null) : static;
+    public function setFooter(?bool $state = null) : static;
 
     /**
      * Set Show Border Option
      */
-    public function setBorder(bool $state = null) : static;
+    public function setBorder(?bool $state = null) : static;
 
     //==============================================================================
     //      Getters & Setters

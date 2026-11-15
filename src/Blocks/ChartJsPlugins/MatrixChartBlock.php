@@ -33,9 +33,11 @@ class MatrixChartBlock extends AbstractChartBlock implements BlockWithDemoInterf
     const TYPE = "MatrixChartBlock";
 
     /**
+     * Stimulus Controller Identifier, as Registered by StimulusBundle from assets/package.json
+     *
      * @var string
      */
-    const CONTROLLER = "BadPixxelWidgetsChartJsMatrixController";
+    const CONTROLLER = "badpixxel--widgets--matrix";
 
     /**
      * @var string
