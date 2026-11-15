@@ -17,7 +17,7 @@ use BadPixxel\Widgets\Demo\Dictionary\WidgetsDemoRoutes;
 use BadPixxel\Widgets\Services\Blocks\BlockResolver;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Routing\Attribute\Route;
 
 /**
  * Show Available Widgets Blocks List
