@@ -20,7 +20,7 @@ trait OptionsSafeAwareTrait
     /**
      * Set this Block as Safe => Allow HTML Contents
      */
-    public function setSafe(bool $state = null): static
+    public function setSafe(?bool $state = null): static
     {
         return $this->mergeOptions(array(
             Options::SAFE => $state ?? true,

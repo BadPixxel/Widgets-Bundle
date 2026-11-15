@@ -123,6 +123,38 @@ class B102WidgetDeferredLoadingTest extends KernelTestCase
     }
 
     /**
+     * Cached Widget Compiled on Cold Cache keeps its Blocks
+     *
+     * Deferred Live Request is the first one to compile the Widget,
+     * so blocks returned on cache miss must not be lost.
+     */
+    public function testColdCacheCompileKeepsBlocks() : void
+    {
+        $dummyText = uniqid("Cold Cache Sample Data");
+        $data = $this->getComponentData($dummyText, false);
+        //====================================================================//
+        // Build Widget with Empty Cache
+        $configurator = $this->assertWidgetClassExists(Text::class);
+        $compiler = static::getContainer()->get(WidgetCompiler::class);
+        Assert::assertInstanceOf(WidgetCompiler::class, $compiler);
+        $widget = $configurator->getService()
+            ->mergeOptions(self::CACHED_OPTIONS)
+            ->setParameters($data["parameters"])
+        ;
+        Assert::assertFalse($compiler->hasCache($widget, self::CACHED_OPTIONS, $data["parameters"]));
+        //====================================================================//
+        // Compile Widget on Cold Cache => Blocks are Present
+        $compiled = $compiler->compile($widget, self::CACHED_OPTIONS, $data["parameters"]);
+        Assert::assertNotEmpty($compiled->getBlocks());
+        Assert::assertTrue($compiler->hasCache($widget, self::CACHED_OPTIONS, $data["parameters"]));
+        //====================================================================//
+        // Compile Widget on Warm Cache => Same Blocks Count
+        $count = count($compiled->getBlocks());
+        $recompiled = $compiler->compile($widget, self::CACHED_OPTIONS, $data["parameters"]);
+        Assert::assertCount($count, $recompiled->getBlocks());
+    }
+
+    /**
      * Deferred Loading Modes & Configurator Input Provider
      *
      * @return array<string, array{string, bool}>

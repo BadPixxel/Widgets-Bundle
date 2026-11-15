@@ -169,7 +169,7 @@ abstract class AbstractConfiguratorAwareComponent extends AbstractRenderingConfi
     public function mount(
         string $key,
         string $configuratorHash,
-        WidgetConfigurator $configurator = null,
+        ?WidgetConfigurator $configurator = null,
         array $options = array(),
         array $parameters = array(),
     ): void {

@@ -29,7 +29,7 @@ interface WidgetProviderInterface
      *
      * @return null|WidgetCollectionItem
      */
-    public function getWidget(string $type, array $parameters = null): ?WidgetCollectionItem;
+    public function getWidget(string $type, ?array $parameters = null): ?WidgetCollectionItem;
 
     /**
      * Return Widget Options Array

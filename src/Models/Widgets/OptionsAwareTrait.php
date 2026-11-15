@@ -66,7 +66,7 @@ trait OptionsAwareTrait
     /**
      * Set Header Status
      */
-    public function setHeader(bool $state = null) : static
+    public function setHeader(?bool $state = null) : static
     {
         return $this->mergeOptions(array(
             Options::SHOW_HEADER => $state ?? true,
@@ -76,7 +76,7 @@ trait OptionsAwareTrait
     /**
      * Set Footer Status
      */
-    public function setFooter(bool $state = null) : static
+    public function setFooter(?bool $state = null) : static
     {
         return $this->mergeOptions(array(
             Options::SHOW_FOOTER => $state ?? true,
@@ -86,7 +86,7 @@ trait OptionsAwareTrait
     /**
      * @inheritDoc
      */
-    public function setBorder(bool $state = null): static
+    public function setBorder(?bool $state = null): static
     {
         return $this->mergeOptions(array(
             Options::SHOW_BORDER => $state ?? true,

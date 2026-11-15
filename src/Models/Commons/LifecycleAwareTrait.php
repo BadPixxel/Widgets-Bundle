@@ -110,7 +110,7 @@ trait LifecycleAwareTrait
     /**
      * @inheritdoc
      */
-    public function setRefreshAt(DateTime $refreshAt = null) : static
+    public function setRefreshAt(?DateTime $refreshAt = null) : static
     {
         $this->refreshAt = $refreshAt ?? new DateTime();
 
