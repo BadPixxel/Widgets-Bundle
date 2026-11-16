@@ -16,9 +16,11 @@
     <div class='col-12 col-md-6'>
         <h4>Widget Configurator</h4>
 
+        {# Same options as the preview: full width by default, kept when parameters are saved #}
         <twig:Widget:Configurator:Card
                 :configurator="Configurator"
                 :configuration="Configuration"
+                :options="Options"
         />
     </div>
 
