@@ -118,7 +118,7 @@ WidgetCompiler (cache lookup, then Widget::build() on cache miss)
     ↓
 Widgets:Block Component (finds the renderer handling each block)
     ↓
-Block renderer Twig Component (i.e. Widgets:Block:Text, ChartJsRenderer)
+Block renderer Twig Component (e.g. Widgets:Block:Text, ChartJsRenderer)
     ↓
 Response
 ```
@@ -184,13 +184,18 @@ The cache key depends on the widget, its options and its parameters. `reset()` d
 
 ```php
 // Get all registered blocks
-public function all(): array
+public function all(): iterable
 
 // Find block by type
-public function findByType(string $type): ?BlockInterface
+public function findByType(string $type): ?AbstractBlock
 ```
 
 Blocks tagged with `badpixxel.widgets.block` (`#[AsWidgetBlock]`) are indexed by type.
+
+### Twig Extensions
+
+- `ColorsExtension` - `widgets_color` filter: chart color role to CSS expression
+- `RenderingModesExtension` - `bs3` / `bs4` / `bs5` tests, from `RenderingConfiguration::bootstrapVersion()`
 
 ## Registration System
 
@@ -231,19 +236,20 @@ Block renderers are regular Twig Components implementing `BlockRendererInterface
 
 The main renderers are Symfony UX Live Components:
 
-- `Widget` - Renders a widget: deferred loading, refresh, in-place edition, moves & deletion in collections
+- `Widget` - Renders a widget: deferred loading, refresh, in-place editing, moves & deletion in collections
 - `WidgetsCollection` - Renders a collection: toolbar, edit mode, widget selector, move left / right, presets
 
 Components communicate with Live events, defined in `WidgetEvents` and `CollectionEvents`
-(i.e. `badpixxel.widget.updated`, `badpixxel.widget.collection.updated`).
+(e.g. `badpixxel.widget.updated`, `badpixxel.widget.collection.updated`).
 
 ### Stimulus Controllers & Assets
 
 The bundle is a Symfony UX package (`assets/package.json`):
 
-- Its Stimulus controllers (i.e. `badpixxel--widgets--matrix`) are declared in `symfony.controllers`,
+- Its Stimulus controllers (e.g. `badpixxel--widgets--matrix`) are declared in `symfony.controllers`,
   synchronized by Flex into the host `assets/controllers.json`, and registered by StimulusBundle
-- `@badpixxel/ux-widgets` registers Chart.js plugins (Matrix, Sankey), and must be imported before Stimulus starts
+- `@badpixxel/ux-widgets` registers Chart.js plugins (Matrix, Sankey) and theme colors (`widgets-theme.js`),
+  and must be imported before Stimulus starts
 
 See [JavaScript Modules](javascript.md).
 
@@ -257,10 +263,13 @@ Chart block (LineChartBlock, BarChartBlock...) with rows, label key & values key
 ChartJsRenderer → ChartJsBuilder
     ├→ ChartJsLabelsBuilder (labels)
     ├→ ChartJsDatasetsBuilder (datasets)
-    ├→ ChartJsColorsBuilder (colors, default palette from configuration)
+    ├→ ChartJsColorsBuilder (colors: ColorBuilder turns ChartColors roles into CSS var() chains,
+    │                        default palette from configuration)
     └→ ChartJsOptionsBuilder (options)
     ↓
-Symfony UX Chart.js render_chart() + optional block controller (i.e. Matrix)
+Symfony UX Chart.js render_chart() + optional block controller (e.g. Matrix)
+    ↓
+Browser: widgets-theme.js resolves CSS expressions on chartjs:pre-connect
 ```
 
 ## Sonata Integration
@@ -291,7 +300,7 @@ class MyWidget extends AbstractWidget
 ### Custom Widget Loaders
 
 Implement `WidgetsLoaderInterface` to provide widget configurators from another source
-(i.e. database driven widgets). Implementations are autoconfigured with `badpixxel.widgets.widget.loader`.
+(e.g. database driven widgets). Implementations are autoconfigured with `badpixxel.widgets.widget.loader`.
 
 ```php
 use BadPixxel\Widgets\Interfaces\Widgets\Loader\WidgetsLoaderInterface;

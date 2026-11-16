@@ -53,7 +53,7 @@ new SimpleDescriptor(
     title: "Sales",                     // Widget title
     description: "Monthly sales",       // Description, shown in selectors
     icon: "fa fa-fw fa-chart-line",     // Font Awesome icon
-    origin: "Shop",                     // Origin, i.e. your bundle or module name
+    origin: "Shop",                     // Origin, e.g. your bundle or module name
     subtitle: null,                     // Optional subtitle
 );
 ```
@@ -89,7 +89,7 @@ return new TranslatableDescriptor(
 ```
 
 The attribute is repeatable: the same widget can be declared several times,
-i.e. with other default options for another channel.
+e.g. with other default options for another channel.
 
 > `#[AsWidget]` only tags the class as a widget service: its `channels` and `roles` are not read.
 > Use `#[AsStaticWidget]` to make a widget available.
@@ -335,7 +335,7 @@ public function build(): void
 
 ## Widget Parameters
 
-Parameters are runtime values of a widget (i.e. configurable widgets values). They are given
+Parameters are runtime values of a widget (e.g. configurable widgets values). They are given
 to the `Widget` component, or stored with each widget of a collection:
 
 ```twig

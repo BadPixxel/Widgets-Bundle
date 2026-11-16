@@ -32,6 +32,7 @@ badpixxel_widgets:
 ```
 
 These are the only configuration keys: defaults are shown above.
+(The demo bundle has its own `widgets_demo` keys, see the [README](../README.md#demo-application).)
 
 > **Note**: only `defaults.colors` is currently read by the bundle.
 > `cache.enable` is declared but not used: caching is enabled per widget, with `Options::CACHE_ENABLED`
@@ -55,7 +56,7 @@ widget attribute, or at runtime with `setOptions()` / `mergeOptions()` and the d
 | `Options::DATES_PRESET`    | `DatePreset`     | Date preset of date-aware widgets, see `DatePresets`           |
 | `Options::CACHE_ENABLED`   | `UseCache`       | Enable widget cache (default: `true`)                          |
 | `Options::CACHE_TTL`       | `CacheLifeTime`  | Cache lifetime in seconds (default: `300`, `0` disables cache) |
-| `Options::EDITABLE`        | `Editable`       | Allow edition via UI                                           |
+| `Options::EDITABLE`        | `Editable`       | Allow editing via UI                                           |
 | `Options::DELETABLE`       | `Deletable`      | Allow deletion via UI                                          |
 | `Options::SORTABLE`        | `Sortable`       | Allow reordering via UI                                        |
 | `Options::EDITED`          | `EditMode`       | Widget is currently edited                                     |
@@ -208,6 +209,25 @@ $chart = (new BarChartBlock())
 ;
 ```
 
+### Progress Bars
+
+`ProgressBarBlock` (Bootstrap) draws one or more progress bars. A point is a value in %, or an array
+with a `label` shown inside the bar:
+
+```php
+use BadPixxel\Widgets\Blocks\Bootstrap\ProgressBarBlock;
+use BadPixxel\Widgets\Dictionary\ChartColors;
+
+$block = (new ProgressBarBlock())
+    ->addProgressBar(array(array("value" => 84, "label" => "Revenue · 84 / 90 k€")))
+    ->setBarColors(array(ChartColors::SUCCESS))     // Theme roles or CSS colors
+    ->setBarHeight(22)                              // In pixels, room for labels
+    ->setShowLegend(false)                          // Hide legend under bars
+;
+```
+
+Also available: `setLabels()` (legend labels), `setBarClasses()` (Bootstrap classes, e.g. `bg-success`).
+
 When no colors are given, the `badpixxel_widgets.defaults.colors` palette is used, cycled when a chart
 has more datasets (or points, for pie charts) than colors.
 
@@ -229,12 +249,14 @@ use BadPixxel\Widgets\Dictionary\ChartColors;
 $chart->setColors(array(ChartColors::SUCCESS, ChartColors::DANGER, "#ff6600"));
 ```
 
-A role is converted to a CSS expression (i.e. `var(--bpw-series-1, var(--bs-primary, var(--primary, #0d6efd)))`),
+A role is converted to a CSS expression (e.g. `var(--bpw-series-1, var(--bs-primary, var(--primary, #0d6efd)))`),
 resolved by the browser on the chart element, just before the chart is created. So charts follow the site theme,
 Bootswatch themes and the Bootstrap 5 color mode, and are redrawn when the color mode changes.
 Chart.js texts, grid lines and font also follow the theme, unless set in the block chart options.
 
-Redefine `--bpw-*` variables in your stylesheet to change roles without changing Bootstrap:
+Redefine `--bpw-*` variables in your stylesheet to change roles without changing Bootstrap.
+`--bpw-font` sets the chart font. Variables are read on the chart element, so they can also be
+overridden for a single widget (e.g. on a widget CSS class):
 
 ```css
 :root {
@@ -268,7 +290,7 @@ Widgets are rendered with Twig / Live Components, there is no dedicated Twig fun
 | `configurator`     | `WidgetConfigurator`, as returned by `WidgetsResolver::resolve()`      |
 | `configuratorHash` | Configurator hash, alternative to `configurator`                       |
 | `options`          | Options merged into widget defaults                                    |
-| `parameters`       | Widget parameters (i.e. configurable widgets values)                   |
+| `parameters`       | Widget parameters (e.g. configurable widgets values)                   |
 | `configuration`    | Rendering configuration: `mode`, `deferred`, `editable`...             |
 | `loading`          | `defer` or `lazy`: compile the widget on a deferred Live request       |
 
@@ -278,7 +300,7 @@ Without `loading`, a widget whose cache is empty is deferred automatically, unle
 ### Template Overriding
 
 Bundle templates live in `@BadpixxelWidgets` and can be overridden the Symfony way, in
-`templates/bundles/BadpixxelWidgetsBundle/` (i.e. `Components/widget.html.twig`).
+`templates/bundles/BadpixxelWidgetsBundle/` (e.g. `Components/widget.html.twig`).
 
 Templates adapt their markup to the rendering mode with the `bs3`, `bs4` and `bs5` Twig tests.
 They accept a rendering configuration or a mode code, any unknown mode is Bootstrap 5:

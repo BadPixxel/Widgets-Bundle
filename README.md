@@ -13,12 +13,12 @@ Build interactive dashboards from composable widgets, rendered with Symfony UX L
 - **Pre-built Blocks** - Text, tables, notifications, alerts, progress bars and charts
 - **Chart.js Integration** - Line, bar, pie, donut, polar, matrix and Sankey charts
 - **Theme Colors** - Charts follow your Bootstrap theme & color mode, explicit colors still win
-- **Symfony UX Live Components** - Interactive widgets, deferred loading, in-place edition
+- **Symfony UX Live Components** - Interactive widgets, deferred loading, in-place editing
 - **Widget Collections** - User editable dashboards, persisted with Doctrine
 - **Role-Based Access Control** - Restrict widget visibility by user roles
 - **Widget Caching** - Per-widget cache with configurable lifetime
 - **Date Presets** - Built-in time-range filtering (this week, last month, past year...)
-- **Bootstrap 3 / 4 / 5** - Rendering modes for each Bootstrap version
+- **Bootstrap 3 / 4 / 5** - Rendering modes for each Bootstrap version, `bs3` / `bs4` / `bs5` Twig tests for templates
 - **Sonata Integration** - Optional Sonata Admin and Sonata Block support
 
 ## Requirements
@@ -170,12 +170,15 @@ php bin/console badpixxel:widgets:widgets
 
 # List all available blocks
 php bin/console badpixxel:widgets:blocks
+
+# Upgrade from 2.x: convert collections options & parameters to JSON (--dry-run to count only)
+php bin/console badpixxel:widgets:migrate-json
 ```
 
 ## Examples
 
 See the [demo/Widgets](demo/Widgets) directory for real-world examples:
-- A shop dashboard (`Shop/`): KPIs without header nor footer, line, donut, stacked bar & heatmap charts,
+- A shop dashboard (`Shop/`): KPIs without header or footer, line, donut, stacked bar & heatmap charts,
   targets, products table and notifications, in various widths
 - Text widgets
 - Time-series charts
@@ -183,7 +186,17 @@ See the [demo/Widgets](demo/Widgets) directory for real-world examples:
 - Date preset widgets
 - Cache status widgets
 
+## Demo Application
+
+The demo application (`demo/`, `WidgetsDemoBundle`) has a navbar to switch between Bootstrap 3, 4 and 5
+(`/{bsMode}/...`), Bootswatch themes (Bootstrap 4 & 5: Flatly, Minty, Sketchy, Darkly; Bootstrap 5 also Morph
+and Quartz) and the Bootstrap 5 light / dark color mode. Choices are kept in the `bpw_demo_theme` and
+`bpw_demo_color_mode` cookies. Its homepage is a static shop dashboard.
+
 Extension bundles reuse the demo application with their own homepage dashboard & icon:
+map `"BadPixxel\\Widgets\\Demo\\": "vendor/badpixxel/widgets-bundle/demo"` in your `autoload-dev`,
+register `BadPixxel\Widgets\Demo\WidgetsDemoBundle`, import `@WidgetsDemoBundle/Resources/config/routing.php`
+with `prefix: /{bsMode}`, then configure the homepage:
 
 ```yaml
 # tests/config/packages/widgets_demo.yaml
@@ -194,6 +207,15 @@ widgets_demo:
     widgets:
         - App\Widgets\MyWidget
 ```
+
+| Key        | Default                                          | Description                                  |
+|------------|--------------------------------------------------|----------------------------------------------|
+| `title`    | `Shop Dashboard`                                 | Homepage title, cannot be empty              |
+| `subtitle` | `Static widgets, with demo data`                 | Homepage subtitle                            |
+| `icon`     | `bundles/badpixxelwidgets/img/widgets-icon.svg`  | Navbar brand & favicon, public asset path    |
+| `widgets`  | The `Shop\` dashboard                            | Widgets classes, in display order            |
+
+Demo templates read this configuration with the `demo_homepage()` Twig function.
 
 ## Testing
 

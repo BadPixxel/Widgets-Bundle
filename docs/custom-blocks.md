@@ -158,7 +158,7 @@ public function getDataResolver(): ?OptionsResolver
 }
 ```
 
-Prefer defaults over required fields: blocks are also instantiated empty, i.e. for listings and demos.
+Prefer defaults over required fields: blocks are also instantiated empty, e.g. for listings and demos.
 
 ## Block Options
 
@@ -321,7 +321,7 @@ public function build(): void
 }
 ```
 
-When the renderer needs services (i.e. to format values), inject them in the renderer component.
+When the renderer needs services (e.g. to format values), inject them in the renderer component.
 
 ## Demo Data Support
 
@@ -348,7 +348,7 @@ class MessageBlock extends AbstractBlock implements BlockWithDemoInterface
 ## Template Overriding
 
 Built-in renderers use templates from `@BadpixxelWidgets/Components/Blocks/`. Override them the Symfony way,
-in `templates/bundles/BadpixxelWidgetsBundle/Components/Blocks/` (i.e. `Basics/TextBlock.html.twig`).
+in `templates/bundles/BadpixxelWidgetsBundle/Components/Blocks/` (e.g. `Basics/TextBlock.html.twig`).
 
 ## Testing Blocks
 

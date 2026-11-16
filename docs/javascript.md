@@ -32,6 +32,9 @@ For applications that already have Stimulus and Live Component. This is the reco
 
 **What it does**:
 - Registers Chart.js plugins (Matrix, Sankey) on `chartjs:init`
+- Loads theme colors (`widgets-theme.js`): resolves chart color roles, fills Chart.js defaults,
+  redraws charts on theme change (see [Theme Colors](#theme-colors))
+- Exports `resolveColor`, `alpha` and `onThemeChange` for extensions
 - Does NOT start Stimulus, nor register controllers: StimulusBundle does it from `controllers.json`
 
 **Usage in your `assets/app.js`**:
@@ -91,6 +94,7 @@ before the first chart connects.
 
 - before a chart is created (`chartjs:pre-connect`, capture phase), colors given as CSS expressions
   (theme roles, see [Chart Colors](configuration.md#chart-colors)) are resolved on the chart element
+- colors of chart data replaced by Live updates (`chartjs:view-value-change`) are resolved too
 - Chart.js defaults (texts, grid lines, font) are filled from the theme: options set by blocks always win
 - connected charts are redrawn when the theme changes (`data-bs-theme`, `class` or `style` of `<html>`,
   or the system color scheme)

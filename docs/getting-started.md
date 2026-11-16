@@ -41,8 +41,8 @@ php bin/console doctrine:migrations:migrate
 The bundle ships a Symfony UX package (`assets/package.json`). On `composer require` / `composer update`,
 Symfony Flex synchronizes it into your application:
 
-- `importmap.php`: `@badpixxel/ux-widgets`, Chart.js and its Matrix / Sankey plugins, jQuery
-- `assets/controllers.json`: the `@badpixxel/widgets-bundle` Stimulus controllers (i.e. Matrix chart)
+- `importmap.php`: `@badpixxel/ux-widgets`, `@badpixxel/ux-widgets-app`, Chart.js and its Matrix / Sankey plugins, jQuery
+- `assets/controllers.json`: the `@badpixxel/widgets-bundle` Stimulus controllers (e.g. Matrix chart)
 
 Then download the JavaScript dependencies:
 
@@ -302,6 +302,14 @@ php bin/console badpixxel:widgets:widgets
 
 ```bash
 php bin/console badpixxel:widgets:blocks
+```
+
+### Migrate from 2.x
+
+Collections options & parameters are now stored as JSON. Convert existing rows (`--dry-run` to count only):
+
+```bash
+php bin/console badpixxel:widgets:migrate-json
 ```
 
 ## Next Steps

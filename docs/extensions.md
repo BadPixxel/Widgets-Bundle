@@ -11,7 +11,7 @@ An extension is a Symfony bundle that ships:
 
 1. **Blocks & renderers** (PHP) - see [Creating Custom Blocks](custom-blocks.md)
 2. **A Symfony UX package** (`assets/package.json`) - declaring its Stimulus controllers and JavaScript dependencies
-3. **An optional integration module** - for code that must run before Stimulus starts (i.e. Chart.js plugins)
+3. **An optional integration module** - for code that must run before Stimulus starts (e.g. Chart.js plugins)
 
 There is no JavaScript plugin registry: controllers are registered by StimulusBundle, like any Symfony UX package.
 
@@ -130,6 +130,43 @@ import '@acme/ux-widgets-gauge';
 import { startStimulusApp } from '@symfony/stimulus-bundle';
 const app = startStimulusApp();
 ```
+
+## Theme Colors
+
+Blocks accept `ChartColors` roles (`series-1`..`series-8`, `accent`, `success`...), converted to CSS
+expressions that follow the site theme (see [Chart Colors](configuration.md#chart-colors)).
+Charts not rendered by Chart.js resolve them in JavaScript, before drawing:
+
+```javascript
+import { resolveColor, alpha, onThemeChange } from '@badpixxel/ux-widgets';
+
+const color = resolveColor(expression, element);    // "rgb(13, 110, 253)"
+onThemeChange(() => redraw());                      // Color mode or theme changed
+```
+
+In Twig, use the `widgets_color` filter: `{{ 'success'|widgets_color }}`.
+
+## Demo Application
+
+Extensions can reuse the demo application of the bundle, with their own homepage dashboard & icon:
+
+1. Map the demo namespace in your `composer.json` `autoload-dev`:
+   `"BadPixxel\\Widgets\\Demo\\": "vendor/badpixxel/widgets-bundle/demo"`
+2. Register `BadPixxel\Widgets\Demo\WidgetsDemoBundle` in your test kernel bundles
+3. Import `@WidgetsDemoBundle/Resources/config/routing.php` with `prefix: /{bsMode}`
+4. Configure the homepage:
+
+```yaml
+# tests/config/packages/widgets_demo.yaml
+widgets_demo:
+    title:      "D3.js Dashboard"
+    subtitle:   "Static D3.js widgets, with demo data"
+    icon:       "bundles/badpixxelwidgetsd3js/img/widgets-d3js-icon.svg"
+    widgets:
+        - Acme\Widgets\GaugeWidget
+```
+
+See the [README](../README.md#demo-application) for all keys.
 
 ## Legacy: `widget:controllers:register`
 

@@ -7,16 +7,17 @@ Key facts for code generation:
 - Register a widget with `#[AsStaticWidget(channels: array(...), roles: array(...), priority: 0, options: array(...))]` on a class extending `BadPixxel\Widgets\Models\AbstractWidget`. `#[AsWidget]` only tags the service and does NOT make the widget available.
 - A widget implements `getDescriptor(): SimpleDescriptor` (`BadPixxel\Widgets\Widgets\Descriptor\SimpleDescriptor(title, description, icon, origin, ?subtitle)`) and `build(): void`, which calls `$this->addBlock(...)`.
 - Widgets are autowired services; a widget with a constructor must call `parent::__construct()`.
-- Blocks are built with `new` and fluent setters, i.e. `(new TextBlock())->setText("...")->setSafe(true)`. Constructors take `(array $data = array(), array $options = array())`.
+- Blocks are built with `new` and fluent setters, e.g. `(new TextBlock())->setText("...")->setSafe(true)`. Constructors take `(array $data = array(), array $options = array())`.
 - Chart blocks take rows: `->setDataSet($rows)->setPointLabelKey("date")->setPointValuesKeys(array("total"))->setLabels(array("Total"))`.
-- Options are constants of `BadPixxel\Widgets\Dictionary\Options` (i.e. `Options::WIDTH`, `Options::CACHE_ENABLED`, `Options::CACHE_TTL`). Widths: `Dictionary\Widgets\WidgetWidth`, colors: `Dictionary\Widgets\WidgetColors`, alert levels: `AlertBlock::SUCCESS|INFO|WARNING|ERROR|DEFAULT`.
-- There is no Twig function: render with `<twig:Widget :configurator="..." loading="defer" />` (configurator from `WidgetsResolver::resolve(MyWidget::class)`) or `<twig:WidgetsCollection type="..." channel="..." />`.
+- Options are constants of `BadPixxel\Widgets\Dictionary\Options` (e.g. `Options::WIDTH`, `Options::CACHE_ENABLED`, `Options::CACHE_TTL`). Widths: `Dictionary\Widgets\WidgetWidth`, colors: `Dictionary\Widgets\WidgetColors`, alert levels: `AlertBlock::SUCCESS|INFO|WARNING|ERROR|DEFAULT`.
+- There is no Twig function to render widgets: use `<twig:Widget :configurator="..." loading="defer" />` (configurator from `WidgetsResolver::resolve(MyWidget::class)`) or `<twig:WidgetsCollection type="..." channel="..." />`. Twig helpers: the `widgets_color` filter (role to CSS) and the `bs3` / `bs4` / `bs5` tests (a `RenderingConfiguration` or a mode code; unknown modes are bs5).
 - Caching is per widget and enabled by default for 300 s (`Options::CACHE_ENABLED`, `Options::CACHE_TTL`). A widget with `loading="defer"`/`"lazy"`, or an empty cache, is compiled on a deferred Live request.
 - Configuration: only `badpixxel_widgets.defaults.colors` is read; `cache.enable` and `sonata.*` keys are declared but unused.
-- Chart colors: theme roles from `BadPixxel\Widgets\Dictionary\ChartColors` (`series-1`..`series-8`, `accent`, `success`, `warning`, `danger`, `info`, `muted`) or explicit CSS colors, i.e. `->setColors(array(ChartColors::SUCCESS, "#ff6600"))`. Roles follow the Bootstrap theme & color mode; the default palette is the 8 series roles.
-- JavaScript: import `@badpixxel/ux-widgets` before `startStimulusApp()`. Stimulus controllers are declared in `assets/package.json` (UX package) and registered by StimulusBundle from the host `assets/controllers.json` (i.e. `badpixxel--widgets--matrix`).
-- CLI: `badpixxel:widgets:widgets`, `badpixxel:widgets:blocks`.
-- Tests: extend `BadPixxel\Widgets\Phpunit\TestCase\AbstractBlocksTestCase` / `AbstractWidgetsTestCase` (PHPUnit 10.5 / 11) and return your namespaces, or use `Phpunit\Traits\WidgetsAssertionsTrait` in a `KernelTestCase`. Using an `*AwareTestTrait` alone also requires `WidgetsContainerTrait`.
+- Chart colors: theme roles from `BadPixxel\Widgets\Dictionary\ChartColors` (`series-1`..`series-8`, `accent`, `success`, `warning`, `danger`, `info`, `muted`) or explicit CSS colors, e.g. `->setColors(array(ChartColors::SUCCESS, "#ff6600"))`. Roles follow the Bootstrap theme & color mode; the default palette is the 8 series roles. JavaScript helpers `resolveColor`, `alpha` and `onThemeChange` are exported by `@badpixxel/ux-widgets`.
+- JavaScript: import `@badpixxel/ux-widgets` before `startStimulusApp()`. Stimulus controllers are declared in `assets/package.json` (UX package) and registered by StimulusBundle from the host `assets/controllers.json` (e.g. `badpixxel--widgets--matrix`).
+- CLI: `badpixxel:widgets:widgets`, `badpixxel:widgets:blocks`, `badpixxel:widgets:migrate-json` (2.x to 3.0 JSON columns).
+- Demo: `WidgetsDemoBundle` (`demo/`, autoload-dev only). Extensions reuse it and configure the homepage with `widgets_demo: {title, subtitle, icon, widgets}`.
+- Tests: extend `BadPixxel\Widgets\Phpunit\TestCase\AbstractBlocksTestCase` / `AbstractWidgetsTestCase` (PHPUnit 10.5 / 11) and return your namespaces, or use `Phpunit\Traits\WidgetsAssertionsTrait` in a `KernelTestCase`. Using an `*AwareTestTrait` alone also requires `WidgetsContainerTrait`. Run all checks with `make verify` (quality + PHPUnit on Symfony 6.4, 7.4 and 8.0).
 
 ## Docs
 
@@ -39,4 +40,4 @@ Key facts for code generation:
 - [Built-in Blocks](src/Blocks): Block classes, by category
 - [Block Renderers](src/TwigComponent/BlockRenderer): Twig Components rendering built-in blocks
 - [Options Dictionary](src/Dictionary/Options.php): All widget & block options keys
-- [D3.js Widgets Bundle](https://gitlab.com/badpixxel-public/widgets-d3-bundle): Extension example, with D3.js Bubble & Force charts
+- [D3.js Widgets Bundle](https://gitlab.com/badpixxel-public/widgets-d3-bundle): Extension example, with D3.js Bubble, Force & Sync Flow diagrams

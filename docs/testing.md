@@ -50,11 +50,11 @@ the first digit is the feature group.
 
 | Test                              | What is checked                                                                                   |
 |-----------------------------------|---------------------------------------------------------------------------------------------------|
-| `Unit001HelpersTest`              | Tags encoder (string / array, invalid Json), Json parser, rendering configuration flags           |
+| `Unit001HelpersTest`              | Tags encoder (string / array, invalid Json), Json parser, rendering configuration flags & modes, `bs3` / `bs4` / `bs5` Twig tests |
 | `Unit002DatePresetsParserTest`    | Every preset: start before end, valid format & grouping; exact ranges; unknown preset fallback    |
 | `Unit003OptionsResolversTest`     | Nested options on Symfony 6.4 to 8; Block, Chart, Chart Data, Widget & Collection defaults; validation |
-| `Unit004ChartColorsTest`          | Theme roles to CSS expressions, explicit colors unchanged, default palette cycling, `widgets_color` filter |
-| `Unit005DemoHomepageTest`         | Demo homepage configuration: shop dashboard defaults, title / icon / widgets overrides           |
+| `Unit004ChartColorsTest`          | Theme roles to CSS expressions, explicit colors unchanged, default palette cycling, block colors mixing roles & CSS colors, `widgets_color` filter |
+| `Unit005DemoHomepageTest`         | Demo homepage configuration: shop dashboard defaults, title / icon / widgets overrides, empty title rejected |
 | `Unit101BlocksModelTest`          | Block data & options resolution, defaults restored on invalid inputs, width shortcuts, demo, Matrix raw options |
 | `Unit102WidgetsModelTest`         | Widget options & shortcuts, parameters, cache TTL, blocks, lifecycle dates, date presets          |
 | `Unit103WidgetConfiguratorTest`   | Hash stability, channels & roles normalization, static options & parameters applied to widget     |
@@ -67,7 +67,7 @@ the first digit is the feature group.
 |-----------------------------------|---------------------------------------------------------------------------------------------------|
 | `Int001SymfonyInitTest`           | `cache:clear` & `debug:router` work in `dev` & `test` environments                                |
 | `Int101BlockResolverTest`         | Blocks resolver service & blocks resolution by type                                               |
-| `Int102BlocksTest`                | Generic blocks suite (see below) on all registered blocks                                         |
+| `Int102BlocksTest`                | Generic blocks suite (see below) on all registered blocks; progress bar labels inside bars & hidden legend |
 | `Int201WidgetResolverTest`        | Widgets resolution by hash & class, not found & not allowed widgets                               |
 | `Int202WidgetsTest`               | Generic widgets suite (see below) on all registered widgets                                       |
 | `Int203WidgetCompilerTest`        | Cold & warm cache, cache keys, cache reset, widgets without cache, compilation errors             |
@@ -81,9 +81,9 @@ the first digit is the feature group.
 | Test                              | What is checked                                                                                   |
 |-----------------------------------|---------------------------------------------------------------------------------------------------|
 | `Func001WidgetComponentTest`      | Widget Live Component rendering, `refresh` & `updated` actions                                     |
-| `Func002WidgetDeferredLoadingTest`| Deferred loading (defer, lazy, auto) & inline rendering when cache exists                         |
+| `Func002WidgetDeferredLoadingTest`| Deferred loading (defer, lazy, auto), inline rendering when cache exists, cold cache compilation keeps blocks |
 | `Func003WidgetConfiguratorTest`   | Configurator card renders the widget form, saving emits `UPDATED` with edited parameters          |
-| `Func101DemoPagesTest`            | Demo pages: listings in bs3, bs4 & bs5, every block preview, every widget preview, collections   |
+| `Func101DemoPagesTest`            | Demo pages: homepage & listings in bs3, bs4 & bs5, collections (incl. Sonata), every block preview, every widget preview (incl. Sonata) |
 | `Func102DemoThemesTest`           | Demo themes: every Bootswatch theme per Bootstrap version, fallback, color modes, invalid values |
 
 Database tests use the SQLite database of the test kernel (`var/data.db`), missing tables are created on the fly.
@@ -153,7 +153,7 @@ Each block or widget is a data set, so failures name the faulty class.
 | `testWidgetDescriptor`     | Title, icon & description are not empty, translated descriptors are translated       |
 | `testWidgetOptions`        | All widget options are defined, static options are applied                           |
 | `testWidgetCompilation`    | Widget compiles without error, refresh date is set, blocks are valid                 |
-| `testWidgetForm`           | Edition form is built & rendered, configurable widgets add parameters fields         |
+| `testWidgetForm`           | Editing form is built & rendered, configurable widgets add parameters fields         |
 | `testWidgetRendering`      | Widget Live Component renders the widget, without compilation error                  |
 
 ### Assertions Traits
