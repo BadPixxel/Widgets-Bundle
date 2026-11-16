@@ -47,11 +47,12 @@ class WidgetFormFactory
         ));
         //====================================================================//
         // Import Widget Parameters Form Fields
-        $paramForm = $builder->add('parameters', FormType::class, array(
+        // Widget fields are added to the "parameters" child, mapped to widget parameters array
+        $builder->add('parameters', FormType::class, array(
             'label' => false,
         ));
         if ($widget instanceof ConfigurableWidgetInterface) {
-            $widget->buildForm($paramForm);
+            $widget->buildForm($builder->get('parameters'));
         }
 
         return $builder->getForm();
