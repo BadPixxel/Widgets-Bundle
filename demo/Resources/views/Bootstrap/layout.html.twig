@@ -1,2 +1,96 @@
-{# Bootstrap Layout - Extends dynamically based on bsMode #}
-{% extends '@WidgetsDemo/Bootstrap/base.' ~ bsMode ~ '.html.twig' %}
+{#
+ # Demo Layout, for all Bootstrap Versions (bsMode: bs3, bs4 or bs5)
+ #
+ # Bootstrap CSS is plain Bootstrap or a Bootswatch theme (bs4 & bs5), selected in the navbar:
+ # the demo itself adds no theme specific CSS, to see how widgets render natively.
+ #}
+{% set bsModes = constant('BadPixxel\\Widgets\\Demo\\Dictionary\\DemoThemes::VERSIONS') %}
+{% set bsMode = bsMode ?? app.request.attributes.get('bsMode') ?? constant('BadPixxel\\Widgets\\Dictionary\\Widgets\\RenderingModes::DEFAULT') %}
+{% set bsVersion = bsModes[bsMode] %}
+{% set colorMode = demo_color_mode(bsMode) %}
+{% set isBs3 = bsMode == constant('BadPixxel\\Widgets\\Dictionary\\Widgets\\RenderingModes::BS3') %}
+{# Demo Pages: menu entries, with routes highlighting each entry #}
+{% set routes = 'BadPixxel\\Widgets\\Demo\\Dictionary\\WidgetsDemoRoutes::' %}
+{% set demoPages = [
+    { route: constant(routes ~ 'HOME'), label: 'Home', icon: 'fa-home', routes: [constant(routes ~ 'HOME')] },
+    { route: constant(routes ~ 'BLOCKS_LIST'), label: 'Blocks', icon: 'fa-cubes', routes: [constant(routes ~ 'BLOCKS_LIST'), constant(routes ~ 'BLOCKS_PREVIEW')] },
+    { route: constant(routes ~ 'WIDGETS_LIST'), label: 'Widgets', icon: 'fa-th-large', routes: [constant(routes ~ 'WIDGETS_LIST'), constant(routes ~ 'WIDGET_PREVIEW')] },
+    { route: constant(routes ~ 'COLLECTION_COMPONENT'), label: 'Collection', icon: 'fa-columns', routes: [constant(routes ~ 'COLLECTION_COMPONENT')] },
+] %}
+{% set sonataPages = [
+    { route: constant(routes ~ 'SONATA_WIDGET_LIST'), label: 'Widgets as Sonata Blocks', routes: [constant(routes ~ 'SONATA_WIDGET_LIST'), constant(routes ~ 'SONATA_WIDGET_PREVIEW')] },
+    { route: constant(routes ~ 'SONATA_COLLECTION'), label: 'Collection as Sonata Block', routes: [constant(routes ~ 'SONATA_COLLECTION')] },
+] %}
+{% set currentRoute = app.request.attributes.get('_route') ?? constant(routes ~ 'HOME') %}
+{% set currentParams = app.request.attributes.get('_route_params') ?? {} %}
+<!DOCTYPE html>
+<html lang="en"{% if colorMode %} data-bs-theme="{{ colorMode }}"{% endif %}>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block page_title %}BadPixxel Widgets{% endblock %}</title>
+    <link rel="icon" type="image/svg+xml" href="{{ asset('logos/widgets-icon.svg') }}">
+
+    {% block stylesheets %}
+        {# Bootstrap, or Bootswatch Theme, from CDN #}
+        <link href="{{ demo_stylesheet(bsMode) }}" rel="stylesheet">
+        {# jQuery UI #}
+        <link href="https://code.jquery.com/ui/1.13.2/themes/base/jquery-ui.min.css" rel="stylesheet">
+        {# FontAwesome 5 #}
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+        {# Prism.js CSS - Tomorrow Night theme #}
+        <link href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet">
+        <link href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/line-numbers/prism-line-numbers.min.css" rel="stylesheet">
+        <link href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/toolbar/prism-toolbar.min.css" rel="stylesheet">
+    {% endblock %}
+
+    {% block jquery %}
+        {# jQuery (required for jQuery UI & Bootstrap 3 / 4) #}
+        <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+        <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"></script>
+    {% endblock %}
+</head>
+<body>
+
+    {# Navigation: pages, Bootstrap version, theme & color mode #}
+    {% include isBs3 ? '@WidgetsDemo/Bootstrap/_navbar.bs3.html.twig' : '@WidgetsDemo/Bootstrap/_navbar.html.twig' %}
+
+    <main class="container-fluid">
+
+        <div class="{{ isBs3 ? 'page-header' : 'pb-2 mb-4 border-bottom' }}">
+            <h1 class="h3">{% block title %}BadPixxel Widgets{% endblock %}</h1>
+        </div>
+
+        {% block page_content %}{% endblock %}
+
+    </main>
+
+    <footer class="text-center text-muted my-4">
+        <small>
+            BadPixxel Widgets Bundle &middot; Bootstrap {{ bsVersion }}
+            &middot; {{ demo_themes(bsMode)[demo_theme(bsMode)] }}{% if colorMode %} ({{ colorMode }}){% endif %}
+        </small>
+    </footer>
+
+    {% block javascripts %}
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@{{ bsVersion }}/dist/js/{{ isBs3 ? 'bootstrap.min.js' : 'bootstrap.bundle.min.js' }}"></script>
+        {# Prism.js Core & Languages #}
+        <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/prism.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-markup.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-markup-templating.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-php.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-javascript.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-twig.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-json.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-yaml.min.js"></script>
+        {# Prism.js Plugins #}
+        <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/line-numbers/prism-line-numbers.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/toolbar/prism-toolbar.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/copy-to-clipboard/prism-copy-to-clipboard.min.js"></script>
+        {% block importmap %}
+            {{ importmap('app') }}
+        {% endblock %}
+    {% endblock %}
+
+</body>
+</html>

@@ -1,49 +1,36 @@
 {% extends "base.html.twig" %}
 
-{% block headline %}
-    Widgets Collection  as Sonata Block
+{% block title %}
+    Widgets Collection as Sonata Block
 {% endblock %}
 
-{% block content_row %}
-    
-    <div class="col-xs-12 col-md-6 p-3">
-        <h3>
-            <i class="fa fa-fw fa-info-circle "></i>
-            You can use Sonata Blocks to render a Widgets Collections
-        </h3>   
-        <p>
-            Just pass a title, a channel code and your collection code, that's all...
-            <br />
-            If collection code is new, it will be created & persisted to database.
-            So you can create new widget collections on the demand.
-            <br />
-            In addition, you can pass few option to hide the menu, disable édition.
-        </p>
-    </div>
+{% block page_content %}
+    <div class="row">
 
-    <div class="col-xs-12 col-md-6 p-3">
+        <div class="col-12 col-md-6">
+            <h5><i class="fa fa-fw fa-info-circle"></i> Render a Widgets Collection with Sonata Blocks</h5>
+            <p>
+                Just pass a collection type and a channel, that's all.
+                If the collection type is new, it is created & persisted to database,
+                so you can create new collections on demand.
+                A few options hide the toolbar or disable edition.
+            </p>
+        </div>
 
-        <h3>
-            <i class="fa fa-fw fa-code"></i> Example
-        </h3>
+        <div class="col-12 col-md-6">
+            <h5><i class="fa fa-fw fa-code"></i> Example</h5>
+<pre><code class="language-twig">{% verbatim %}{{ sonata_block_render({ 'type': 'badpixxel.widgets.collection' }, {
+    'type':     'my-dashboard',
+    'channel':  'demo',
+}) }}{% endverbatim %}</code></pre>
+        </div>
 
-<pre><code class="language-twig">{% verbatim %}
-{{ sonata_block_render({ 'type': 'badpixxel.widgets.collection' }, {
-    "title" :   "Title for Collection Header",
-    'channel':      'demo',
-}) }}
-{% endverbatim %}</code></pre>
+        <div class="col-12 mt-3">
+            {{ sonata_block_render({ 'type': 'badpixxel.widgets.collection' }, {
+                'type':     'demo-custom',
+                'channel':  null,
+            }) }}
+        </div>
 
     </div>
-         
-    <div class="col-12 p-3">
-        {{ sonata_block_render({ 'type': 'badpixxel.widgets.collection' }, {
-            "type" :        "demo-custom",
-            'channel':      null,
-        }) }}
-    </div>
-
-
-        
 {% endblock %}
-

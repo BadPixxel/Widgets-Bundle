@@ -82,6 +82,7 @@ the first digit is the feature group.
 | `Func002WidgetDeferredLoadingTest`| Deferred loading (defer, lazy, auto) & inline rendering when cache exists                         |
 | `Func003WidgetConfiguratorTest`   | Configurator card renders the widget form, saving emits `UPDATED` with edited parameters          |
 | `Func101DemoPagesTest`            | Demo pages: listings in bs3, bs4 & bs5, every block preview, every widget preview, collections   |
+| `Func102DemoThemesTest`           | Demo themes: every Bootswatch theme per Bootstrap version, fallback, color modes, invalid values |
 
 Database tests use the SQLite database of the test kernel (`var/data.db`), missing tables are created on the fly.
 

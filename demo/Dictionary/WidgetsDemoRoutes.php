@@ -62,4 +62,14 @@ class WidgetsDemoRoutes
      * SONATA COLLECTION - Render Widget Collection as Sonata Block
      */
     const SONATA_COLLECTION = "widget_demo_widget_sonata_collection";
+
+    /**
+     * THEMES - Select Demo Theme, then Go Back to Previous Page
+     */
+    const THEME_SWITCH = "widget_demo_theme_switch";
+
+    /**
+     * THEMES - Select Demo Color Mode, then Go Back to Previous Page
+     */
+    const COLOR_MODE_SWITCH = "widget_demo_color_mode_switch";
 }

@@ -1,32 +1,22 @@
 {% extends "base.html.twig" %}
 
-{% block headline %}
-    List of Available Widgets in "demo" listing
-{% endblock %}    
-
-{% block body %}
-    <p>
-        This is the list of Widgets Definitions returned by Sample Widget Factory Service. 
-    </p>
-
-    <p>
-        You can create as many Widgets Lists as needed. Here we use demo list to collect demonstrations widgets. 
-        List is retrieved by sending the event <b>"splash.widgets.list.demo"</b>
-    </p>
-
-    <hr>
-{% endblock %}    
-        
-    
-{% block content_row %}
-    <div class='col-12 col-md-10'>
-        {% include '@WidgetsDemo/Widgets/List/contents.html.twig' %}
-    </div>
-    <div class='col-12 col-md-6'>
-{#        {% include '@WidgetsDemo/Widgets/List/factory.html.twig' %}#}
-    </div>
-    <div class='col-12 col-md-6'>
-{#        {% include '@WidgetsDemo/Widgets/List/definition.html.twig' %}#}
-    </div>
+{% block title %}
+    Widgets as Sonata Blocks
 {% endblock %}
 
+{% block page_content %}
+    <div class="row">
+
+        <div class="col-12">
+            <p>
+                Every configured widget can be rendered as a Sonata Block, with the
+                <code>badpixxel.widget.simple</code> block type. Preview one below.
+            </p>
+        </div>
+
+        <div class="col-12">
+            {% include '@WidgetsDemo/Widgets/List/contents.html.twig' %}
+        </div>
+
+    </div>
+{% endblock %}

@@ -1,0 +1,99 @@
+{#
+ # Demo Navbar - Bootstrap 4 & 5
+ #
+ # Both data-toggle (BS4) & data-bs-toggle (BS5) attributes are set, and both
+ # mr-auto / me-auto, dropdown-menu-right / dropdown-menu-end classes.
+ #}
+{% set themes = demo_themes(bsMode) %}
+{% set currentTheme = demo_theme(bsMode) %}
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary mb-4"{% if colorMode %} data-bs-theme="dark"{% endif %}>
+    <div class="container-fluid">
+
+        <a class="navbar-brand d-flex align-items-center" href="{{ path(constant(routes ~ 'HOME'), {bsMode: bsMode}) }}">
+            <img src="{{ asset('logos/widgets-icon.svg') }}" alt="" width="28" height="28" class="mr-2 me-2">
+            Widgets
+        </a>
+
+        <button class="navbar-toggler" type="button"
+                data-toggle="collapse" data-bs-toggle="collapse"
+                data-target="#demo-navbar" data-bs-target="#demo-navbar"
+                aria-controls="demo-navbar" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="demo-navbar">
+
+            {# Demo Pages #}
+            <ul class="navbar-nav mr-auto me-auto">
+                {% for page in demoPages %}
+                    {% set active = currentRoute in page.routes %}
+                    <li class="nav-item{% if active %} active{% endif %}">
+                        <a class="nav-link{% if active %} active{% endif %}"
+                           href="{{ path(page.route, {bsMode: bsMode}) }}"{% if active %} aria-current="page"{% endif %}>
+                            <i class="fa fa-fw {{ page.icon }}"></i> {{ page.label }}
+                        </a>
+                    </li>
+                {% endfor %}
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button"
+                       data-toggle="dropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="fa fa-fw fa-th"></i> Sonata
+                    </a>
+                    <div class="dropdown-menu">
+                        {% for page in sonataPages %}
+                            <a class="dropdown-item{% if currentRoute in page.routes %} active{% endif %}"
+                               href="{{ path(page.route, {bsMode: bsMode}) }}">{{ page.label }}</a>
+                        {% endfor %}
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="{{ path('sonata_admin_dashboard') }}" target="_blank">
+                            Sonata Admin <i class="fa fa-fw fa-external-link-alt"></i>
+                        </a>
+                    </div>
+                </li>
+            </ul>
+
+            {# Rendering: Bootstrap Version, Theme & Color Mode #}
+            <ul class="navbar-nav">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button"
+                       data-toggle="dropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="fab fa-fw fa-bootstrap"></i> Bootstrap {{ bsVersion|split('.')|first }}
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right dropdown-menu-end">
+                        {% for mode, version in bsModes %}
+                            <a class="dropdown-item{% if mode == bsMode %} active{% endif %}"
+                               href="{{ path(currentRoute, currentParams|merge({bsMode: mode})) }}">Bootstrap {{ version }}</a>
+                        {% endfor %}
+                    </div>
+                </li>
+                {% if themes|length > 1 %}
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button"
+                           data-toggle="dropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="fa fa-fw fa-palette"></i> {{ themes[currentTheme] }}
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right dropdown-menu-end">
+                            {% for theme, label in themes %}
+                                <a class="dropdown-item{% if theme == currentTheme %} active{% endif %}"
+                                   href="{{ path(constant(routes ~ 'THEME_SWITCH'), {bsMode: bsMode, theme: theme}) }}">{{ label }}</a>
+                            {% endfor %}
+                        </div>
+                    </li>
+                {% endif %}
+                {% if colorMode %}
+                    {% set darkMode = constant('BadPixxel\\Widgets\\Demo\\Dictionary\\DemoThemes::DARK') %}
+                    {% set lightMode = constant('BadPixxel\\Widgets\\Demo\\Dictionary\\DemoThemes::LIGHT') %}
+                    {% set nextColorMode = colorMode == darkMode ? lightMode : darkMode %}
+                    <li class="nav-item">
+                        <a class="nav-link" title="Switch to {{ nextColorMode }} mode"
+                           href="{{ path(constant(routes ~ 'COLOR_MODE_SWITCH'), {bsMode: bsMode, colorMode: nextColorMode}) }}">
+                            <i class="fa fa-fw {{ nextColorMode == darkMode ? 'fa-moon' : 'fa-sun' }}"></i>
+                            <span class="d-lg-none">Switch to {{ nextColorMode }} mode</span>
+                        </a>
+                    </li>
+                {% endif %}
+            </ul>
+
+        </div>
+    </div>
+</nav>

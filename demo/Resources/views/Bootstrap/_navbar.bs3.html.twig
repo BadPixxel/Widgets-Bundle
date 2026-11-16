@@ -1,0 +1,72 @@
+{#
+ # Demo Navbar - Bootstrap 3 (no Bootswatch theme, no color mode)
+ #}
+<nav class="navbar navbar-inverse navbar-static-top">
+    <div class="container-fluid">
+
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed"
+                    data-toggle="collapse" data-target="#demo-navbar" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="{{ path(constant(routes ~ 'HOME'), {bsMode: bsMode}) }}">
+                <img src="{{ asset('logos/widgets-icon.svg') }}" alt="" width="22" height="22"
+                     style="display: inline-block; margin: -2px 6px 0 0;">
+                Widgets
+            </a>
+        </div>
+
+        <div class="collapse navbar-collapse" id="demo-navbar">
+
+            {# Demo Pages #}
+            <ul class="nav navbar-nav">
+                {% for page in demoPages %}
+                    <li{% if currentRoute in page.routes %} class="active"{% endif %}>
+                        <a href="{{ path(page.route, {bsMode: bsMode}) }}">
+                            <i class="fa fa-fw {{ page.icon }}"></i> {{ page.label }}
+                        </a>
+                    </li>
+                {% endfor %}
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                        <i class="fa fa-fw fa-th"></i> Sonata <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        {% for page in sonataPages %}
+                            <li{% if currentRoute in page.routes %} class="active"{% endif %}>
+                                <a href="{{ path(page.route, {bsMode: bsMode}) }}">{{ page.label }}</a>
+                            </li>
+                        {% endfor %}
+                        <li role="separator" class="divider"></li>
+                        <li>
+                            <a href="{{ path('sonata_admin_dashboard') }}" target="_blank">
+                                Sonata Admin <i class="fa fa-fw fa-external-link-alt"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+
+            {# Rendering: Bootstrap Version #}
+            <ul class="nav navbar-nav navbar-right">
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                        <i class="fab fa-fw fa-bootstrap"></i> Bootstrap {{ bsVersion|split('.')|first }}
+                        <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        {% for mode, version in bsModes %}
+                            <li{% if mode == bsMode %} class="active"{% endif %}>
+                                <a href="{{ path(currentRoute, currentParams|merge({bsMode: mode})) }}">Bootstrap {{ version }}</a>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </li>
+            </ul>
+
+        </div>
+    </div>
+</nav>

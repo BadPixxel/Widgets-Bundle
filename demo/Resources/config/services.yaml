@@ -21,6 +21,11 @@ services:
         resource: '../../Services'
 
     ################################################################################
+    # AutoWire for Twig Extensions
+    BadPixxel\Widgets\Demo\Twig\:
+        resource: '../../Twig'
+
+    ################################################################################
     # AutoWire for Demo Widgets
     BadPixxel\Widgets\Demo\Widgets\:
         resource: '../../Widgets'
