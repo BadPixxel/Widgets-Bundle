@@ -11,7 +11,7 @@
  *  file that was distributed with this source code.
  */
 
-namespace BadPixxel\Widgets\Phpunit\Tests\B;
+namespace BadPixxel\Widgets\Tests\Operational;
 
 use BadPixxel\Widgets\Demo\Widgets\Text;
 use BadPixxel\Widgets\Phpunit\Traits\WidgetsAwareTestTrait;
@@ -23,7 +23,7 @@ use Symfony\UX\LiveComponent\Test\InteractsWithLiveComponents;
 /**
  * Test Widgets Component Loading
  */
-class B101WidgetComponentTest extends KernelTestCase
+class Func001WidgetComponentTest extends KernelTestCase
 {
     use WidgetsAwareTestTrait;
     use InteractsWithLiveComponents;
@@ -50,13 +50,13 @@ class B101WidgetComponentTest extends KernelTestCase
         );
         //====================================================================//
         // Render the component html
-        $this->assertStringContainsString($dummyText, $textComponent->render());
+        Assert::assertStringContainsString($dummyText, $textComponent->render());
         //====================================================================//
         // Refresh the component html
         $textComponent->call('refresh');
         //====================================================================//
         // Render the component html
-        $this->assertStringContainsString($dummyText, $textComponent->render());
+        Assert::assertStringContainsString($dummyText, $textComponent->render());
         //====================================================================//
         // Update Text
         $dummyTextAlt = uniqid("Test Sample Data");
@@ -70,6 +70,6 @@ class B101WidgetComponentTest extends KernelTestCase
         ));
         //====================================================================//
         // Render the component html
-        $this->assertStringContainsString($dummyTextAlt, $textComponent->render());
+        Assert::assertStringContainsString($dummyTextAlt, $textComponent->render());
     }
 }

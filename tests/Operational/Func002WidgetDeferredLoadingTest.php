@@ -11,7 +11,7 @@
  *  file that was distributed with this source code.
  */
 
-namespace BadPixxel\Widgets\Phpunit\Tests\B;
+namespace BadPixxel\Widgets\Tests\Operational;
 
 use BadPixxel\Widgets\Demo\Widgets\Text;
 use BadPixxel\Widgets\Dictionary\Options;
@@ -20,6 +20,7 @@ use BadPixxel\Widgets\Phpunit\Traits\WidgetsAwareTestTrait;
 use BadPixxel\Widgets\Services\Widgets\WidgetCompiler;
 use BadPixxel\Widgets\TwigComponent\Widget;
 use PHPUnit\Framework\Assert;
+use PHPUnit\Framework\Attributes\DataProvider;
 use ReflectionProperty;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\UX\TwigComponent\Test\InteractsWithTwigComponents;
@@ -27,7 +28,7 @@ use Symfony\UX\TwigComponent\Test\InteractsWithTwigComponents;
 /**
  * Test Widgets Deferred Loading: Deferred Widgets must not be Compiled on Main Request
  */
-class B102WidgetDeferredLoadingTest extends KernelTestCase
+class Func002WidgetDeferredLoadingTest extends KernelTestCase
 {
     use WidgetsAwareTestTrait;
     use InteractsWithTwigComponents;
@@ -52,9 +53,8 @@ class B102WidgetDeferredLoadingTest extends KernelTestCase
 
     /**
      * Explicitly Deferred Widget is not Compiled on Main Request
-     *
-     * @dataProvider deferredLoadingProvider
      */
+    #[DataProvider("deferredLoadingProvider")]
     public function testDeferredWidgetIsNotCompiled(string $loading, bool $useObject) : void
     {
         $dummyText = uniqid("Deferred Sample Data");

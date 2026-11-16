@@ -11,18 +11,19 @@
  *  file that was distributed with this source code.
  */
 
-namespace BadPixxel\Widgets\Phpunit\Tests\A;
+namespace BadPixxel\Widgets\Tests\Integration;
 
 use BadPixxel\Widgets\Interfaces\BlockInterface;
 use BadPixxel\Widgets\Phpunit\Traits\BlocksAwareTestTrait;
 use BadPixxel\Widgets\Services\Blocks\BlockResolver;
 use PHPUnit\Framework\Assert;
+use PHPUnit\Framework\Attributes\DataProvider;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
 /**
  * Unit test of Block Resolver
  */
-class A101BlockResolverTest extends KernelTestCase
+class Int101BlockResolverTest extends KernelTestCase
 {
     use BlocksAwareTestTrait;
 
@@ -48,9 +49,8 @@ class A101BlockResolverTest extends KernelTestCase
 
     /**
      * Test Block Loading from Block Resolver
-     *
-     * @dataProvider blockTypesProvider
      */
+    #[DataProvider("blockTypesProvider")]
     public function testBlockResolution(string $blockType) : void
     {
         Assert::assertInstanceOf(

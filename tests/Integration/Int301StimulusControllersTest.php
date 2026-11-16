@@ -11,17 +11,18 @@
  *  file that was distributed with this source code.
  */
 
-namespace BadPixxel\Widgets\Phpunit\Tests\A;
+namespace BadPixxel\Widgets\Tests\Integration;
 
 use BadPixxel\Widgets\Blocks\ChartJsPlugins\MatrixChartBlock;
 use PHPUnit\Framework\Assert;
+use PHPUnit\Framework\Attributes\DataProvider;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\UX\StimulusBundle\AssetMapper\ControllersMapGenerator;
 
 /**
  * Test Widgets Stimulus Controllers are Registered by StimulusBundle (UX Package)
  */
-class A301StimulusControllersTest extends KernelTestCase
+class Int301StimulusControllersTest extends KernelTestCase
 {
     /**
      * StimulusBundle Controllers Map Generator Service ID
@@ -30,9 +31,8 @@ class A301StimulusControllersTest extends KernelTestCase
 
     /**
      * Check Widgets Controllers are Resolved from assets/package.json
-     *
-     * @dataProvider controllersProvider
      */
+    #[DataProvider("controllersProvider")]
     public function testControllerIsRegistered(string $controller, string $logicalPath) : void
     {
         $generator = static::getContainer()->get(self::MAP_GENERATOR);

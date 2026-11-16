@@ -13,61 +13,147 @@
 
 namespace BadPixxel\Widgets\Phpunit\Traits;
 
+use BadPixxel\Widgets\Dictionary\Options;
 use BadPixxel\Widgets\Interfaces\BlockInterface;
-use BadPixxel\Widgets\Services\Blocks\BlockResolver;
+use BadPixxel\Widgets\Interfaces\Blocks\BlockWithDemoInterface;
+use BadPixxel\Widgets\Models\AbstractBlock;
 use PHPUnit\Framework\Assert;
-use Webmozart\Assert\Assert as MozartAssert;
 
 /**
  * This Test is Aware of Blocks Features
+ *
+ * Blocks assertions & providers, usable by Widgets Bundle extensions
+ * to check their own blocks definitions.
  */
 trait BlocksAwareTestTrait
 {
+    use WidgetsContainerTrait;
+
+    //==============================================================================
+    // DATA PROVIDERS
+    //==============================================================================
+
     /**
-     * Load a Widget Block
+     * All Blocks Types Provider
+     *
+     * @return array<string, array{string}>
      */
-    public function assertBlocksTypeExists(string $blockType) : BlockInterface
+    public static function blockTypesProvider() : array
+    {
+        return static::getBlockTypes();
+    }
+
+    //==============================================================================
+    // ASSERTIONS
+    //==============================================================================
+
+    /**
+     * Load a Widget Block from Blocks Resolver
+     */
+    public function assertBlocksTypeExists(string $blockType) : AbstractBlock
     {
         Assert::assertInstanceOf(
-            BlockInterface::class,
-            $block = $this->getBlockResolver()->findByType($blockType)
+            AbstractBlock::class,
+            $block = static::getBlockResolver()->findByType($blockType),
+            sprintf("Block type %s is not registered", $blockType)
         );
 
         return $block;
     }
 
     /**
-     * All Blocks Codes Provider
-     *
-     * @return array[]
+     * Check Block Definition: type, description & options resolver
      */
-    public static function blockTypesProvider() : array
+    public function assertBlockDefinitionIsValid(BlockInterface $block) : void
     {
-        $blocksResolver = static::getBlockResolver();
+        Assert::assertNotEmpty($block->getType(), "Block type is empty");
+        Assert::assertNotEmpty(
+            $block->getDescription(),
+            sprintf("Block %s has no description", $block->getType())
+        );
         //====================================================================//
-        // Walk on Blocks
-        $blocks = array();
-        foreach ($blocksResolver->all() as $block) {
-            $blocks[$block->getType()] = array($block->getType());
-        }
-
-        return $blocks;
+        // Default Options are Resolved
+        $options = (clone $block)->setOptions()->getOptions();
+        Assert::assertArrayHasKey(Options::WIDTH, $options);
+        Assert::assertIsString($options[Options::WIDTH]);
+        Assert::assertArrayHasKey(Options::SAFE, $options);
+        Assert::assertIsBool($options[Options::SAFE]);
+        //====================================================================//
+        // Default Data are Resolved, without Exception
+        (clone $block)->setData(array())->getData();
     }
 
     /**
-     * Safe Load Block Resolver Service
+     * Check Block is Robust to Empty & Unknown Data / Options
+     *
+     * Blocks must never throw on unexpected inputs: unknown values are dropped
+     * and defaults are restored.
      */
-    protected static function getBlockResolver() : BlockResolver
+    public function assertBlockIsRobust(BlockInterface $block) : void
     {
-        static $blockResolver;
+        $unknown = uniqid("unknown");
+        //====================================================================//
+        // Empty Inputs
+        $empty = (clone $block)->setData(array())->setOptions();
+        Assert::assertEquals($block->getType(), $empty->getType());
+        //====================================================================//
+        // Unknown Inputs
+        $random = (clone $block)
+            ->setData(array($unknown => uniqid()))
+            ->setOptions(array($unknown => uniqid()))
+        ;
+        Assert::assertArrayNotHasKey($unknown, $random->getOptions());
+        if ($random->getDataResolver()) {
+            Assert::assertArrayNotHasKey($unknown, $random->getData());
+        }
+        //====================================================================//
+        // Invalid Option Type => Defaults are Restored
+        $invalid = (clone $block)->setOptions(array(Options::SAFE => uniqid()));
+        Assert::assertFalse($invalid->getOptions()[Options::SAFE]);
+    }
 
-        if (!$blockResolver instanceof BlockResolver) {
-            $service = static::getContainer()->get(BlockResolver::class);
-            MozartAssert::isInstanceOf($service, BlockResolver::class);
+    /**
+     * Check Block Demo Data, if Block provides a Demo
+     *
+     * @return null|BlockInterface Configured Demo Block, Null if Block has no Demo
+     */
+    public function assertBlockDemoIsValid(BlockInterface $block) : ?BlockInterface
+    {
+        Assert::assertSame($block instanceof BlockWithDemoInterface, $block->hasDemo());
+        if (!$block instanceof BlockWithDemoInterface) {
+            return null;
+        }
+        $demo = clone $block;
+        $demo->setupForDemo();
+        Assert::assertNotEmpty(
+            $demo->getData(),
+            sprintf("Block %s demo has no data", $block->getType())
+        );
 
-            $blockResolver = $service;
+        return $demo;
+    }
+
+    //==============================================================================
+    // TOOLING
+    //==============================================================================
+
+    /**
+     * Get Registered Blocks Types, optionally filtered by Classes Namespaces
+     *
+     * @param string[] $namespaces Only keep blocks from these namespaces, all if empty
+     *
+     * @return array<string, array{string}>
+     */
+    protected static function getBlockTypes(array $namespaces = array()) : array
+    {
+        $types = array();
+        foreach (static::getBlockResolver()->all() as $block) {
+            if (!static::isInNamespaces($block::class, $namespaces)) {
+                continue;
+            }
+            $types[$block->getType()] = array($block->getType());
         }
 
-        return $blockResolver;
+        return $types;
     }
 }

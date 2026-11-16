@@ -11,7 +11,7 @@
  *  file that was distributed with this source code.
  */
 
-namespace BadPixxel\Widgets\Phpunit\Tests\A;
+namespace BadPixxel\Widgets\Tests\Integration;
 
 use BadPixxel\Widgets\Interfaces\WidgetInterface;
 use BadPixxel\Widgets\Phpunit\Traits\WidgetsAwareTestTrait;
@@ -19,12 +19,13 @@ use BadPixxel\Widgets\Services\Widgets\Technical\NotAllowedWidget;
 use BadPixxel\Widgets\Services\Widgets\Technical\NotFoundWidget;
 use BadPixxel\Widgets\Services\Widgets\WidgetsResolver;
 use PHPUnit\Framework\Assert;
+use PHPUnit\Framework\Attributes\DataProvider;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
 /**
  * Test Widgets Blocks Configuration & Loading
  */
-class A201WidgetResolverTest extends KernelTestCase
+class Int201WidgetResolverTest extends KernelTestCase
 {
     use WidgetsAwareTestTrait;
 
@@ -41,9 +42,8 @@ class A201WidgetResolverTest extends KernelTestCase
 
     /**
      * Test Widget Configurator Loading
-     *
-     * @dataProvider widgetHashProvider
      */
+    #[DataProvider("widgetHashProvider")]
     public function testWidgetConfiguratorLoading(string $widgetHash) : void
     {
         $configurator = $this->assertWidgetConfiguratorExists($widgetHash);
@@ -62,9 +62,8 @@ class A201WidgetResolverTest extends KernelTestCase
 
     /**
      * Test Widget Resolution
-     *
-     * @dataProvider widgetHashProvider
      */
+    #[DataProvider("widgetHashProvider")]
     public function testExistingWidgetResolution(string $widgetHash) : void
     {
         $configurator = $this->assertWidgetConfiguratorExists($widgetHash);
@@ -78,9 +77,8 @@ class A201WidgetResolverTest extends KernelTestCase
 
     /**
      * Test Widget Resolution by Class
-     *
-     * @dataProvider widgetHashProvider
      */
+    #[DataProvider("widgetHashProvider")]
     public function testClassWidgetResolution(string $widgetHash) : void
     {
         $configurator = $this->assertWidgetConfiguratorExists($widgetHash);
@@ -111,9 +109,8 @@ class A201WidgetResolverTest extends KernelTestCase
 
     /**
      * Test Widget Resolution with Roles
-     *
-     * @dataProvider widgetWithRoleHashProvider
      */
+    #[DataProvider("widgetWithRoleHashProvider")]
     public function testRolesWidgetResolution(string $widgetHash) : void
     {
         //====================================================================//
