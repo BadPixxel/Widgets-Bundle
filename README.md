@@ -200,5 +200,5 @@ Developed by [BadPixxel](https://www.badpixxel.com) / [Splash Sync](https://www.
 
 ## Support
 
-- Report issues: [GitHub Issues](https://github.com/badpixxel/widgets-bundle/issues)
+- Report issues: [GitLab Issues](https://gitlab.com/badpixxel-public/widgets-bundle/-/issues)
 - Documentation: [docs/](docs/)
