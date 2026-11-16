@@ -62,6 +62,21 @@ class DemoThemes
      */
     const QUARTZ = "quartz";
 
+    /**
+     * Bootswatch Slate: dark, shades of gunmetal gray (Bootstrap 5 only)
+     */
+    const SLATE = "slate";
+
+    /**
+     * Bootswatch Solar: dark, Solarized colors (Bootstrap 5 only)
+     */
+    const SOLAR = "solar";
+
+    /**
+     * Bootswatch Vapor: dark, cyberpunk neon (Bootstrap 5 only)
+     */
+    const VAPOR = "vapor";
+
     //==============================================================================
     // COLOR MODES (Bootstrap 5.3 only)
     //==============================================================================
@@ -129,6 +144,9 @@ class DemoThemes
                 self::DARKLY => "Darkly",
                 self::MORPH => "Morph",
                 self::QUARTZ => "Quartz",
+                self::SLATE => "Slate",
+                self::SOLAR => "Solar",
+                self::VAPOR => "Vapor",
             ),
             RenderingModes::BS4 => array(
                 self::DEFAULT => "Bootstrap",

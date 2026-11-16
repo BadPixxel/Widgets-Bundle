@@ -190,7 +190,7 @@ See the [demo/Widgets](demo/Widgets) directory for real-world examples:
 
 The demo application (`demo/`, `WidgetsDemoBundle`) has a navbar to switch between Bootstrap 3, 4 and 5
 (`/{bsMode}/...`), Bootswatch themes (Bootstrap 4 & 5: Flatly, Minty, Sketchy, Darkly; Bootstrap 5 also Morph
-and Quartz) and the Bootstrap 5 light / dark color mode. Choices are kept in the `bpw_demo_theme` and
+Quartz, Slate, Solar and Vapor) and the Bootstrap 5 light / dark color mode. Choices are kept in the `bpw_demo_theme` and
 `bpw_demo_color_mode` cookies. Its homepage is a static shop dashboard.
 
 Extension bundles reuse the demo application with their own homepage dashboard & icon:
