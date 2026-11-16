@@ -33,9 +33,10 @@ class WidgetsList extends AbstractController
     ) {
     }
 
-    public function __invoke() : Response
+    public function __invoke(string $bsMode) : Response
     {
         return $this->render('@WidgetsDemo/Sonata/Widgets/index.html.twig', array(
+            'bsMode' => $bsMode,
             'Configurators' => $this->widgetsResolver->findAll(null, true),
             'PreviewRoute' => WidgetsDemoRoutes::SONATA_WIDGET_PREVIEW
         ));

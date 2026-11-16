@@ -222,12 +222,10 @@ class OpenWhetherCollector
         $response = curl_exec($curlH);
         //==============================================================================
         // Check for cURL errors
+        // Handle is released when going out of scope: curl_close() has no effect since PHP 8.0
         if (curl_errno($curlH)) {
-            curl_close($curlH);
-
             return null;
         }
-        curl_close($curlH);
 
         //==============================================================================
         // Decode the JSON response

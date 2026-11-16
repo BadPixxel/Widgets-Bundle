@@ -40,7 +40,7 @@ class BlocksPreview extends AbstractController
         //==============================================================================
         //  Search for requested block
         if (!$block = $this->blockResolver->findByType($type)) {
-            $this->createNotFoundException(sprintf("Block %s not found", $type));
+            throw $this->createNotFoundException(sprintf("Block %s not found", $type));
         }
         //==============================================================================
         //  Ensure this Block has Demo Data

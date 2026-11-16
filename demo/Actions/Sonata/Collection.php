@@ -33,9 +33,10 @@ class Collection extends AbstractController
     ) {
     }
 
-    public function __invoke() : Response
+    public function __invoke(string $bsMode) : Response
     {
         return $this->render('@WidgetsDemo/Sonata/collection.html.twig', array(
+            'bsMode' => $bsMode,
             'Channels' => $this->widgetsResolver->getAllChannels(),
             'Type' => "test-sonata-collection",
         ));

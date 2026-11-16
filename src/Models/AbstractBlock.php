@@ -114,7 +114,7 @@ abstract class AbstractBlock implements BlockInterface
      */
     final public function isEmpty() : bool
     {
-        return !empty($this->data);
+        return empty($this->data);
     }
 
     /**
