@@ -14,16 +14,14 @@
 namespace BadPixxel\Widgets\Demo\Actions;
 
 use BadPixxel\Widgets\Demo\Dictionary\WidgetsDemoRoutes;
-use BadPixxel\Widgets\Demo\Widgets\CacheStatus;
-use BadPixxel\Widgets\Demo\Widgets\Text;
-use BadPixxel\Widgets\Dictionary\Widgets\RenderingModes;
+use BadPixxel\Widgets\Demo\Widgets\Shop;
 use BadPixxel\Widgets\Services\Widgets\WidgetsResolver;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
 /**
- * Widgets Demo Landing Page
+ * Widgets Demo Landing Page: a Static Shop Dashboard
  */
 #[Route(
     path: "/",
@@ -31,31 +29,42 @@ use Symfony\Component\Routing\Attribute\Route;
 )]
 class Homepage extends AbstractController
 {
+    /**
+     * Dashboard Widgets, in Display Order: widths add up to full rows
+     */
+    private const DASHBOARD = array(
+        Shop\KpiRevenue::class,
+        Shop\KpiOrders::class,
+        Shop\KpiVisitors::class,
+        Shop\KpiReturns::class,
+        Shop\SalesOverview::class,
+        Shop\SalesByChannel::class,
+        Shop\OrdersByDay::class,
+        Shop\VisitsActivity::class,
+        Shop\MonthlyTargets::class,
+        Shop\ShopNotifications::class,
+        Shop\TopProducts::class,
+    );
+
+    /**
+     * Action Constructor
+     */
     public function __construct(
         private readonly WidgetsResolver $widgetsResolver
     ) {
     }
 
+    /**
+     * Render Dashboard
+     */
     public function __invoke(string $bsMode): Response
     {
-        //==============================================================================
-        // Load Widget Configurators by Class
-        $textConfigurator = $this->widgetsResolver->resolve(Text::class, true);
-        $cacheConfigurator = $this->widgetsResolver->resolve(CacheStatus::class, true);
-
-        // If Bootstrap version specified, render Bootstrap layout
-        if ($bsMode && in_array($bsMode, RenderingModes::all(), true)) {
-            return $this->render('@WidgetsDemo/index.html.twig', array(
-                'bsMode' => $bsMode,
-                'textConfigurator' => $textConfigurator,
-                'cacheConfigurator' => $cacheConfigurator,
-            ));
-        }
-
-        // Default: render standard homepage
         return $this->render('@WidgetsDemo/index.html.twig', array(
-            'textConfigurator' => $textConfigurator,
-            'cacheConfigurator' => $cacheConfigurator,
+            'bsMode' => $bsMode,
+            'dashboard' => array_map(
+                fn (string $widgetClass) => $this->widgetsResolver->resolve($widgetClass, true),
+                self::DASHBOARD
+            ),
         ));
     }
 }
