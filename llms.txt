@@ -1,0 +1,41 @@
+# BadPixxel Widgets Bundle
+
+> Symfony bundle (`badpixxel/widgets-bundle`) to build dashboards from composable widgets. Widgets are services that build a list of blocks (text, tables, alerts, progress bars, Chart.js charts), rendered with Symfony UX Live Components and Bootstrap 3/4/5. Widgets can be displayed alone, or in user editable collections persisted with Doctrine. PHP 8.1+, Symfony 6.4, 7.4 or 8.0.
+
+Key facts for code generation:
+
+- Register a widget with `#[AsStaticWidget(channels: array(...), roles: array(...), priority: 0, options: array(...))]` on a class extending `BadPixxel\Widgets\Models\AbstractWidget`. `#[AsWidget]` only tags the service and does NOT make the widget available.
+- A widget implements `getDescriptor(): SimpleDescriptor` (`BadPixxel\Widgets\Widgets\Descriptor\SimpleDescriptor(title, description, icon, origin, ?subtitle)`) and `build(): void`, which calls `$this->addBlock(...)`.
+- Widgets are autowired services; a widget with a constructor must call `parent::__construct()`.
+- Blocks are built with `new` and fluent setters, i.e. `(new TextBlock())->setText("...")->setSafe(true)`. Constructors take `(array $data = array(), array $options = array())`.
+- Chart blocks take rows: `->setDataSet($rows)->setPointLabelKey("date")->setPointValuesKeys(array("total"))->setLabels(array("Total"))`.
+- Options are constants of `BadPixxel\Widgets\Dictionary\Options` (i.e. `Options::WIDTH`, `Options::CACHE_ENABLED`, `Options::CACHE_TTL`). Widths: `Dictionary\Widgets\WidgetWidth`, colors: `Dictionary\Widgets\WidgetColors`, alert levels: `AlertBlock::SUCCESS|INFO|WARNING|ERROR|DEFAULT`.
+- There is no Twig function: render with `<twig:Widget :configurator="..." loading="defer" />` (configurator from `WidgetsResolver::resolve(MyWidget::class)`) or `<twig:WidgetsCollection type="..." channel="..." />`.
+- Caching is per widget (`Options::CACHE_ENABLED` + `Options::CACHE_TTL`). A widget with `loading="defer"`/`"lazy"`, or an empty cache, is compiled on a deferred Live request.
+- Configuration: only `badpixxel_widgets.defaults.colors` is read; `cache.enable` and `sonata.*` keys are declared but unused.
+- JavaScript: import `@badpixxel/ux-widgets` before `startStimulusApp()`. Stimulus controllers are declared in `assets/package.json` (UX package) and registered by StimulusBundle from the host `assets/controllers.json` (i.e. `badpixxel--widgets--matrix`).
+- CLI: `badpixxel:widgets:widgets`, `badpixxel:widgets:blocks`.
+- Tests: extend `BadPixxel\Widgets\Phpunit\TestCase\AbstractBlocksTestCase` / `AbstractWidgetsTestCase` (PHPUnit 10.5 / 11) and return your namespaces, or use `Phpunit\Traits\WidgetsAssertionsTrait` in a `KernelTestCase`. Using an `*AwareTestTrait` alone also requires `WidgetsContainerTrait`.
+
+## Docs
+
+- [README](README.md): Features, installation, quick start, available blocks
+- [Getting Started](docs/getting-started.md): Installation, assets, first widget, displaying widgets & collections, channels, roles, charts
+- [Creating Custom Widgets](docs/custom-widgets.md): Descriptors, attribute options, configurable widgets, date presets, caching, parameters, dependency injection
+- [Creating Custom Blocks](docs/custom-blocks.md): Block classes, data & options resolvers, renderer Twig Components, chart blocks, demo data
+- [Configuration Reference](docs/configuration.md): Bundle configuration, widget options, date presets, widths, alert levels, chart setters, components props, loaders, Doctrine tables
+- [Architecture Overview](docs/architecture.md): Widgets, blocks, configurators & collections, rendering flow, services, registration, Symfony UX integration
+- [Testing](docs/testing.md): Test suites, generic blocks & widgets test cases and assertions traits for extensions
+
+## JavaScript
+
+- [JavaScript Modules](docs/javascript.md): UX package, integration & standalone modes, Chart.js plugins, Stimulus controllers
+- [Creating Extensions](docs/extensions.md): Shipping blocks, Stimulus controllers and Chart.js plugins from another bundle
+
+## Optional
+
+- [Demo Widgets](demo/Widgets): Real widgets examples (text, time-series charts, matrix heatmap, date presets, cache status)
+- [Built-in Blocks](src/Blocks): Block classes, by category
+- [Block Renderers](src/TwigComponent/BlockRenderer): Twig Components rendering built-in blocks
+- [Options Dictionary](src/Dictionary/Options.php): All widget & block options keys
+- [D3.js Widgets Bundle](https://gitlab.com/badpixxel-public/widgets-d3-bundle): Extension example, with D3.js Bubble & Force charts
