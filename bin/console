@@ -23,8 +23,25 @@ umask(0002);
 // AUTOLOAD SYMFONY RUNTIME
 require_once dirname(__DIR__).'/vendor/autoload_runtime.php';
 
-return function (array $context) {
+//==============================================================================
+// Build the Application
+$applicationLoader = function (array $context): Application {
     $kernel = new Kernel($context['APP_ENV'], (bool) $context['APP_DEBUG']);
 
+    // returning an "Application" makes the Runtime run a Console
+    // application instead of the HTTP Kernel
     return new Application($kernel);
 };
+
+//==============================================================================
+// Check if we are running inside PHPStan to return the Object directly
+if (isset($_SERVER['argv'][0]) && str_contains($_SERVER['argv'][0], 'phpstan')) {
+    return $applicationLoader(array(
+        'APP_ENV' => $_SERVER['APP_ENV'] ?? 'test',
+        'APP_DEBUG' => $_SERVER['APP_DEBUG'] ?? true,
+    ));
+}
+
+//==============================================================================
+// Return Closure to be used by Runtime
+return $applicationLoader;
