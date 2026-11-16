@@ -35,10 +35,12 @@ $applicationLoader = function (array $context): Application {
 
 //==============================================================================
 // Check if we are running inside PHPStan to return the Object directly
+// PHPStan uses its own environment: its bundled classes (phpdoc-parser...) must
+// never leak into the container cache shared with PhpUnit
 if (isset($_SERVER['argv'][0]) && str_contains($_SERVER['argv'][0], 'phpstan')) {
     return $applicationLoader(array(
-        'APP_ENV' => $_SERVER['APP_ENV'] ?? 'test',
-        'APP_DEBUG' => $_SERVER['APP_DEBUG'] ?? true,
+        'APP_ENV' => 'phpstan',
+        'APP_DEBUG' => true,
     ));
 }
 
