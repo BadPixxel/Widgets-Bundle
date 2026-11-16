@@ -78,7 +78,12 @@ class Unit201StaticWidgetsCompilerTest extends TestCase
         $container = new ContainerBuilder();
         $container->setDefinition(StaticWidgetsLoader::class, new Definition(StaticWidgetsLoader::class));
         self::addStaticWidget($container, "widget.text", Text::class, new AsStaticWidget("demo", array(), 10));
-        self::addStaticWidget($container, "widget.cache", CacheStatus::class, new AsStaticWidget(array(), "ROLE_ADMIN"));
+        self::addStaticWidget(
+            $container,
+            "widget.cache",
+            CacheStatus::class,
+            new AsStaticWidget(array(), "ROLE_ADMIN")
+        );
         //====================================================================//
         // Process Compiler Pass
         (new StaticWidgetsCompiler())->process($container);
