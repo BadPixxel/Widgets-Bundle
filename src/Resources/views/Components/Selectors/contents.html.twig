@@ -9,7 +9,7 @@
                     href="#tab-{{ Tab.id }}"
                     aria-controls="tab-{{ Tab.id }}"
                     role="tab"
-                    {% if this.configuration.mode == 'bs5' %}
+                    {% if this.configuration is bs5 %}
                         data-bs-toggle="tab"
                     {% else %}
                         data-toggle="tab"

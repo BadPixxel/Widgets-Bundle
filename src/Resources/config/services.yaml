@@ -18,3 +18,8 @@ services:
     # AutoWire for Services
     BadPixxel\Widgets\Services\:
         resource: '../../Services'
+
+    ################################################################################
+    # AutoWire for Twig Extensions
+    BadPixxel\Widgets\Twig\:
+        resource: '../../Twig'

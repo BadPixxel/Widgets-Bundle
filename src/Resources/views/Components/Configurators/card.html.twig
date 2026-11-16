@@ -1,9 +1,9 @@
 
 {% trans_default_domain "BadPixxelWidgetsBundle" %}
 
-{% if configuration.mode == 'bs3' %}
+{% if configuration is bs3 %}
     {% form_theme form 'bootstrap_3_layout.html.twig' %}
-{% elseif configuration.mode == 'bs4' %}
+{% elseif configuration is bs4 %}
     {% form_theme form 'bootstrap_4_layout.html.twig' %}
 {% else %}
     {% form_theme form 'bootstrap_5_layout.html.twig' %}

@@ -8,7 +8,7 @@
 {% set bsMode = bsMode ?? app.request.attributes.get('bsMode') ?? constant('BadPixxel\\Widgets\\Dictionary\\Widgets\\RenderingModes::DEFAULT') %}
 {% set bsVersion = bsModes[bsMode] %}
 {% set colorMode = demo_color_mode(bsMode) %}
-{% set isBs3 = bsMode == constant('BadPixxel\\Widgets\\Dictionary\\Widgets\\RenderingModes::BS3') %}
+{% set isBs3 = bsMode is bs3 %}
 {# Demo Pages: menu entries, with routes highlighting each entry #}
 {% set routes = 'BadPixxel\\Widgets\\Demo\\Dictionary\\WidgetsDemoRoutes::' %}
 {% set demoPages = [

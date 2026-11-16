@@ -1,4 +1,5 @@
-<button class="btn btn-xs px-1 small {{ class }}"
+{# btn-xs only exists in Bootstrap 3, btn-sm is the smallest size in Bootstrap 4 & 5 #}
+<button class="btn {{ configuration is bs3 ? 'btn-xs' : 'btn-sm' }} px-1 small {{ class }}"
         data-action="live#action"
         data-live-action-param="{{ action }}"
         {% block content %}{% endblock %}

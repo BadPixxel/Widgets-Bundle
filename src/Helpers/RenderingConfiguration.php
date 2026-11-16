@@ -13,6 +13,8 @@
 
 namespace BadPixxel\Widgets\Helpers;
 
+use BadPixxel\Widgets\Dictionary\Widgets\RenderingModes;
+
 /**
  * Rendering Configuration
  *
@@ -68,6 +70,22 @@ class RenderingConfiguration
     public function isEdited() : bool
     {
         return $this->edited && $this->isEditable();
+    }
+
+    /**
+     * Get Bootstrap Version of Rendering Mode: 3, 4 or 5, Bootstrap 5 for any other mode
+     *
+     * Not named getXxx() / isXxx(): LiveProp serialization reads every public method
+     * with these prefixes as the accessor of a property. In templates, use Twig tests:
+     * configuration is bs3 / bs4 / bs5.
+     */
+    public function bootstrapVersion() : int
+    {
+        return match ($this->mode) {
+            RenderingModes::BS3 => 3,
+            RenderingModes::BS4 => 4,
+            default => 5,
+        };
     }
 
     /**

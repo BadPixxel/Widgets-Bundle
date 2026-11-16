@@ -13,12 +13,16 @@
 
 namespace BadPixxel\Widgets\Tests\Core;
 
+use BadPixxel\Widgets\Dictionary\Widgets\RenderingModes;
 use BadPixxel\Widgets\Helpers\JsonParser;
 use BadPixxel\Widgets\Helpers\RenderingConfiguration;
 use BadPixxel\Widgets\Helpers\TagsEncoder;
+use BadPixxel\Widgets\Twig\RenderingModesExtension;
 use JsonException;
 use PHPUnit\Framework\Assert;
 use PHPUnit\Framework\TestCase;
+use Twig\Environment;
+use Twig\Loader\ArrayLoader;
 
 /**
  * Unit Tests of Widgets Helpers: Tags Encoder, Json Parser & Rendering Configuration
@@ -90,5 +94,39 @@ class Unit001HelpersTest extends TestCase
         $config->editable = true;
         Assert::assertTrue($config->setEdited(true)->isEdited());
         Assert::assertFalse($config->setEdited(false)->isEdited());
+    }
+
+    /**
+     * Rendering Configuration Detects Bootstrap Version, Bootstrap 5 by Default
+     */
+    public function testRenderingConfigurationModes() : void
+    {
+        $expected = array(
+            RenderingModes::BS3 => 3,
+            RenderingModes::BS4 => 4,
+            RenderingModes::BS5 => 5,
+            "default" => 5,
+            "unknown" => 5,
+        );
+        foreach ($expected as $mode => $version) {
+            $config = (new RenderingConfiguration())->fromArray(array("mode" => $mode));
+            Assert::assertSame($version, $config->bootstrapVersion(), $mode);
+        }
+    }
+
+    /**
+     * Twig Tests bs3, bs4 & bs5 Accept Rendering Configurations & Modes Codes
+     */
+    public function testRenderingModesTwigTests() : void
+    {
+        $twig = new Environment(new ArrayLoader(array(
+            "modes" => "{{ value is bs3 ? 3 }}{{ value is bs4 ? 4 }}{{ value is bs5 ? 5 }}",
+        )));
+        $twig->addExtension(new RenderingModesExtension());
+        $expected = array(RenderingModes::BS3 => "3", RenderingModes::BS4 => "4", RenderingModes::BS5 => "5");
+        foreach ($expected as $mode => $out) {
+            Assert::assertSame($out, $twig->render("modes", array("value" => $mode)));
+            Assert::assertSame($out, $twig->render("modes", array("value" => new RenderingConfiguration($mode))));
+        }
     }
 }

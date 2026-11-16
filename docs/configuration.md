@@ -245,6 +245,13 @@ Without `loading`, a widget whose cache is empty is deferred automatically, unle
 Bundle templates live in `@BadpixxelWidgets` and can be overridden the Symfony way, in
 `templates/bundles/BadpixxelWidgetsBundle/` (i.e. `Components/widget.html.twig`).
 
+Templates adapt their markup to the rendering mode with the `bs3`, `bs4` and `bs5` Twig tests.
+They accept a rendering configuration or a mode code, any unknown mode is Bootstrap 5:
+
+```twig
+<button class="btn {{ configuration is bs3 ? 'btn-xs' : 'btn-sm' }}">...</button>
+```
+
 ## Service Configuration
 
 ### Custom Widget Loader
