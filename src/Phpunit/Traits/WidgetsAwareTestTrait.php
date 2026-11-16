@@ -28,11 +28,11 @@ use Symfony\Contracts\Translation\TranslatorInterface;
  *
  * Widgets assertions & providers, usable by Widgets Bundle extensions
  * to check their own widgets definitions, compilation & forms.
+ *
+ * Requires WidgetsContainerTrait in the using class.
  */
 trait WidgetsAwareTestTrait
 {
-    use WidgetsContainerTrait;
-
     //==============================================================================
     // DATA PROVIDERS
     //==============================================================================

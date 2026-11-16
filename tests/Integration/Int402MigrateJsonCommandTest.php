@@ -17,6 +17,7 @@ use BadPixxel\Widgets\Demo\Widgets\Text;
 use BadPixxel\Widgets\Entity\WidgetCollectionItem;
 use BadPixxel\Widgets\Phpunit\Traits\DatabaseAwareTestTrait;
 use BadPixxel\Widgets\Phpunit\Traits\WidgetsAwareTestTrait;
+use BadPixxel\Widgets\Phpunit\Traits\WidgetsContainerTrait;
 use PHPUnit\Framework\Assert;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
@@ -30,6 +31,7 @@ class Int402MigrateJsonCommandTest extends KernelTestCase
 {
     use WidgetsAwareTestTrait;
     use DatabaseAwareTestTrait;
+    use WidgetsContainerTrait;
 
     /**
      * Command Name

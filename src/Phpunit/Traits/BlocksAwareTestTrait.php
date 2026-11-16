@@ -24,11 +24,11 @@ use PHPUnit\Framework\Assert;
  *
  * Blocks assertions & providers, usable by Widgets Bundle extensions
  * to check their own blocks definitions.
+ *
+ * Requires WidgetsContainerTrait in the using class.
  */
 trait BlocksAwareTestTrait
 {
-    use WidgetsContainerTrait;
-
     //==============================================================================
     // DATA PROVIDERS
     //==============================================================================

@@ -19,6 +19,7 @@ use BadPixxel\Widgets\Dictionary\Widgets\RenderingModes;
 use BadPixxel\Widgets\Phpunit\Traits\BlocksAwareTestTrait;
 use BadPixxel\Widgets\Phpunit\Traits\DatabaseAwareTestTrait;
 use BadPixxel\Widgets\Phpunit\Traits\WidgetsAwareTestTrait;
+use BadPixxel\Widgets\Phpunit\Traits\WidgetsContainerTrait;
 use PHPUnit\Framework\Assert;
 use PHPUnit\Framework\Attributes\DataProvider;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
@@ -32,6 +33,7 @@ class Func101DemoPagesTest extends WebTestCase
     use BlocksAwareTestTrait;
     use WidgetsAwareTestTrait;
     use DatabaseAwareTestTrait;
+    use WidgetsContainerTrait;
 
     /**
      * Listing Pages are Rendered in all Rendering Modes

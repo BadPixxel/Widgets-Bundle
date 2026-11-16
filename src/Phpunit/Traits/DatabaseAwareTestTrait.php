@@ -22,11 +22,11 @@ use Doctrine\ORM\Tools\SchemaTool;
  * This Test Stores Widgets Collections in Database
  *
  * Creates missing Widgets tables on the test connection, existing tables are never altered.
+ *
+ * Requires WidgetsContainerTrait in the using class.
  */
 trait DatabaseAwareTestTrait
 {
-    use WidgetsContainerTrait;
-
     /**
      * Get Doctrine Entity Manager
      */

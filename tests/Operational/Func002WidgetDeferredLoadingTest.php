@@ -17,6 +17,7 @@ use BadPixxel\Widgets\Demo\Widgets\Text;
 use BadPixxel\Widgets\Dictionary\Options;
 use BadPixxel\Widgets\Dictionary\Widgets\WidgetLoading;
 use BadPixxel\Widgets\Phpunit\Traits\WidgetsAwareTestTrait;
+use BadPixxel\Widgets\Phpunit\Traits\WidgetsContainerTrait;
 use BadPixxel\Widgets\Services\Widgets\WidgetCompiler;
 use BadPixxel\Widgets\TwigComponent\Widget;
 use PHPUnit\Framework\Assert;
@@ -31,6 +32,7 @@ use Symfony\UX\TwigComponent\Test\InteractsWithTwigComponents;
 class Func002WidgetDeferredLoadingTest extends KernelTestCase
 {
     use WidgetsAwareTestTrait;
+    use WidgetsContainerTrait;
     use InteractsWithTwigComponents;
 
     /**

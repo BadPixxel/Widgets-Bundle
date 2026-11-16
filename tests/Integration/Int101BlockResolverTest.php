@@ -15,6 +15,7 @@ namespace BadPixxel\Widgets\Tests\Integration;
 
 use BadPixxel\Widgets\Interfaces\BlockInterface;
 use BadPixxel\Widgets\Phpunit\Traits\BlocksAwareTestTrait;
+use BadPixxel\Widgets\Phpunit\Traits\WidgetsContainerTrait;
 use BadPixxel\Widgets\Services\Blocks\BlockResolver;
 use PHPUnit\Framework\Assert;
 use PHPUnit\Framework\Attributes\DataProvider;
@@ -26,6 +27,7 @@ use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 class Int101BlockResolverTest extends KernelTestCase
 {
     use BlocksAwareTestTrait;
+    use WidgetsContainerTrait;
 
     /**
      * Check Block Resolver Service Loading

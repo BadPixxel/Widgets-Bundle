@@ -15,6 +15,7 @@ namespace BadPixxel\Widgets\Tests\Operational;
 
 use BadPixxel\Widgets\Demo\Widgets\Text;
 use BadPixxel\Widgets\Phpunit\Traits\WidgetsAwareTestTrait;
+use BadPixxel\Widgets\Phpunit\Traits\WidgetsContainerTrait;
 use BadPixxel\Widgets\TwigComponent\Widget;
 use PHPUnit\Framework\Assert;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
@@ -26,6 +27,7 @@ use Symfony\UX\LiveComponent\Test\InteractsWithLiveComponents;
 class Func001WidgetComponentTest extends KernelTestCase
 {
     use WidgetsAwareTestTrait;
+    use WidgetsContainerTrait;
     use InteractsWithLiveComponents;
 
     /**

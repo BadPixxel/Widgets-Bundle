@@ -15,6 +15,7 @@ namespace BadPixxel\Widgets\Tests\Integration;
 
 use BadPixxel\Widgets\Phpunit\Traits\BlocksAwareTestTrait;
 use BadPixxel\Widgets\Phpunit\Traits\WidgetsAwareTestTrait;
+use BadPixxel\Widgets\Phpunit\Traits\WidgetsContainerTrait;
 use PHPUnit\Framework\Assert;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
@@ -28,6 +29,7 @@ class Int501ConsoleCommandsTest extends KernelTestCase
 {
     use BlocksAwareTestTrait;
     use WidgetsAwareTestTrait;
+    use WidgetsContainerTrait;
 
     /**
      * All Registered Blocks are Listed

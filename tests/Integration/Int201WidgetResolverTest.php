@@ -15,6 +15,7 @@ namespace BadPixxel\Widgets\Tests\Integration;
 
 use BadPixxel\Widgets\Interfaces\WidgetInterface;
 use BadPixxel\Widgets\Phpunit\Traits\WidgetsAwareTestTrait;
+use BadPixxel\Widgets\Phpunit\Traits\WidgetsContainerTrait;
 use BadPixxel\Widgets\Services\Widgets\Technical\NotAllowedWidget;
 use BadPixxel\Widgets\Services\Widgets\Technical\NotFoundWidget;
 use BadPixxel\Widgets\Services\Widgets\WidgetsResolver;
@@ -28,6 +29,7 @@ use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 class Int201WidgetResolverTest extends KernelTestCase
 {
     use WidgetsAwareTestTrait;
+    use WidgetsContainerTrait;
 
     /**
      * Check Widget Resolver Service Loading

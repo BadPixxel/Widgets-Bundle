@@ -21,6 +21,7 @@ use BadPixxel\Widgets\Entity\WidgetCollection;
 use BadPixxel\Widgets\Entity\WidgetCollectionItem;
 use BadPixxel\Widgets\Phpunit\Traits\DatabaseAwareTestTrait;
 use BadPixxel\Widgets\Phpunit\Traits\WidgetsAwareTestTrait;
+use BadPixxel\Widgets\Phpunit\Traits\WidgetsContainerTrait;
 use PHPUnit\Framework\Assert;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
@@ -31,6 +32,7 @@ class Int401CollectionManagerTest extends KernelTestCase
 {
     use WidgetsAwareTestTrait;
     use DatabaseAwareTestTrait;
+    use WidgetsContainerTrait;
 
     /**
      * Ensure Widgets Tables Exists

@@ -24,4 +24,5 @@ trait WidgetsAssertionsTrait
     use WidgetsAwareTestTrait;
     use ComponentsAwareTestTrait;
     use DatabaseAwareTestTrait;
+    use WidgetsContainerTrait;
 }

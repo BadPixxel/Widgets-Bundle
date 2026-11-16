@@ -35,6 +35,8 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * Unit Tests of Widgets, Blocks, Charts & Collections Options Resolvers
+ *
+ * @SuppressWarnings(CouplingBetweenObjects)
  */
 class Unit003OptionsResolversTest extends TestCase
 {

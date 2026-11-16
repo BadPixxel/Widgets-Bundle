@@ -33,6 +33,8 @@ use Webmozart\Assert\InvalidArgumentException;
 
 /**
  * Unit Tests of Widgets Attributes & Static Widgets Compiler Pass
+ *
+ * @SuppressWarnings(CouplingBetweenObjects)
  */
 class Unit201StaticWidgetsCompilerTest extends TestCase
 {

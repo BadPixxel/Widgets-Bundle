@@ -18,6 +18,7 @@ use BadPixxel\Widgets\Dictionary\Options;
 use BadPixxel\Widgets\Models\AbstractBlock;
 use BadPixxel\Widgets\Models\AbstractWidget;
 use BadPixxel\Widgets\Phpunit\Traits\WidgetsAwareTestTrait;
+use BadPixxel\Widgets\Phpunit\Traits\WidgetsContainerTrait;
 use BadPixxel\Widgets\Services\Widgets\Technical\CompilationErrorWidget;
 use BadPixxel\Widgets\Widgets\Descriptor\SimpleDescriptor;
 use PHPUnit\Framework\Assert;
@@ -30,6 +31,7 @@ use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 class Int203WidgetCompilerTest extends KernelTestCase
 {
     use WidgetsAwareTestTrait;
+    use WidgetsContainerTrait;
 
     /**
      * Cacheable Widget Blocks are Cached, then Reset

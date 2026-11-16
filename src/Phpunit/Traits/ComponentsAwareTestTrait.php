@@ -25,10 +25,11 @@ use Symfony\UX\TwigComponent\Test\InteractsWithTwigComponents;
 
 /**
  * This Test Renders Blocks & Widgets using Twig & Live Components
+ *
+ * Requires WidgetsContainerTrait in the using class.
  */
 trait ComponentsAwareTestTrait
 {
-    use WidgetsContainerTrait;
     use InteractsWithTwigComponents;
     use InteractsWithLiveComponents;
 
