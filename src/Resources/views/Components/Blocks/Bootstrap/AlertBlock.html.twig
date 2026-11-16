@@ -1,7 +1,14 @@
-<div class="{{ this.alertClass }} no-margin">
+{#
+ # Blocks do not know the rendering mode: the dismiss button works on Bootstrap 3, 4 & 5.
+ # Bootstrap 5 draws .btn-close, and hides the text with .visually-hidden (unknown to BS3 & BS4).
+ #}
+<div class="{{ this.alertClass }}{% if data.dismissible|default(false) %} alert-dismissible{% endif %} no-margin">
 
     {% if data.dismissible|default(false) %}
-        <button class="close" data-dismiss="alert">×</button>
+        <button type="button" class="close btn-close" aria-label="Close"
+                data-dismiss="alert" data-bs-dismiss="alert">
+            <span aria-hidden="true" class="visually-hidden">&times;</span>
+        </button>
     {% endif %}
 
     {% if data.title is not empty %}
