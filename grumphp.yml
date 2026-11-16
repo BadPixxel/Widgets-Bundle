@@ -18,9 +18,9 @@
 #############################################
 # Override Default Config.
 parameters:
-    mode:           "badpixxel"
+    mode:               "badpixxel"
     # Php Stan
-    stan_config:    "./tests/grumphp/phpstan.neon"
+    stan-config:        "%core_dir%/phpstan/sf.badpixxel.neon"
     # For Building Splash Documentation
     doc-enable:         false
     doc-contents:       ["php-composer", "php-docker"]

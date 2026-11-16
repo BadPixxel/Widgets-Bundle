@@ -1,14 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- https://phpunit.de/manual/current/en/appendixes.configuration.html -->
+<!-- https://docs.phpunit.de/en/11.5/configuration.html - PHPUnit 10.5 & 11 -->
 <phpunit
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/9.3/phpunit.xsd"
+        xsi:noNamespaceSchemaLocation="vendor/phpunit/phpunit/phpunit.xsd"
         backupGlobals="false"
-        backupStaticAttributes="false"
         colors="true"
-        convertErrorsToExceptions="true"
-        convertNoticesToExceptions="true"
-        convertWarningsToExceptions="true"
         processIsolation="false"
         stopOnFailure="true"
         cacheResult="false"
@@ -16,9 +12,14 @@
 >
 
   <testsuites>
-      <testsuite name="Widgets">
-          <directory>./src/Phpunit/Tests/</directory>
-          <directory>./tests/</directory>
+      <testsuite name="Core">
+          <directory>./tests/Core/</directory>
+      </testsuite>
+      <testsuite name="Integration">
+          <directory>./tests/Integration/</directory>
+      </testsuite>
+      <testsuite name="Operational">
+          <directory>./tests/Operational/</directory>
       </testsuite>
   </testsuites>
 

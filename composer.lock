@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "e69362eff8ae76f08a9fc2558d9ae210",
+    "content-hash": "f1899ebce9af9f2350603bf3013a50fb",
     "packages": [
         {
             "name": "composer/semver",
@@ -626,16 +626,16 @@
         },
         {
             "name": "doctrine/instantiator",
-            "version": "2.1.0",
+            "version": "2.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/instantiator.git",
-                "reference": "23da848e1a2308728fe5fdddabf4be17ff9720c7"
+                "reference": "bf3870fbe25c1b5f4febaf281be76d1e2d86df30"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/instantiator/zipball/23da848e1a2308728fe5fdddabf4be17ff9720c7",
-                "reference": "23da848e1a2308728fe5fdddabf4be17ff9720c7",
+                "url": "https://api.github.com/repos/doctrine/instantiator/zipball/bf3870fbe25c1b5f4febaf281be76d1e2d86df30",
+                "reference": "bf3870fbe25c1b5f4febaf281be76d1e2d86df30",
                 "shasum": ""
             },
             "require": {
@@ -645,15 +645,15 @@
                 "doctrine/coding-standard": "^14",
                 "ext-pdo": "*",
                 "ext-phar": "*",
-                "phpbench/phpbench": "^1.2",
-                "phpstan/phpstan": "^2.1",
-                "phpstan/phpstan-phpunit": "^2.0",
-                "phpunit/phpunit": "^10.5.58"
+                "phpbench/phpbench": "^1.7",
+                "phpstan/phpstan": "^2.3",
+                "phpstan/phpstan-phpunit": "^2.1",
+                "phpunit/phpunit": "^13.4.6"
             },
             "type": "library",
             "autoload": {
                 "psr-4": {
-                    "Doctrine\\Instantiator\\": "src/Doctrine/Instantiator/"
+                    "Doctrine\\Instantiator\\": "src/"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -675,7 +675,7 @@
             ],
             "support": {
                 "issues": "https://github.com/doctrine/instantiator/issues",
-                "source": "https://github.com/doctrine/instantiator/tree/2.1.0"
+                "source": "https://github.com/doctrine/instantiator/tree/2.2.0"
             },
             "funding": [
                 {
@@ -691,7 +691,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2026-01-05T06:47:08+00:00"
+            "time": "2026-11-15T20:06:55+00:00"
         },
         {
             "name": "doctrine/lexer",
@@ -13182,7 +13182,9 @@
     ],
     "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": {},
+    "stability-flags": {
+        "badpixxel/php-sdk": 20
+    },
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {

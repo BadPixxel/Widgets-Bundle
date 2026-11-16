@@ -57,7 +57,8 @@
     "require-dev": {
         "ext-curl":                                     "*",
 
-        "badpixxel/php-sdk":                            "^2.0|^3.0",
+        "badpixxel/php-sdk":                            "^3.0@dev",
+        "phpunit/phpunit":                              "^10.5|^11.0",
         "sonata-project/admin-bundle":                  "^4.0",
         "sonata-project/block-bundle":                  "^4.0|^5.0",
 
