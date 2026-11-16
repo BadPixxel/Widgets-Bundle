@@ -1,8 +1,10 @@
 {% extends "base.html.twig" %}
 
 {% block title %}
-    Shop Dashboard
-    <small class="text-muted h6">Static widgets, with demo data</small>
+    {{ demo_homepage().title }}
+    {% if demo_homepage().subtitle is not empty %}
+        <small class="text-muted h6">{{ demo_homepage().subtitle }}</small>
+    {% endif %}
 {% endblock %}
 
 {% block page_content %}

@@ -13,15 +13,18 @@
 
 namespace BadPixxel\Widgets\Demo\Actions;
 
+use BadPixxel\Widgets\Demo\Dictionary\DemoHomepage;
 use BadPixxel\Widgets\Demo\Dictionary\WidgetsDemoRoutes;
-use BadPixxel\Widgets\Demo\Widgets\Shop;
 use BadPixxel\Widgets\Services\Widgets\WidgetsResolver;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\DependencyInjection\Attribute\Autowire;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
 /**
- * Widgets Demo Landing Page: a Static Shop Dashboard
+ * Widgets Demo Landing Page: a Static Dashboard
+ *
+ * Widgets, title & icon come from "widgets_demo" configuration (see DemoHomepage)
  */
 #[Route(
     path: "/",
@@ -30,27 +33,14 @@ use Symfony\Component\Routing\Attribute\Route;
 class Homepage extends AbstractController
 {
     /**
-     * Dashboard Widgets, in Display Order: widths add up to full rows
-     */
-    private const DASHBOARD = array(
-        Shop\KpiRevenue::class,
-        Shop\KpiOrders::class,
-        Shop\KpiVisitors::class,
-        Shop\KpiReturns::class,
-        Shop\SalesOverview::class,
-        Shop\SalesByChannel::class,
-        Shop\OrdersByDay::class,
-        Shop\VisitsActivity::class,
-        Shop\MonthlyTargets::class,
-        Shop\ShopNotifications::class,
-        Shop\TopProducts::class,
-    );
-
-    /**
      * Action Constructor
+     *
+     * @param array{widgets: class-string[]} $homepage
      */
     public function __construct(
-        private readonly WidgetsResolver $widgetsResolver
+        private readonly WidgetsResolver $widgetsResolver,
+        #[Autowire(param: DemoHomepage::PARAMETER)]
+        private readonly array $homepage,
     ) {
     }
 
@@ -63,7 +53,7 @@ class Homepage extends AbstractController
             'bsMode' => $bsMode,
             'dashboard' => array_map(
                 fn (string $widgetClass) => $this->widgetsResolver->resolve($widgetClass, true),
-                self::DASHBOARD
+                $this->homepage[DemoHomepage::WIDGETS]
             ),
         ));
     }

@@ -183,6 +183,18 @@ See the [demo/Widgets](demo/Widgets) directory for real-world examples:
 - Date preset widgets
 - Cache status widgets
 
+Extension bundles reuse the demo application with their own homepage dashboard & icon:
+
+```yaml
+# tests/config/packages/widgets_demo.yaml
+widgets_demo:
+    title:      "D3.js Dashboard"
+    subtitle:   "Static D3.js widgets, with demo data"
+    icon:       "bundles/badpixxelwidgetsd3js/img/widgets-d3js-icon.svg"
+    widgets:
+        - App\Widgets\MyWidget
+```
+
 ## Testing
 
 ```bash

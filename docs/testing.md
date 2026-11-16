@@ -54,6 +54,7 @@ the first digit is the feature group.
 | `Unit002DatePresetsParserTest`    | Every preset: start before end, valid format & grouping; exact ranges; unknown preset fallback    |
 | `Unit003OptionsResolversTest`     | Nested options on Symfony 6.4 to 8; Block, Chart, Chart Data, Widget & Collection defaults; validation |
 | `Unit004ChartColorsTest`          | Theme roles to CSS expressions, explicit colors unchanged, default palette cycling, `widgets_color` filter |
+| `Unit005DemoHomepageTest`         | Demo homepage configuration: shop dashboard defaults, title / icon / widgets overrides           |
 | `Unit101BlocksModelTest`          | Block data & options resolution, defaults restored on invalid inputs, width shortcuts, demo, Matrix raw options |
 | `Unit102WidgetsModelTest`         | Widget options & shortcuts, parameters, cache TTL, blocks, lifecycle dates, date presets          |
 | `Unit103WidgetConfiguratorTest`   | Hash stability, channels & roles normalization, static options & parameters applied to widget     |

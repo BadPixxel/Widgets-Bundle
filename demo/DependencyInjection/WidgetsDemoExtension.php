@@ -13,6 +13,7 @@
 
 namespace BadPixxel\Widgets\Demo\DependencyInjection;
 
+use BadPixxel\Widgets\Demo\Dictionary\DemoHomepage;
 use BadPixxel\Widgets\Demo\Dictionary\WidgetsDemoRoutes;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -30,6 +31,9 @@ class WidgetsDemoExtension extends Extension implements PrependExtensionInterfac
      */
     public function load(array $configs, ContainerBuilder $container): void
     {
+        $config = $this->processConfiguration(new Configuration(), $configs);
+        $container->setParameter(DemoHomepage::PARAMETER, $config);
+
         $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.yaml');
     }
