@@ -1,0 +1,140 @@
+#    
+#    General String Translations
+#
+
+################################################################################    
+#    Widget Generic Names
+################################################################################  
+widget:
+    type:           Widget-Typ
+    name:           Widget-Name
+    params:         Einstellungen
+    add:            Hinzufügen
+    view:           Ansehen
+    edit:           Bearbeiten
+    save:           Speichern
+    loading:        Wird geladen...
+    now:            Jetzt
+
+################################################################################    
+#    Widget Generic Actions
+################################################################################  
+actions:
+    yes:            Ja
+    no:             Nein
+    close:          Schließen
+    move:           Dieses Widget verschieben
+    move-left:      Links
+    move-right:     Rechts
+
+remove:         
+    label:          Entfernen
+    title:          Dieses Widget entfernen
+    contents:       "Möchten Sie dieses Widget wirklich entfernen?"
+            
+################################################################################    
+#    Options Form Translations
+################################################################################    
+options:
+    label:          Darstellung
+    width:
+        label:      Breite
+        tooltip:    "Wählen Sie die Breite Ihres Widgets, wir passen seine Größe auf allen Geräten an."
+        xs:         "Sehr klein - 25% auf großen Bildschirmen"
+        sm:         "Klein - 33% auf großen Bildschirmen"
+        m:          "Mittel (Standard) - 50% auf großen Bildschirmen"
+        l:          "Groß - 66% auf großen Bildschirmen"
+        xl:         "Sehr groß - Immer 100%"
+    color:
+        label:      Farbe
+        tooltip:    Wählen Sie die Widget-Farbe
+        none:       Keine (ohne Rahmen)
+        default:    Standard
+        primary:    Primär
+        success:    Erfolg
+        info:       Information
+        warning:    Warnung
+        danger:     Gefahr
+    header:
+        label:      Titel anzeigen
+        tooltip:    "Deaktivieren Sie diese Option, um den Widget-Titel nicht anzuzeigen"
+    footer:
+        label:      Fußzeile anzeigen
+        tooltip:    "Deaktivieren Sie diese Option, um den unteren Bereich des Widgets nicht anzuzeigen"
+    usecache:
+        label:      Cache verwenden
+        tooltip:    "Deaktivieren Sie diese Option, um den Widget-Inhalt nicht im Cache zu speichern"
+
+################################################################################    
+#    Dates Form Translations
+################################################################################ 
+dates:  
+    label:      Zeitraum
+    tooltip:    Wählen Sie den Zeitraum der Live-Ansicht
+    D:          Heute
+    W:          Diese Woche
+    M:          Dieser Monat
+    Y:          Dieses Jahr
+    LW:         Eine Woche
+    L2W:        Zwei Wochen
+    LM:         Ein Monat
+    LY:         Ein Jahr
+    PD:         Gestern
+    PW:         Letzte Woche
+    PM:         Letzter Monat
+    PY:         Letztes Jahr
+    
+# ==============================================================================
+# Widget Parameter Setup
+# ==============================================================================
+parameters:
+    title:          Widget-Parameter bearbeiten
+    
+# ==============================================================================
+# Widget List
+# ==============================================================================
+list:
+    title:          Meine Widgets
+    tooltip:        Liste aller verfügbaren Widgets
+    origin:         Quelle/Server
+    name:           Name
+    desc:           Beschreibung
+    actions:        Aktionen
+    add:            Hinzufügen
+    
+# ==============================================================================
+# Widget Blocks Parameters
+# ==============================================================================
+
+blocks:
+    renderer-not-found: Der Renderer dieses Blocks konnte nicht ermittelt werden.
+    
+    sparkbar:
+        height:
+            label:      Diagrammhöhe
+            tooltip:    Diagrammhöhe in Pixeln anpassen
+        barwidth:
+            label:      Balkenbreite
+            tooltip:    Breite der Diagrammbalken anpassen
+        barcolor:
+            label:      Balkenfarbe
+            tooltip:    "Farbe der Diagrammbalken anpassen (z. B. #00FF00)"
+
+# ==============================================================================
+# Widget Translations
+# ==============================================================================
+
+widgets:
+    technical:
+        not-found:
+            title:          Widget nicht gefunden
+            description:    Das angeforderte Widget existiert nicht
+            text:           Das gesuchte Widget existiert leider nicht oder ist nicht mehr verfügbar.
+        not-allowed:
+            title:          Zugriff verweigert
+            description:    Unberechtigter Zugriff auf dieses Widget
+            text:           "Sie haben nicht die erforderlichen Rechte, um auf dieses Widget zuzugreifen."
+        compilation-error:
+            title:          Widget-Kompilierungsfehler
+            description:    Beim Kompilieren des Widgets ist ein Fehler aufgetreten
+            text:           Beim Kompilieren dieses Widgets ist ein Fehler aufgetreten. Prüfen Sie die Fehlerdetails unten oder wenden Sie sich an Ihren Administrator.

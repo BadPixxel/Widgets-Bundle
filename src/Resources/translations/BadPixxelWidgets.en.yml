@@ -14,6 +14,7 @@ widget:
     edit:           Edit
     save:           Save
     loading:        "Loading ..."
+    now:            Now
 
 ################################################################################    
 #    Widget Generic Actions
@@ -38,8 +39,8 @@ options:
     label:          Rendering
     width:
         label:      Width
-        tooltip:    Select width of you widget and we will adjust its size on all devices.
-        xs:         Extra Small !! - 25% on large screens
+        tooltip:    Select the width of your widget and we will adjust its size on all devices.
+        xs:         Extra Small - 25% on large screens
         sm:         Small - 33% on large screens
         m:          Medium (Default) - 50% on large screens
         l:          Large - 66% on large screens
@@ -94,7 +95,7 @@ parameters:
 # ==============================================================================
 list:
     title:          My Widget List
-    tooltip:        This is the list all available widget    
+    tooltip:        List of all available widgets    
     origin:         Source/Server
     name:           Name
     desc:           Description    
@@ -106,6 +107,7 @@ list:
 # ==============================================================================
 
 blocks:
+    renderer-not-found: "Unable to identify the widget block renderer."
     
     sparkbar:
         height:
@@ -113,10 +115,10 @@ blocks:
             tooltip:    Adjust Height of Chart in Pixels
         barwidth:
             label:      Bar Width
-            tooltip:    Adjust Witdh of Chart Bars
+            tooltip:    Adjust Width of Chart Bars
         barcolor:
             label:      Bar Color
-            tooltip:    "Adjust Color of Chart Bars (ie : #00FF00)"
+            tooltip:    "Adjust Color of Chart Bars (e.g. #00FF00)"
 
 # ==============================================================================
 # Widget Translations

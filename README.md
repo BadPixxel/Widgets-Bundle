@@ -20,6 +20,7 @@ Build interactive dashboards from composable widgets, rendered with Symfony UX L
 - **Date Presets** - Built-in time-range filtering (this week, last month, past year...)
 - **Bootstrap 3 / 4 / 5** - Rendering modes for each Bootstrap version, `bs3` / `bs4` / `bs5` Twig tests for templates
 - **Sonata Integration** - Optional Sonata Admin and Sonata Block support
+- **Translations** - English, French, Spanish, Italian, German & Dutch (`BadPixxelWidgets` domain)
 
 ## Requirements
 

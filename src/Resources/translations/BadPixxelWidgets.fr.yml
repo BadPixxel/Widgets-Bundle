@@ -14,6 +14,7 @@ widget:
     edit:           Editer
     save:           Sauvegarder
     loading:        "Chargement..."
+    now:            Maintenant
 
 ################################################################################
 #    Widget Generic Actions
@@ -106,6 +107,7 @@ list:
 # ==============================================================================
 
 blocks:
+    renderer-not-found: "Impossible d'identifier le moteur de rendu de ce bloc."
 
     sparkbar:
         height:

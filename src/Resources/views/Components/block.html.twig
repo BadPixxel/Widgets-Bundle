@@ -8,7 +8,7 @@
         {{ component(renderer, { "block": block }) }}
     {% else %}
         <p class="text-danger">
-            Unable to identify Widget Block renderer !
+            {{ "blocks.renderer-not-found"|trans({}, "BadPixxelWidgets") }}
         </p>
     {% endif %}
 

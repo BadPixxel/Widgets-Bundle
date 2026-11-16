@@ -5,7 +5,7 @@
 <div class="{{ this.alertClass }}{% if data.dismissible|default(false) %} alert-dismissible{% endif %} no-margin">
 
     {% if data.dismissible|default(false) %}
-        <button type="button" class="close btn-close" aria-label="Close"
+        <button type="button" class="close btn-close" aria-label="{{ 'actions.close'|trans({}, 'BadPixxelWidgets') }}"
                 data-dismiss="alert" data-bs-dismiss="alert">
             <span aria-hidden="true" class="visually-hidden">&times;</span>
         </button>

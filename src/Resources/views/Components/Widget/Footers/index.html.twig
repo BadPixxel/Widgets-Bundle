@@ -2,8 +2,10 @@
 {% if widget.options.Footer or configuration.edited or configuration.sortable %}
     <div class="{{ this.divClass }}">
         <small>
-            {% if widget.refreshAt | default("Now") is not empty %}
-                {{ widget.refreshAt | ago | default("Now") }}
+            {% if widget.refreshAt is not empty %}
+                {{ widget.refreshAt | ago }}
+            {% else %}
+                {{ "widget.now"|trans({}, "BadPixxelWidgets") }}
             {% endif %}
             &nbsp;|&nbsp;<twig:Widgets:Widget:Origin :widget="widget" />&nbsp;|&nbsp;
             <twig:Widgets:Stimulus:Icon :configuration="configuration" class="btn-info text-xs" icon="fa fa-fw fa-sync" action="refresh" />

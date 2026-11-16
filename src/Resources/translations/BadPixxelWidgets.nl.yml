@@ -1,0 +1,140 @@
+#    
+#    General String Translations
+#
+
+################################################################################    
+#    Widget Generic Names
+################################################################################  
+widget:
+    type:           Widgettype
+    name:           Widgetnaam
+    params:         Instellingen
+    add:            Toevoegen
+    view:           Bekijken
+    edit:           Bewerken
+    save:           Opslaan
+    loading:        Laden...
+    now:            Nu
+
+################################################################################    
+#    Widget Generic Actions
+################################################################################  
+actions:
+    yes:            Ja
+    no:             Nee
+    close:          Sluiten
+    move:           Deze widget verplaatsen
+    move-left:      Links
+    move-right:     Rechts
+
+remove:         
+    label:          Verwijderen
+    title:          Deze widget verwijderen
+    contents:       "Wilt u deze widget echt verwijderen?"
+            
+################################################################################    
+#    Options Form Translations
+################################################################################    
+options:
+    label:          Weergave
+    width:
+        label:      Breedte
+        tooltip:    "Kies de breedte van uw widget, wij passen de grootte aan op alle apparaten."
+        xs:         "Zeer klein - 25% op grote schermen"
+        sm:         "Klein - 33% op grote schermen"
+        m:          "Middel (standaard) - 50% op grote schermen"
+        l:          "Groot - 66% op grote schermen"
+        xl:         "Zeer groot - Altijd 100%"
+    color:
+        label:      Kleur
+        tooltip:    Kies de kleur van de widget
+        none:       Geen (zonder randen)
+        default:    Standaard
+        primary:    Primair
+        success:    Succes
+        info:       Informatie
+        warning:    Waarschuwing
+        danger:     Gevaar
+    header:
+        label:      Titel tonen
+        tooltip:    Schakel deze optie uit om de titel van de widget niet te tonen
+    footer:
+        label:      Voettekst tonen
+        tooltip:    Schakel deze optie uit om het onderste blok van de widget niet te tonen
+    usecache:
+        label:      Cache gebruiken
+        tooltip:    Schakel deze optie uit om de inhoud van de widget niet in de cache op te slaan
+
+################################################################################    
+#    Dates Form Translations
+################################################################################ 
+dates:  
+    label:      Periode
+    tooltip:    Kies de periode van de live weergave
+    D:          Vandaag
+    W:          Deze week
+    M:          Deze maand
+    Y:          Dit jaar
+    LW:         Eén week
+    L2W:        Twee weken
+    LM:         Eén maand
+    LY:         Eén jaar
+    PD:         Gisteren
+    PW:         Vorige week
+    PM:         Vorige maand
+    PY:         Vorig jaar
+    
+# ==============================================================================
+# Widget Parameter Setup
+# ==============================================================================
+parameters:
+    title:          Widgetparameters bewerken
+    
+# ==============================================================================
+# Widget List
+# ==============================================================================
+list:
+    title:          Mijn widgets
+    tooltip:        Lijst van alle beschikbare widgets
+    origin:         Bron/Server
+    name:           Naam
+    desc:           Beschrijving
+    actions:        Acties
+    add:            Toevoegen
+    
+# ==============================================================================
+# Widget Blocks Parameters
+# ==============================================================================
+
+blocks:
+    renderer-not-found: De renderer van dit blok kan niet worden bepaald.
+    
+    sparkbar:
+        height:
+            label:      Grafiekhoogte
+            tooltip:    Pas de hoogte van de grafiek aan in pixels
+        barwidth:
+            label:      Balkbreedte
+            tooltip:    Pas de breedte van de grafiekbalken aan
+        barcolor:
+            label:      Balkkleur
+            tooltip:    "Pas de kleur van de grafiekbalken aan (bijv. #00FF00)"
+
+# ==============================================================================
+# Widget Translations
+# ==============================================================================
+
+widgets:
+    technical:
+        not-found:
+            title:          Widget niet gevonden
+            description:    De gevraagde widget bestaat niet
+            text:           "Sorry, de widget die u zoekt bestaat niet of is niet meer beschikbaar."
+        not-allowed:
+            title:          Toegang geweigerd
+            description:    Geen toegang tot deze widget
+            text:           U heeft onvoldoende rechten om deze widget te openen.
+        compilation-error:
+            title:          Compilatiefout van de widget
+            description:    Er is een fout opgetreden bij het compileren van de widget
+            text:           Er is een fout opgetreden bij het compileren van deze widget. Bekijk de foutdetails hieronder of neem contact op met uw beheerder.
