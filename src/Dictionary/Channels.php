@@ -37,4 +37,12 @@ class Channels
      * Demonstration Purpose Only
      */
     const DEMO = "demo";
+
+    /**
+     * Demonstration Widgets of an Extension Bundle
+     *
+     * Extension bundles add it to their demo widgets, next to DEMO: in their demo application,
+     * this channel lists only the widgets provided by the extension, without the Widgets Bundle ones.
+     */
+    const EXTENSION = "extension";
 }

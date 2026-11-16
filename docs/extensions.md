@@ -168,6 +168,13 @@ widgets_demo:
 
 See the [README](../README.md#demo-application) for all keys.
 
+Tag your demo widgets with both demo channels: `Channels::DEMO` lists them with the Widgets Bundle demo widgets,
+`Channels::EXTENSION` lists only the widgets of your extension, in the demo widgets selector:
+
+```php
+#[AsStaticWidget(channels: array(Channels::DEMO, Channels::EXTENSION))]
+```
+
 ## Legacy: `widget:controllers:register`
 
 Older extensions register controllers on a global `window.app`, when `widgets.js` dispatches
