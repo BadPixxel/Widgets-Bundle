@@ -57,8 +57,6 @@ stages:
     ################################################################################
     # Outdated Packages & Statistics
     after_script:
-        - curl -s https://raw.githubusercontent.com/BadPixxel/Php-Sdk/3.0/ci/after.sh | sh
-        # SDK Project Statistics, to compare with after.sh before replacing it
         - make stats
 
 ################################################################
