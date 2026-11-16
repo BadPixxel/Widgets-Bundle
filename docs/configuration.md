@@ -20,18 +20,15 @@ badpixxel_widgets:
 
     # Default settings
     defaults:
-        colors:                     # Default color palette for charts
-            - blue
-            - green
-            - red
-            - yellow
-            - orange
-            - purple
-            - pink
-            - brown
-            - grey
-            - black
-            - white
+        colors:                     # Default color palette for charts: theme roles or CSS colors
+            - series-1
+            - series-2
+            - series-3
+            - series-4
+            - series-5
+            - series-6
+            - series-7
+            - series-8
 ```
 
 These are the only configuration keys: defaults are shown above.
@@ -56,8 +53,8 @@ widget attribute, or at runtime with `setOptions()` / `mergeOptions()` and the d
 | `Options::SHOW_FOOTER`     | `Footer`         | Show widget footer                                             |
 | `Options::SHOW_BORDER`     | `Border`         | Show widget border                                             |
 | `Options::DATES_PRESET`    | `DatePreset`     | Date preset of date-aware widgets, see `DatePresets`           |
-| `Options::CACHE_ENABLED`   | `UseCache`       | Enable widget cache                                            |
-| `Options::CACHE_TTL`       | `CacheLifeTime`  | Cache lifetime in seconds (cache is used only if both are set) |
+| `Options::CACHE_ENABLED`   | `UseCache`       | Enable widget cache (default: `true`)                          |
+| `Options::CACHE_TTL`       | `CacheLifeTime`  | Cache lifetime in seconds (default: `300`, `0` disables cache) |
 | `Options::EDITABLE`        | `Editable`       | Allow edition via UI                                           |
 | `Options::DELETABLE`       | `Deletable`      | Allow deletion via UI                                          |
 | `Options::SORTABLE`        | `Sortable`       | Allow reordering via UI                                        |
@@ -211,7 +208,45 @@ $chart = (new BarChartBlock())
 ;
 ```
 
-When no colors are given, the `badpixxel_widgets.defaults.colors` palette is used.
+When no colors are given, the `badpixxel_widgets.defaults.colors` palette is used, cycled when a chart
+has more datasets (or points, for pie charts) than colors.
+
+### Chart Colors
+
+Colors are **theme roles** or explicit CSS colors (`#ff6600`, `rgb(...)`, `red`), mixed freely.
+Roles are constants of `BadPixxel\Widgets\Dictionary\ChartColors`:
+
+| Role                         | Theme color, in order: `--bpw-*` variable, Bootstrap 5, Bootstrap 4, fallback     |
+|------------------------------|------------------------------------------------------------------------------------|
+| `series-1` ... `series-8`    | Default palette: primary, success, info, warning, danger, secondary, indigo, teal |
+| `accent`                     | Primary                                                                            |
+| `success`, `warning`, `danger`, `info` | Matching Bootstrap colors                                                |
+| `muted`                      | Secondary                                                                          |
+
+```php
+use BadPixxel\Widgets\Dictionary\ChartColors;
+
+$chart->setColors(array(ChartColors::SUCCESS, ChartColors::DANGER, "#ff6600"));
+```
+
+A role is converted to a CSS expression (i.e. `var(--bpw-series-1, var(--bs-primary, var(--primary, #0d6efd)))`),
+resolved by the browser on the chart element, just before the chart is created. So charts follow the site theme,
+Bootswatch themes and the Bootstrap 5 color mode, and are redrawn when the color mode changes.
+Chart.js texts, grid lines and font also follow the theme, unless set in the block chart options.
+
+Redefine `--bpw-*` variables in your stylesheet to change roles without changing Bootstrap:
+
+```css
+:root {
+    --bpw-series-1: #7048e8;
+    --bpw-text: #333;           /* Chart texts */
+    --bpw-grid: #eee;           /* Chart grid lines */
+}
+```
+
+In Twig, the `widgets_color` filter converts a role for HTML contents: `style="color: {{ 'success'|widgets_color }}"`.
+Extensions resolve roles in JavaScript with the helpers exported by `@badpixxel/ux-widgets`:
+`resolveColor(value, element)`, `alpha(color, ratio)` and `onThemeChange(callback)`.
 
 ## Twig Components
 
@@ -352,8 +387,13 @@ requested widget does not exist, or when the current user is not granted.
     )
 )]
 
-// Real-time widgets: no cache options
-#[AsStaticWidget(channels: array("dashboard"))]
+// Real-time widgets: disable the default 5 minutes cache
+#[AsStaticWidget(
+    channels: array("dashboard"),
+    options: array(
+        Options::CACHE_ENABLED => false,
+    )
+)]
 ```
 
 Compiled blocks are stored in the application cache (`cache.app`), per widget, options and parameters.

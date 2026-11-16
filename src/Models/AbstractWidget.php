@@ -22,6 +22,11 @@ use BadPixxel\Widgets\Models\Widgets\OptionsAwareTrait;
 use BadPixxel\Widgets\Models\Widgets\ParametersAwareTrait;
 use Doctrine\Common\Collections\ArrayCollection;
 
+/**
+ * Base Class of all Widgets
+ *
+ * @SuppressWarnings(NumberOfChildren)
+ */
 abstract class AbstractWidget implements WidgetInterface
 {
     use BlocksTrait;

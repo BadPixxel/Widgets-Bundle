@@ -70,7 +70,8 @@ Complete application with its own Stimulus and Live Component initialization.
 
 ## Module Files
 
-- `widgets.js` - Integration module (Chart.js plugins)
+- `widgets.js` - Integration module (Chart.js plugins, theme colors)
+- `widgets-theme.js` - Theme colors: resolves chart colors roles & Chart.js defaults from the site theme
 - `widgets-app.js` - Standalone application (full bootstrap)
 - `controllers/` - Stimulus controllers, declared in `assets/package.json`
 - `plugins/` - Chart.js plugins loaders
@@ -83,6 +84,26 @@ The bundle registers, on `chartjs:init`:
 
 The integration module must be imported before Stimulus starts, so these plugins are registered
 before the first chart connects.
+
+## Theme Colors
+
+`widgets.js` also loads `widgets-theme.js`, which makes charts follow the site theme:
+
+- before a chart is created (`chartjs:pre-connect`, capture phase), colors given as CSS expressions
+  (theme roles, see [Chart Colors](configuration.md#chart-colors)) are resolved on the chart element
+- Chart.js defaults (texts, grid lines, font) are filled from the theme: options set by blocks always win
+- connected charts are redrawn when the theme changes (`data-bs-theme`, `class` or `style` of `<html>`,
+  or the system color scheme)
+
+Its helpers are exported for extensions:
+
+```javascript
+import { resolveColor, alpha, onThemeChange } from '@badpixxel/ux-widgets';
+
+resolveColor('var(--bs-primary)', element);     // "rgb(13, 110, 253)"
+resolveColor(alpha('var(--bs-primary)', 0.5));  // Transparent variant
+onThemeChange(() => redraw());
+```
 
 ## Stimulus Controllers
 

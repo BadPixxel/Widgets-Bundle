@@ -14,7 +14,9 @@
 namespace BadPixxel\Widgets\Tests\Core;
 
 use BadPixxel\Widgets\Blocks\Basics\TextBlock;
+use BadPixxel\Widgets\Blocks\ChartJsPlugins\MatrixChartBlock;
 use BadPixxel\Widgets\Dictionary\Blocks\BlockWidth;
+use BadPixxel\Widgets\Dictionary\ChartConfig;
 use BadPixxel\Widgets\Dictionary\Options;
 use BadPixxel\Widgets\Models\AbstractBlock;
 use PHPUnit\Framework\Assert;
@@ -120,6 +122,29 @@ class Unit101BlocksModelTest extends TestCase
         $block->setupForDemo();
         Assert::assertNotEmpty($block->getData()["text"]);
         Assert::assertTrue($block->getOptions()[Options::SAFE]);
+    }
+
+    /**
+     * Matrix Chart Accepts Raw Chart.js Options, and Checks its Labels
+     */
+    public function testMatrixChartOptions() : void
+    {
+        $block = (new MatrixChartBlock())
+            ->setHorizontalLabels(array("08h", "10h"))
+            ->setVerticalLabels(array("Mon"))
+            ->setRatio(5)
+        ;
+        $chartOptions = $block->getOptions()[Options::CHART_OPTIONS];
+        Assert::assertIsArray($chartOptions);
+        Assert::assertSame(array("08h", "10h"), $chartOptions[MatrixChartBlock::X_LABELS]);
+        Assert::assertSame(5, $chartOptions[ChartConfig::RATIO]);
+        Assert::assertSame(MatrixChartBlock::CONTROLLER, $block->getController());
+        //====================================================================//
+        // Invalid Labels: all Options Defaults are Restored
+        $block->mergeOptions(array(Options::CHART_OPTIONS => array(MatrixChartBlock::Y_LABELS => array(1, 2))));
+        $chartOptions = $block->getOptions()[Options::CHART_OPTIONS];
+        Assert::assertIsArray($chartOptions);
+        Assert::assertSame(array(), $chartOptions[MatrixChartBlock::Y_LABELS]);
     }
 
     /**

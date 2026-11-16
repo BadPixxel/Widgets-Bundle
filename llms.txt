@@ -11,8 +11,9 @@ Key facts for code generation:
 - Chart blocks take rows: `->setDataSet($rows)->setPointLabelKey("date")->setPointValuesKeys(array("total"))->setLabels(array("Total"))`.
 - Options are constants of `BadPixxel\Widgets\Dictionary\Options` (i.e. `Options::WIDTH`, `Options::CACHE_ENABLED`, `Options::CACHE_TTL`). Widths: `Dictionary\Widgets\WidgetWidth`, colors: `Dictionary\Widgets\WidgetColors`, alert levels: `AlertBlock::SUCCESS|INFO|WARNING|ERROR|DEFAULT`.
 - There is no Twig function: render with `<twig:Widget :configurator="..." loading="defer" />` (configurator from `WidgetsResolver::resolve(MyWidget::class)`) or `<twig:WidgetsCollection type="..." channel="..." />`.
-- Caching is per widget (`Options::CACHE_ENABLED` + `Options::CACHE_TTL`). A widget with `loading="defer"`/`"lazy"`, or an empty cache, is compiled on a deferred Live request.
+- Caching is per widget and enabled by default for 300 s (`Options::CACHE_ENABLED`, `Options::CACHE_TTL`). A widget with `loading="defer"`/`"lazy"`, or an empty cache, is compiled on a deferred Live request.
 - Configuration: only `badpixxel_widgets.defaults.colors` is read; `cache.enable` and `sonata.*` keys are declared but unused.
+- Chart colors: theme roles from `BadPixxel\Widgets\Dictionary\ChartColors` (`series-1`..`series-8`, `accent`, `success`, `warning`, `danger`, `info`, `muted`) or explicit CSS colors, i.e. `->setColors(array(ChartColors::SUCCESS, "#ff6600"))`. Roles follow the Bootstrap theme & color mode; the default palette is the 8 series roles.
 - JavaScript: import `@badpixxel/ux-widgets` before `startStimulusApp()`. Stimulus controllers are declared in `assets/package.json` (UX package) and registered by StimulusBundle from the host `assets/controllers.json` (i.e. `badpixxel--widgets--matrix`).
 - CLI: `badpixxel:widgets:widgets`, `badpixxel:widgets:blocks`.
 - Tests: extend `BadPixxel\Widgets\Phpunit\TestCase\AbstractBlocksTestCase` / `AbstractWidgetsTestCase` (PHPUnit 10.5 / 11) and return your namespaces, or use `Phpunit\Traits\WidgetsAssertionsTrait` in a `KernelTestCase`. Using an `*AwareTestTrait` alone also requires `WidgetsContainerTrait`.
@@ -34,7 +35,7 @@ Key facts for code generation:
 
 ## Optional
 
-- [Demo Widgets](demo/Widgets): Real widgets examples (text, time-series charts, matrix heatmap, date presets, cache status)
+- [Demo Widgets](demo/Widgets): Real widgets examples (shop dashboard: KPIs, charts, targets, table, notifications, heatmap; text, date presets, cache status)
 - [Built-in Blocks](src/Blocks): Block classes, by category
 - [Block Renderers](src/TwigComponent/BlockRenderer): Twig Components rendering built-in blocks
 - [Options Dictionary](src/Dictionary/Options.php): All widget & block options keys

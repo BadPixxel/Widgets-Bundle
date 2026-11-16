@@ -16,6 +16,7 @@ namespace BadPixxel\Widgets\Demo\Widgets;
 use BadPixxel\Widgets\Attribute\AsStaticWidget;
 use BadPixxel\Widgets\Blocks\ChartJs\LineChartBlock;
 use BadPixxel\Widgets\Demo\Services\OpenWhetherCollector;
+use BadPixxel\Widgets\Dictionary\ChartColors;
 use BadPixxel\Widgets\Dictionary\Options;
 use BadPixxel\Widgets\Dictionary\Widgets\WidgetWidth;
 use BadPixxel\Widgets\Interfaces\Widgets\ConfigurableWidgetInterface;
@@ -86,6 +87,11 @@ class TemperaturesHistory extends AbstractWidget implements ConfigurableWidgetIn
             ->setPointLabelKey("date")
             ->setPointValuesKeys(("h" == $interval) ? array("avg") : array("min", "max", "avg"))
             ->setLabels(("h" == $interval) ? array("Temperature 2M") : array("Min", "Max", "Avg"))
+            //==============================================================================
+            // Force Theme Roles Colors: cold min, hot max, warm average
+            ->setColors(("h" == $interval)
+                ? array(ChartColors::WARNING)
+                : array(ChartColors::INFO, ChartColors::DANGER, ChartColors::WARNING))
             ->setMin(-10)
             ->setMax(40)
         ;

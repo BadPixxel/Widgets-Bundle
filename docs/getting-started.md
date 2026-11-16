@@ -89,14 +89,14 @@ Create the configuration file `config/packages/badpixxel_widgets.yaml`:
 ```yaml
 badpixxel_widgets:
     defaults:
-        colors:                     # Default color palette for charts
-            - blue
-            - green
-            - red
-            - yellow
-            - orange
-            - purple
+        colors:                     # Default color palette for charts: theme roles or CSS colors
+            - series-1
+            - series-2
+            - "#ff6600"
 ```
+
+By default, charts use the 8 `series-*` theme roles: they follow your Bootstrap theme and color mode.
+See [Chart Colors](configuration.md#chart-colors).
 
 ## Your First Widget
 

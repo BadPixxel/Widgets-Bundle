@@ -209,7 +209,8 @@ See [Date Presets Reference](configuration.md#date-presets-reference) for availa
 
 ## Cacheable Widgets
 
-Every `AbstractWidget` is cacheable: enable cache with options.
+Widgets are cached by default, for 5 minutes (`Options::CACHE_TTL` = 300). Change the lifetime with options,
+or set `Options::CACHE_ENABLED` to `false` for real-time widgets.
 
 ```php
 #[AsStaticWidget(

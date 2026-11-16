@@ -15,12 +15,12 @@ namespace BadPixxel\Widgets\Blocks\ChartJsPlugins;
 
 use BadPixxel\Widgets\Attribute\AsWidgetBlock;
 use BadPixxel\Widgets\Dictionary\Options;
-use BadPixxel\Widgets\Helpers\NestedOptions;
 use BadPixxel\Widgets\Interfaces\Blocks\BlockWithDemoInterface;
 use BadPixxel\Widgets\Models\AbstractChartBlock;
 use BadPixxel\Widgets\OptionResolver\BlockOptionsResolver;
 use InvalidArgumentException;
-use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\OptionsResolver\Exception\InvalidOptionsException;
+use Symfony\Component\OptionsResolver\Options as ResolverOptions;
 
 /**
  * Widget Matrix Chart Block
@@ -81,12 +81,9 @@ class MatrixChartBlock extends AbstractChartBlock implements BlockWithDemoInterf
     {
         $resolver = parent::getOptionsResolver();
 
-        NestedOptions::define($resolver, Options::CHART_OPTIONS, function (OptionsResolver $chartResolver): void {
-            $chartResolver->setDefault(self::X_LABELS, array());
-            $chartResolver->addAllowedTypes(self::X_LABELS, "string[]");
-            $chartResolver->setDefault(self::Y_LABELS, array());
-            $chartResolver->addAllowedTypes(self::Y_LABELS, "string[]");
-        });
+        //==============================================================================
+        // Raw Chart.js Options are Free (i.e. aspectRatio, plugins), only Matrix Labels are Checked
+        $resolver->addNormalizer(Options::CHART_OPTIONS, self::normalizeChartOptions(...));
 
         return $resolver;
     }
@@ -171,5 +168,24 @@ class MatrixChartBlock extends AbstractChartBlock implements BlockWithDemoInterf
         }
 
         return $values;
+    }
+
+    /**
+     * Check Matrix Labels in Chart Options, other Raw Chart.js Options are Free
+     *
+     * @SuppressWarnings(UnusedFormalParameter)
+     *
+     * @throws InvalidOptionsException
+     */
+    private static function normalizeChartOptions(ResolverOptions $resolved, array $chartOptions): array
+    {
+        foreach (array(self::X_LABELS, self::Y_LABELS) as $key) {
+            $labels = $chartOptions[$key] ??= array();
+            if (!is_array($labels) || array_filter($labels, fn (mixed $label) => !is_string($label))) {
+                throw new InvalidOptionsException(sprintf("Matrix %s must be a list of strings", $key));
+            }
+        }
+
+        return $chartOptions;
     }
 }

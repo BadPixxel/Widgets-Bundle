@@ -28,6 +28,12 @@ import './plugins/chartjs-matrix.js';
 import './plugins/chartjs-sankey.js';
 
 //------------------------------------------------------------------------------
+// Theme Colors: Charts follow the Site Theme (Bootstrap variables & color modes)
+// Helpers are exported for extensions (i.e. D3.js widgets)
+//------------------------------------------------------------------------------
+export { resolveColor, alpha, onThemeChange } from './widgets-theme.js';
+
+//------------------------------------------------------------------------------
 // On Window Loaded, Trigger Widgets Init Events
 // "widget:controllers:register" is kept for extensions relying on a global
 // window.app, prefer declaring controllers in your assets/package.json

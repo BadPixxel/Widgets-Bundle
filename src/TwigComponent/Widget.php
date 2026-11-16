@@ -215,13 +215,20 @@ class Widget extends AbstractConfiguratorAwareComponent
     //==============================================================================
 
     /**
-     * Get Widget Div Class
+     * Get Widget Div Class: widget width, from compiled widget, component or configurator options
      */
     public function getDivClass(): string
     {
-        return $this->getConfiguration()->isEdited()
-            ? WidgetWidth::M
-            : $this->options[Options::WIDTH] ?? WidgetWidth::M
-        ;
+        if ($this->getConfiguration()->isEdited()) {
+            return WidgetWidth::M;
+        }
+        //==============================================================================
+        // Compiled Widget: options from attribute, component & build()
+        $width = isset($this->widget) ? ($this->widget->getOptions()[Options::WIDTH] ?? null) : null;
+        //==============================================================================
+        // Deferred Widget: options from component, then attribute
+        $width ??= $this->options[Options::WIDTH] ?? $this->getConfigurator()?->getOptions()[Options::WIDTH] ?? null;
+
+        return is_string($width) && !empty($width) ? $width : WidgetWidth::M;
     }
 }

@@ -15,6 +15,7 @@ declare(strict_types=1);
 
 namespace BadPixxel\Widgets\DependencyInjection;
 
+use BadPixxel\Widgets\Dictionary\ChartColors;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
@@ -81,14 +82,9 @@ class Configuration implements ConfigurationInterface
         $node->addDefaultsIfNotSet();
         $node->children()
             ->arrayNode('colors')
-            ->defaultValue(array(
-                "blue", "green", "red",
-                "yellow", "orange", "purple",
-                "pink", "brown", "grey",
-                "black", "white"
-            ))
+            ->defaultValue(ChartColors::series())
             ->scalarPrototype()
-            ->info("Default Colors List")
+            ->info("Default Colors List: theme roles (see ChartColors) or explicit CSS colors")
         ;
 
         return $node;

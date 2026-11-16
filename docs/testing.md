@@ -53,7 +53,8 @@ the first digit is the feature group.
 | `Unit001HelpersTest`              | Tags encoder (string / array, invalid Json), Json parser, rendering configuration flags           |
 | `Unit002DatePresetsParserTest`    | Every preset: start before end, valid format & grouping; exact ranges; unknown preset fallback    |
 | `Unit003OptionsResolversTest`     | Nested options on Symfony 6.4 to 8; Block, Chart, Chart Data, Widget & Collection defaults; validation |
-| `Unit101BlocksModelTest`          | Block data & options resolution, defaults restored on invalid inputs, width shortcuts, demo       |
+| `Unit004ChartColorsTest`          | Theme roles to CSS expressions, explicit colors unchanged, default palette cycling, `widgets_color` filter |
+| `Unit101BlocksModelTest`          | Block data & options resolution, defaults restored on invalid inputs, width shortcuts, demo, Matrix raw options |
 | `Unit102WidgetsModelTest`         | Widget options & shortcuts, parameters, cache TTL, blocks, lifecycle dates, date presets          |
 | `Unit103WidgetConfiguratorTest`   | Hash stability, channels & roles normalization, static options & parameters applied to widget     |
 | `Unit104WidgetCollectionTest`     | Collection definition & options, widgets registration, positions, date preset propagation, reordering |

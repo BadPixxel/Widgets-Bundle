@@ -12,6 +12,7 @@ Build interactive dashboards from composable widgets, rendered with Symfony UX L
 - **Composable Widget System** - Widgets are built from simple, reusable blocks
 - **Pre-built Blocks** - Text, tables, notifications, alerts, progress bars and charts
 - **Chart.js Integration** - Line, bar, pie, donut, polar, matrix and Sankey charts
+- **Theme Colors** - Charts follow your Bootstrap theme & color mode, explicit colors still win
 - **Symfony UX Live Components** - Interactive widgets, deferred loading, in-place edition
 - **Widget Collections** - User editable dashboards, persisted with Doctrine
 - **Role-Based Access Control** - Restrict widget visibility by user roles
@@ -147,7 +148,7 @@ badpixxel_widgets:
         blocks:     true
         admin:      true
     defaults:
-        colors:     [blue, green, red, yellow, orange, purple]
+        colors:     [series-1, series-2, series-3, series-4, series-5, series-6, series-7, series-8]
 ```
 
 ## Documentation
@@ -174,6 +175,8 @@ php bin/console badpixxel:widgets:blocks
 ## Examples
 
 See the [demo/Widgets](demo/Widgets) directory for real-world examples:
+- A shop dashboard (`Shop/`): KPIs without header nor footer, line, donut, stacked bar & heatmap charts,
+  targets, products table and notifications, in various widths
 - Text widgets
 - Time-series charts
 - Matrix heatmaps
