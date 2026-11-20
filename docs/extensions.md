@@ -58,6 +58,10 @@ Create `assets/package.json` at the root of your bundle. StimulusBundle only loo
 - `main` paths are relative to `package.json`: they must point to files mapped by AssetMapper
   (bundle `Resources/public` files are mapped as `bundles/<bundle>/...`)
 - `name` sets the controller identifier: `acme/widgets-gauge/gauge` → `acme--widgets-gauge--gauge`
+- The bundle `composer.json` must list `symfony-ux` in its `keywords` too. Symfony Flex only keeps
+  the controllers of packages carrying this keyword: without it, every `composer update` of the
+  host application removes them from `assets/controllers.json`
+- Never declare `entrypoints` in `package.json`: Symfony Flex adds them to every host application
 
 ### 2. Use the Controller from your Block
 

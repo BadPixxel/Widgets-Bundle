@@ -64,6 +64,17 @@ Complete application with its own Stimulus and Live Component initialization.
 - Registers Chart.js and Live Component controllers
 - Exposes the Stimulus application as `window.app`
 
+**Declaration**: the bundle does not force this entrypoint on host applications (no `entrypoints`
+in `assets/package.json`, Symfony Flex would add it to every application). Applications using it
+mark it as an entrypoint in their `importmap.php`:
+
+```php
+'@badpixxel/ux-widgets-app' => array(
+    'path' => 'bundles/badpixxelwidgets/widgets-app.js',
+    'entrypoint' => true,
+),
+```
+
 **Usage in templates**:
 ```twig
 {% block javascripts %}

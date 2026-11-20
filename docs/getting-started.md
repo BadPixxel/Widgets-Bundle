@@ -74,7 +74,15 @@ import { startStimulusApp } from '@symfony/stimulus-bundle';
 const app = startStimulusApp();
 ```
 
-Applications without their own Stimulus setup can use the standalone entrypoint instead:
+Applications without their own Stimulus setup can use the standalone entrypoint instead. It is
+never forced on the host: declare it as an entrypoint in your `importmap.php` first.
+
+```php
+'@badpixxel/ux-widgets-app' => array(
+    'path' => 'bundles/badpixxelwidgets/widgets-app.js',
+    'entrypoint' => true,
+),
+```
 
 ```twig
 {{ importmap('@badpixxel/ux-widgets-app') }}

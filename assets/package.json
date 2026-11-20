@@ -28,8 +28,7 @@
           "chartjs-chart-sankey":         "^0.14.0",
           "@badpixxel/ux-widgets":        "path:%PACKAGE%/../src/Resources/public/widgets.js",
           "@badpixxel/ux-widgets-app":    "path:%PACKAGE%/../src/Resources/public/widgets-app.js"
-      },
-      "entrypoints": ["@badpixxel/ux-widgets-app"]
+      }
   },
 
   "dependencies": {
