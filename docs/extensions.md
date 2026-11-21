@@ -38,8 +38,8 @@ Create `assets/package.json` at the root of your bundle. StimulusBundle only loo
             "gauge": {
                 "name":                 "acme/widgets-gauge/gauge",
                 "main":                 "../src/Resources/public/controllers/gauge_controller.js",
-                "webpackMode":          "eager",
-                "fetch":                "eager",
+                "webpackMode":          "lazy",
+                "fetch":                "lazy",
                 "enabled":              true
             }
         },
@@ -62,6 +62,9 @@ Create `assets/package.json` at the root of your bundle. StimulusBundle only loo
   the controllers of packages carrying this keyword: without it, every `composer update` of the
   host application removes them from `assets/controllers.json`
 - Never declare `entrypoints` in `package.json`: Symfony Flex adds them to every host application
+- Declare controllers `lazy` (`webpackMode` and `fetch`): a lazy controller and its dependencies
+  (Chart.js, d3...) are downloaded only when a page shows one of its widgets. An `eager` controller
+  is preloaded on every page of the host application, chart or not
 
 ### 2. Use the Controller from your Block
 
@@ -103,7 +106,7 @@ On `composer require` / `composer update`, Symfony Flex adds your controllers to
 {
     "controllers": {
         "@acme/widgets-gauge-bundle": {
-            "gauge": { "enabled": true, "fetch": "eager" }
+            "gauge": { "enabled": true, "fetch": "lazy" }
         }
     }
 }

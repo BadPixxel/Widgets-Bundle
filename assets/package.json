@@ -13,8 +13,8 @@
           "matrix": {
               "name":                     "badpixxel/widgets/matrix",
               "main":                     "../src/Resources/public/controllers/matrix_controller.js",
-              "webpackMode":              "eager",
-              "fetch":                    "eager",
+              "webpackMode":              "lazy",
+              "fetch":                    "lazy",
               "enabled":                  true
           }
       },

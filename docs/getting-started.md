@@ -56,7 +56,7 @@ Without Flex, add the controllers manually to your `assets/controllers.json`:
 {
     "controllers": {
         "@badpixxel/widgets-bundle": {
-            "matrix": { "enabled": true, "fetch": "eager" }
+            "matrix": { "enabled": true, "fetch": "lazy" }
         }
     }
 }
